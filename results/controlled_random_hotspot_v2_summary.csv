@@ -1,0 +1,5 @@
+Method,mean_D_total_ms,std_D_total_ms,mean_Substitutions,mean_AvgCompute_ms,mean_AvgTrans_ms
+Proposed,9892.556979,598.115491,114.400000,172.474058,39.869407
+Random Placement,12854.257498,2469.057295,87.000000,225.474420,60.755445
+Importance-based Placement,12423.948754,2420.634729,91.400000,220.007308,55.505711
+No-similarity Placement,19107.492705,726.122228,0.000000,394.751473,47.958506
