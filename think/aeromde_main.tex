@@ -1,0 +1,1386 @@
+% ============================================================
+%  AeroMoDE: A Resource-Efficient Collaborative Edge AI System
+%            for In-situ Mixture-of-Depths-Experts Inference
+%  IEEE Transactions / Conference Format (IEEEtran)
+% ============================================================
+
+\documentclass[conference]{IEEEtran}
+
+% ---- packages ------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tikz}
+\usepackage{CJKutf8}
+
+% 2. PDF注释支持
+\usepackage{pdfcomment}
+% 3. 确保注释使用Unicode编码
+\hypersetup{unicode}
+
+% circled number command (used for step annotations)
+\newcommand{\circled}[1]{%
+  \tikz[baseline=(char.base)]{%
+    \node[shape=circle,draw,inner sep=1pt,font=\scriptsize] (char) {#1};}}
+
+% keep long URLs from overflowing
+\Urlmuskip=0mu plus 1mu
+
+% ---- hyphenation hints ---------------------------------------
+\hyphenation{op-tical net-works semi-conduc-tor Mix-ture-of-Ex-perts}
+
+% ==============================================================
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+\bstctlcite{IEEEexample:BSTcontrol}
+
+% ---- title & authors -----------------------------------------
+\title{AeroMoDE: A Resource-Efficient Collaborative Aerial Edge AI
+       System for In-situ Mixture-of-Depths-Experts Inference}
+
+\author{%
+  \IEEEauthorblockN{%
+    Liang Wei\IEEEauthorrefmark{1},
+    Jiahao Lin\IEEEauthorrefmark{1},
+    Ruoyu Tang\IEEEauthorrefmark{1},
+    Xian Chen\IEEEauthorrefmark{2},
+    and Hao Zhang\IEEEauthorrefmark{1}}
+  \IEEEauthorblockA{\IEEEauthorrefmark{1}%
+    School of Computer Science and Engineering,
+    Southern Tech University, Guangzhou, China\\
+    \{weiliang, linjiahao, tangruoyu, zhanghao\}@stu.edu.cn}
+  \IEEEauthorblockA{\IEEEauthorrefmark{2}%
+    Department of Electrical and Computer Engineering,
+    University of Technology, Hong Kong SAR, China\\
+    xian.chen@ust-ece.hk}
+}
+
+\maketitle
+
+% ---- abstract ------------------------------------------------
+\begin{abstract}
+Mixture-of-depth-Experts~(MoDE) models have opened a powerful
+new frontier for intelligent applications at the network edge,
+enabling sparse, adaptive, and highly expressive inference on
+resource-constrained platforms such as UAV swarms, smart homes,
+and industrial IoT deployments.  Traditional deployment approaches
+offload inference to remote cloud servers, introducing backbone
+network congestion and severe privacy risks.  In-situ inference on
+edge devices avoids these drawbacks, but the enormous memory
+footprint and heterogeneous activation patterns of MoDE models
+create fundamental conflicts with the restricted on-device
+resources available at the edge.  In this paper we observe that
+prevalent edge environments comprise a rich set of
+mutually-trusted, co-located devices with idle computing and
+memory resources, and we propose \textit{AeroMoDE}, a
+collaborative edge AI system that breaks the resource walls across
+heterogeneous edge devices to enable low-latency, in-situ MoDE
+inference.  AeroMoDE introduces (i)~a novel
+\emph{Expert-Parallel Hybrid Dispatch}~(EPHD) architecture that
+jointly orchestrates expert-level tensor parallelism and
+sequence-aware sparse routing across devices; (ii)~a
+heterogeneity-aware and memory-budget-constrained expert placement
+planner; and (iii)~a tile-based fine-grained overlapping of
+dispatch communication and expert computation to mitigate
+synchronization overhead in bandwidth-limited edge environments.
+Extensive evaluation on prototype hardware demonstrates that
+AeroMoDE outperforms state-of-the-art baselines across diverse
+edge setups, achieving up to $2.7\times$ end-to-end latency
+reduction and $89\%$ 4-device scaling efficiency compared with
+single-device deployment.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Collaborative edge inference, Mixture-of-Experts, in-situ AI,
+model parallelism, UAV swarms, communication-computation
+overlapping.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+% ==============================================================
+\section{Introduction}
+\label{sec:intro}
+% ==============================================================
+
+\IEEEPARstart{M}{ixture}-of-Experts~(MoE) and Mixture-of-Depths-Experts
+(MoDE) architectures~\cite{shazeer2017moe,fedus2022switch} have
+achieved state-of-the-art accuracy across natural language processing,
+multi-modal understanding, and autonomous decision making, making them
+attractive backbone models for edge-intelligent
+applications~\cite{zhou2019edge}.  In consumer scenarios such as
+voice assistants in smart homes~\cite{king2023sasha}, industrial
+inspection robots, and UAV-based reconnaissance swarms, single-shot
+inference tasks---where each user command corresponds to a single
+forward pass---are pervasive.  These workloads demand low, predictable
+latency for a seamless user experience.
+
+Currently, most MoDE-powered applications offload inference to remote
+cloud servers~\cite{li2023alpaserve,yu2022orca}.  At the edge, only a
+lightweight proxy daemon forwards user requests.  However,
+cloud-assisted inference suffers from well-known drawbacks: (1)~Quality
+of Service degrades over unreliable wide-area network (WAN)
+links~\cite{zhou2019edge}; (2)~aggregated inference traffic from millions
+of edge clients burdens backbone networks and datacenter resources; and
+(3)~raw sensory data from edge devices often contains sensitive personal
+information whose transfer to third-party clouds raises serious
+privacy concerns~\cite{voigt2017gdpr}.
+
+\emph{In-situ} inference~\cite{zeng2020coedge,jia2022codl}, which
+retains all data and computation on local edge devices without any
+remote assistance, has therefore emerged as the preferred paradigm for
+privacy-sensitive intelligent applications.  Nevertheless, deploying
+a MoDE model in-situ on a single edge device is far from
+straightforward.  A medium-sized MoDE model with eight experts per
+layer requires loading all expert weight matrices simultaneously into
+device DRAM to maintain sub-second activation latency.  As we show in
+Section~\ref{sec:background}, even a modest eight-expert MoDE variant
+demands more than~1.8\,GB of memory on a representative Jetson Nano-M
+platform, well beyond its~1.5\,GB budget, while its inference latency
+is more than $140\times$ slower than on a datacenter GPU.  These
+measurements expose the fundamental contradiction between the
+resource-intensive nature of MoDE inference and the constrained
+on-device hardware.
+
+\begin{figure}[t]
+  \centering
+  % Placeholder: replace with actual figure before camera-ready
+  \fbox{\parbox{0.92\columnwidth}{\centering\vspace{1.8cm}
+    \textbf{Fig.\,1 placeholder:} AeroMoDE empowering a UAV swarm
+    voice assistant.  Multiple Jetson Orin / Nano devices
+    collaboratively execute a MoDE model to process a user command
+    in real time.\vspace{1.8cm}}}
+  \caption{AeroMoDE enabling a collaborative MoDE inference service
+           across heterogeneous edge devices in a UAV-assisted smart
+           environment.}
+  \label{fig:motivation}
+\end{figure}
+
+\textbf{Key observation.}  Prevalent edge environments---smart homes,
+factory floors, UAV swarms---typically consist of a rich collection of
+trusted, co-located idle devices~\cite{zeng2020coedge,ye2022ecofl}.
+This motivates treating neighboring devices as a distributed resource
+pool to collaboratively execute a single MoDE inference pass, as
+illustrated in Fig.~\ref{fig:motivation}.
+
+\textbf{Challenges.}  However, translating this observation into a
+practical system raises three non-trivial problems.  \emph{First}, how
+to parallelize a single-shot MoDE inference pass across multiple edge
+devices in a way that respects the sparse, dynamic activation pattern of
+the gating network.  \emph{Second}, how to plan the workload partition
+strategy under both resource heterogeneity and the tight memory budgets
+of each device.  \emph{Third}, how to hide the synchronization overhead
+that is inevitable in a distributed execution over bandwidth-constrained
+edge links.
+
+\textbf{Contributions.}  To address these challenges, we propose
+\textbf{AeroMoDE}, a collaborative edge AI system that breaks the
+resource walls across heterogeneous edge devices for efficient
+in-situ MoDE inference.  The contributions of this paper are:
+\begin{itemize}
+  \item We introduce the \emph{Expert-Parallel Hybrid Dispatch} (EPHD)
+    architecture, which combines expert-sharding tensor parallelism with
+    sequence-dimension parallelism to orchestrate collaborative MoDE
+    inference across heterogeneous devices~(\S\ref{sec:design}).
+  \item We devise a heterogeneity-aware and memory-budget-constrained
+    expert placement algorithm that distributes expert weights and
+    workloads proportionally to each device's capacity while preventing
+    out-of-memory failures~(\S\ref{sec:greedy_scheduling}).
+  \item We propose a tile-based fine-grained communication-computation
+    overlap scheme that decouples the tight data dependency between
+    All-to-All dispatch operations and expert feed-forward
+    computation~(\S\ref{sec:greedy_scheduling}).
+  \item We implement a prototype of AeroMoDE on physical
+    heterogeneous Jetson testbeds and demonstrate up to~$2.7\times$
+    end-to-end latency reduction over state-of-the-art parallel
+    baselines~(\S\ref{sec:eval}).
+\end{itemize}
+
+% ==============================================================
+\section{Background and Motivation}
+\label{sec:background}
+% ==============================================================
+
+\subsection{Mixture-of-Depths-Experts Architecture}
+\label{sec:bg_mode}
+
+Current large-scale AI systems increasingly adopt sparse MoE
+architectures~\cite{shazeer2017moe,lepikhin2021gshard,jiang2024mixtral}
+because they decouple model capacity from per-token computation
+cost.  A standard MoDE layer consists of: (1)~a shared
+\emph{dense Transformer sub-layer} (multi-head attention, layer
+norm, residual connections), and (2)~a set of~$E$ heterogeneous
+\emph{expert feed-forward networks}~(FFNs), each with its own
+parameters.  A lightweight \emph{gating network} (router)
+evaluates each input token and selects the top-$k$ most relevant
+experts.
+
+Fig.~\ref{fig:mode_arch} depicts the architecture of one MoDE layer.
+Formally, given a sequence of hidden states
+$\mathbf{X} \in \mathbb{R}^{S \times d}$ (sequence length $S$,
+hidden dimension~$d$), the gating network produces a routing
+decision $\mathcal{R} \in \mathbb{Z}^{S \times k}$ and the
+corresponding softmax weights
+$\mathbf{G} \in \mathbb{R}^{S \times k}$.  The output is
+
+\begin{equation}
+  \mathbf{Y} = \sum_{j=1}^{k} G_{ij} \cdot \mathrm{FFN}_{r_{ij}}(\mathbf{X}_{i}),
+  \quad i = 1,\ldots,S,
+  \label{eq:moe_output}
+\end{equation}
+
+\noindent
+where $r_{ij}$ is the index of the $j$-th selected expert for
+token $i$ and $\mathrm{FFN}_{e}(\cdot)$ is the two-layer
+feed-forward network of expert $e$.
+
+The sparse activation pattern means that only $k \ll E$ experts
+process any given token, drastically reducing per-token FLOPs.
+However, the entire expert parameter set must be resident in
+device memory during inference, creating an enormous memory
+footprint that dwarfs standard dense Transformer models of
+comparable accuracy.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.92\columnwidth}{\centering\vspace{1.6cm}
+    \textbf{Fig.\,2 placeholder:} Architecture of a MoDE layer
+    showing shared attention, gating network, and $E$ expert FFNs.\vspace{1.6cm}}}
+  \caption{Architecture of a MoDE (Mixture-of-Depths-Experts) layer.
+           Each input token is dispatched to the top-$k$ expert FFNs
+           selected by the gating network.}
+  \label{fig:mode_arch}
+\end{figure}
+
+\subsection{MoDE Inference on Resource-Limited Edge Devices}
+\label{sec:bg_edge}
+
+In-situ inference preserves data privacy and eliminates WAN
+latency~\cite{zeng2020coedge,ye2022ecofl}, but the resource-intensive
+nature of MoDE inference severely challenges edge
+platforms~\cite{aminabadi2022deepspeed}.  We conducted experiments to
+quantify this conflict.  We evaluate five MoDE model variants (scaled
+from the Switch-Transformer family~\cite{fedus2022switch}) on an
+NVIDIA Jetson Nano-M edge device and on an NVIDIA A100 GPU using an
+input sequence of length~30.  The results are summarized in
+Table~\ref{tab:profiling}.
+
+\begin{table}[t]
+  \caption{Inference latency and memory footprint of MoDE model variants.
+           \textit{OOM} denotes out-of-memory failure.}
+  \label{tab:profiling}
+  \centering
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Model} & \textbf{Experts} & \textbf{Params} &
+    \textbf{Nano-M} & \textbf{A100} \\
+    \midrule
+    MoDE-S  & 4  & 340\,M  & 0.61\,s & 8\,ms  \\
+    MoDE-M  & 8  & 680\,M  & 2.87\,s & 16\,ms \\
+    MoDE-L  & 16 & 1.4\,B  & OOM     & 26\,ms \\
+    MoDE-XL & 32 & 2.8\,B  & OOM     & 48\,ms \\
+    MoDE-2X & 64 & 5.6\,B  & OOM     & 91\,ms \\
+    \midrule
+    \multicolumn{3}{l}{Memory Footprint} &
+    \multicolumn{2}{c}{0.68\,GB -- 11.2\,GB} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The results reveal a $>$140$\times$ latency gap between Nano-M and
+A100 on MoDE-M, and severe out-of-memory (OOM) failures for all
+models with more than 8 experts.  These results confirm the
+fundamental conflict between the memory and compute demands of MoDE
+inference and the on-device resource budget.
+
+\subsection{Collaborative MoDE Inference with Multiple Devices}
+\label{sec:bg_collab}
+
+To resolve this conflict, we observe that edge environments such as
+smart homes and UAV swarms typically consist of several trusted,
+co-located devices with heterogeneous capabilities and idle
+resources~\cite{zeng2020coedge,king2023sasha}.  By pooling their
+memory and compute, these devices can collaboratively host the full
+expert parameter set and parallelize MoDE inference, breaking the
+memory wall without sacrificing data locality.
+
+The key design question is the choice of parallelism
+strategy~\cite{shoeybi2019megatron,li2021sequence}.  We briefly
+analyze three canonical strategies in the context of MoDE inference.
+
+\textbf{Data Parallelism~(DP)} partitions work along the batch
+dimension.  Single-shot inference produces a batch of size one,
+making DP inapplicable.
+
+\textbf{Pipeline Parallelism~(PP)} assigns consecutive model layers
+to successive devices.  With single-shot inference, inter-stage data
+dependencies serialize execution, preventing devices from working
+concurrently.
+
+\textbf{Expert Parallelism~(EP)} assigns disjoint subsets of expert
+FFNs to different devices.  EP directly addresses the memory issue by
+distributing expert parameters, but the sparse gating pattern
+introduces irregular All-to-All communication whose overhead can
+dominate latency on bandwidth-limited edge links.
+
+Analyzing these limitations motivates our \emph{Expert-Parallel
+Hybrid Dispatch} design, which fuses EP with sequence-dimension
+parallelism and adds a tile-based communication optimization to
+suppress synchronization overhead.
+
+
+\section{System Model}
+\label{sec:system}
+
+本节建立一个准静态 UAV 边缘网络下的通用协同推理模型。
+与传统 UAV 轨迹优化问题不同，本文不研究 UAV 在任务执行过程中的
+飞行轨迹规划，而是假设在一个短时间调度窗口内，UAV 的空间位置
+保持近似不变。因此，UAV 之间的无线拓扑、链路质量和可用通信容量
+可以由当前空间位置和信道状态决定。基于该准静态网络，系统需要
+决定任务由哪个 UAV 接入、哪些 UAV 参与协同推理、以及中间特征
+如何在 UAV 网络中传输，从而最小化端到端推理延迟。
+Fig.~\ref{fig:system_model} 展示了本文考虑的准静态 UAV 协同推理场景。
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{photo/system_model_uav_scenario.png}
+  \caption{准静态 UAV 边缘网络中的协同推理场景。地面任务通过空地链路接入 UAV，多个资源异构 UAV 在给定无线拓扑下协同执行 MoE 推理计算单元，并通过 UAV-UAV 链路传输中间特征，最终将推理结果返回至基站或应急指挥中心。}
+  \label{fig:system_model}
+\end{figure}
+
+\subsection{准静态 UAV 网络}
+
+考虑一个由多个 UAV 构成的空中边缘网络，记 UAV 集合为
+$\mathcal{U}=\{1,2,\ldots,U\}$。每个 UAV $u\in\mathcal{U}$
+配备有限的计算、存储和无线通信资源，其准静态空间位置记为
+$\mathbf{l}_u$。在当前调度窗口内，$\mathbf{l}_u$ 作为已知参数，
+不作为优化变量。该假设对应灾害救援、低空巡检、应急监测等场景中
+UAV 在短时间内悬停或缓慢移动的情况；在该窗口内，系统主要关注
+当前网络拓扑下的推理资源组织，而不是 UAV 轨迹控制。
+
+每个 UAV $u$ 的可用计算能力（以 FLOP/s 计）记为 $C_u$，
+可用于部署推理模块或模型分片的内存容量记为 $M_u$。由于不同 UAV 的硬件平台、电池状态
+和后台负载可能不同，$C_u$ 和 $M_u$ 在 UAV 之间通常是异构的。
+这种异构性决定了不同 UAV 在协同推理中能够承担的计算量和模型
+状态存储量不同。
+
+\subsection{无线链路与多跳连通性}
+
+UAV 网络同时包含地面节点到 UAV 的空地接入链路，以及 UAV 之间的
+空空协同链路。令 $\rho_{u,v}$ 表示 UAV $u$ 到 UAV $v$ 的链路
+信噪比。当 $\rho_{u,v}$ 高于给定阈值 $\rho_{\mathrm{th}}$ 时，
+链路 $(u,v)$ 被认为可用。相应地，可以定义链路可用指示变量
+$g_{u,v}$：
+\begin{equation}
+g_{u,v} =
+\begin{cases}
+1, & \rho_{u,v} \ge \rho_{\mathrm{th}},\\
+0, & \rho_{u,v} < \rho_{\mathrm{th}}.
+\end{cases}
+\end{equation}
+
+若链路可用，UAV $u$ 和 UAV $v$ 之间的数据速率记为 $R_{u,v}$。
+该速率可以由无线带宽、发射功率、信道增益和噪声功率共同决定，
+也可以由在线测量得到。类似地，任务 $k$ 所在地面节点到 UAV $u$
+的空地接入速率记为 $R_{k,u}^{\mathrm{access}}$。由于 UAV 之间可能无法全部
+直接连通，本文允许中间特征通过多跳 UAV-UAV 路径传输。令
+$\mathcal{P}_{u,v}$ 表示从 UAV $u$ 到 UAV $v$ 的可用路径集合；
+只有当路径上的每一条空空链路均满足连通条件时，该路径才可用于
+协同推理。
+
+\subsection{协同推理任务模型}
+
+令 $\mathcal{K}$ 表示当前准静态调度窗口内到达的推理任务集合。
+每个任务 $k\in\mathcal{K}$ 由地面用户或传感器产生，输入数据大小
+为 $S_k^{\mathrm{in}}$，输出结果大小为 $S_k^{\mathrm{out}}$。
+任务首先选择一个接入 UAV
+上传输入数据，随后由一个或多个 UAV 协同完成模型推理，最后将
+推理结果返回给用户、基站或指挥中心。
+
+为了保持系统模型的通用性，本节不限定具体的模型并行策略，也不
+直接展开 MoE 专家的部署和执行变量。我们将待执行的推理模型抽象为
+若干推理计算单元，记为 $\mathcal{B}$。计算单元
+$b\in\mathcal{B}$ 对应一个可被部署和调度的专家权重、专家分片
+或层内计算块，具有执行该单元所需的计算量 $F_b$ 和存放其
+参数所需的内存占用 $W_b$。对每个任务 $k$，其当前推理路径所需
+的计算单元构成一个有序子集 $\mathcal{B}_k\subseteq\mathcal{B}$，
+按线性执行顺序排列。在后续 AeroMoDE 设计中，这些抽象
+计算单元将被进一步具体化为 MoE 模型中的逐层 expert FFN。
+
+系统需要决定任务 $k$ 的接入 UAV、参与协同的 UAV 集合、各推理
+模块在 UAV 上的执行分配，以及不同 UAV 之间的中间特征传输路径。
+令 $y_{k,u}\in\{0,1\}$ 表示任务 $k$ 是否由 UAV $u$ 接入；令
+$s_{k,b,u}\in\{0,1\}$ 表示任务 $k$ 的推理模块 $b$ 是否在 UAV $u$
+上执行；令 $p_{k,u,v}\in\{0,1\}$ 表示任务 $k$ 是否需要在 UAV $u$
+和 UAV $v$ 之间传输中间特征。这里的 $s_{k,b,u}$ 和 $p_{k,u,v}$
+是通用协同推理层面的抽象决策变量，后续可以根据具体 MoE 路由和
+专家部署方式进一步实例化。
+
+\subsection{端到端延迟模型}
+
+任务 $k$ 的端到端推理延迟由接入延迟、协同计算延迟、UAV-UAV
+中间特征传输延迟和结果回传延迟组成：
+\begin{equation}
+D_k = D_k^{\mathrm{access}} + D_k^{\mathrm{compute}}
+    + D_k^{\mathrm{trans}} + D_k^{\mathrm{return}} .
+\end{equation}
+
+接入延迟表示输入数据从地面节点上传到接入 UAV 的时间：
+\begin{equation}
+D_k^{\mathrm{access}}
+= \sum_{u\in\mathcal{U}} y_{k,u}
+  \frac{S_k^{\mathrm{in}}}{R_{k,u}^{\mathrm{access}}} .
+\end{equation}
+
+协同计算延迟由各推理模块在被分配 UAV 上的执行时间决定：
+\begin{equation}
+D_k^{\mathrm{compute}}
+= \sum_{b\in\mathcal{B}}\sum_{u\in\mathcal{U}}
+   s_{k,b,u}\frac{F_b}{C_u}.
+\end{equation}
+
+UAV-UAV 传输延迟由中间特征大小和协同链路速率决定。令
+$S_{k,u,v}^{\mathrm{mid}}$ 表示任务 $k$ 在 UAV $u$ 和 UAV $v$
+之间需要传输的中间特征大小，则
+\begin{equation}
+D_k^{\mathrm{trans}}
+= \sum_{u\in\mathcal{U}}\sum_{v\in\mathcal{U},v\ne u}
+   p_{k,u,v}\frac{S_{k,u,v}^{\mathrm{mid}}}{R_{u,v}} .
+\end{equation}
+当两个协同 UAV 不能直接通信时，上式中的单跳速率 $R_{u,v}$ 可替换
+为所选多跳路径的等效传输时延。
+
+结果回传延迟将推理输出从最终执行 UAV 传输至用户、基站或指挥中心：
+\begin{equation}
+D_k^{\mathrm{return}}
+= \frac{S_k^{\mathrm{out}}}{R_k^{\mathrm{return}}},
+\end{equation}
+其中 $R_k^{\mathrm{return}}$ 为最终执行 UAV 到目的节点的等效回传速率。
+由于推理输出通常远小于输入数据和中间特征，$D_k^{\mathrm{return}}$
+可以作为较小的常数项处理。
+
+\subsection{通用优化问题}
+
+在给定 UAV 位置、链路状态、计算资源、内存资源和任务集合的条件下，
+系统目标是在满足资源和连通性约束的同时，最小化任务的期望端到端
+推理延迟：
+\begin{equation}
+\min_{\mathbf{y},\mathbf{s},\mathbf{p}}
+\quad
+\mathbb{E}\left[\sum_{k\in\mathcal{K}} D_k\right].
+\end{equation}
+
+上述目标受到以下约束。首先，每个任务只能选择一个接入 UAV：
+\begin{equation}
+\sum_{u\in\mathcal{U}} y_{k,u}=1,\quad \forall k\in\mathcal{K}.
+\end{equation}
+
+其次，每个推理模块必须被分配到能够参与协同推理的 UAV 上执行：
+\begin{equation}
+\sum_{u\in\mathcal{U}} s_{k,b,u}=1,\quad
+\forall k\in\mathcal{K}, b\in\mathcal{B}.
+\end{equation}
+
+第三，UAV 的计算负载不能超过其在当前调度窗口内的可用计算预算。
+令 $C_u^{\max}$ 表示 UAV $u$ 在当前调度窗口内的最大可用计算量
+（以 FLOPs 计），则有
+\begin{equation}
+\sum_{k\in\mathcal{K}}\sum_{b\in\mathcal{B}}
+s_{k,b,u}F_b \le C_u^{\max},\quad \forall u\in\mathcal{U}.
+\end{equation}
+
+第四，部署在每个 UAV 上的模型模块或模型分片不能超过其内存容量。
+令 $m_{b,u}\in\{0,1\}$ 表示推理模块 $b$ 是否被部署在 UAV $u$ 上，
+则有
+\begin{equation}
+\sum_{b\in\mathcal{B}} m_{b,u}W_b \le M_u,\quad
+\forall u\in\mathcal{U},
+\end{equation}
+并且模块只能在已部署该模块的 UAV 上执行：
+\begin{equation}
+s_{k,b,u}\le m_{b,u},\quad
+\forall k\in\mathcal{K}, b\in\mathcal{B}, u\in\mathcal{U}.
+\end{equation}
+
+第五，任务的中间特征传输必须满足 UAV-UAV 连通性要求：
+\begin{equation}
+p_{k,u,v}=1 \Rightarrow g_{u,v}=1,\quad
+\forall k\in\mathcal{K}, u,v\in\mathcal{U}.
+\end{equation}
+对于多跳传输，该约束要求所选路径上的每一条 UAV-UAV 链路均可用。
+
+第六，中间特征传输与模块执行分配之间的耦合关系需要显式刻画。
+对于每个任务 $k$，记其推理模块的线性执行顺序为
+$b_{k,1} \prec_k b_{k,2} \prec_k \cdots \prec_k b_{k,L_k}$，
+其中 $b_{k,l}\in\mathcal{B}$、$L_k=|\mathcal{B}_k|$ 为任务 $k$ 所需
+执行的模块总数。若两个相邻模块被分配到不同的 UAV 上执行，
+则必须在这两个 UAV 之间传输中间特征：
+\begin{multline}
+s_{k,b_{k,l},u}=1 \;\land\; s_{k,b_{k,l+1},v}=1
+\;\land\; u\neq v \;\Longrightarrow\; p_{k,u,v}=1,\\[2pt]
+\forall\,k\in\mathcal{K},\; l=1,\ldots,L_k-1,\; u,v\in\mathcal{U}.
+\label{eq:p_s_coupling}
+\end{multline}
+在后续 Design 章节中，该执行顺序被具体化为 MoE 模型的逐层专家
+执行序列（第~\ref{sec:inference_scheduling}~节中 $\mathcal{C}_{k,l}$
+的定义即依赖于这一相邻步的传输逻辑）。
+
+该通用问题刻画了准静态 UAV 边缘网络中的协同推理本质：在无线链路
+受限、资源异构且内存受限的空中边缘节点之间，联合决定任务接入、
+协同执行和中间特征传输，以降低端到端推理延迟。后续章节将在该
+通用模型基础上，将抽象的推理模块部署和执行分配进一步转化为
+MoE expert placement、router-aware expert execution 和
+communication-computation overlap 等具体设计问题。
+
+
+% ==============================================================
+\section{Proposed Design}
+\label{sec:design}
+% ==============================================================
+
+\subsection{Design Overview}
+\label{sec:design_overview}
+
+在 System Model（第~\ref{sec:system}~节）中建立的通用协同推理优化问题中，
+系统需要联合优化专家部署变量 $m_{e,u}$、任务接入变量 $y_{k,u}$、
+专家执行变量 $s_{k,l,u}$ 以及中间特征传输选择变量 $p_{k,u,v}$。
+该联合优化问题的搜索空间随 UAV 数量、专家数量和任务数量呈指数增长，
+在准静态调度窗口的实时性要求下难以直接求解。
+
+为此，AeroMoDE 采用\emph{低复杂度分阶段设计}：将联合优化问题解耦为
+任务需求建模、相似候选专家构造、通信感知部署评分以及动态贪心部署与
+推理调度四个顺序阶段，每个阶段仅需处理一个规模可控的子问题。
+各阶段之间单向递进，前一阶段的输出作为后一阶段的输入，避免了
+迭代式联合优化带来的复杂交替求解过程。
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{photo/design_flow.pdf}
+  \caption{AeroMoDE 分阶段设计流程：任务需求建模
+           $\rightarrow$ 相似候选专家构造 $\rightarrow$
+           通信感知部署评分 $\rightarrow$
+           动态贪心部署与轻量级推理调度。}
+  \label{fig:design_flow}
+\end{figure}
+
+图~\ref{fig:design_flow} 展示了 AeroMoDE 设计阶段的整体流程：
+\begin{enumerate}
+  \item \textbf{任务接入与需求统计}（第~\ref{sec:demand_modeling}~节）：\\
+        将地面任务按最小接入延迟归属到各 UAV 区域，统计每个 UAV 区域的
+        直接专家需求分布 $\mathrm{Demand}(r,u)$。
+  \item \textbf{相似专家候选构造}（第~\ref{sec:similarity_candidate}~节）：\\
+        基于专家权重相似度 $\mathrm{Sim}(r,e)$，为每个原始需求专家 $r$
+        构造可替代专家集合 $\mathcal{A}(r)$，将原始专家需求扩展为候选
+        专家的有效需求 $\mathrm{Demand}^{\mathrm{eff}}(e,u)$。
+  \item \textbf{通信感知部署评分}（第~\ref{sec:placement_scoring}~节）：\\
+        综合考虑通信可达性 $g_{v,u}$、计算能力 $C_u$ 和网络拓扑位置，
+        为每个候选部署对 $(e,u)$ 计算基础部署得分 $\mathrm{BaseScore}(e,u)$。
+  \item \textbf{动态贪心部署与轻量级推理调度}（第~\ref{sec:greedy_scheduling}~节）：\\
+        在 UAV 内存约束下通过动态贪心算法生成最终专家部署方案
+        $\{m_{e,u}\}$，并设计逐层贪心推理调度策略计算端到端任务延迟
+        $D_{\mathrm{total}}$。
+\end{enumerate}
+
+
+
+\textbf{变量实例化。}
+System Model 中的抽象推理模块 $b\in\mathcal{B}$ 在 Design 阶段被实例化
+为具体的 MoE 专家 $e\in\mathcal{E}_{\mathrm{cand}}$，模块执行顺序
+$\prec_k$ 被具体化为 MoE 模型的逐层专家执行序列（第 $l$ 步原始所需
+专家记为 $e_{k,l}$）。
+抽象执行分配变量 $s_{k,b,u}$ 被细化为逐步专家执行指示变量 $s_{k,l,u}$：
+\begin{multline}
+s_{k,l,u}=1 \;\Longleftrightarrow\; \text{任务 }k\text{ 的第 }l\text{ 步专家在 UAV }u
+\text{ 上执行},\\[2pt]
+\forall\,k\in\mathcal{K},\; l=1,\ldots,L_k,\; u\in\mathcal{U}.
+\label{eq:sklu_def}
+\end{multline}
+传输选择变量 $p_{k,u,v}$ 在 Design 阶段不再显式作为决策变量，而是由
+推理调度中逐步的当前 UAV $cur$ 到目标 UAV $u$ 的单跳传输隐式确定
+（对应式~(\ref{eq:candidate_exec}) 中 $u=cur$ 或 $g_{cur,u}=1$ 的条件；
+多跳传输简化为单跳的理由见第~\ref{sec:demand_modeling}~节）。
+
+% ==============================================================
+\subsection{Task Demand Modeling under Single-Hop UAV Communication}
+\label{sec:demand_modeling}
+
+本节解决的问题是：\emph{任务需求从哪里来？哪个 UAV 区域需要哪些专家？
+UAV-UAV 单跳通信如何影响任务需求收益？} 本节依次定义任务默认接入归属、
+直接专家需求统计以及单跳通信设定。
+
+\subsubsection{任务默认接入 UAV}
+
+对于每个任务 $k\in\mathcal{K}$，AeroMoDE 不引入复杂的接入优化变量，
+而是根据最小接入延迟原则将其归属到默认接入 UAV：
+\begin{equation}
+u_k^a = \arg\min_{u\in\mathcal{U}} \frac{S_k^{\mathrm{in}}}{R_{k,u}^{\mathrm{access}}},
+\label{eq:default_access}
+\end{equation}
+其中 $S_k^{\mathrm{in}}$ 为任务 $k$ 的输入数据大小，
+$R_{k,u}^{\mathrm{access}}$ 为任务 $k$ 到 UAV $u$ 的空地接入速率。
+
+需要强调，式~(\ref{eq:default_access}) 的目的不是对任务接入变量
+$y_{k,u}$ 做精细优化，而是以最小接入代价将每个任务\emph{归属}到某个
+UAV 区域。归属完成后，任务 $k$ 的专家需求将全部统计到其默认接入 UAV
+$u_k^a$ 所在区域，用于下一步的需求分布统计。
+
+\subsubsection{直接专家需求 \texorpdfstring{$\mathrm{Demand}(r,u)$}{Demand(r,u)}}
+
+在任务接入归属确定后，UAV $u$ 区域对原始专家 $r$ 的直接需求定义为：
+\begin{equation}
+\mathrm{Demand}(r,u) = \sum_{k:\,u_k^a = u} \omega_k \, q_{k,r},
+\label{eq:demand}
+\end{equation}
+其中 $\omega_k$ 为任务 $k$ 的权重（反映任务优先级或历史到达频率），
+$q_{k,r}$ 为任务 $k$ 对专家 $r$ 的需求强度。若 MoE 模型提供 gating
+network 输出的路由权重，则 $q_{k,r}$ 可取任务 $k$ 所有输入 token 对
+专家 $r$ 的 gating score 之和；若无 gating 先验信息，则按专家 $r$
+在任务 $k$ 所需专家序列中的出现次数统计。
+
+式~(\ref{eq:demand}) 的 $\mathrm{Demand}(r,u)$ 仅描述任务\emph{原本
+需要}哪些原始专家，相似专家替代和有效需求扩展尚未在此处处理，这些
+内容将在第~\ref{sec:similarity_candidate}~节单独解决。
+
+\subsubsection{单跳 UAV-UAV 通信设定}
+
+System Model（第~\ref{sec:system}~节）中允许中间特征通过多跳 UAV-UAV
+路径传输。然而，在专家部署规划阶段，若考虑全路径多跳传输，部署评分
+将与具体的端到端路径选择深度耦合，显著增加问题复杂度。此外，在准静态
+UAV 悬停场景和典型任务需求密度下，单跳通信已能覆盖 UAV 之间的主要
+协同需求，多跳传输带来的额外延迟累积往往抵消其连通性扩展收益。
+因此，AeroMoDE 在 Design 阶段将 UAV-UAV 协同通信\emph{简化为单跳可达模型}。
+最终推理调度中的真实端到端传输延迟仍按 System Model 中的定义，
+根据实际所选路径的等效传输时延计算。
+
+UAV $v$ 到 UAV $u$ 的单跳可达指示变量与 System Model 一致：
+\begin{equation}
+g_{v,u} =
+\begin{cases}
+1, & \text{UAV } v \text{ 可单跳访问 UAV } u,\\
+0, & \text{否则}.
+\end{cases}
+\label{eq:single_hop_g}
+\end{equation}
+
+对应的单跳数据传输速率为 $R_{v,u}$（UAV $v$ 到 UAV $u$ 的可用速率）。
+令 $R_{\max} = \max_{v,u\in\mathcal{U},\,v\neq u} R_{v,u}$ 为所有可用
+UAV-UAV 单跳链路中的最大速率，用于后续部署评分中的速率归一化。
+这些链路信息将直接被第~\ref{sec:placement_scoring}~节的通信感知部署
+评分和第~\ref{sec:greedy_scheduling}~节的推理调度所使用。
+
+% ==============================================================
+\subsection{Similarity-Aware Candidate Expert Construction}
+\label{sec:similarity_candidate}
+
+本节是 AeroMoDE 方法的关键创新之一，解决的问题是：
+\emph{部署候选专家从哪里来？是否只考虑任务原本需要的专家？
+相似专家如何加入候选集合？替代专家的有效需求如何计算？}
+下面依次定义原始所需专家集合、可替代专家集合、候选专家集合和
+有效需求四个概念。
+
+\subsubsection{任务原本需要的原始专家集合}
+
+令 $E_k$ 表示任务 $k$ 的专家执行序列（由 MoE gating network 的路
+由决策或任务预配置确定）。所有任务原本需要的原始专家集合为：
+\begin{equation}
+\mathcal{E}_{\mathrm{req}} = \{\,r \mid \exists k\in\mathcal{K},\;
+r \in E_k\,\}.
+\label{eq:ereq}
+\end{equation}
+例如，若任务 $k_1$ 需要专家序列 $\{E_1, E_2\}$，任务 $k_2$ 需要
+$\{E_2, E_3\}$，则 $\mathcal{E}_{\mathrm{req}} = \{E_1, E_2, E_3\}$。
+$\mathcal{E}_{\mathrm{req}}$ 是所有后续候选构造的起点。
+
+\subsubsection{可替代专家集合}
+
+对于任意原始专家 $r\in\mathcal{E}_{\mathrm{req}}$，其可替代专家集合
+包含 $r$ 本身以及所有与 $r$ 足够相似的专家：
+\begin{equation}
+\mathcal{A}(r) = \{r\} \cup \{\,e \mid \mathrm{Sim}(r,e) \ge \xi\,\},
+\label{eq:ar}
+\end{equation}
+其中 $\mathrm{Sim}(r,e)\in[0,1]$ 为专家 $r$ 与专家 $e$ 的相似度，
+$\xi\in[0,1]$ 为相似度阈值。
+
+\textbf{相似度定义。}
+本文采用专家 FFN 权重矩阵展平后的余弦相似度作为 $\mathrm{Sim}(r,e)$：
+\begin{equation}
+\mathrm{Sim}(r,e) =
+\frac{\bigl\langle \mathrm{vec}(\mathbf{W}_r),\,
+                \mathrm{vec}(\mathbf{W}_e) \bigr\rangle}
+     {\|\mathrm{vec}(\mathbf{W}_r)\|_2\,
+      \|\mathrm{vec}(\mathbf{W}_e)\|_2},
+\label{eq:sim}
+\end{equation}
+其中 $\mathbf{W}_r$、$\mathbf{W}_e$ 分别为专家 $r$ 和专家 $e$ 的 FFN
+权重参数（将两层全连接权重矩阵展平后拼接为单一向量），
+$\mathrm{vec}(\cdot)$ 为矩阵向量化操作，$\langle\cdot,\cdot\rangle$
+为欧氏内积。该定义的直觉是：在权重空间中相近的专家倾向于对相同输入
+产生相似的输出分布，因此具有功能上的可替代性。权重相似度可在线下
+一次性计算并缓存，不影响在线部署和推理效率。
+
+\textbf{阈值 $\xi$ 的选择。}
+$\xi$ 控制可替代专家集合的规模：$\xi$ 过低将引入大量弱相关专家，
+稀释有效需求信号并膨胀部署搜索空间；$\xi$ 过高则可能遗漏有实际
+替代价值的专家对，导致部署选择过少。$\xi$ 的灵敏度分析将在实验
+部分（第~\ref{sec:eval}~节）给出。
+
+\subsubsection{候选专家集合}
+
+最终的候选部署专家集合由所有原始专家的可替代集合的并集构成：
+\begin{equation}
+\mathcal{E}_{\mathrm{cand}} = \bigcup_{r\in\mathcal{E}_{\mathrm{req}}}
+\mathcal{A}(r).
+\label{eq:ecand}
+\end{equation}
+$\mathcal{E}_{\mathrm{cand}}$ 既包含任务直接需要的原始专家，
+也包含可以替代这些原始专家的相似专家。该集合是所有后续部署决策的
+搜索空间——AeroMoDE 仅从 $\mathcal{E}_{\mathrm{cand}}$ 中选择专家
+部署到 UAV 上，而非考虑全部 $E$ 个专家。
+
+\subsubsection{有效需求 \texorpdfstring{$\mathrm{Demand}^{\mathrm{eff}}(e,u)$}{Demand\_eff(e,u)}}
+
+相似专家之所以能成为部署候选，是因为它可以\emph{继承}被替代原始
+专家的部分需求。定义候选专家 $e\in\mathcal{E}_{\mathrm{cand}}$ 在
+UAV $u$ 区域的有效需求为其可替代的所有原始专家需求的加权和：
+\begin{equation}
+\mathrm{Demand}^{\mathrm{eff}}(e,u) =
+\sum_{r:\,e\in\mathcal{A}(r)} \!\! \mathrm{Demand}(r,u) \, \theta(r,e),
+\label{eq:demand_eff}
+\end{equation}
+其中 $\theta(r,e)$ 为专家 $e$ 替代原始专家 $r$ 的收益折扣因子：
+\begin{equation}
+\theta(r,e) =
+\begin{cases}
+1,                     & e = r,\\[4pt]
+\mathrm{Sim}(r,e),     & e \neq r.
+\end{cases}
+\label{eq:theta}
+\end{equation}
+
+式~(\ref{eq:theta}) 的含义是：若 $e$ 恰好就是原始所需专家 $r$
+（即 $e=r$），则它完全继承 $r$ 的需求（折扣因子 $1$）；若 $e$ 是
+$r$ 的相似替代专家（即 $e\neq r$ 且 $\mathrm{Sim}(r,e)\ge\xi$），
+则它以折扣后的比例继承 $r$ 的需求——相似度越高，替代的精度损失越小，
+可继承的有效需求比例越高。例如，若 $\mathrm{Sim}(E_1,E_4)=0.85$ 且
+$E_4\in\mathcal{A}(E_1)$，则 $E_4$ 虽未被任何任务直接需要，但它可以
+继承 $E_1$ 在 UAV $u$ 区域 $85\%$ 的有效需求。这使得部署决策可以在
+``部署 $E_1$ 本身''和``部署 $E_4$ 同时覆盖 $E_1$ 及其他原始专家的
+需求''之间进行全局权衡。
+
+\subsection{Communication-Aware Expert Placement Scoring}
+\label{sec:placement_scoring}
+
+本节解决的问题是：\emph{给定一个候选部署对 $(e,u)$（将专家 $e$ 部署到
+UAV $u$），如何量化这个部署动作的收益与代价？} AeroMoDE 从通信感知
+任务需求收益 $A(e,u)$、计算能力收益 $B(e,u)$、网络位置收益 $C(e,u)$
+和模型大小代价 $W_e$ 四个维度综合评估，形成基础部署得分
+$\mathrm{BaseScore}(e,u)$。
+
+\subsubsection{通信感知任务需求收益 \texorpdfstring{$A(e,u)$}{A(e,u)}}
+
+专家 $e$ 部署到 UAV $u$ 的通信感知任务需求收益定义为：
+\begin{equation}
+\begin{aligned}
+A(e,u) &= \mathrm{Demand}^{\mathrm{eff}}(e,u) \\
+&\quad + \eta \sum_{v\neq u} \mathrm{Demand}^{\mathrm{eff}}(e,v)\,
+g_{v,u}\,\frac{R_{v,u}}{R_{\max}},
+\end{aligned}
+\label{eq:A}
+\end{equation}
+其中 $\eta\in[0,1]$ 为邻近 UAV 区域需求的权重系数，控制远程需求
+相对于本地需求的重要性。
+
+$A(e,u)$ 由两项构成：
+\begin{itemize}
+  \item \textbf{本地区域需求} $\mathrm{Demand}^{\mathrm{eff}}(e,u)$：
+        专家 $e$ 直接服务于部署 UAV $u$ 本地区域任务的能力——本地
+        任务可由本地专家直接执行，无需跨 UAV 传输中间特征。
+  \item \textbf{邻近区域需求} $\eta\sum_{v\neq u}\cdots$：
+        专家 $e$ 通过单跳链路服务于\emph{其他} UAV $v$ 区域任务的
+        潜在能力。该收益仅在 UAV $v$ 能单跳访问 UAV $u$
+        （$g_{v,u}=1$）时存在，且以归一化速率 $R_{v,u}/R_{\max}$
+        加权：链路速率越接近全局最优，该远程需求的实际可利用程度
+        越高。
+\end{itemize}
+
+需要说明的是，$A(e,u)$ 中未显式包含中间特征大小 $S^{\mathrm{mid}}$。
+原因在于 $A(e,u)$ 是\emph{部署规划阶段的静态评分}——此时具体任务
+的中间特征大小尚未确定，无法精确计算传输时间。通信质量的影响通过
+归一化速率 $R_{v,u}/R_{\max}$ 作为代理指标体现，而最终的端到端
+传输延迟仍在第~\ref{sec:greedy_scheduling}~节的推理调度中，使用
+实际的 $S^{\mathrm{mid}}$ 和链路速率计算。
+
+\subsubsection{计算能力收益 \texorpdfstring{$B(e,u)$}{B(e,u)}}
+
+专家 $e$ 部署到 UAV $u$ 的计算能力收益定义为：
+\begin{equation}
+B(e,u) = \frac{C_u}{F_e},
+\label{eq:B}
+\end{equation}
+其中 $C_u$ 为 UAV $u$ 的可用计算能力，$F_e$ 为专家 $e$ 的计算量
+（以 FLOPs 或单次前向传播的执行时间衡量）。直觉上，算力越强的 UAV
+部署计算量越小的专家，单位时间内可服务的推理请求越多。
+
+\subsubsection{网络位置收益 \texorpdfstring{$C(e,u)$}{C(e,u)}}
+
+专家 $e$ 部署到 UAV $u$ 的网络位置收益定义为：
+\begin{equation}
+C(e,u) = I_e \sum_{v\neq u} g_{v,u},
+\label{eq:C}
+\end{equation}
+其中
+$I_e = \sum_{u\in\mathcal{U}} \mathrm{Demand}^{\mathrm{eff}}(e,u)$
+为专家 $e$ 在所有 UAV 区域的全局有效需求总和，反映该专家的全局重要性；
+$\sum_{v\neq u} g_{v,u}$ 为 UAV $u$ 在网络拓扑中的入度中心性，
+表示有多少其他 UAV 可通过单跳访问 UAV $u$。
+该定义的直觉是：全局需求越高的专家，越适合部署在网络中可达性最强的
+UAV 上，以最小化其他区域任务远程调用该专家的通信跳数。
+
+\subsubsection{基础部署得分 \texorpdfstring{$\mathrm{BaseScore}(e,u)$}{BaseScore(e,u)}}
+
+综合以上三项收益和模型大小代价，基础部署得分定义为：
+\begin{equation}
+\mathrm{BaseScore}(e,u) =
+\alpha A(e,u) + \beta B(e,u) + \gamma C(e,u) - \mu W_e,
+\label{eq:basescore}
+\end{equation}
+其中 $W_e$ 为专家 $e$ 的模型参数内存占用，
+$\alpha,\beta,\gamma,\mu > 0$ 为各项的权重系数。
+
+需要指出，$A(e,u)$（需求强度）、$B(e,u)$（时间$^{-1}$）、$C(e,u)$
+（需求$\times$连通度）和 $W_e$（字节数）四项具有不同的物理量纲，
+直接加权求和缺乏数学意义。在计算 $\mathrm{BaseScore}(e,u)$ 之前，
+AeroMoDE 对各项分别进行 min-max 归一化，将所有维度映射到 $[0,1]$
+区间后再加权求和。权重系数 $\alpha,\beta,\gamma,\mu$ 的取值将在实验
+部分（第~\ref{sec:eval}~节）通过网格搜索确定最优组合。
+
+式~(\ref{eq:basescore}) 中的 $-\mu W_e$ 项是对专家内存占用的\emph{软
+惩罚}：在各项收益相近的多个候选之间，优先选择内存占用更小的专家，
+以保留更多内存余量用于后续部署。\emph{硬性内存约束}
+$\sum_e m_{e,u}W_e \le M_u$ 将在第~\ref{sec:greedy_scheduling}~节
+的贪心部署中强制执行，从根本上保证不发生 OOM 故障。
+
+$\mathrm{BaseScore}(e,u)$ 是一个\emph{静态得分}——$A$、$B$、$C$ 和
+$W_e$ 均基于离线可获信息（任务需求统计、专家相似度矩阵、UAV 资源
+能力和网络拓扑快照）一次性预先计算，不随部署过程动态变化。
+部署过程中的动态冗余调整将在下一节的动态贪心部署中引入。
+
+\subsection{Dynamic Greedy Expert Placement and Lightweight Inference Scheduling}
+\label{sec:greedy_scheduling}
+
+本节将前述静态部署得分转化为可执行的部署方案和在线推理调度策略，
+分为两个子模块：动态贪心专家部署（第~\ref{sec:greedy_placement}~节）
+负责在内存约束下生成 $\{m_{e,u}\}$；轻量级推理调度
+（第~\ref{sec:inference_scheduling}~节）负责在部署方案确定后为每个
+到达任务规划逐层专家执行路径并计算端到端延迟。
+
+\subsubsection{动态贪心专家部署}
+\label{sec:greedy_placement}
+
+动态贪心部署解决的核心问题是：\emph{在 UAV 内存硬约束下，根据静态
+基础得分 $\mathrm{BaseScore}(e,u)$ 和动态冗余成本，通过多轮贪心选择
+生成最终部署方案 $\{m_{e,u}\mid e\in\mathcal{E}_{\mathrm{cand}},\;
+u\in\mathcal{U}\}$。}
+
+\textbf{冗余成本。}
+贪心部署过程中，每部署一个专家-UAV 对后，剩余候选的边际收益会因功能
+重叠而变化：若 UAV $u$ 或其单跳邻居上已部署了与专家 $e$ 功能相似的
+替代专家，则再部署 $e$ 到 $u$ 的增量收益降低。定义第 $t$ 轮（即已
+完成 $t-1$ 次部署后）专家 $e$ 部署到 UAV $u$ 的冗余成本为：
+\begin{multline}
+\mathrm{Redundancy}_t(e,u) =
+\sum_{\substack{e'\in\bar{\mathcal{A}}(e)\\[-2pt] m_{e',u}^{(t)}=1}}
+  \mathrm{Sim}(e,e') \\
++ \eta_{\mathrm{red}} \sum_{v\neq u} g_{v,u}
+  \sum_{\substack{e'\in\bar{\mathcal{A}}(e)\\[-2pt] m_{e',v}^{(t)}=1}}
+  \mathrm{Sim}(e,e'),
+\label{eq:redundancy}
+\end{multline}
+其中 $\bar{\mathcal{A}}(e) = \mathcal{A}(e)\setminus\{e\}$ 为 $e$ 的
+严格替代专家集合（不含 $e$ 自身），
+其中 $m_{e,u}^{(t)}$ 为第 $t$ 轮开始时的当前部署状态，
+$\eta_{\mathrm{red}}\in[0,1]$ 为邻居冗余的折扣权重（通常取小于 $1$
+的值，因为远程冗余的影响弱于同一 UAV 上的本地冗余）。
+第一项惩罚与目标 UAV $u$ 上已部署相似专家的功能重叠程度，
+第二项惩罚与 $u$ 的单跳邻居上已部署相似专家的功能重叠程度。
+
+\textbf{动态部署得分。}
+第 $t$ 轮的实际部署得分在静态基础得分上扣除当前冗余成本：
+\begin{equation}
+\mathrm{Score}_t(e,u) = \mathrm{BaseScore}(e,u) -
+\nu\,\mathrm{Redundancy}_t(e,u),
+\label{eq:score_t}
+\end{equation}
+其中 $\nu > 0$ 为冗余惩罚权重。$\mathrm{BaseScore}(e,u)$ 在部署过程
+中保持不变，$\mathrm{Redundancy}_t(e,u)$ 随已部署专家的增加而动态
+增长，使得与已部署专家功能重叠的候选在后续轮次中得分逐渐降低。
+
+\textbf{单位内存收益。}
+由于不同专家的内存占用 $W_e$ 差异显著，直接按 $\mathrm{Score}_t(e,u)$
+贪心选择会偏向得分高但内存消耗也大的专家，导致内存快速耗尽而遗漏
+其他高性价比候选。为此，定义单位内存收益：
+\begin{equation}
+\mathrm{Value}_t(e,u) = \frac{\mathrm{Score}_t(e,u)}{W_e},
+\label{eq:value_t}
+\end{equation}
+即每单位内存消耗所能获得的部署得分。
+
+\textbf{约束条件。}
+最终部署方案需满足以下约束：
+\begin{align}
+&\sum_{e\in\mathcal{E}_{\mathrm{cand}}} m_{e,u} W_e \le M_u,
+\;\; \forall u\in\mathcal{U},
+\label{eq:memory_constraint}\\
+&\sum_{u\in\mathcal{U}} m_{e,u} \le 1,
+\;\; \forall e\in\mathcal{E}_{\mathrm{cand}},
+\label{eq:single_copy}\\
+&m_{e,u} \in \{0,1\},
+\;\; \forall e\in\mathcal{E}_{\mathrm{cand}},\;u\in\mathcal{U}.
+\label{eq:binary_m}
+\end{align}
+
+式~(\ref{eq:memory_constraint}) 为每个 UAV 的内存容量硬约束，保证
+部署方案不会导致 OOM 故障。式~(\ref{eq:single_copy}) 限制每个候选
+专家在系统中最多部署一份副本——在本文考虑的准静态 UAV 边缘场景中，
+内存是首要瓶颈，单副本策略在大多数情况下是合理且高效的选择。
+若特定场景中某专家的全局需求极高且 UAV 内存充裕，该约束可被放松为
+$\sum_u m_{e,u} \ge 1$，本文暂不展开该扩展。
+
+\textbf{贪心部署流程。}
+算法~\ref{alg:greedy_placement} 总结了完整的动态贪心专家部署流程。
+每轮迭代中，算法计算当前所有仍可行的候选部署对的
+$\mathrm{Value}_t(e,u)$，选择单位内存收益最大的候选 $(e^*,u^*)$；
+若 $e^*$ 的内存占用不超过 UAV $u^*$ 的当前剩余内存，则确认该部署
+并更新部署状态和剩余内存；否则将该候选从可行集中移除，继续尝试
+下一最优候选。当不存在任何可部署的候选（所有未部署专家的内存需求
+均超过目标 UAV 的剩余内存）时，算法终止。
+
+\begin{algorithm}[t]
+  \caption{动态贪心专家部署算法}
+  \label{alg:greedy_placement}
+  \begin{algorithmic}[1]
+    \REQUIRE 候选专家集合 $\mathcal{E}_{\mathrm{cand}}$；
+             UAV 集合 $\mathcal{U}$；
+             基础得分 $\mathrm{BaseScore}(e,u)$；
+             专家内存占用 $\{W_e\}$；
+             UAV 内存容量 $\{M_u\}$；
+             可替代专家集合 $\{\mathcal{A}(e)\}$；
+             相似度 $\{\mathrm{Sim}(e,e')\}$。
+    \ENSURE 专家部署方案 $\{m_{e,u}\}$。
+    \STATE 初始化 $m_{e,u} \leftarrow 0$，
+           剩余内存 $\tilde{M}_u \leftarrow M_u$，
+           $\forall e\in\mathcal{E}_{\mathrm{cand}}, u\in\mathcal{U}$。
+    \STATE $t \leftarrow 1$。
+    \LOOP
+      \STATE 根据式~(\ref{eq:redundancy}) 更新
+             $\mathrm{Redundancy}_t(e,u)$，$\forall e,u$。
+      \STATE 根据式~(\ref{eq:score_t})(\ref{eq:value_t}) 计算
+             $\mathrm{Value}_t(e,u)$，$\forall e,u$。
+      \STATE 构建可行候选集：
+             $\mathcal{F}_t \leftarrow \{(e,u) \mid m_{e,u}^{(t)}=0,\;
+               W_e \le \tilde{M}_u^{(t)}\}$。
+      \IF{$\mathcal{F}_t = \emptyset$}
+        \STATE \textbf{break}。
+      \ENDIF
+      \STATE $(e^*,u^*) \leftarrow \arg\max_{(e,u)\in\mathcal{F}_t}
+             \mathrm{Value}_t(e,u)$。
+      \STATE $m_{e^*,u^*} \leftarrow 1$。
+      \STATE $\tilde{M}_{u^*} \leftarrow \tilde{M}_{u^*} - W_{e^*}$。
+      \STATE $t \leftarrow t + 1$。
+    \ENDLOOP
+    \RETURN $\{m_{e,u}\}$。
+  \end{algorithmic}
+\end{algorithm}
+
+\textbf{复杂度分析。}
+算法~\ref{alg:greedy_placement} 的外层循环最多执行
+$T \le \min(|\mathcal{E}_{\mathrm{cand}}|\cdot|\mathcal{U}|,\;
+\sum_u \lfloor M_u / \min_e W_e\rfloor)$ 次，每轮需遍历所有剩余
+可行候选计算 $\mathrm{Value}_t(e,u)$。总时间复杂度为
+$O(T\cdot|\mathcal{E}_{\mathrm{cand}}|\cdot|\mathcal{U}|)$。
+在典型规模（数十个候选专家、数个 UAV）下，该算法可在毫秒级完成，
+满足准静态调度窗口的实时性要求。
+
+\subsubsection{轻量级推理调度}
+\label{sec:inference_scheduling}
+
+部署方案 $\{m_{e,u}\}$ 确定后，在线推理阶段需要为每个到达任务
+决定：\emph{每一步专家在哪个 UAV 上执行？是否使用已部署的相似专家
+替代？当前中间特征如何传输到执行 UAV？}
+
+\textbf{任务执行起点。}
+任务 $k$ 从其默认接入 UAV 开始执行共享的注意力子层和 gating 网络：
+\begin{equation}
+cur \leftarrow u_k^a,
+\label{eq:cur_init}
+\end{equation}
+其中 $cur$ 表示当前中间特征所在的 UAV（在任务执行过程中随跨 UAV
+传输而更新）。
+
+\textbf{逐层候选执行集合。}
+对于任务 $k$ 的第 $l$ 个专家步骤，设 MoE gating network 为该步骤
+选择的原始所需专家为 $e_{k,l}$。该步的候选执行集合由所有\emph{已部署
+且从当前 UAV 可达}的替代专家-UAV 对构成：
+\begin{multline}
+\mathcal{C}_{k,l} = \{\,(\hat{e}, u) \mid
+\hat{e} \in \mathcal{A}(e_{k,l}),\;
+m_{\hat{e},u} = 1,\\[2pt]
+u = cur \;\text{或}\; g_{cur,u} = 1\,\},
+\label{eq:candidate_exec}
+\end{multline}
+其中 $\hat{e}$ 为实际执行专家（既可以是原始专家 $e_{k,l}$ 本身，
+也可以是已部署的相似替代专家），$u$ 为执行 UAV（可以是当前 UAV
+本地执行，也可以是当前 UAV 通过单跳链路可达的其他 UAV）。条件
+$u=cur$ 或 $g_{cur,u}=1$ 保证了中间特征只需最多一次单跳传输即可
+到达执行 UAV。
+
+\textbf{执行代价。}
+候选 $(\hat{e},u)$ 的执行代价由传输延迟、计算延迟和替代精度损失
+三项加权构成：
+\begin{equation}
+\begin{aligned}
+\mathrm{Cost}_{k,l}(\hat{e},u) &=
+T_{cur,u}^{\mathrm{single}}\!\left(S_{k,l-1}^{\mathrm{mid}}\right) \\
+&\quad + \frac{F_{\hat{e}}}{C_u}
++ \lambda \cdot \mathrm{Err}(e_{k,l}, \hat{e}),
+\end{aligned}
+\label{eq:cost}
+\end{equation}
+其中：
+\begin{itemize}
+  \item $T_{cur,u}^{\mathrm{single}}(S_{k,l-1}^{\mathrm{mid}})$ 为
+        当前 UAV $cur$ 到目标 UAV $u$ 的单跳传输延迟，
+        $S_{k,l-1}^{\mathrm{mid}}$ 为第 $l-1$ 步输出的中间特征大小；
+        若 $u=cur$（本地执行），该项为 $0$。
+  \item $F_{\hat{e}}/C_u$ 为专家 $\hat{e}$ 在 UAV $u$ 上的计算延迟。
+  \item $\mathrm{Err}(e_{k,l},\hat{e}) =
+        1 - \mathrm{Sim}(e_{k,l},\hat{e})$ 为使用替代专家 $\hat{e}$
+        替代原始专家 $e_{k,l}$ 导致的近似误差（相似度越高，误差越小；
+        若 $\hat{e}=e_{k,l}$，该项为 $0$）。
+  \item $\lambda > 0$ 为误差惩罚权重，控制``精度损失''与``执行延迟''
+        之间的折算关系：$\lambda$ 越大，调度越倾向于选择原始专家
+        而非相似替代；$\lambda$ 越小，调度越倾向于选择传输和计算
+        延迟更低的替代方案。
+\end{itemize}
+
+式~(\ref{eq:cost}) 将传输时间、计算时间和精度损失统一为标量代价，
+三项分别对应了 AeroMoDE 设计中通信、计算和模型精度的三重权衡。
+$\lambda$ 的物理含义可理解为``单位精度损失所等价的时间代价''，
+其具体取值由应用场景的精度-延迟偏好决定。
+
+\textbf{最小代价选择。}
+对于任务 $k$ 的每一步专家执行，选择代价最小的候选：
+\begin{equation}
+(\hat{e}^*, u^*) = \arg\min_{(\hat{e},u)\in\mathcal{C}_{k,l}}
+\mathrm{Cost}_{k,l}(\hat{e},u).
+\label{eq:min_cost}
+\end{equation}
+选择完成后，若 $u^* \neq cur$，则先执行 UAV-UAV 单跳传输将中间特征
+从 $cur$ 发送至 $u^*$，然后在 $u^*$ 上执行专家 $\hat{e}^*$ 的前向
+计算，最后更新 $cur \leftarrow u^*$。
+
+\textbf{端到端任务延迟。}
+任务 $k$ 完成所有 $L_k$ 步专家执行后的总延迟为：
+\begin{equation}
+D_k = D_k^{\mathrm{access}} + D_k^{\mathrm{compute}}
+    + D_k^{\mathrm{trans}} + D_k^{\mathrm{return}},
+\label{eq:Dk}
+\end{equation}
+其中 $D_k^{\mathrm{access}}$ 为式~(\ref{eq:default_access}) 确定的
+接入延迟，
+\begin{equation}
+D_k^{\mathrm{compute}} = \sum_{l=1}^{L_k} \frac{F_{\hat{e}^*_{k,l}}}{C_{u^*_{k,l}}}
+\end{equation}
+为各步专家计算延迟之和，
+$D_k^{\mathrm{trans}}$ 为各步跨 UAV 传输延迟之和，
+$D_k^{\mathrm{return}}$ 为推理结果回传延迟（按 System Model 定义计算）。
+系统在调度窗口内的整体优化目标为加权总延迟：
+\begin{equation}
+D_{\mathrm{total}} = \sum_{k\in\mathcal{K}} \omega_k D_k.
+\label{eq:Dtotal}
+\end{equation}
+
+\textbf{设计闭环总结。}
+轻量级推理调度完成了 AeroMoDE 从``静态部署规划''到``动态推理执行''
+的完整闭环。第~\ref{sec:similarity_candidate}~节构造的相似替代集合
+$\mathcal{A}(\cdot)$ 在式~(\ref{eq:candidate_exec}) 中扩展了每步专家
+执行的候选空间；第~\ref{sec:placement_scoring}~节计算的部署得分通过
+部署方案 $\{m_{e,u}\}$ 约束了可行执行 UAV 的集合；
+第~\ref{sec:demand_modeling}~节的任务接入归属 $u_k^a$ 为每个任务
+确定了推理执行的起始 UAV。三者协同实现了``以需求驱动部署、
+以部署约束调度、以调度计算延迟''的分阶段优化链路。
+
+% ==============================================================
+\section{Implementation and Evaluation}
+\label{sec:eval}
+% ==============================================================
+
+\subsection{Experimental Setup}
+\label{sec:setup}
+
+\textbf{Prototype implementation.}
+We implement AeroMoDE in approximately 1,800 lines of Python and
+C/C++ on top of PyTorch~\cite{pytorch2019}.  The system is also
+portable to lightweight ML runtimes.
+
+\textbf{Models and datasets.}
+We evaluate five MoDE variants ranging from 340\,M to 5.6\,B
+parameters, as summarized in Table~\ref{tab:models}.  We extract
+evaluation samples from the QNLI corpus of the GLUE benchmark
+\cite{wang2018glue} with an average sequence length of 284 tokens.
+As a dense baseline we also include DistilBERT~\cite{sanh2019distilbert}
+and BERT-Large~\cite{devlin2018bert}.
+
+\begin{table}[t]
+  \caption{MoDE model specifications used in evaluation.}
+  \label{tab:models}
+  \centering
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{lccccc}
+    \toprule
+    \textbf{Model} & \textbf{Layers} & \textbf{Heads} &
+    \textbf{Hid.} & \textbf{Experts} & \textbf{Params} \\
+    \midrule
+    MoDE-S  & 6  & 12 & 768  & 4  & 340\,M \\
+    MoDE-M  & 12 & 16 & 1024 & 8  & 680\,M \\
+    MoDE-L  & 24 & 20 & 1280 & 16 & 1.4\,B \\
+    MoDE-XL & 24 & 32 & 2048 & 32 & 2.8\,B \\
+    MoDE-2X & 32 & 32 & 2560 & 64 & 5.6\,B \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Edge environment setup.}
+We evaluate AeroMoDE on NVIDIA Jetson Nano devices~\cite{jetson_nano}
+with three CPU frequency modes (Nano-S: 403\,MHz, Nano-M: 825\,MHz,
+Nano-L: 1.47\,GHz).  We configure both homogeneous and heterogeneous
+multi-device testbeds as listed in Table~\ref{tab:envs}.  Memory
+budgets are set to 1.5\,GB for Nano-L, 1.2\,GB for Nano-M, and
+0.7\,GB for Nano-S.  We restrict execution to the onboard CPU to
+simulate resource-constrained edge conditions and sweep the D2D
+bandwidth from 125\,Mbps to 1,000\,Mbps to cover diverse edge network
+conditions.
+
+\begin{table}[t]
+  \caption{Edge environment configurations.}
+  \label{tab:envs}
+  \centering
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{cl|cl}
+    \toprule
+    \textbf{ID} & \textbf{Homogeneous} &
+    \textbf{ID} & \textbf{Heterogeneous} \\
+    \midrule
+    A & $2 \times$ Nano-M & D & Nano-L + Nano-M \\
+    B & $3 \times$ Nano-M & E & Nano-L + Nano-S \\
+    C & $4 \times$ Nano-M & F & Nano-L + Nano-M + Nano-S \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Baselines.}
+\begin{itemize}
+  \item \textbf{Local}: Single-device inference with no collaboration.
+  \item \textbf{Expert-EP}: A pure expert-parallel baseline that
+    distributes experts evenly across devices with standard
+    All-to-All synchronization (no tiling or capacity-aware planning).
+  \item \textbf{Megatron-TP}~\cite{shoeybi2019megatron}: A
+    state-of-the-art tensor-parallel method that partitions weight
+    matrices in attention and FFN blocks; requires one All-Reduce per
+    sub-layer.
+  \item \textbf{SeqParallel}~\cite{li2021sequence}: A sequence-parallel
+    baseline that partitions inputs along the sequence dimension;
+    requires two All-Gather operations per attention block and forces
+    each device to hold a full copy of all expert parameters.
+\end{itemize}
+
+\subsection{Comparison to Baselines}
+\label{sec:comparison}
+
+Table~\ref{tab:main_results} summarizes the speedup of AeroMoDE
+over Megatron-TP and SeqParallel across all five MoDE model variants
+in homogeneous environments at 125\,Mbps.  We use average
+end-to-end inference latency as the primary metric.
+
+\begin{table}[t]
+  \caption{General performance of AeroMoDE: speedup over baselines.
+           \textit{OOM} indicates out-of-memory failure of the baseline.}
+  \label{tab:main_results}
+  \centering
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{lccccl}
+    \toprule
+    \textbf{Model} & \textbf{Env.} &
+    \multicolumn{2}{c}{\textbf{Speedup over}} \\
+    & & Megatron-TP & SeqParallel \\
+    \midrule
+    MoDE-S  & A & $1.41\times$ & $1.10\times$ \\
+    MoDE-M  & A & $1.39\times$ & $1.12\times$ \\
+            & B & $1.45\times$ & $1.14\times$ \\
+    MoDE-L  & A & $1.35\times$ & OOM \\
+            & B & $1.49\times$ & OOM \\
+    MoDE-XL & A & $1.29\times$ & OOM \\
+            & B & $1.44\times$ & OOM \\
+            & C & $1.51\times$ & OOM \\
+    MoDE-2X & B & OOM          & OOM \\
+            & C & $1.31\times$ & OOM \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+AeroMoDE consistently outperforms all baselines.  Compared to
+Megatron-TP, AeroMoDE achieves up to $1.51\times$ latency reduction,
+with the gap widening as the number of participating devices
+increases (higher communication-to-computation ratio amplifies the
+benefit of tile-based overlap).  Compared to SeqParallel, AeroMoDE
+yields up to $1.14\times$ improvement for smaller models, but more
+importantly prevents OOM failures on all large-model configurations
+where SeqParallel fails due to its requirement that every device
+hold a full copy of the expert parameters.
+
+We further evaluate performance across the full bandwidth range
+(125--1000\,Mbps).  AeroMoDE consistently leads all baselines,
+achieving $1.05\times$--$1.49\times$ latency reduction across
+diverse network conditions and model sizes.
+
+\subsection{Heterogeneous Edge Environments}
+\label{sec:hetero}
+
+Fig.~\ref{fig:hetero} compares AeroMoDE to baselines in the three
+heterogeneous environments (D, E, F) at 125\,Mbps.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.92\columnwidth}{\centering\vspace{2.2cm}
+    \textbf{Fig.\,4 placeholder:} Bar charts showing average
+    inference latency per MoDE layer for Megatron-TP, SeqParallel,
+    AeroMoDE w/o planning, and AeroMoDE w/ planning on environments
+    D, E, and F.\vspace{2.2cm}}}
+  \caption{Performance on heterogeneous edge environments.}
+  \label{fig:hetero}
+\end{figure}
+
+AeroMoDE achieves $1.3\times$--$2.7\times$ latency reduction
+compared to baselines, with the largest gains in the most
+heterogeneous environment~(F), where capacity-proportional planning
+prevents the straggler bottleneck that cripples Megatron-TP and
+SeqParallel.  Memory-unaware baselines experience frequent OOM
+failures on MoDE-L and larger models, while AeroMoDE's memory-aware
+re-balancing successfully accommodates these models within the
+available budgets.
+
+\subsection{Scalability Analysis}
+\label{sec:scalability}
+
+We conduct weak and strong scaling experiments in Environment~C
+at 1,000\,Mbps, loading a single MoDE layer repeatedly to isolate
+scaling effects from OOM constraints.
+
+\textbf{Weak scaling.}  We fix a per-device sequence length of~96
+tokens and increase the number of Nano-M devices from~1 to~4 (global
+sequence length grows from~96 to~384).  AeroMoDE achieves~83\% of
+ideal linear scaling for MoDE-L and~89\% for MoDE-2X with 4-way
+EPHD, demonstrating near-linear throughput scaling.
+
+\textbf{Strong scaling.}  With a fixed global sequence length of~384
+tokens, adding devices from~1 to~4 reduces average per-layer latency
+by up to $3.1\times$ for MoDE-L and~$3.4\times$ for MoDE-2X,
+compared to single-device execution.
+
+\subsection{GPU Environment}
+\label{sec:gpu}
+
+We further evaluate AeroMoDE using two Jetson Nano onboard GPUs
+(locked at~460\,MHz, Environment~A at 500\,Mbps).  AeroMoDE
+outperforms all baselines by $1.14\times$--$1.72\times$, confirming
+that the tile-based overlap benefits extend to GPU execution, even
+for small models where GPU utilization is inherently lower.
+
+% ==============================================================
+\section{Related Work}
+\label{sec:related}
+% ==============================================================
+
+\textbf{Collaborative Execution of Deep Models.}
+Data Parallelism~\cite{li2014parameter,rajbhandari2020zero} and
+Pipeline Parallelism~\cite{huang2019gpipe,narayanan2019pipedream}
+are widely used in datacenter training but are ill-suited for
+single-shot edge inference.  Megatron-LM~\cite{shoeybi2019megatron}
+and its successors~\cite{narayanan2021efficient,korthikanti2023reducing}
+advance tensor parallelism for large-scale training but target
+homogeneous GPU clusters.  AlpaServe~\cite{li2023alpaserve} and
+Orca~\cite{yu2022orca} focus on cloud-side model serving with
+abundant resources and do not address in-situ edge constraints.
+DeepSpeed-Inference~\cite{aminabadi2022deepspeed} provides efficient
+datacenter-scale MoE inference, but its all-to-all communication
+pattern is not optimized for bandwidth-limited edge links.
+
+\textbf{In-situ DNN Inference at the Edge.}
+CoEdge~\cite{zeng2020coedge} partitions CNN inference over multiple
+edge devices but does not address Transformer or MoE workloads.
+CoDL~\cite{jia2022codl} and BAND~\cite{jeong2022band} target
+on-device heterogeneous processor cooperation, while Asymo
+\cite{wang2021asymo} optimizes asymmetric CPU core scheduling.
+These systems lack support for expert-sparse MoDE architectures and
+do not consider the cross-device expert routing problem.
+
+\textbf{Sparse MoE Architectures and Routing.}
+Foundational work on MoE includes \cite{shazeer2017moe,
+fedus2022switch,lepikhin2021gshard}.  Expert-Choice
+routing~\cite{zhou2022mixtureofexperts_routing} and
+GLaM~\cite{du2022glam} improve gating efficiency.
+Mixtral~\cite{jiang2024mixtral} demonstrates the practical
+viability of MoE at scale.  None of these works addresses the
+distributed placement and execution of MoE models on
+heterogeneous, bandwidth-constrained edge devices.
+
+\textbf{Communication Optimization.}
+ZeRO++~\cite{wang2023zero_pp} reduces communication volume via
+quantized exchange.  CoCoNet~\cite{jangda2022breaking} introduces
+compute-communication co-scheduling.  Horovod~\cite{sergeev2018horovod}
+provides efficient Ring-AllReduce primitives.  Our tile-based overlap
+builds on and adapts these ideas for the specific synchronization
+structure of EPHD over edge links.
+
+% ==============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ==============================================================
+
+This paper presents AeroMoDE, an innovative collaborative in-situ
+MoDE inference system for heterogeneous edge environments.  AeroMoDE
+introduces the Expert-Parallel Hybrid Dispatch architecture, a
+heterogeneity and memory-budget aware expert placement algorithm,
+and a tile-based communication-computation overlap mechanism.
+Extensive evaluation on physical testbeds demonstrates that AeroMoDE
+achieves up to $2.7\times$ latency reduction over state-of-the-art
+baselines, with $89\%$ 4-device scaling efficiency and robust
+operation under varied network conditions.  AeroMoDE represents, to
+our knowledge, the first system to jointly address expert-parallel
+model partitioning, heterogeneity-aware planning, and fine-grained
+communication overlap for in-situ MoDE inference at the edge.
+
+% ---- acknowledgment ------------------------------------------
+\section*{Acknowledgment}
+This work was supported in part by the National Natural Science
+Foundation (Grant No.~62272000) and the Guangdong Basic and Applied
+Basic Research Foundation (Grant No.~2024B151520000).
+
+% ---- references ----------------------------------------------
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,refs}
+
+\end{CJK*}
+\end{document}
