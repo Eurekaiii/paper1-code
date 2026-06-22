@@ -141,10 +141,26 @@ def print_report(result: SystemResult, uavs: List[UAV], experts: List[Expert]) -
     """Print a human-readable summary of the system result."""
     W_map = {e.id: e.W_e for e in experts}
     M_map = {u.id: u.M_u for u in uavs}
+    access_counts = {u.id: 0 for u in uavs}
+    for plan in result.execution_plans:
+        access_counts[plan.access_uav] = access_counts.get(plan.access_uav, 0) + 1
 
     print("=" * 72)
     print("  AeroMoDE Pipeline Result")
     print("=" * 72)
+
+    print("\n--- UAV Parameters ---")
+    for u in uavs:
+        print(
+            f"  UAV {u.id}: pos=({u.x:.1f}, {u.y:.1f}, {u.H:.1f}) m  "
+            f"C={u.C_u / 1e9:.2f} GFLOP/s  "
+            f"M={u.M_u / 1e9:.2f} GB  "
+            f"P={u.P_u:.2f} W"
+        )
+
+    print("\n--- Default Access Task Counts ---")
+    for u in uavs:
+        print(f"  UAV {u.id}: {access_counts.get(u.id, 0)} tasks")
 
     print("\n--- Expert Deployment ---")
     deployed = [(e, u) for (e, u), m in result.deployment.items() if m == 1]

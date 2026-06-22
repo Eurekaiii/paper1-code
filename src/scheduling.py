@@ -1,18 +1,18 @@
 """
-AeroMoDE Lightweight Inference Scheduling
-===========================================
-Per-layer greedy scheduling: for each expert step, pick the (ê, u) that
-minimises  transmission + computation + substitution error.
+AeroMoDE lightweight inference scheduling.
 
-Reference: aeromde_main.tex  Section IV-E  (Eqs. 18–27).
+For each task layer, the scheduler chooses a deployed original/substitute
+expert on the current UAV or on a single-hop reachable UAV. Multi-hop and
+unreachable transmission are not allowed.
 """
 
-from typing import Dict, List, Tuple, Set
+from typing import Dict, List, Set, Tuple
+
 import numpy as np
 
-from .config import SchedulingConfig
-from .models import Task, UAV, ExpertStep, TaskExecutionPlan
 from .communication import downlink_delay, single_hop_delay
+from .config import SchedulingConfig
+from .models import ExpertStep, Task, TaskExecutionPlan, UAV
 
 
 def schedule_task(
@@ -21,7 +21,7 @@ def schedule_task(
     uavs: List[UAV],
     deployment: Dict[Tuple[int, int], int],
     deployed_by_uav: Dict[int, List[int]],
-    substitutable_sets: Dict[int, Set[int]],        # A(r)
+    substitutable_sets: Dict[int, Set[int]],
     similarity: Dict[Tuple[int, int], float],
     G: np.ndarray,
     R: np.ndarray,
@@ -30,142 +30,108 @@ def schedule_task(
     C_map: Dict[int, float],
     access_delay_val: float,
     cfg: SchedulingConfig,
-    comm_cfg,   # ChannelConfig — for single_hop_delay calls
+    comm_cfg,
 ) -> TaskExecutionPlan:
-    """Schedule one task's expert execution path layer-by-layer.
-
-    Algorithm sketch (Eqs. 18–27):
-      cur ← u_k^a
-      for l = 1 .. L_k:
-        build C_{k,l} = {(ê, u) | ê ∈ A(e_{k,l}), m_{ê,u}=1, u==cur or g_{cur,u}=1}
-        for each (ê, u):
-          Cost = T^{single}(S_{k,l-1}^{mid}) + F_ê/C_u + λ·Err(e_{k,l}, ê)
-        pick min-cost
-        update cur ← u*
-    """
-    # Map uav_id → UAV object for delay lookups
+    """Schedule one task layer-by-layer under strict single-hop reachability."""
     uav_objects: Dict[int, UAV] = {u.id: u for u in uavs}
-
     cur = access_uav
     steps: List[ExpertStep] = []
 
-    for l_idx, e_orig in enumerate(task.expert_sequence):
-        # Determine intermediate data size to transmit
-        # S_{k,0}^{mid} = S_k^{in} (input), S_{k,l}^{mid} from task.S_mid
-        if l_idx == 0:
-            S_prev = task.S_in
+    for layer_idx, original_expert in enumerate(task.expert_sequence):
+        if layer_idx == 0:
+            data_size = task.S_in
         else:
-            # S_mid[l_idx-1] is the output size after step l_idx
-            # (after step l_idx-1 completes, the feature has size S_mid[l_idx-1])
-            S_prev = task.S_mid[l_idx - 1] if l_idx - 1 < len(task.S_mid) else task.S_mid[-1]
+            prev_idx = layer_idx - 1
+            data_size = task.S_mid[prev_idx] if prev_idx < len(task.S_mid) else task.S_mid[-1]
 
-        # Build candidate execution set C_{k,l} (Eq. 19)
-        A_e = substitutable_sets.get(e_orig, {e_orig})
-        candidates: List[Tuple[int, int]] = []  # (ê, u)
-        fallback_candidates: List[Tuple[int, int]] = []  # all deployed, ignoring reachability
+        substitutes = substitutable_sets.get(original_expert, {original_expert})
+        deployed_substitutes: List[Tuple[int, int]] = []
+        candidates: List[Tuple[int, int]] = []
 
-        for e_hat in A_e:
-            for u_id, deployed_list in deployed_by_uav.items():
-                if e_hat not in deployed_list:
+        for actual_expert in substitutes:
+            for uav_id, deployed_experts in deployed_by_uav.items():
+                if actual_expert not in deployed_experts:
                     continue
-                fallback_candidates.append((e_hat, u_id))  # always available as fallback
-                if u_id == cur:
-                    candidates.append((e_hat, u_id))
-                else:
-                    cur_idx = uav_indices[cur]
-                    u_idx = uav_indices[u_id]
-                    if G[cur_idx, u_idx] == 1:
-                        candidates.append((e_hat, u_id))
+                deployed_substitutes.append((actual_expert, uav_id))
+                if uav_id == cur or G[uav_indices[cur], uav_indices[uav_id]] == 1:
+                    candidates.append((actual_expert, uav_id))
 
-        # If no single-hop-reachable candidate, fall back to all deployed experts
-        # (with a large transmission penalty for unreachable links)
-        use_fallback = False
         if not candidates:
-            if not fallback_candidates:
+            if deployed_substitutes:
                 raise RuntimeError(
-                    f"Task {task.id} layer {l_idx}: no UAV has a substitute "
-                    f"for expert {e_orig} deployed at all."
+                    f"Task {task.id} layer {layer_idx}: expert {original_expert} "
+                    f"or its substitutes are deployed, but none are reachable "
+                    f"from UAV {cur} by a single hop."
                 )
-            candidates = fallback_candidates
-            use_fallback = True
+            raise RuntimeError(
+                f"Task {task.id} layer {layer_idx}: no deployed expert can serve "
+                f"expert {original_expert}."
+            )
 
-        # Evaluate cost for each candidate (Eq. 20)
         best_cost = float("inf")
-        best_e_hat = -1
-        best_u = -1
+        best_expert = -1
+        best_uav = -1
         best_trans = 0.0
         best_comp = 0.0
         best_err = 0.0
 
-        for e_hat, u_id in candidates:
-            cur_uav = uav_objects[cur]
-            tgt_uav = uav_objects[u_id]
-
-            # Transmission delay
-            if u_id == cur:
-                T_trans = 0.0
+        for actual_expert, uav_id in candidates:
+            if uav_id == cur:
+                trans_delay = 0.0
             else:
-                T_trans = single_hop_delay(cur_uav, tgt_uav, S_prev, comm_cfg)
-                # If not single-hop reachable (in fallback), use a large penalty
-                # proportional to data size / minimum rate
-                if np.isinf(T_trans) and use_fallback:
-                    # Penalty: assume multi-hop or retransmission cost
-                    # Use 5x the worst single-hop delay as penalty
-                    worst_rate = 1e6  # 1 Mbps fallback
-                    T_trans = S_prev / worst_rate * 5.0
+                trans_delay = single_hop_delay(
+                    uav_objects[cur],
+                    uav_objects[uav_id],
+                    data_size,
+                    comm_cfg,
+                )
 
-            if np.isinf(T_trans):
+            if np.isinf(trans_delay):
                 continue
 
-            # Computation delay
-            F_e = F_map.get(e_hat, 1.0)
-            C_uu = C_map.get(u_id, 1.0)
-            T_comp = F_e / C_uu if C_uu > 0 else float("inf")
+            F_e = F_map.get(actual_expert, 1.0)
+            C_u = C_map.get(uav_id, 1.0)
+            comp_delay = F_e / C_u if C_u > 0 else float("inf")
 
-            # Substitution error (Eq. 21)
-            if e_hat == e_orig:
+            if actual_expert == original_expert:
                 err = 0.0
             else:
-                err = 1.0 - similarity.get((e_orig, e_hat), 0.0)
+                err = 1.0 - similarity.get((original_expert, actual_expert), 0.0)
+            err_penalty = cfg.lamb * err
 
-            cost = T_trans + T_comp + cfg.lamb * err
-
+            cost = trans_delay + comp_delay + err_penalty
             if cost < best_cost:
                 best_cost = cost
-                best_e_hat = e_hat
-                best_u = u_id
-                best_trans = T_trans
-                best_comp = T_comp
-                best_err = cfg.lamb * err
+                best_expert = actual_expert
+                best_uav = uav_id
+                best_trans = trans_delay
+                best_comp = comp_delay
+                best_err = err_penalty
 
-        if best_e_hat < 0:
+        if best_expert < 0:
             raise RuntimeError(
-                f"Task {task.id} layer {l_idx}: no feasible candidate "
-                f"(all have infinite cost)."
+                f"Task {task.id} layer {layer_idx}: all single-hop candidates "
+                f"have infinite cost."
             )
 
-        steps.append(ExpertStep(
-            layer_idx=l_idx,
-            original_expert=e_orig,
-            actual_expert=best_e_hat,
-            uav_id=best_u,
-            is_substituted=(best_e_hat != e_orig),
-            cost_transmission=best_trans,
-            cost_computation=best_comp,
-            cost_error=best_err,
-        ))
+        steps.append(
+            ExpertStep(
+                layer_idx=layer_idx,
+                original_expert=original_expert,
+                actual_expert=best_expert,
+                uav_id=best_uav,
+                is_substituted=(best_expert != original_expert),
+                cost_transmission=best_trans,
+                cost_computation=best_comp,
+                cost_error=best_err,
+            )
+        )
+        cur = best_uav
 
-        # Update current UAV
-        cur = best_u
-
-    # --- Aggregate delays ---
     D_access = access_delay_val
-    D_compute = sum(s.cost_computation for s in steps)
-    D_trans = sum(s.cost_transmission for s in steps)
-
-    # Return delay: last UAV → ground, using the final UAV's transmit power.
+    D_compute = sum(step.cost_computation for step in steps)
+    D_trans = sum(step.cost_transmission for step in steps)
     D_return = downlink_delay(uav_objects[cur], task, comm_cfg)
-
     D_total = D_access + D_compute + D_trans + D_return
 
     return TaskExecutionPlan(
@@ -183,7 +149,7 @@ def schedule_task(
 def schedule_all_tasks(
     tasks: List[Task],
     access_assignment: List[int],
-    access_delays: np.ndarray,            # (K, U)
+    access_delays: np.ndarray,
     uavs: List[UAV],
     deployment: Dict[Tuple[int, int], int],
     deployed_by_uav: Dict[int, List[int]],
@@ -197,21 +163,16 @@ def schedule_all_tasks(
     cfg: SchedulingConfig,
     comm_cfg,
 ) -> Tuple[List[TaskExecutionPlan], float]:
-    """Schedule all tasks and compute weighted total delay D_total.
-
-    Returns (plans, D_weighted).
-    """
+    """Schedule all tasks and compute weighted total delay."""
     plans: List[TaskExecutionPlan] = []
-
     D_weighted = 0.0
 
-    for ki, task in enumerate(tasks):
-        u_acc = access_assignment[ki]
-        acc_dly = access_delays[ki, uav_indices[u_acc]]
-
+    for task_idx, task in enumerate(tasks):
+        access_uav = access_assignment[task_idx]
+        access_delay_val = access_delays[task_idx, uav_indices[access_uav]]
         plan = schedule_task(
             task=task,
-            access_uav=u_acc,
+            access_uav=access_uav,
             uavs=uavs,
             deployment=deployment,
             deployed_by_uav=deployed_by_uav,
@@ -222,7 +183,7 @@ def schedule_all_tasks(
             uav_indices=uav_indices,
             F_map=F_map,
             C_map=C_map,
-            access_delay_val=acc_dly,
+            access_delay_val=access_delay_val,
             cfg=cfg,
             comm_cfg=comm_cfg,
         )

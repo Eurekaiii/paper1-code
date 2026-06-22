@@ -22,12 +22,26 @@ def _unit_vector(rng: np.random.Generator, dim: int) -> np.ndarray:
     return vec / norm
 
 
+def _grid_positions(num_points: int, area_size: float) -> List[np.ndarray]:
+    """Place UAVs on a regular grid to create separated service regions."""
+    side = int(np.ceil(np.sqrt(num_points)))
+    margin = area_size / (side + 1)
+    coords = np.linspace(margin, area_size - margin, side)
+    positions: List[np.ndarray] = []
+    for y in coords:
+        for x in coords:
+            positions.append(np.array([x, y]))
+            if len(positions) == num_points:
+                return positions
+    return positions
+
+
 def build_random_scenario(
     cfg: SystemConfig,
     num_uavs: int = 4,
     num_experts: int = 8,
     num_tasks: int = 10,
-    area_size: float = 120.0,
+    area_size: float = 240.0,
     vector_dim: int = 64,
 ) -> Tuple[List[UAV], List[Expert], List[Task]]:
     """Construct a reproducible random but feasible UAV/task/expert scenario."""
@@ -43,14 +57,15 @@ def build_random_scenario(
         raise ValueError("vector_dim must be positive.")
 
     rng = np.random.default_rng(cfg.seed)
+    ground_positions = _grid_positions(num_uavs, area_size)
 
     uavs: List[UAV] = []
     for u_id in range(num_uavs):
         position = np.array(
             [
-                rng.uniform(0.0, area_size),
-                rng.uniform(0.0, area_size),
-                rng.uniform(60.0, 100.0),
+                ground_positions[u_id][0],
+                ground_positions[u_id][1],
+                rng.uniform(70.0, 90.0),
             ]
         )
         uavs.append(
@@ -84,8 +99,8 @@ def build_random_scenario(
 
     tasks: List[Task] = []
     for task_id in range(num_tasks):
-        anchor = uavs[int(rng.integers(0, num_uavs))]
-        offset = rng.normal(0.0, 25.0, size=2)
+        anchor = uavs[task_id % num_uavs]
+        offset = rng.normal(0.0, area_size / 30.0, size=2)
         position = np.clip(anchor.position[:2] + offset, 0.0, area_size)
         num_layers = int(rng.integers(2, 5))
         expert_sequence = (
