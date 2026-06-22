@@ -7,13 +7,16 @@ Most project logic lives in specialized modules:
 """
 
 from .config import SystemConfig
+from .baselines import print_comparison_table, run_all_methods
 from .pipeline import print_report, run_pipeline
 from .scenario import build_example_scenario, build_random_scenario
 
 __all__ = [
     "build_example_scenario",
     "build_random_scenario",
+    "print_comparison_table",
     "print_report",
+    "run_all_methods",
     "run_pipeline",
 ]
 
@@ -25,10 +28,12 @@ def main() -> None:
     uavs, experts, tasks = build_random_scenario(cfg)
     print(f"  {len(uavs)} UAVs, {len(experts)} experts, {len(tasks)} tasks")
 
-    print("Running AeroMoDE pipeline ...")
-    result = run_pipeline(uavs, experts, tasks, cfg)
+    print("Running Proposed and baseline methods ...")
+    results = run_all_methods(uavs, experts, tasks, cfg)
 
-    print_report(result, uavs, experts)
+    proposed_name, proposed_result = results[0]
+    print_report(proposed_result, uavs, experts)
+    print_comparison_table(results)
 
 
 if __name__ == "__main__":
