@@ -215,6 +215,236 @@ def build_hotspot_similarity_scenario(
     return uavs, experts, tasks
 
 
+def build_controlled_random_hotspot_scenario(
+    cfg: SystemConfig,
+    num_uavs: int = 4,
+    num_tasks: int = 40,
+    area_size: float = 240.0,
+    vector_dim: int = 64,
+) -> Tuple[List[UAV], List[Expert], List[Task]]:
+    """Build a reproducible randomized hotspot scenario with memory pressure."""
+    if num_uavs != 4:
+        raise ValueError("build_controlled_random_hotspot_scenario expects 4 UAVs.")
+    if num_tasks <= 0:
+        raise ValueError("num_tasks must be positive.")
+    if area_size <= 0:
+        raise ValueError("area_size must be positive.")
+    if vector_dim <= 0:
+        raise ValueError("vector_dim must be positive.")
+
+    rng = np.random.default_rng(cfg.seed)
+    base_positions = [
+        np.array([60.0, 60.0]),
+        np.array([180.0, 60.0]),
+        np.array([60.0, 180.0]),
+        np.array([180.0, 180.0]),
+    ]
+
+    uavs: List[UAV] = []
+    for uav_id, base_position in enumerate(base_positions):
+        xy = np.clip(base_position + rng.uniform(-10.0, 10.0, size=2), 0.0, area_size)
+        uavs.append(
+            UAV(
+                id=uav_id,
+                position=np.array([xy[0], xy[1], rng.uniform(70.0, 90.0)]),
+                C_u=rng.uniform(6e9, 12e9),
+                M_u=rng.uniform(850e6, 1050e6),
+                P_u=rng.uniform(10.0, 14.0),
+            )
+        )
+
+    vectors = [_unit_vector(rng, vector_dim) for _ in range(8)]
+    vectors[4] = _similar_vector(rng, vectors[0], noise_scale=rng.uniform(0.06, 0.10))
+    vectors[5] = _similar_vector(rng, vectors[1], noise_scale=rng.uniform(0.06, 0.10))
+    vectors[6] = _similar_vector(rng, vectors[2], noise_scale=rng.uniform(0.06, 0.10))
+
+    experts = [
+        Expert(
+            id=e_id,
+            W_e=rng.uniform(620e6, 760e6),
+            F_e=rng.uniform(1.0e9, 1.35e9),
+            weight_vector=vectors[e_id],
+        )
+        for e_id in range(4)
+    ]
+    experts.extend(
+        Expert(
+            id=e_id,
+            W_e=rng.uniform(220e6, 320e6),
+            F_e=rng.uniform(3.5e8, 5.2e8),
+            weight_vector=vectors[e_id],
+        )
+        for e_id in range(4, 7)
+    )
+    experts.append(
+        Expert(
+            id=7,
+            W_e=rng.uniform(280e6, 380e6),
+            F_e=rng.uniform(5.0e8, 7.0e8),
+            weight_vector=vectors[7],
+        )
+    )
+
+    hotspot_distributions = {
+        0: ([0, 1, 3, 2], [0.65, 0.20, 0.10, 0.05]),
+        1: ([1, 3, 0, 2], [0.65, 0.20, 0.10, 0.05]),
+        2: ([2, 0, 3, 1], [0.65, 0.20, 0.10, 0.05]),
+        3: ([0, 2, 1, 3], [0.45, 0.45, 0.05, 0.05]),
+    }
+
+    tasks: List[Task] = []
+    base_counts = [num_tasks // num_uavs for _ in range(num_uavs)]
+    for idx in range(num_tasks % num_uavs):
+        base_counts[idx] += 1
+
+    task_id = 0
+    for uav_id, count in enumerate(base_counts):
+        anchor = uavs[uav_id]
+        expert_ids, probabilities = hotspot_distributions[uav_id]
+        for _ in range(count):
+            num_layers = int(rng.integers(2, 5))
+            expert_sequence = (
+                rng.choice(expert_ids, size=num_layers, replace=True, p=probabilities)
+                .astype(int)
+                .tolist()
+            )
+            first_mid = rng.uniform(5e5, 9e5)
+            position = np.clip(
+                anchor.position[:2] + rng.normal(0.0, 12.0, size=2),
+                0.0,
+                area_size,
+            )
+            tasks.append(
+                Task(
+                    id=task_id,
+                    position=position,
+                    S_in=rng.uniform(1.0e6, 2.2e6),
+                    S_out=rng.uniform(1.0e4, 2.5e4),
+                    S_mid=[first_mid * (0.9**i) for i in range(num_layers)],
+                    expert_sequence=expert_sequence,
+                    omega=rng.uniform(0.8, 1.4),
+                )
+            )
+            task_id += 1
+
+    return uavs, experts, tasks
+
+
+def build_controlled_random_hotspot_scenario_v2(
+    cfg: SystemConfig,
+    num_uavs: int = 4,
+    num_tasks: int = 40,
+    area_size: float = 240.0,
+    vector_dim: int = 64,
+) -> Tuple[List[UAV], List[Expert], List[Task]]:
+    """Build a stronger randomized hotspot scenario for placement diagnostics."""
+    if num_uavs != 4:
+        raise ValueError("build_controlled_random_hotspot_scenario_v2 expects 4 UAVs.")
+    if num_tasks <= 0:
+        raise ValueError("num_tasks must be positive.")
+    if area_size <= 0:
+        raise ValueError("area_size must be positive.")
+    if vector_dim <= 0:
+        raise ValueError("vector_dim must be positive.")
+
+    rng = np.random.default_rng(cfg.seed)
+    base_positions = [
+        np.array([60.0, 60.0]),
+        np.array([180.0, 60.0]),
+        np.array([60.0, 180.0]),
+        np.array([180.0, 180.0]),
+    ]
+
+    uavs: List[UAV] = []
+    for uav_id, base_position in enumerate(base_positions):
+        xy = np.clip(base_position + rng.uniform(-10.0, 10.0, size=2), 0.0, area_size)
+        uavs.append(
+            UAV(
+                id=uav_id,
+                position=np.array([xy[0], xy[1], rng.uniform(70.0, 90.0)]),
+                C_u=rng.uniform(8e9, 11e9),
+                M_u=rng.uniform(850e6, 1050e6),
+                P_u=rng.uniform(10.0, 14.0),
+            )
+        )
+
+    vectors = [_unit_vector(rng, vector_dim) for _ in range(8)]
+    vectors[4] = _similar_vector(rng, vectors[0], noise_scale=rng.uniform(0.06, 0.10))
+    vectors[5] = _similar_vector(rng, vectors[1], noise_scale=rng.uniform(0.06, 0.10))
+    vectors[6] = _similar_vector(rng, vectors[2], noise_scale=rng.uniform(0.06, 0.10))
+
+    experts = [
+        Expert(
+            id=e_id,
+            W_e=rng.uniform(620e6, 760e6),
+            F_e=rng.uniform(1.0e9, 1.35e9),
+            weight_vector=vectors[e_id],
+        )
+        for e_id in range(4)
+    ]
+    experts.extend(
+        Expert(
+            id=e_id,
+            W_e=rng.uniform(220e6, 320e6),
+            F_e=rng.uniform(3.5e8, 5.2e8),
+            weight_vector=vectors[e_id],
+        )
+        for e_id in range(4, 7)
+    )
+    experts.append(
+        Expert(
+            id=7,
+            W_e=rng.uniform(280e6, 380e6),
+            F_e=rng.uniform(5.0e8, 7.0e8),
+            weight_vector=vectors[7],
+        )
+    )
+
+    hotspot_distributions = {
+        0: ([0, 1, 3, 2], [0.75, 0.15, 0.07, 0.03]),
+        1: ([1, 3, 0, 2], [0.75, 0.15, 0.07, 0.03]),
+        2: ([2, 0, 3, 1], [0.75, 0.15, 0.07, 0.03]),
+        3: ([0, 2, 1, 3], [0.48, 0.48, 0.02, 0.02]),
+    }
+
+    tasks: List[Task] = []
+    base_counts = [num_tasks // num_uavs for _ in range(num_uavs)]
+    for idx in range(num_tasks % num_uavs):
+        base_counts[idx] += 1
+
+    task_id = 0
+    for uav_id, count in enumerate(base_counts):
+        anchor = uavs[uav_id]
+        expert_ids, probabilities = hotspot_distributions[uav_id]
+        for _ in range(count):
+            num_layers = int(rng.integers(2, 5))
+            expert_sequence = (
+                rng.choice(expert_ids, size=num_layers, replace=True, p=probabilities)
+                .astype(int)
+                .tolist()
+            )
+            first_mid = rng.uniform(8e5, 1.4e6)
+            position = np.clip(
+                anchor.position[:2] + rng.normal(0.0, 12.0, size=2),
+                0.0,
+                area_size,
+            )
+            tasks.append(
+                Task(
+                    id=task_id,
+                    position=position,
+                    S_in=rng.uniform(1.0e6, 2.2e6),
+                    S_out=rng.uniform(1.0e4, 2.5e4),
+                    S_mid=[first_mid * (0.9**i) for i in range(num_layers)],
+                    expert_sequence=expert_sequence,
+                    omega=rng.uniform(0.8, 1.4),
+                )
+            )
+            task_id += 1
+
+    return uavs, experts, tasks
+
+
 def build_example_scenario(
     cfg: SystemConfig,
 ) -> Tuple[List[UAV], List[Expert], List[Task]]:

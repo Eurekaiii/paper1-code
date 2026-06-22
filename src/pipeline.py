@@ -108,6 +108,7 @@ def run_pipeline(
         max_copies_per_expert=cfg.max_copies_per_expert,
         required_experts=required_experts,
         demand_eff=demand_eff,
+        substitutable_sets=substitutable_sets,
     )
 
     deployed_by_uav = get_deployed_experts_by_uav(deployment)

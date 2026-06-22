@@ -44,6 +44,7 @@ def greedy_placement(
     max_copies_per_expert: int = 1,
     required_experts: Set[int] | None = None,
     demand_eff: Dict[int, Dict[int, float]] | None = None,
+    substitutable_sets: Dict[int, Set[int]] | None = None,
 ) -> Dict[Tuple[int, int], int]:
     """Dynamic greedy expert placement (Algorithm 1).
 
@@ -63,8 +64,10 @@ def greedy_placement(
     required_experts : set | None
         Experts that MUST be deployed somewhere (feasibility guarantee).
     demand_eff : dict | None
-        demand_eff[e][u] = float. Used in pre-deployment to place required
-        experts on the UAV with highest LOCAL demand (avoiding cross-UAV hops).
+        demand_eff[e][u] = float. Used as a fallback in pre-deployment if
+        a required expert's precomputed BaseScore is unavailable.
+    substitutable_sets : dict | None
+        substitutable_sets[r] gives experts that can cover required expert r.
 
     Returns
     -------
@@ -79,74 +82,78 @@ def greedy_placement(
     expert_copies = {e: 0 for e in candidates}
 
     # ================================================================
-    # Phase 0: pre-deploy required experts (feasibility guarantee).
-    # "Regret-based" assignment: for each required expert, compute the
-    # gap between its best and second-best UAV by A(e,u).  Allocate
-    # experts with the LARGEST regret first — they have the strongest
-    # preference and suffer most if displaced.  This avoids the bin-
-    # packing pathology where later experts get pushed to unreachable UAVs.
+    # Phase 0: pre-deploy coverage for required experts. A required expert
+    # can be covered by itself or by one of its substitutable lightweight
+    # experts, which avoids filling memory with only large original experts.
     # ================================================================
     if required_experts:
-        # Build per-expert UAV rankings by A(e,u)
-        expert_rankings: Dict[int, List[Tuple[int, float]]] = {}
-        for e in required_experts:
-            if e not in candidates:
-                continue
-            rankings: List[Tuple[int, float]] = []
-            for u in uav_ids:
-                if remaining_memory[u] < W_map.get(e, float("inf")):
-                    continue
-                local = demand_eff.get(e, {}).get(u, 0.0) if demand_eff else 0.0
-                remote = 0.0
-                if demand_eff:
-                    for v in uav_ids:
-                        if v == u:
+        uncovered_required = set(required_experts)
+
+        def is_covered(required: int) -> bool:
+            cover_set = substitutable_sets.get(required, {required}) if substitutable_sets else {required}
+            cover_set = cover_set | {required}
+            return any(
+                deployed == 1 and e in cover_set
+                for (e, _u), deployed in deployment.items()
+            )
+
+        while True:
+            uncovered_required = {
+                r for r in uncovered_required if not is_covered(r)
+            }
+            if not uncovered_required:
+                break
+
+            best_required = -1
+            best_pair: Tuple[int, int] = (-1, -1)
+            best_value = float("-inf")
+
+            for required in sorted(uncovered_required):
+                cover_set = (
+                    substitutable_sets.get(required, {required})
+                    if substitutable_sets
+                    else {required}
+                )
+                cover_set = (cover_set | {required}) & candidates
+                for e in sorted(cover_set):
+                    if expert_copies.get(e, 0) >= max_copies_per_expert:
+                        continue
+                    W_e = W_map.get(e, float("inf"))
+                    if W_e <= 0:
+                        continue
+                    for u in uav_ids:
+                        if deployment.get((e, u), 0) == 1:
                             continue
-                        if uav_indices[v] < len(G) and uav_indices[u] < len(G):
-                            if G[uav_indices[v], uav_indices[u]] == 1:
-                                remote += demand_eff.get(e, {}).get(v, 0.0)
-                A_val = local + cfg.eta * remote
-                rankings.append((u, A_val))
-            rankings.sort(key=lambda x: x[1], reverse=True)
-            if rankings:
-                expert_rankings[e] = rankings
+                        if remaining_memory[u] < W_e:
+                            continue
+                        score = base_scores.get((e, u))
+                        if score is None:
+                            local = demand_eff.get(e, {}).get(u, 0.0) if demand_eff else 0.0
+                            remote = 0.0
+                            if demand_eff:
+                                for v in uav_ids:
+                                    if v == u:
+                                        continue
+                                    if uav_indices[v] < len(G) and uav_indices[u] < len(G):
+                                        if G[uav_indices[v], uav_indices[u]] == 1:
+                                            remote += demand_eff.get(e, {}).get(v, 0.0)
+                            score = local + cfg.eta * remote
+                        value = score / W_e
+                        if value > best_value:
+                            best_value = value
+                            best_required = required
+                            best_pair = (e, u)
 
-        # Assign by descending regret (gap between best and second-best)
-        while expert_rankings:
-            _filter_rankings_by_memory(expert_rankings, remaining_memory, W_map)
-            if not expert_rankings:
+            if best_required < 0:
                 break
 
-            # Find expert with largest regret
-            best_e = -1
-            best_regret = -1.0
-            for e, rankings in expert_rankings.items():
-                if len(rankings) >= 2:
-                    regret = rankings[0][1] - rankings[1][1]
-                elif len(rankings) == 1:
-                    regret = float("inf")  # only one viable UAV — must go there
-                else:
-                    regret = -1.0
-                if regret > best_regret:
-                    best_regret = regret
-                    best_e = e
-
-            if best_e < 0:
-                break
-
-            rankings = expert_rankings.pop(best_e)
-            best_u, _ = rankings[0]
-            if remaining_memory[best_u] < W_map.get(best_e, float("inf")):
-                continue
+            best_e, best_u = best_pair
             deployment[(best_e, best_u)] = 1
             remaining_memory[best_u] -= W_map.get(best_e, 0.0)
-            expert_copies[best_e] = 1
-
-            # Remove this UAV from other experts' rankings if memory exhausted
-            if remaining_memory[best_u] < min(W_map.values()):
-                _filter_rankings_by_memory(expert_rankings, remaining_memory, W_map)
-            # If no UAV can fit this required expert, we proceed anyway;
-            # the scheduling phase will report the infeasibility clearly.
+            expert_copies[best_e] = expert_copies.get(best_e, 0) + 1
+            uncovered_required.discard(best_required)
+            # If another required expert is also covered by this substitute,
+            # the next loop iteration will remove it through is_covered().
 
     # ================================================================
     # Phase 1: main greedy loop (Algorithm 1)

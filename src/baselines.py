@@ -492,3 +492,97 @@ def print_multi_seed_table(metrics_by_method: Dict[str, List[MethodMetrics]]) ->
     print("-+-".join("-" * width for width in widths))
     for row in rows:
         print(" | ".join(row[i].ljust(widths[i]) for i in range(len(headers))))
+
+
+def print_multi_seed_diagnostic_table(
+    metrics_by_method: Dict[str, List[MethodMetrics]],
+    seeds: List[int],
+) -> None:
+    """Print per-seed method diagnostics and each seed's best method."""
+    headers = [
+        "Seed",
+        "Method",
+        "D_total(ms)",
+        "Substitutions",
+        "AvgCompute(ms)",
+        "AvgTrans(ms)",
+    ]
+    method_names = list(metrics_by_method.keys())
+    rows: List[List[str]] = []
+
+    for idx, seed in enumerate(seeds):
+        for method in method_names:
+            metrics = metrics_by_method[method][idx]
+            rows.append(
+                [
+                    str(seed),
+                    method,
+                    f"{metrics.D_total * 1e3:.2f}",
+                    str(metrics.substitutions),
+                    f"{metrics.avg_D_compute * 1e3:.2f}",
+                    f"{metrics.avg_D_trans * 1e3:.2f}",
+                ]
+            )
+
+    widths = [
+        max(len(headers[i]), *(len(row[i]) for row in rows))
+        for i in range(len(headers))
+    ]
+
+    print("\n=== Multi-seed Per-seed Diagnostics ===")
+    print(" | ".join(headers[i].ljust(widths[i]) for i in range(len(headers))))
+    print("-+-".join("-" * width for width in widths))
+    for row in rows:
+        print(" | ".join(row[i].ljust(widths[i]) for i in range(len(headers))))
+
+    print("\n=== Multi-seed Winners ===")
+    for idx, seed in enumerate(seeds):
+        winner = min(method_names, key=lambda method: metrics_by_method[method][idx].D_total)
+        print(f"Seed {seed} winner: {winner}")
+
+
+def print_multi_seed_winner_table(
+    metrics_by_method: Dict[str, List[MethodMetrics]],
+    seeds: List[int],
+) -> None:
+    """Print compact per-seed D_total comparison with winner."""
+    method_columns = [
+        ("Proposed", "Proposed D_total"),
+        ("Random Placement", "Random D_total"),
+        ("Importance-based Placement", "Importance D_total"),
+        ("No-similarity Placement", "No-similarity D_total"),
+    ]
+    headers = ["Seed", *(label for _, label in method_columns), "Winner"]
+    rows: List[List[str]] = []
+
+    for idx, seed in enumerate(seeds):
+        available_methods = [
+            method for method, _ in method_columns if method in metrics_by_method
+        ]
+        winner = min(
+            available_methods,
+            key=lambda method: metrics_by_method[method][idx].D_total,
+        )
+        rows.append(
+            [
+                str(seed),
+                *[
+                    f"{metrics_by_method[method][idx].D_total * 1e3:.2f}"
+                    if method in metrics_by_method
+                    else "-"
+                    for method, _ in method_columns
+                ],
+                winner,
+            ]
+        )
+
+    widths = [
+        max(len(headers[i]), *(len(row[i]) for row in rows))
+        for i in range(len(headers))
+    ]
+
+    print("\n=== Multi-seed Winner Table ===")
+    print(" | ".join(headers[i].ljust(widths[i]) for i in range(len(headers))))
+    print("-+-".join("-" * width for width in widths))
+    for row in rows:
+        print(" | ".join(row[i].ljust(widths[i]) for i in range(len(headers))))
