@@ -35,6 +35,8 @@ class MethodMetrics:
 
     name: str
     D_total: float
+    substitutions: int
+    deployments: int
     avg_D_access: float
     avg_D_compute: float
     avg_D_trans: float
@@ -45,12 +47,17 @@ class MethodMetrics:
 def compute_metrics(name: str, result: SystemResult) -> MethodMetrics:
     """Compute table metrics from a system result."""
     plans = result.execution_plans
+    deployments = sum(result.deployment.values())
     if not plans:
-        return MethodMetrics(name, np.inf, np.inf, np.inf, np.inf, np.inf, False)
+        return MethodMetrics(name, np.inf, 0, deployments, np.inf, np.inf, np.inf, np.inf, False)
 
     return MethodMetrics(
         name=name,
         D_total=result.D_total,
+        substitutions=sum(
+            1 for plan in plans for step in plan.steps if step.is_substituted
+        ),
+        deployments=deployments,
         avg_D_access=float(np.mean([p.D_access for p in plans])),
         avg_D_compute=float(np.mean([p.D_compute for p in plans])),
         avg_D_trans=float(np.mean([p.D_trans for p in plans])),
@@ -246,8 +253,10 @@ def run_importance_placement(
     remaining_memory = {u.id: u.M_u for u in uavs}
     deployment = _empty_deployment(candidates, uav_ids)
 
-    def best_local_demand_uav(e: int, feasible_uavs: List[int]) -> int:
-        return max(feasible_uavs, key=lambda u: demand_eff.get(e, {}).get(u, 0.0))
+    C_map = {u.id: u.C_u for u in uavs}
+
+    def strongest_compute_uav(_e: int, feasible_uavs: List[int]) -> int:
+        return max(feasible_uavs, key=lambda u: C_map.get(u, 0.0))
 
     _place_required_originals(
         deployment,
@@ -255,7 +264,7 @@ def run_importance_placement(
         uav_ids,
         W_map,
         remaining_memory,
-        choose_uav=best_local_demand_uav,
+        choose_uav=strongest_compute_uav,
     )
 
     ranked_candidates = sorted(
@@ -274,7 +283,7 @@ def run_importance_placement(
         feasible_uavs = [u for u in uav_ids if remaining_memory[u] >= W_map[e]]
         if not feasible_uavs:
             continue
-        u = best_local_demand_uav(e, feasible_uavs)
+        u = strongest_compute_uav(e, feasible_uavs)
         deployment[(e, u)] = 1
         remaining_memory[u] -= W_map[e]
 
@@ -347,6 +356,8 @@ def print_comparison_table(results: List[Tuple[str, SystemResult]]) -> None:
     metrics = [compute_metrics(name, result) for name, result in results]
     headers = [
         "Method",
+        "Substitutions",
+        "Deployments",
         "D_total(ms)",
         "AvgAccess(ms)",
         "AvgCompute(ms)",
@@ -356,6 +367,8 @@ def print_comparison_table(results: List[Tuple[str, SystemResult]]) -> None:
     rows = [
         [
             m.name,
+            str(m.substitutions),
+            str(m.deployments),
             f"{m.D_total * 1e3:.2f}",
             f"{m.avg_D_access * 1e3:.2f}",
             f"{m.avg_D_compute * 1e3:.2f}",
