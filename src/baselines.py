@@ -66,6 +66,18 @@ def compute_metrics(name: str, result: SystemResult) -> MethodMetrics:
     )
 
 
+def count_substitution_pairs(result: SystemResult) -> Dict[Tuple[int, int], int]:
+    """Count how often each original expert is replaced by another expert."""
+    counts: Dict[Tuple[int, int], int] = {}
+    for plan in result.execution_plans:
+        for step in plan.steps:
+            if not step.is_substituted:
+                continue
+            pair = (step.original_expert, step.actual_expert)
+            counts[pair] = counts.get(pair, 0) + 1
+    return counts
+
+
 def _empty_deployment(
     candidates: Set[int],
     uav_ids: List[int],
@@ -384,6 +396,98 @@ def print_comparison_table(results: List[Tuple[str, SystemResult]]) -> None:
     ]
 
     print("\n=== Method Comparison ===")
+    print(" | ".join(headers[i].ljust(widths[i]) for i in range(len(headers))))
+    print("-+-".join("-" * width for width in widths))
+    for row in rows:
+        print(" | ".join(row[i].ljust(widths[i]) for i in range(len(headers))))
+
+
+def print_deployment_details(
+    results: List[Tuple[str, SystemResult]],
+    uavs: List[UAV],
+) -> None:
+    """Print per-method expert deployments grouped by UAV."""
+    uav_ids = [u.id for u in uavs]
+
+    print("\n=== Deployment Details ===")
+    for name, result in results:
+        print(f"\n{name}")
+        for uav_id in uav_ids:
+            expert_ids = sorted(
+                e
+                for (e, u), deployed in result.deployment.items()
+                if deployed == 1 and u == uav_id
+            )
+            expert_text = ", ".join(f"E{e}" for e in expert_ids) if expert_ids else "-"
+            print(f"  UAV {uav_id}: {expert_text}")
+
+
+def print_substitution_pair_details(results: List[Tuple[str, SystemResult]]) -> None:
+    """Print per-method substitution pair counts."""
+    print("\n=== Substitution Pairs ===")
+    for name, result in results:
+        counts = count_substitution_pairs(result)
+        print(f"\n{name}")
+        if not counts:
+            print("  (none)")
+            continue
+        for (original, actual), count in sorted(counts.items()):
+            print(f"  E{original} -> E{actual}: {count}")
+
+
+def run_multi_seed_evaluation(
+    seeds: List[int],
+    scenario_builder: Callable[[SystemConfig], Tuple[List[UAV], List[Expert], List[Task]]],
+) -> Dict[str, List[MethodMetrics]]:
+    """Run all methods on multiple seeds and return per-method metrics."""
+    metrics_by_method: Dict[str, List[MethodMetrics]] = {}
+
+    for seed in seeds:
+        cfg = SystemConfig()
+        cfg.seed = seed
+        uavs, experts, tasks = scenario_builder(cfg)
+        results = run_all_methods(uavs, experts, tasks, cfg)
+        for name, result in results:
+            metrics_by_method.setdefault(name, []).append(compute_metrics(name, result))
+
+    return metrics_by_method
+
+
+def print_multi_seed_table(metrics_by_method: Dict[str, List[MethodMetrics]]) -> None:
+    """Print mean/std diagnostics across repeated scenario seeds."""
+    headers = [
+        "Method",
+        "mean D_total(ms)",
+        "std D_total(ms)",
+        "mean Substitutions",
+        "mean AvgCompute(ms)",
+        "mean AvgTrans(ms)",
+    ]
+
+    rows: List[List[str]] = []
+    for name, metrics in metrics_by_method.items():
+        D_total = np.array([m.D_total for m in metrics], dtype=float) * 1e3
+        substitutions = np.array([m.substitutions for m in metrics], dtype=float)
+        avg_compute = np.array([m.avg_D_compute for m in metrics], dtype=float) * 1e3
+        avg_trans = np.array([m.avg_D_trans for m in metrics], dtype=float) * 1e3
+        rows.append(
+            [
+                name,
+                f"{np.mean(D_total):.2f}",
+                f"{np.std(D_total):.2f}",
+                f"{np.mean(substitutions):.2f}",
+                f"{np.mean(avg_compute):.2f}",
+                f"{np.mean(avg_trans):.2f}",
+            ]
+        )
+
+    widths = [
+        max(len(headers[i]), *(len(row[i]) for row in rows))
+        for i in range(len(headers))
+    ]
+
+    print("\n=== Multi-seed Evaluation ===")
+    print("Seeds: [0, 1, 2, 3, 4]")
     print(" | ".join(headers[i].ljust(widths[i]) for i in range(len(headers))))
     print("-+-".join("-" * width for width in widths))
     for row in rows:
