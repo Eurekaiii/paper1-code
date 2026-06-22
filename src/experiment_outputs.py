@@ -17,7 +17,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .baselines import MethodMetrics, run_multi_seed_evaluation
+from .evaluation import MethodMetrics, run_multi_seed_evaluation
 from .scenario import build_controlled_random_hotspot_scenario_v2
 
 

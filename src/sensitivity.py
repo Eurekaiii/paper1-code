@@ -8,12 +8,12 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from typing import Callable, Dict, Iterable, List
+from typing import Callable, Dict, List
 
 import numpy as np
 
-from .baselines import MethodMetrics, compute_metrics, run_all_methods
 from .config import SystemConfig
+from .evaluation import MethodMetrics, compute_metrics, run_all_methods
 from .models import Expert, Task, UAV
 from .scenario import build_controlled_random_hotspot_scenario_v2
 

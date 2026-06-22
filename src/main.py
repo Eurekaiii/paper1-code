@@ -7,15 +7,14 @@ Most project logic lives in specialized modules:
 """
 
 from .config import SystemConfig
-from .baselines import (
+from .evaluation import run_all_methods, run_multi_seed_evaluation
+from .reporting import (
     print_comparison_table,
     print_deployment_details,
     print_multi_seed_diagnostic_table,
     print_multi_seed_table,
     print_multi_seed_winner_table,
     print_substitution_pair_details,
-    run_all_methods,
-    run_multi_seed_evaluation,
 )
 from .pipeline import print_report, run_pipeline
 from .scenario import (
