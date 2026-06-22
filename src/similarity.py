@@ -7,7 +7,7 @@ Cosine similarity between expert FFN weights → substitutable sets A(r)
 Reference: aeromde_main.tex  Section IV-C  (Eqs. 9–11).
 """
 
-from typing import List, Dict, Set, Tuple, Optional
+from typing import List, Dict, Set, Tuple
 import numpy as np
 
 from .models import Expert

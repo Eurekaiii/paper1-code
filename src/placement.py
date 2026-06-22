@@ -14,6 +14,22 @@ from .config import DeploymentConfig
 from .scoring import compute_redundancy, compute_dynamic_score
 
 
+def _filter_rankings_by_memory(
+    expert_rankings: Dict[int, List[Tuple[int, float]]],
+    remaining_memory: Dict[int, float],
+    W_map: Dict[int, float],
+) -> None:
+    """Drop required-expert rankings that no longer fit current memory."""
+    for e in list(expert_rankings.keys()):
+        expert_rankings[e] = [
+            (u, score)
+            for u, score in expert_rankings[e]
+            if remaining_memory[u] >= W_map.get(e, float("inf"))
+        ]
+        if not expert_rankings[e]:
+            del expert_rankings[e]
+
+
 def greedy_placement(
     candidates: Set[int],
     uav_ids: List[int],
@@ -54,8 +70,6 @@ def greedy_placement(
     -------
     deployment : dict   (e, u) → m_{e,u} ∈ {0, 1}
     """
-    # --- init ---
-    U = len(uav_ids)
     deployment: Dict[Tuple[int, int], int] = {}
     for e in candidates:
         for u in uav_ids:
@@ -63,7 +77,6 @@ def greedy_placement(
 
     remaining_memory = {u: M_map.get(u, 0.0) for u in uav_ids}
     expert_copies = {e: 0 for e in candidates}
-    t = 0
 
     # ================================================================
     # Phase 0: pre-deploy required experts (feasibility guarantee).
@@ -100,6 +113,10 @@ def greedy_placement(
 
         # Assign by descending regret (gap between best and second-best)
         while expert_rankings:
+            _filter_rankings_by_memory(expert_rankings, remaining_memory, W_map)
+            if not expert_rankings:
+                break
+
             # Find expert with largest regret
             best_e = -1
             best_regret = -1.0
@@ -119,20 +136,15 @@ def greedy_placement(
 
             rankings = expert_rankings.pop(best_e)
             best_u, _ = rankings[0]
+            if remaining_memory[best_u] < W_map.get(best_e, float("inf")):
+                continue
             deployment[(best_e, best_u)] = 1
             remaining_memory[best_u] -= W_map.get(best_e, 0.0)
             expert_copies[best_e] = 1
-            t += 1
 
             # Remove this UAV from other experts' rankings if memory exhausted
             if remaining_memory[best_u] < min(W_map.values()):
-                for e in list(expert_rankings.keys()):
-                    expert_rankings[e] = [
-                        (u, a) for u, a in expert_rankings[e]
-                        if u != best_u or remaining_memory[best_u] >= W_map.get(e, float("inf"))
-                    ]
-                    if not expert_rankings[e]:
-                        del expert_rankings[e]
+                _filter_rankings_by_memory(expert_rankings, remaining_memory, W_map)
             # If no UAV can fit this required expert, we proceed anyway;
             # the scheduling phase will report the infeasibility clearly.
 
@@ -179,7 +191,6 @@ def greedy_placement(
         deployment[(e_star, u_star)] = 1
         remaining_memory[u_star] -= W_map.get(e_star, 0.0)
         expert_copies[e_star] += 1
-        t += 1
 
     return deployment
 

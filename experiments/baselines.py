@@ -19,7 +19,7 @@ from typing import Dict, List, Tuple, Set
 
 from src.config import SystemConfig
 from src.models import UAV, Task, Expert, SystemResult
-from src.main import run_pipeline
+from src.pipeline import run_pipeline
 from src.placement import get_deployed_experts_by_uav
 from src.similarity import strict_substitute_set
 
@@ -45,8 +45,15 @@ def baseline_local_only(
     total_expert_size = sum(e.W_e for e in experts)
     uavs_big = []
     for u in uavs:
-        uavs_big.append(UAV(id=u.id, position=u.position.copy(),
-                            C_u=u.C_u, M_u=total_expert_size * 2))
+        uavs_big.append(
+            UAV(
+                id=u.id,
+                position=u.position.copy(),
+                C_u=u.C_u,
+                M_u=total_expert_size * 2,
+                P_u=u.P_u,
+            )
+        )
 
     return run_pipeline(uavs_big, experts, tasks, cfg2)
 
@@ -121,29 +128,19 @@ def baseline_random_placement(
 
     # Re-run the scheduling part with this random deployment
     from src.communication import build_connectivity_matrix, build_access_info
-    from src.demand import compute_direct_demand, compute_required_experts, \
-        compute_effective_demand
-    from src.similarity import compute_similarity_matrix, build_substitutable_sets, \
-        build_candidate_set
+    from src.demand import compute_required_experts
+    from src.similarity import compute_similarity_matrix, build_substitutable_sets
     from src.scheduling import schedule_all_tasks
 
     G, Rmat = build_connectivity_matrix(uavs, cfg.channel)
-    R_vals = [Rmat[i, j] for i in range(len(uavs)) for j in range(len(uavs))
-              if i != j and G[i, j] == 1]
-    R_max = max(R_vals) if R_vals else 1.0
-
     access_uavs, access_delays = build_access_info(tasks, uavs, cfg.channel)
-    demand = compute_direct_demand(tasks, uavs, access_uavs)
     E_req = compute_required_experts(tasks)
     sim = compute_similarity_matrix(experts)
     A_sets = build_substitutable_sets(sim, E_req, cfg.similarity.xi)
-    demand_eff = compute_effective_demand(demand, A_sets, sim, uav_ids)
 
     uav_indices = {u.id: i for i, u in enumerate(uavs)}
     C_map = {u.id: u.C_u for u in uavs}
     F_map = {e.id: e.F_e for e in experts}
-
-    return_rate = cfg.channel.B * np.log2(1.0 + 10.0)
 
     plans, D_weighted = schedule_all_tasks(
         tasks=tasks, access_assignment=access_uavs,
@@ -152,7 +149,7 @@ def baseline_random_placement(
         substitutable_sets=A_sets, similarity=sim,
         G=G, R=Rmat, uav_indices=uav_indices,
         F_map=F_map, C_map=C_map,
-        return_rate=return_rate, cfg=cfg.scheduling,
+        cfg=cfg.scheduling,
         comm_cfg=cfg.channel,
     )
 
@@ -192,7 +189,7 @@ def baseline_round_robin(
     from src.demand import compute_required_experts
     E_req = compute_required_experts(tasks)
 
-    deployment: Dict[Tuple[int, int], float] = {}
+    deployment: Dict[Tuple[int, int], int] = {}
     for e in E_cand:
         for u in uav_ids:
             deployment[(e, u)] = 0
@@ -240,23 +237,19 @@ def baseline_round_robin(
 
     # Scheduling
     from src.communication import build_connectivity_matrix, build_access_info
-    from src.demand import compute_direct_demand, compute_required_experts, \
-        compute_effective_demand
+    from src.demand import compute_required_experts
     from src.similarity import compute_similarity_matrix, build_substitutable_sets
     from src.scheduling import schedule_all_tasks
 
     G, Rmat = build_connectivity_matrix(uavs, cfg.channel)
     access_uavs, access_delays = build_access_info(tasks, uavs, cfg.channel)
-    demand = compute_direct_demand(tasks, uavs, access_uavs)
     E_req = compute_required_experts(tasks)
     sim = compute_similarity_matrix(experts)
     A_sets = build_substitutable_sets(sim, E_req, cfg.similarity.xi)
-    demand_eff = compute_effective_demand(demand, A_sets, sim, uav_ids)
 
     uav_indices = {u.id: i for i, u in enumerate(uavs)}
     C_map = {u.id: u.C_u for u in uavs}
     F_map = {e.id: e.F_e for e in experts}
-    return_rate = cfg.channel.B * np.log2(1.0 + 10.0)
 
     plans, D_weighted = schedule_all_tasks(
         tasks=tasks, access_assignment=access_uavs,
@@ -265,7 +258,7 @@ def baseline_round_robin(
         substitutable_sets=A_sets, similarity=sim,
         G=G, R=Rmat, uav_indices=uav_indices,
         F_map=F_map, C_map=C_map,
-        return_rate=return_rate, cfg=cfg.scheduling,
+        cfg=cfg.scheduling,
         comm_cfg=cfg.channel,
     )
 

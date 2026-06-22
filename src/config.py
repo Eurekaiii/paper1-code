@@ -8,7 +8,6 @@ Reference: LaTeX aeromde_main.tex, Sections III (System Model) & IV (Proposed De
 """
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 
 @dataclass
@@ -25,7 +24,6 @@ class ChannelConfig:
 
     # TX power
     P_ground: float = 5.0        # Ground device transmit power (W)
-    P_uav: float = 10.0          # UAV transmit power (W)
 
 
 @dataclass

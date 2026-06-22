@@ -7,7 +7,7 @@ Reference: aeromde_main.tex  Section III-B  (wireless links),
                               Section IV-B   (single-hop simplification).
 """
 
-from typing import Dict, Tuple, List
+from typing import Tuple, List
 import numpy as np
 
 from .config import ChannelConfig
@@ -72,6 +72,29 @@ def access_delay(task: Task, uav: UAV, cfg: ChannelConfig) -> float:
     return task.S_in / rate
 
 
+def downlink_snr(uav: UAV, task_pos: np.ndarray, cfg: ChannelConfig) -> float:
+    """ρ_{u,k}^{down} = P_u · h_{u,k} / (N_0 · B)."""
+    d = _ground_to_uav_distance(task_pos, uav)
+    h = channel_gain(d, cfg)
+    return (uav.P_u * h) / (cfg.N0 * cfg.B)
+
+
+def downlink_rate(uav: UAV, task_pos: np.ndarray, cfg: ChannelConfig) -> float:
+    """R_{u,k}^{down} = B · log2(1 + ρ), or 0 if unavailable."""
+    rho = downlink_snr(uav, task_pos, cfg)
+    if rho < cfg.rho_th:
+        return 0.0
+    return cfg.B * np.log2(1.0 + rho)
+
+
+def downlink_delay(uav: UAV, task: Task, cfg: ChannelConfig) -> float:
+    """D_{u,k}^{down} = S_k^{out} / R_{u,k}^{down}."""
+    rate = downlink_rate(uav, task.position, cfg)
+    if rate <= 0.0:
+        return float("inf")
+    return task.S_out / rate
+
+
 def default_access_uav(task: Task, uavs: List[UAV], cfg: ChannelConfig) -> int:
     """u_k^a = argmin_u  S_k^{in} / R_{k,u}^{access}  (Eq. 7)."""
     best_uav = -1
@@ -93,7 +116,7 @@ def uav_snr(uav_tx: UAV, uav_rx: UAV, cfg: ChannelConfig) -> float:
     """ρ_{u,v} = P_u · h_{u,v} / (N_0 · B)."""
     d = _uav_to_uav_distance(uav_tx, uav_rx)
     h = channel_gain(d, cfg)
-    return (cfg.P_uav * h) / (cfg.N0 * cfg.B)
+    return (uav_tx.P_u * h) / (cfg.N0 * cfg.B)
 
 
 def uav_link_available(uav_tx: UAV, uav_rx: UAV, cfg: ChannelConfig) -> bool:

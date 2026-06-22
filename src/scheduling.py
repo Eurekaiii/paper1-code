@@ -7,19 +7,18 @@ minimises  transmission + computation + substitution error.
 Reference: aeromde_main.tex  Section IV-E  (Eqs. 18–27).
 """
 
-from typing import Dict, List, Tuple, Set, Optional
+from typing import Dict, List, Tuple, Set
 import numpy as np
 
 from .config import SchedulingConfig
 from .models import Task, UAV, ExpertStep, TaskExecutionPlan
-from .communication import single_hop_delay
+from .communication import downlink_delay, single_hop_delay
 
 
 def schedule_task(
     task: Task,
     access_uav: int,
     uavs: List[UAV],
-    uav_map: Dict[int, UAV],
     deployment: Dict[Tuple[int, int], int],
     deployed_by_uav: Dict[int, List[int]],
     substitutable_sets: Dict[int, Set[int]],        # A(r)
@@ -30,7 +29,6 @@ def schedule_task(
     F_map: Dict[int, float],
     C_map: Dict[int, float],
     access_delay_val: float,
-    return_rate: float,                              # R^{down} for return
     cfg: SchedulingConfig,
     comm_cfg,   # ChannelConfig — for single_hop_delay calls
 ) -> TaskExecutionPlan:
@@ -165,11 +163,8 @@ def schedule_task(
     D_compute = sum(s.cost_computation for s in steps)
     D_trans = sum(s.cost_transmission for s in steps)
 
-    # Return delay: last UAV → ground  (Eq. 5)
-    if return_rate > 0:
-        D_return = task.S_out / return_rate
-    else:
-        D_return = 0.0
+    # Return delay: last UAV → ground, using the final UAV's transmit power.
+    D_return = downlink_delay(uav_objects[cur], task, comm_cfg)
 
     D_total = D_access + D_compute + D_trans + D_return
 
@@ -199,7 +194,6 @@ def schedule_all_tasks(
     uav_indices: Dict[int, int],
     F_map: Dict[int, float],
     C_map: Dict[int, float],
-    return_rate: float,
     cfg: SchedulingConfig,
     comm_cfg,
 ) -> Tuple[List[TaskExecutionPlan], float]:
@@ -207,7 +201,6 @@ def schedule_all_tasks(
 
     Returns (plans, D_weighted).
     """
-    uav_map = {u.id: u for u in uavs}
     plans: List[TaskExecutionPlan] = []
 
     D_weighted = 0.0
@@ -220,7 +213,6 @@ def schedule_all_tasks(
             task=task,
             access_uav=u_acc,
             uavs=uavs,
-            uav_map=uav_map,
             deployment=deployment,
             deployed_by_uav=deployed_by_uav,
             substitutable_sets=substitutable_sets,
@@ -231,7 +223,6 @@ def schedule_all_tasks(
             F_map=F_map,
             C_map=C_map,
             access_delay_val=acc_dly,
-            return_rate=return_rate,
             cfg=cfg,
             comm_cfg=comm_cfg,
         )

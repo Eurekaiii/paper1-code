@@ -11,7 +11,7 @@ import copy
 import numpy as np
 from src.config import SystemConfig
 from src.models import UAV, Task, Expert
-from src.main import run_pipeline
+from src.pipeline import run_pipeline
 from experiments.scenarios import build_all_scenarios
 from experiments.baselines import baseline_no_substitution
 

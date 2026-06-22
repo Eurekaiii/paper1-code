@@ -8,7 +8,6 @@ Reference: aeromde_main.tex  Section IV-B  (Demand modeling),
 """
 
 from typing import List, Dict, Set, Tuple
-import numpy as np
 
 from .models import Task, UAV
 

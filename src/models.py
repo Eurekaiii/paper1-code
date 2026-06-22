@@ -6,7 +6,7 @@ UAV, Task, and Expert data structures used throughout the pipeline.
 Reference: aeromde_main.tex Sections III & IV.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List, Dict, Optional, Tuple
 import numpy as np
 
@@ -28,11 +28,14 @@ class UAV:
         Available compute capability (FLOP/s).
     M_u : float
         Available memory capacity for hosting expert parameters (bytes).
+    P_u : float
+        UAV transmit power (W).
     """
     id: int
     position: np.ndarray          # shape (3,)  → (x, y, H)
     C_u: float                    # FLOP/s
     M_u: float                    # bytes
+    P_u: float = 10.0             # W
 
     @property
     def x(self) -> float: return self.position[0]
