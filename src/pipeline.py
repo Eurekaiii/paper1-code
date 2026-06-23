@@ -23,9 +23,9 @@ from .scheduling import schedule_all_tasks
 from .scoring import compute_base_scores
 from .similarity import (
     build_candidate_set,
+    build_redundancy_sets,
     build_substitutable_sets,
     compute_similarity_matrix,
-    strict_substitute_set,
 )
 
 
@@ -91,9 +91,11 @@ def run_pipeline(
         cfg=dep_cfg,
     )
 
-    strict_substitutes = {
-        e: strict_substitute_set(e, substitutable_sets) for e in candidates
-    }
+    strict_substitutes = build_redundancy_sets(
+        candidates,
+        similarity,
+        sim_cfg.xi,
+    )
     deployment = greedy_placement(
         candidates=candidates,
         uav_ids=uav_ids,

@@ -107,3 +107,24 @@ def strict_substitute_set(
 ) -> Set[int]:
     """Ā(e) = A(e) \ {e}."""
     return substitutable_sets.get(e, {e}) - {e}
+
+
+def build_redundancy_sets(
+    candidates: Set[int],
+    similarity: Dict[Tuple[int, int], float],
+    xi_red: float,
+) -> Dict[int, Set[int]]:
+    """Build redundancy neighborhoods for all candidate experts.
+
+    Substitutable sets A(r) are anchored at originally required experts for
+    demand inheritance. Redundancy is different: any two sufficiently similar
+    candidate experts can reduce each other's marginal placement value.
+    """
+    red_sets: Dict[int, Set[int]] = {}
+    for e in candidates:
+        red_sets[e] = {
+            ep
+            for ep in candidates
+            if ep != e and similarity.get((e, ep), 0.0) >= xi_red
+        }
+    return red_sets
