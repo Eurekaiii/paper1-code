@@ -41,6 +41,8 @@ class ScalabilitySetting:
     num_uavs: int
     num_tasks: int
     area_size: float
+    num_experts: int = 8
+    memory_scale: float = 1.0
 
 
 @dataclass
@@ -128,6 +130,8 @@ def _summarize_setting(
                 "num_uavs": setting.num_uavs,
                 "num_tasks": setting.num_tasks,
                 "area_size": setting.area_size,
+                "num_experts": setting.num_experts,
+                "memory_scale": setting.memory_scale,
                 "method": method,
                 "success_rate": feasible_count / len(metrics),
                 "infeasible_count": infeasible_count,
@@ -170,13 +174,19 @@ def run_scalability_setting(
     for seed in seeds:
         cfg = SystemConfig()
         cfg.seed = seed
-        cfg.max_copies_per_expert = max(1, math.ceil(setting.num_uavs / 3))
+        if setting.experiment in {"area_size", "full_scale_area"}:
+            cfg.max_copies_per_expert = setting.num_uavs
+        else:
+            cfg.max_copies_per_expert = max(1, math.ceil(setting.num_uavs / 3))
         uavs, experts, tasks = build_scalable_hotspot_scenario(
             cfg,
             num_uavs=setting.num_uavs,
             num_tasks=setting.num_tasks,
             area_size=setting.area_size,
+            num_experts=setting.num_experts,
         )
+        for uav in uavs:
+            uav.M_u *= setting.memory_scale
         for method in METHOD_ORDER:
             metrics_by_method[method].append(
                 _run_method_timed(
@@ -229,6 +239,35 @@ def default_scalability_settings() -> List[ScalabilitySetting]:
             )
         )
 
+    for area_size, num_uavs, num_tasks, num_experts in [
+        (240.0, 10, 60, 8),
+        (500.0, 20, 120, 16),
+        (1000.0, 40, 240, 24),
+    ]:
+        settings.append(
+            ScalabilitySetting(
+                experiment="full_scale_area",
+                value=area_size,
+                num_uavs=num_uavs,
+                num_tasks=num_tasks,
+                area_size=area_size,
+                num_experts=num_experts,
+                memory_scale=area_size / 240.0,
+            )
+        )
+
+    for num_experts in [8, 12, 16, 24]:
+        settings.append(
+            ScalabilitySetting(
+                experiment="expert_count",
+                value=float(num_experts),
+                num_uavs=10,
+                num_tasks=80,
+                area_size=240.0,
+                num_experts=num_experts,
+            )
+        )
+
     return settings
 
 
@@ -244,6 +283,8 @@ def save_scalability_csv(
         "num_uavs",
         "num_tasks",
         "area_size",
+        "num_experts",
+        "memory_scale",
         "method",
         "success_rate",
         "infeasible_count",
@@ -285,7 +326,9 @@ def run_all_scalability_experiments(
         print(
             f"Running {setting.experiment}={setting.value:g} "
             f"(UAVs={setting.num_uavs}, tasks={setting.num_tasks}, "
-            f"area={setting.area_size:g}x{setting.area_size:g})"
+            f"area={setting.area_size:g}x{setting.area_size:g}, "
+            f"experts={setting.num_experts}, "
+            f"memory_scale={setting.memory_scale:g})"
         )
         all_rows.extend(run_scalability_setting(setting, seeds=seeds))
 

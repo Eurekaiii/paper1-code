@@ -465,8 +465,8 @@ def build_scalable_hotspot_scenario(
         raise ValueError("num_tasks must be positive.")
     if area_size <= 0:
         raise ValueError("area_size must be positive.")
-    if num_experts < 8:
-        raise ValueError("num_experts must be at least 8.")
+    if num_experts < 8 or num_experts % 2 != 0:
+        raise ValueError("num_experts must be an even value of at least 8.")
     if vector_dim <= 0:
         raise ValueError("vector_dim must be positive.")
 
@@ -491,34 +491,24 @@ def build_scalable_hotspot_scenario(
             )
         )
 
+    num_originals = num_experts // 2
     vectors = [_unit_vector(rng, vector_dim) for _ in range(num_experts)]
-    substitute_pairs = [(4, 0), (5, 1), (6, 2)]
-    for dst, src in substitute_pairs:
+    for src in range(num_originals):
+        dst = num_originals + src
         vectors[dst] = _similar_vector(
             rng,
             vectors[src],
             noise_scale=rng.uniform(0.06, 0.10),
         )
-    if num_experts > 8:
-        for e_id in range(8, num_experts):
-            src_id = int(rng.choice([0, 1, 2, 3]))
-            vectors[e_id] = _similar_vector(
-                rng,
-                vectors[src_id],
-                noise_scale=rng.uniform(0.08, 0.14),
-            )
 
     experts: List[Expert] = []
     for e_id in range(num_experts):
-        if e_id < 4:
+        if e_id < num_originals:
             weight = rng.uniform(620e6, 760e6)
             flops = rng.uniform(1.0e9, 1.35e9)
-        elif e_id < 7:
+        else:
             weight = rng.uniform(220e6, 320e6)
             flops = rng.uniform(3.5e8, 5.2e8)
-        else:
-            weight = rng.uniform(280e6, 420e6)
-            flops = rng.uniform(5.0e8, 8.0e8)
         experts.append(
             Expert(
                 id=e_id,
@@ -528,12 +518,23 @@ def build_scalable_hotspot_scenario(
             )
         )
 
-    hotspot_templates = [
-        ([0, 1, 3, 2], [0.72, 0.16, 0.08, 0.04]),
-        ([1, 3, 0, 2], [0.72, 0.16, 0.08, 0.04]),
-        ([2, 0, 3, 1], [0.72, 0.16, 0.08, 0.04]),
-        ([0, 2, 1, 3], [0.46, 0.46, 0.04, 0.04]),
-    ]
+    hotspot_templates = []
+    original_ids = list(range(num_originals))
+    for hotspot_idx in range(max(4, num_originals)):
+        primary = hotspot_idx % num_originals
+        secondary = (hotspot_idx + 1) % num_originals
+        tertiary = (hotspot_idx + 3) % num_originals
+        background = [eid for eid in original_ids if eid not in {primary, secondary, tertiary}]
+        if background:
+            quaternary = int(rng.choice(background))
+        else:
+            quaternary = (hotspot_idx + 2) % num_originals
+        hotspot_templates.append(
+            (
+                [primary, secondary, tertiary, quaternary],
+                [0.62, 0.22, 0.10, 0.06],
+            )
+        )
 
     tasks: List[Task] = []
     base_counts = [num_tasks // num_uavs for _ in range(num_uavs)]
