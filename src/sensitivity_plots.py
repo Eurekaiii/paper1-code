@@ -71,12 +71,10 @@ def _plot_sensitivity(
 
         x_vals: List[float] = []
         y_vals: List[float] = []
-        std_vals: List[float] = []
 
         for row in method_rows:
             x = _to_float(row["value"])
             mean = _to_float(row["mean_D_total_ms"])
-            std = _to_float(row["std_D_total_ms"])
 
             if min_x is not None and x < min_x:
                 if mark_infeasible and not np.isfinite(mean):
@@ -88,27 +86,20 @@ def _plot_sensitivity(
                 continue
             x_vals.append(x)
             y_vals.append(mean)
-            std_vals.append(std if np.isfinite(std) else 0.0)
 
         if not x_vals:
             continue
 
         xs = np.array(x_vals)
         means = np.array(y_vals)
-        stds = np.array(std_vals)
 
-        ax.fill_between(
-            xs, means - stds, means + stds,
-            color=COLORS[method], alpha=0.10, linewidth=0, zorder=1,
-        )
-        ax.errorbar(
-            xs, means, yerr=stds,
+        ax.plot(
+            xs, means,
             label=METHOD_LABELS[method],
             color=COLORS[method],
             marker=MARKERS[method],
             linewidth=2.2,
             markersize=6.0,
-            capsize=3.2,
             markeredgewidth=0.4,
             markeredgecolor="#333333",
             zorder=3,

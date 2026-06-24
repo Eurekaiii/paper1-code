@@ -67,7 +67,6 @@ def plot_fig1_total_delay(summary_csv: Path, output_base: Path) -> None:
     rows = _order(_read_csv(summary_csv))
     labels = [METHOD_LABELS[r["Method"]] for r in rows]
     means  = np.array([_to_float(r["mean_D_total_ms"]) for r in rows])
-    stds   = np.array([_to_float(r["std_D_total_ms"]) for r in rows])
     x      = np.arange(len(rows))
 
     fig, ax = plt.subplots(figsize=FIG_SINGLE)
@@ -75,11 +74,10 @@ def plot_fig1_total_delay(summary_csv: Path, output_base: Path) -> None:
     bar_colors = [COLORS[r["Method"]] for r in rows]
 
     ax.bar(
-        x, means, yerr=stds,
-        capsize=4.5, width=0.55,
+        x, means,
+        width=0.55,
         color=bar_colors,
         edgecolor="#4A4A4A", linewidth=0.7,
-        error_kw={"linewidth": 1.0, "capthick": 1.0},
         zorder=3,
     )
 
@@ -209,46 +207,37 @@ def _add_sensitivity_lines(
     field: str = "mean_D_total_ms",
     std_field: str = "std_D_total_ms",
 ) -> None:
-    """Draw one error-bar / fill-between line per method on *ax*."""
-    grouped: Dict[str, Tuple[List[float], List[float], List[float]]] = {}
+    """Draw one mean-value line per method on *ax*."""
+    grouped: Dict[str, Tuple[List[float], List[float]]] = {}
     for method in METHOD_ORDER:
         method_rows = [r for r in rows if r["method"] == method]
         method_rows.sort(key=lambda r: _to_float(r["value"]))
-        xs, means, stds = [], [], []
+        xs, means = [], []
         for r in method_rows:
             m = _to_float(r[field])
-            s = _to_float(r.get(std_field, "0"))
             if not np.isfinite(m):
                 continue
             xs.append(_to_float(r["value"]))
             means.append(m)
-            stds.append(s if np.isfinite(s) else 0.0)
         if xs:
-            grouped[method] = (xs, means, stds)
+            grouped[method] = (xs, means)
 
     for method in METHOD_ORDER:
         entry = grouped.get(method)
         if entry is None:
             continue
-        xs, means, stds = entry
+        xs, means = entry
 
         x_arr = np.array(xs)
         m_arr = np.array(means)
-        s_arr = np.array(stds)
 
-        # Semi-transparent ±1 std band
-        ax.fill_between(
-            x_arr, m_arr - s_arr, m_arr + s_arr,
-            color=COLORS[method], alpha=0.10, linewidth=0, zorder=1,
-        )
-        ax.errorbar(
-            x_arr, m_arr, yerr=s_arr,
+        ax.plot(
+            x_arr, m_arr,
             label=METHOD_LABELS[method],
             color=COLORS[method],
             marker=MARKERS[method],
             linewidth=2.0,
             markersize=6.0,
-            capsize=3.2,
             markeredgewidth=0.5,
             markeredgecolor="#333333",
             zorder=3,

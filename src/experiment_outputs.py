@@ -72,22 +72,20 @@ def save_summary_csv(rows: List[Dict[str, float | str]], output_path: Path) -> N
 # ═══════════════════════════════════════════════════════════════════════════
 
 def plot_total_delay(rows: List[Dict[str, float | str]], output_path: Path) -> None:
-    """Bar chart: mean total delay per method with std error bars."""
+    """Bar chart: mean total delay per method."""
     ordered = sorted(rows, key=lambda r: METHOD_ORDER.index(str(r["Method"])))
     labels  = [METHOD_LABELS.get(str(r["Method"]), str(r["Method"])) for r in ordered]
     means   = np.array([float(r["mean_D_total_ms"]) for r in ordered])
-    stds    = np.array([float(r["std_D_total_ms"]) for r in ordered])
     x       = np.arange(len(ordered))
 
     fig, ax = plt.subplots(figsize=FIG_SINGLE)
 
     bar_colors = [COLORS.get(str(r["Method"]), "#888888") for r in ordered]
     ax.bar(
-        x, means, yerr=stds,
-        capsize=4.5, width=0.55,
+        x, means,
+        width=0.55,
         color=bar_colors,
         edgecolor="#4A4A4A", linewidth=0.7,
-        error_kw={"linewidth": 1.0},
         zorder=3,
     )
 
