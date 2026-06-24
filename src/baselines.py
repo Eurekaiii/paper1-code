@@ -138,6 +138,18 @@ def _place_required_originals(
         remaining_memory[u] -= W_map[e]
 
 
+def _copy_count(
+    deployment: Dict[Tuple[int, int], int],
+    expert_id: int,
+) -> int:
+    """Return the number of deployed copies for one expert."""
+    return sum(
+        deployed
+        for (e, _u), deployed in deployment.items()
+        if e == expert_id
+    )
+
+
 def run_random_placement(
     uavs: List[UAV],
     experts: List[Expert],
@@ -168,17 +180,18 @@ def run_random_placement(
         choose_uav=lambda _e, feasible: int(rng.choice(feasible)),
     )
 
-    remaining_candidates = [
-        e
+    remaining_pairs = [
+        (e, u)
         for e in candidates
-        if all(deployment.get((e, u), 0) == 0 for u in uav_ids)
+        for u in uav_ids
+        if deployment.get((e, u), 0) == 0
     ]
-    rng.shuffle(remaining_candidates)
-    for e in remaining_candidates:
-        feasible_uavs = [u for u in uav_ids if remaining_memory[u] >= W_map[e]]
-        if not feasible_uavs:
+    rng.shuffle(remaining_pairs)
+    for e, u in remaining_pairs:
+        if _copy_count(deployment, e) >= cfg.max_copies_per_expert:
             continue
-        u = int(rng.choice(feasible_uavs))
+        if remaining_memory[u] < W_map[e]:
+            continue
         deployment[(e, u)] = 1
         remaining_memory[u] -= W_map[e]
 
@@ -228,23 +241,26 @@ def run_importance_placement(
         choose_uav=strongest_compute_uav,
     )
 
-    ranked_candidates = sorted(
+    ranked_pairs = sorted(
         [
-            e
+            (e, u)
             for e in candidates
-            if all(deployment.get((e, u), 0) == 0 for u in uav_ids)
+            for u in uav_ids
+            if deployment.get((e, u), 0) == 0
         ],
-        key=lambda e: (
-            sum(demand_eff.get(e, {}).values()),
-            -W_map.get(e, 0.0),
+        key=lambda pair: (
+            demand_eff.get(pair[0], {}).get(pair[1], 0.0),
+            sum(demand_eff.get(pair[0], {}).values()),
+            C_map.get(pair[1], 0.0),
+            -W_map.get(pair[0], 0.0),
         ),
         reverse=True,
     )
-    for e in ranked_candidates:
-        feasible_uavs = [u for u in uav_ids if remaining_memory[u] >= W_map[e]]
-        if not feasible_uavs:
+    for e, u in ranked_pairs:
+        if _copy_count(deployment, e) >= cfg.max_copies_per_expert:
             continue
-        u = strongest_compute_uav(e, feasible_uavs)
+        if remaining_memory[u] < W_map[e]:
+            continue
         deployment[(e, u)] = 1
         remaining_memory[u] -= W_map[e]
 

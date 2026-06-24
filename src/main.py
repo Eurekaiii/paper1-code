@@ -23,6 +23,7 @@ from .scenario import (
     build_example_scenario,
     build_hotspot_similarity_scenario,
     build_random_scenario,
+    build_scalable_hotspot_scenario,
 )
 
 __all__ = [
@@ -31,6 +32,7 @@ __all__ = [
     "build_example_scenario",
     "build_hotspot_similarity_scenario",
     "build_random_scenario",
+    "build_scalable_hotspot_scenario",
     "print_comparison_table",
     "print_deployment_details",
     "print_multi_seed_diagnostic_table",
