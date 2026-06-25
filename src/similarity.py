@@ -17,12 +17,17 @@ from .models import Expert
 # Cosine similarity  Sim(r, e)  — Eq. (9)
 # ---------------------------------------------------------------------------
 def cosine_similarity(vec_a: np.ndarray, vec_b: np.ndarray) -> float:
-    """Sim(r, e) = ⟨vec(W_r), vec(W_e)⟩ / (||·||₂ · ||·||₂)."""
+    """Sim(r, e) = 1/2 * (1 + ⟨vec(W_r), vec(W_e)⟩ / (||·||₂ · ||·||₂)).
+
+    Maps raw cosine from [-1, 1] to [0, 1] per Eq. (11) in the paper,
+    so that ξ threshold and θ discount factor are consistent in [0, 1].
+    """
     norm_a = np.linalg.norm(vec_a)
     norm_b = np.linalg.norm(vec_b)
     if norm_a < 1e-12 or norm_b < 1e-12:
         return 0.0
-    return float(np.dot(vec_a, vec_b) / (norm_a * norm_b))
+    raw_cos = float(np.dot(vec_a, vec_b) / (norm_a * norm_b))
+    return 0.5 * (1.0 + raw_cos)
 
 
 def compute_similarity_matrix(
