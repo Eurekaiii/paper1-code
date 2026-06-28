@@ -174,7 +174,7 @@ def run_xi_sensitivity(output_dir: Path) -> List[Dict[str, float | str]]:
 def run_memory_sensitivity(output_dir: Path) -> List[Dict[str, float | str]]:
     """Run UAV-memory-scale sensitivity."""
     rows: List[Dict[str, float | str]] = []
-    for scale in [0.8, 1.0, 1.2, 1.4, 1.6]:
+    for scale in [0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0]:
         def mutate_memory(
             uavs: List[UAV],
             _experts: List[Expert],
@@ -211,7 +211,7 @@ def run_memory_sensitivity(output_dir: Path) -> List[Dict[str, float | str]]:
 def run_mid_size_sensitivity(output_dir: Path) -> List[Dict[str, float | str]]:
     """Run intermediate-feature-size sensitivity."""
     rows: List[Dict[str, float | str]] = []
-    for scale in [0.5, 1.0, 1.5, 2.0]:
+    for scale in [0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0]:
         def mutate_mid(_uavs: List[UAV], _experts: List[Expert], tasks: List[Task], scale: float = scale) -> None:
             for task in tasks:
                 task.S_mid = [value * scale for value in task.S_mid]

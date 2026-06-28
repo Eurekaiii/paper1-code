@@ -34,6 +34,13 @@ from .plot_style import (
 # Apply global rcParams on import so figures are consistent.
 apply_style()
 
+LINESTYLES: Dict[str, str] = {
+    "Proposed": "-",
+    "Random Placement": "--",
+    "Importance-based Placement": "-.",
+    "No-similarity Placement": ":",
+}
+
 # ═══════════════════════════════════════════════════════════════════════════
 #  CSV helpers
 # ═══════════════════════════════════════════════════════════════════════════
@@ -83,7 +90,7 @@ def plot_fig1_total_delay(summary_csv: Path, output_base: Path) -> None:
 
     # X-axis
     ax.set_xticks(x)
-    ax.set_xticklabels(labels, rotation=10, ha="right")
+    ax.set_xticklabels(labels, rotation=0, ha="center")
     ax.set_xlabel("Method", labelpad=6)
 
     # Y-axis
@@ -148,7 +155,7 @@ def plot_fig2_delay_breakdown(summary_csv: Path, output_base: Path) -> None:
                 )
 
     ax.set_xticks(x)
-    ax.set_xticklabels(labels, rotation=10, ha="right")
+    ax.set_xticklabels(labels, rotation=0, ha="center")
     ax.set_xlabel("Method", labelpad=6)
     ax.set_ylabel("Mean Delay  (ms)", labelpad=8)
 
@@ -185,7 +192,7 @@ def plot_fig3_substitutions(summary_csv: Path, output_base: Path) -> None:
     )
 
     ax.set_xticks(x)
-    ax.set_xticklabels(labels, rotation=10, ha="right")
+    ax.set_xticklabels(labels, rotation=0, ha="center")
     ax.set_xlabel("Method", labelpad=6)
     ax.set_ylabel("Mean Expert Substitutions", labelpad=8)
     ax.set_ylim(0, subs.max() * 1.25)
@@ -235,6 +242,7 @@ def _add_sensitivity_lines(
             x_arr, m_arr,
             label=METHOD_LABELS[method],
             color=COLORS[method],
+            linestyle=LINESTYLES[method],
             marker=MARKERS[method],
             linewidth=2.0,
             markersize=6.0,
@@ -256,6 +264,7 @@ def _plot_sensitivity_3panel(
     fields: List[Tuple[str, str, str]],
     mark_infeasible: bool = False,
     infeasible_min_x: float | None = None,
+    x_margin_frac: float = 0.08,
 ) -> None:
     """Generic 3-row sensitivity figure.
 
@@ -265,11 +274,8 @@ def _plot_sensitivity_3panel(
     rows = _read_csv(csv_path)
     n_panels = len(fields)
 
-    fig, axes = plt.subplots(
-        n_panels, 1,
-        figsize=(FIG_TALL_3[0], FIG_TALL_3[1] * n_panels / 3),
-        sharex=True,
-    )
+    figsize = FIG_SINGLE if n_panels == 1 else (FIG_TALL_3[0], FIG_TALL_3[1] * n_panels / 3)
+    fig, axes = plt.subplots(n_panels, 1, figsize=figsize, sharex=True)
     if n_panels == 1:
         axes = [axes]
 
@@ -289,7 +295,7 @@ def _plot_sensitivity_3panel(
         _add_sensitivity_lines(ax, rows, field=field, std_field=std_field)
 
         # Shade infeasible region (left portion)
-        if infeasible_min is not None:
+        if infeasible_min is not None and infeasible_max > infeasible_min:
             ax.axvspan(
                 infeasible_min, infeasible_max,
                 color="#CC3333", alpha=0.08, linewidth=0, zorder=0,
@@ -299,7 +305,7 @@ def _plot_sensitivity_3panel(
                 ax.text(
                     (infeasible_min + infeasible_max) / 2, 0.98,
                     "Infeasible",
-                    transform=ax.get_yaxis_transform(),
+                    transform=ax.get_xaxis_transform(),
                     ha="center", va="top",
                     fontsize=9, color="#CC3333", fontweight="bold",
                     fontstyle="italic",
@@ -307,20 +313,21 @@ def _plot_sensitivity_3panel(
 
         ax.set_ylabel(ylabel, labelpad=6)
         style_axes(ax)
-        # Sub-panel label  (a), (b), (c)
-        ax.text(
-            -0.06, 1.02, f"({chr(97 + idx)})",
-            transform=ax.transAxes,
-            fontsize=11, fontweight="bold", va="bottom", ha="left",
-        )
+        if n_panels > 1:
+            ax.text(
+                -0.06, 1.02, f"({chr(97 + idx)})",
+                transform=ax.transAxes,
+                fontsize=11, fontweight="bold", va="bottom", ha="left",
+            )
 
     # ── Shared x-label ────────────────────────────────────────────────
     axes[-1].set_xlabel(xlabel, labelpad=8)
     # Expand x-range slightly for visual breathing room
     all_xs = sorted({_to_float(r["value"]) for r in rows if np.isfinite(_to_float(r["value"]))})
     if all_xs:
-        margin = (all_xs[-1] - all_xs[0]) * 0.08
+        margin = (all_xs[-1] - all_xs[0]) * x_margin_frac
         axes[-1].set_xlim(all_xs[0] - margin, all_xs[-1] + margin)
+        axes[-1].set_xticks(all_xs)
 
     # ── Suptitle ──────────────────────────────────────────────────────
     fig.suptitle(title, fontsize=13, fontweight="bold", y=1.01)
@@ -426,7 +433,8 @@ def plot_fig4_sensitivity_xi(csv_path: Path, output_base: Path) -> None:
         csv_path, output_base,
         xlabel="Similarity Threshold  ξ",
         title="Effect of Similarity Threshold  ξ",
-        fields=_SENSITIVITY_FIELDS,
+        fields=_SENSITIVITY_FIELDS[:1],
+        x_margin_frac=0.0,
     )
 
 
@@ -436,7 +444,8 @@ def plot_fig5_sensitivity_mid_size(csv_path: Path, output_base: Path) -> None:
         csv_path, output_base,
         xlabel="Intermediate Feature Size  (scale factor)",
         title="Effect of Intermediate Feature Size",
-        fields=_SENSITIVITY_FIELDS,
+        fields=_SENSITIVITY_FIELDS[:1],
+        x_margin_frac=0.0,
     )
 
 
@@ -446,9 +455,10 @@ def plot_fig6_sensitivity_memory(csv_path: Path, output_base: Path) -> None:
         csv_path, output_base,
         xlabel="UAV Memory Capacity  (scale factor)",
         title="Effect of UAV Memory Capacity",
-        fields=_SENSITIVITY_FIELDS,
+        fields=_SENSITIVITY_FIELDS[:1],
         mark_infeasible=True,
-        infeasible_min_x=1.0,
+        infeasible_min_x=0.8,
+        x_margin_frac=0.0,
     )
 
 

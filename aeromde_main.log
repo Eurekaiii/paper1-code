@@ -1,0 +1,1842 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.5.21)  28 JUN 2026 15:27
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**aeromde_main.tex
+(./aeromde_main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/ieeetran/IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+\@IEEEtrantmpdimenA=\dimen148
+\@IEEEtrantmpdimenB=\dimen149
+\@IEEEtrantmpdimenC=\dimen150
+\@IEEEtrantmpcountA=\count275
+\@IEEEtrantmpcountB=\count276
+\@IEEEtrantmpcountC=\count277
+\@IEEEtrantmptoksA=\toks17
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 5
+03.
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+\@IEEEnormalsizeunitybaselineskip=\dimen151
+-- This is a 10 point document.
+LaTeX Encoding Info:    Redeclaring text command \textunderscore (encoding ?) o
+n input line 937.
+\CLASSINFOnormalsizebaselineskip=\dimen152
+\CLASSINFOnormalsizeunitybaselineskip=\dimen153
+\IEEEnormaljot=\dimen154
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+\IEEEquantizedlength=\dimen155
+\IEEEquantizedlengthdiff=\dimen156
+\IEEEquantizedtextheightdiff=\dimen157
+\IEEEilabelindentA=\dimen158
+\IEEEilabelindentB=\dimen159
+\IEEEilabelindent=\dimen160
+\IEEEelabelindent=\dimen161
+\IEEEdlabelindent=\dimen162
+\IEEElabelindent=\dimen163
+\IEEEiednormlabelsep=\dimen164
+\IEEEiedmathlabelsep=\dimen165
+\IEEEiedtopsep=\skip49
+\c@section=\count278
+\c@subsection=\count279
+\c@subsubsection=\count280
+\c@paragraph=\count281
+\c@IEEEsubequation=\count282
+\abovecaptionskip=\skip50
+\belowcaptionskip=\skip51
+\c@figure=\count283
+\c@table=\count284
+\@IEEEeqnnumcols=\count285
+\@IEEEeqncolcnt=\count286
+\@IEEEsubeqnnumrollback=\count287
+\@IEEEquantizeheightA=\dimen166
+\@IEEEquantizeheightB=\dimen167
+\@IEEEquantizeheightC=\dimen168
+\@IEEEquantizeprevdepth=\dimen169
+\@IEEEquantizemultiple=\count288
+\@IEEEquantizeboxA=\box53
+\@IEEEtmpitemindent=\dimen170
+\IEEEPARstartletwidth=\dimen171
+\c@IEEEbiography=\count289
+\@IEEEtranrubishbin=\box54
+) (e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 11
+6.
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/psnfss/t1ptm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks18
+\inpenc@posthook=\toks19
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip52
+
+For additional information on amsmath, use the `?' option.
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks20
+\ex@=\dimen172
+))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen173
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count290
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count291
+\leftroot@=\count292
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count293
+\DOTSCASE@=\count294
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box55
+\strutbox@=\box56
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen174
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count295
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count296
+\dotsspace@=\muskip17
+\c@parentequation=\count297
+\dspbrk@lvl=\count298
+\tag@help=\toks21
+\row@=\count299
+\column@=\count300
+\maxfields@=\count301
+\andhelp@=\toks22
+\eqnshift@=\dimen175
+\alignsep@=\dimen176
+\tagshift@=\dimen177
+\tagwidth@=\dimen178
+\totwidth@=\dimen179
+\lineht@=\dimen180
+\@envbody=\toks23
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks24
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/algorithms/algorithmic.sty
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks25
+)
+\c@ALC@unique=\count302
+\c@ALC@line=\count303
+\c@ALC@rem=\count304
+\c@ALC@depth=\count305
+\ALC@tlm=\skip55
+\algorithmicindent=\skip56
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count306
+\float@exts=\toks26
+\float@box=\box57
+\@float@everytoks=\toks27
+\@floatcapt=\box58
+)
+\@float@every@algorithm=\toks28
+\c@algorithm=\count307
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen181
+\Gin@req@width=\dimen182
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/sttools/cuted.sty
+Package: cuted 2025/12/15 v2.10 Mixing onecolumn and twocolumn modes (ST)
+\At@ViperColsBreak=\toks29
+\preCutedStrip=\toks30
+\postCutedStrip=\toks31
+\cuted@@tempbox@a=\box59
+\cuted@@tempbox@c=\box60
+\cuted@@tempbox@var=\box61
+\hold@viper=\box62
+\@viper=\box63
+\cuted@@varbox@a=\box64
+\cuted@@varbox@c=\box65
+\cuted@@tempdim@spread=\dimen183
+\cuted@@tempdim@a=\dimen184
+\cuted@@tempdim@b=\dimen185
+\ht@hold@viper=\dimen186
+\ht@viper=\dimen187
+\var@@pagediscards@ht=\dimen188
+\stripsep=\skip57
+\viper@penalty=\count308
+\strip@page@discards=\dimen189
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/capt-of/capt-of.sty
+Package: capt-of 2009/12/29 v0.2 standard captions outside of floats
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen190
+\lightrulewidth=\dimen191
+\cmidrulewidth=\dimen192
+\belowrulesep=\dimen193
+\belowbottomsep=\dimen194
+\aboverulesep=\dimen195
+\abovetopsep=\dimen196
+\cmidrulesep=\dimen197
+\cmidrulekern=\dimen198
+\defaultaddspace=\dimen199
+\@cmidla=\count309
+\@cmidlb=\count310
+\@aboverulesep=\dimen256
+\@belowrulesep=\dimen257
+\@thisruleclass=\count311
+\@lastruleclass=\count312
+\@thisrulewidth=\dimen258
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/tools/array.sty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen259
+\ar@mcellbox=\box66
+\extrarowheight=\dimen260
+\NC@list=\toks32
+\extratabsurround=\skip58
+\backup@length=\skip59
+\ar@cellbox=\box67
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip60
+\multirow@cntb=\count313
+\multirow@dima=\skip61
+\bigstrutjot=\dimen261
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/utilities/pgfutil-comm
+on.tex
+\pgfutil@everybye=\toks33
+\pgfutil@tempdima=\dimen262
+\pgfutil@tempdimb=\dimen263
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/utilities/pgfutil-late
+x.def
+\pgfutil@abb=\box68
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.
+tex (e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2025-08-29 v3.1.11a (3.1.11a)
+))
+Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
+ (e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty 
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.cod
+e.tex
+Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code
+.tex
+\pgfkeys@pathtoks=\toks34
+\pgfkeys@temptoks=\toks35
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibra
+ryfiltered.code.tex
+\pgfkeys@tmptoks=\toks36
+))
+\pgf@x=\dimen264
+\pgf@y=\dimen265
+\pgf@xa=\dimen266
+\pgf@ya=\dimen267
+\pgf@xb=\dimen268
+\pgf@yb=\dimen269
+\pgf@xc=\dimen270
+\pgf@yc=\dimen271
+\pgf@xd=\dimen272
+\pgf@yd=\dimen273
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count314
+\c@pgf@countb=\count315
+\c@pgf@countc=\count316
+\c@pgf@countd=\count317
+\t@pgf@toka=\toks37
+\t@pgf@tokb=\toks38
+\t@pgf@tokc=\toks39
+\pgf@sys@id@count=\count318
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdf
+tex.def
+File: pgfsys-pdftex.def 2025-08-29 v3.1.11a (3.1.11a)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-com
+mon-pdf.def
+File: pgfsys-common-pdf.def 2025-08-29 v3.1.11a (3.1.11a)
+)))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoft
+path.code.tex
+File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfsyssoftpath@smallbuffer@items=\count319
+\pgfsyssoftpath@bigbuffer@items=\count320
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprot
+ocol.code.tex
+File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.cod
+e.tex
+Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.
+tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathparser.cod
+e.tex
+\pgfmath@dimen=\dimen274
+\pgfmath@count=\count321
+\pgfmath@box=\box69
+\pgfmath@toks=\toks40
+\pgfmath@stack@operand=\toks41
+\pgfmath@stack@operation=\toks42
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+code.tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+basic.code.tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+trigonometric.code.tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+random.code.tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+comparison.code.tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+base.code.tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+round.code.tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+misc.code.tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+integerarithmetics.code.tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.
+tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code
+.tex
+\c@pgfmathroundto@lastzeros=\count322
+))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoin
+ts.code.tex
+File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@picminx=\dimen275
+\pgf@picmaxx=\dimen276
+\pgf@picminy=\dimen277
+\pgf@picmaxy=\dimen278
+\pgf@pathminx=\dimen279
+\pgf@pathmaxx=\dimen280
+\pgf@pathminy=\dimen281
+\pgf@pathmaxy=\dimen282
+\pgf@xx=\dimen283
+\pgf@xy=\dimen284
+\pgf@yx=\dimen285
+\pgf@yy=\dimen286
+\pgf@zx=\dimen287
+\pgf@zy=\dimen288
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
+construct.code.tex
+File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@path@lastx=\dimen289
+\pgf@path@lasty=\dimen290
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
+usage.code.tex
+File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@shorten@end@additional=\dimen291
+\pgf@shorten@start@additional=\dimen292
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescop
+es.code.tex
+File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfpic=\box70
+\pgf@hbox=\box71
+\pgf@layerbox@main=\box72
+\pgf@picture@serial@count=\count323
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregrap
+hicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgflinewidth=\dimen293
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretran
+sformations.code.tex
+File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@pt@x=\dimen294
+\pgf@pt@y=\dimen295
+\pgf@pt@temp=\dimen296
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequic
+k.code.tex
+File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobje
+cts.code.tex
+File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
+processing.code.tex
+File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearro
+ws.code.tex
+File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowsep=\dimen297
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshad
+e.code.tex
+File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@max=\dimen298
+\pgf@sys@shading@range@num=\count324
+\pgf@shadingcount=\count325
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimag
+e.code.tex
+File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexte
+rnal.code.tex
+File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfexternal@startupbox=\box73
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelaye
+rs.code.tex
+File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretran
+sparency.code.tex
+File: pgfcoretransparency.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatt
+erns.code.tex
+File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.
+code.tex
+File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmoduleshape
+s.code.tex
+File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfnodeparttextbox=\box74
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.
+code.tex
+File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-ve
+rsion-0-65.sty
+Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@nodesepstart=\dimen299
+\pgf@nodesepend=\dimen300
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-ve
+rsion-1-18.sty
+Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
+))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code
+.tex)) (e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/utilities/pgffor.code.
+tex
+Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
+\pgffor@iter=\dimen301
+\pgffor@skip=\dimen302
+\pgffor@stack=\toks43
+\pgffor@toks=\toks44
+))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tik
+z.code.tex
+Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibrarypl
+othandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@plot@mark@count=\count326
+\pgfplotmarksize=\dimen303
+)
+\tikz@lastx=\dimen304
+\tikz@lasty=\dimen305
+\tikz@lastxsaved=\dimen306
+\tikz@lastysaved=\dimen307
+\tikz@lastmovetox=\dimen308
+\tikz@lastmovetoy=\dimen309
+\tikzleveldistance=\dimen310
+\tikzsiblingdistance=\dimen311
+\tikz@figbox=\box75
+\tikz@figbox@bg=\box76
+\tikz@tempbox=\box77
+\tikz@tempbox@bg=\box78
+\tikztreelevel=\count327
+\tikznumberofchildren=\count328
+\tikznumberofcurrentchild=\count329
+\tikz@fig@count=\count330
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmodulematri
+x.code.tex
+File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfmatrixcurrentrow=\count331
+\pgfmatrixcurrentcolumn=\count332
+\pgf@matrix@numberofcolumns=\count333
+)
+\tikz@expandcount=\count334
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/lib
+raries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryar
+rows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowinset=\dimen312
+\pgfarrowlength=\dimen313
+\pgfarrowwidth=\dimen314
+\pgfarrowlinewidth=\dimen315
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/lib
+raries/tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cjk/texinput/CJKutf8.sty
+Package: CJKutf8 2021/10/16 4.8.5
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/iftex/ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cjk/texinput/CJK.sty
+Package: CJK 2021/10/16 4.8.5
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cjk/texinput/mule/MULEenc.st
+y
+Package: MULEenc 2021/10/16 4.8.5
+) (e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cjk/texinput/CJK.enc
+File: CJK.enc 2021/10/16 4.8.5
+Now handling font encoding C00 ...
+... no UTF-8 mapping file for font encoding C00
+Now handling font encoding C05 ...
+... no UTF-8 mapping file for font encoding C05
+Now handling font encoding C09 ...
+... no UTF-8 mapping file for font encoding C09
+Now handling font encoding C10 ...
+... no UTF-8 mapping file for font encoding C10
+Now handling font encoding C20 ...
+... no UTF-8 mapping file for font encoding C20
+Now handling font encoding C19 ...
+... no UTF-8 mapping file for font encoding C19
+Now handling font encoding C40 ...
+... no UTF-8 mapping file for font encoding C40
+Now handling font encoding C42 ...
+... no UTF-8 mapping file for font encoding C42
+Now handling font encoding C43 ...
+... no UTF-8 mapping file for font encoding C43
+Now handling font encoding C50 ...
+... no UTF-8 mapping file for font encoding C50
+Now handling font encoding C52 ...
+... no UTF-8 mapping file for font encoding C52
+Now handling font encoding C49 ...
+... no UTF-8 mapping file for font encoding C49
+Now handling font encoding C60 ...
+... no UTF-8 mapping file for font encoding C60
+Now handling font encoding C61 ...
+... no UTF-8 mapping file for font encoding C61
+Now handling font encoding C63 ...
+... no UTF-8 mapping file for font encoding C63
+Now handling font encoding C64 ...
+... no UTF-8 mapping file for font encoding C64
+Now handling font encoding C65 ...
+... no UTF-8 mapping file for font encoding C65
+Now handling font encoding C70 ...
+... no UTF-8 mapping file for font encoding C70
+Now handling font encoding C31 ...
+... no UTF-8 mapping file for font encoding C31
+Now handling font encoding C32 ...
+... no UTF-8 mapping file for font encoding C32
+Now handling font encoding C33 ...
+... no UTF-8 mapping file for font encoding C33
+Now handling font encoding C34 ...
+... no UTF-8 mapping file for font encoding C34
+Now handling font encoding C35 ...
+... no UTF-8 mapping file for font encoding C35
+Now handling font encoding C36 ...
+... no UTF-8 mapping file for font encoding C36
+Now handling font encoding C37 ...
+... no UTF-8 mapping file for font encoding C37
+Now handling font encoding C80 ...
+... no UTF-8 mapping file for font encoding C80
+Now handling font encoding C81 ...
+... no UTF-8 mapping file for font encoding C81
+Now handling font encoding C01 ...
+... no UTF-8 mapping file for font encoding C01
+Now handling font encoding C11 ...
+... no UTF-8 mapping file for font encoding C11
+Now handling font encoding C21 ...
+... no UTF-8 mapping file for font encoding C21
+Now handling font encoding C41 ...
+... no UTF-8 mapping file for font encoding C41
+Now handling font encoding C62 ...
+... no UTF-8 mapping file for font encoding C62
+)
+\CJK@indent=\box79
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/pdfcomment/pdfcomment.sty
+Package: pdfcomment 2018/11/01 pdfcomment.sty v2.4a - Josef Kleber (C) 2008-201
+2, 2015-2016, 2018
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2025/11/04 v2.10 package option processing (HA)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks45
+\XKV@tempa@toks=\toks46
+\XKV@tempb@toks=\toks47
+)
+\XKV@depth=\count335
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+\c@pc@count@i=\count336
+\c@pc@count@ii=\count337
+\c@pc@count@iii=\count338
+\c@pc@count@iv=\count339
+\pc@mathannot@box=\box80
+\pc@nullbox=\box81
+\pc@dima=\skip62
+\pc@dimb=\skip63
+\pc@Sposx=\skip64
+\pc@Sposy=\skip65
+\pc@Eposx=\skip66
+\pc@Eposy=\skip67
+\pc@column=\skip68
+\pc@box@width=\skip69
+\pc@box@height=\skip70
+\pc@box@depth=\skip71
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count340
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/datetime2/datetime2.sty
+Package: datetime2 2021/03/21 v1.5.7 (NLCT) date and time formats
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/tracklang/tracklang.sty
+Package: tracklang 2025/03/11 v1.6.6 (NLCT) Track Languages
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/tracklang/tracklang.tex)))
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/zref/zref-savepos.sty
+Package: zref-savepos 2025-06-08 v2.36 Module savepos for zref (HO)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/zref/zref-base.sty
+Package: zref-base 2025-06-08 v2.36 Module base for zref (HO)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.
+sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+) (e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+Package zref Info: New property list: main on input line 767.
+Package zref Info: New property: default on input line 768.
+Package zref Info: New property: page on input line 769.
+)
+Package zref Info: New property list: savepos on input line 56.
+Package zref Info: New property: posx on input line 58.
+Package zref Info: New property: posy on input line 59.
+)
+\c@zref@unique=\count341
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count342
+\calc@Bcount=\count343
+\calc@Adimen=\dimen316
+\calc@Bdimen=\dimen317
+\calc@Askip=\skip72
+\calc@Bskip=\skip73
+LaTeX Info: Redefining \setlength on input line 86.
+LaTeX Info: Redefining \addtolength on input line 87.
+\calc@Ccount=\count344
+\calc@Cskip=\skip74
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/marginnote/marginnote.sty
+Package: marginnote 2026/01/02 1.4d non floating margin notes for LaTeX 
+\c@mn@abspage=\count345
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/soulpos/soulpos.sty
+Package: soulpos 2021/10/15 v1.2 Fancy underlining
+\ulp@subcnt=\count346
+\ulp@cnt=\count347
+\ulp@out=\write4
+\ulp@in=\read3
+\ulwidth=\dimen318
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2026-01-29 v7.01p Hypertext links for LaTeX
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2026-01-29 v2.58 Cross-referencing by name of section
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/gettitlestring/gettitlestr
+ing.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count348
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\@linkdim=\dimen319
+\Hy@linkcounter=\count349
+\Hy@pagecounter=\count350
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2026-01-29 v7.01p Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count351
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2026-01-29 v7.01p Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4072.
+Package hyperref Info: Hyper figures OFF on input line 4201.
+Package hyperref Info: Link nesting OFF on input line 4206.
+Package hyperref Info: Hyper index ON on input line 4209.
+Package hyperref Info: Plain pages OFF on input line 4216.
+Package hyperref Info: Backreferencing OFF on input line 4221.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4468.
+\c@Hy@tempcnt=\count352
+LaTeX Info: Redefining \url on input line 4807.
+\XeTeXLinkMargin=\dimen320
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count353
+\Field@Width=\dimen321
+\Fld@charsize=\dimen322
+Package hyperref Info: Hyper figures OFF on input line 6084.
+Package hyperref Info: Link nesting OFF on input line 6089.
+Package hyperref Info: Hyper index ON on input line 6092.
+Package hyperref Info: backreferencing OFF on input line 6099.
+Package hyperref Info: Link coloring OFF on input line 6104.
+Package hyperref Info: Link coloring with OCG OFF on input line 6109.
+Package hyperref Info: PDF/A mode OFF on input line 6114.
+\Hy@abspage=\count354
+\c@Item=\count355
+\c@Hfootnote=\count356
+)
+Package hyperref Info: Driver: hpdftex.
+ (e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2026-01-29 v7.01p Hyperref driver for pdfTeX
+\Fld@listcount=\count357
+\c@bookmark@seq@number=\count358
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilechec
+k.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounte
+r.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+84.
+)
+\Hy@SectionHShift=\skip75
+)
+Package zref Info: New property list: pdfcomment on input line 2735.
+Package zref Info: New property: PCPDFOBJID on input line 2736.
+)
+Package hyperref Info: Option `unicode' set `true' on input line 32.
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count359
+) (./aeromde_main.aux)
+\openout1 = `aeromde_main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C00/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C05/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C09/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C10/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C20/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C19/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C40/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C42/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C43/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C50/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C52/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C49/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C60/mj/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C61/mj/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C63/mj/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C64/mj/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C65/mj/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C70/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C31/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C32/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C33/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C34/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C35/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C36/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C37/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C80/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C81/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C01/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C11/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C21/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C41/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+
+-- Lines per column: 56 (exact).
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count360
+\scratchdimen=\dimen323
+\scratchbox=\box82
+\nofMPsegments=\count361
+\nofMParguments=\count362
+\everyMPshowfont=\toks48
+\MPscratchCnt=\count363
+\MPscratchDim=\dimen324
+\MPnumerator=\count364
+\makeMPintoPDFobject=\count365
+\everyMPtoPDFconversion=\toks49
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package soulpos Info: Loading soulutf8 on input line 59.
+ (e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/soul/soulutf8.sty
+Package: soulutf8 2023-06-14 v3.1 Permit use of UTF-8 characters in soul (HO)
+
+
+Package soulutf8 Warning: This package is obsolete,
+(soulutf8)                use the soul package directly. 
+(soulutf8)                 on input line 29.
+
+) (e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/soul/soul.sty
+Package: soul 2023-06-14 v3.1 Permit use of UTF-8 characters in soul (HO)
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/soul/soul-ori.sty
+Package: soul-ori 2023-06-14 v3.1 letterspacing/underlining (mf)
+\SOUL@word=\toks50
+\SOUL@lasttoken=\toks51
+\SOUL@syllable=\toks52
+\SOUL@cmds=\toks53
+\SOUL@buffer=\toks54
+\SOUL@token=\toks55
+\SOUL@syllgoal=\dimen325
+\SOUL@syllwidth=\dimen326
+\SOUL@charkern=\dimen327
+\SOUL@hyphkern=\dimen328
+\SOUL@dimen=\dimen329
+\SOUL@dimeni=\dimen330
+\SOUL@minus=\count366
+\SOUL@comma=\count367
+\SOUL@apo=\count368
+\SOUL@grave=\count369
+\SOUL@spaceskip=\skip76
+\SOUL@ttwidth=\dimen331
+\SOUL@uldp=\dimen332
+\SOUL@ulht=\dimen333
+))
+Package hyperref Info: Link coloring OFF on input line 59.
+\@outlinefile=\write5
+\openout5 = `aeromde_main.out'.
+
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cjk/texinput/UTF8/UTF8.bdg
+File: UTF8.bdg 2021/10/16 4.8.5
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cjk/texinput/UTF8/UTF8.enc
+File: UTF8.enc 2021/10/16 4.8.5
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cjk/texinput/UTF8/UTF8.chr
+File: UTF8.chr 2021/10/16 4.8.5
+)
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 85.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 85.
+
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 85.
+
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for C70+gbsn on input line 
+88.
+
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cjk/texinput/UTF8/c70gbsn.fd
+File: c70gbsn.fd 2021/10/16 4.8.5
+)
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cjk/texinput/UTF8/c70gbsn.fd
+x
+File: c70gbsn.fdx 2021/10/16 4.8.5
+)
+
+LaTeX Font Warning: Font shape `C70/gbsn/b/n' undefined
+(Font)              using `C70/gbsn/m/n' instead on input line 88.
+
+
+LaTeX Warning: Citation `mozaffari2019uav' on page 1 undefined on input line 12
+7.
+
+
+LaTeX Warning: Citation `zhu2019uav' on page 1 undefined on input line 127.
+
+
+LaTeX Warning: Citation `shazeer2017moe' on page 1 undefined on input line 130.
+
+
+
+LaTeX Warning: Citation `fedus2022switch' on page 1 undefined on input line 130
+.
+
+
+LaTeX Warning: Citation `jiang2024mixtral' on page 1 undefined on input line 13
+0.
+
+
+LaTeX Warning: Citation `shazeer2017moe' on page 1 undefined on input line 184.
+
+
+
+LaTeX Warning: Citation `fedus2022switch' on page 1 undefined on input line 184
+.
+
+
+LaTeX Warning: Citation `lepikhin2021gshard' on page 1 undefined on input line 
+184.
+
+
+LaTeX Warning: Citation `jiang2024mixtral' on page 1 undefined on input line 18
+4.
+
+
+LaTeX Font Warning: Font shape `C70/gbsn/m/it' undefined
+(Font)              using `C70/gbsn/m/n' instead on input line 185.
+
+[1{e:/WorkSoftWare/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{e
+:/WorkSoftWare/texlive/2026/texmf-dist/fonts/enc/dvips/base/8r.enc}
+
+\openout4 = `aeromde_main.upa'.
+
+
+]
+
+LaTeX Warning: Reference `fig:system_model' on page 2 undefined on input line 2
+56.
+
+
+LaTeX Warning: File `photo/system_model_uav_scenario.png' not found on input li
+ne 260.
+
+
+! Package pdftex.def Error: File `photo/system_model_uav_scenario.png' not foun
+d: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.260 ...dth]{photo/system_model_uav_scenario.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 26
+0.
+(e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+) [2]
+[3]
+
+LaTeX Warning: Reference `sec:inference_scheduling' on page 4 undefined on inpu
+t line 452.
+
+
+LaTeX Warning: Reference `sec:system' on page 4 undefined on input line 470.
+
+
+LaTeX Warning: Reference `fig:design_flow' on page 4 undefined on input line 53
+1.
+
+
+LaTeX Warning: Reference `sec:demand_modeling' on page 4 undefined on input lin
+e 533.
+
+
+Underfull \hbox (badness 2591) in paragraph at lines 533--536
+\C70/gbsn/m/it/10/57 ﬂ \C70/gbsn/m/n/10/ff ^^L \C70/gbsn/b/n/10/7e ﬂ \C70/gbsn/
+b/n/10/8b ° \C70/gbsn/m/it/10/6b œ \C70/gbsn/b/n/10/4e *\T1/ptm/m/n/10 UAV \C70
+/gbsn/m/it/10/53 : \C70/gbsn/m/it/10/57 ﬂ \C70/gbsn/m/n/10/76 Ñ Ù \C70/gbsn/b/n
+/10/63 • \C70/gbsn/b/n/10/4e ^^S \C70/gbsn/m/it/10/5b ∂ \C70/gbsn/b/n/10/97 ^^@
+ \C70/gbsn/b/n/10/6c B \C70/gbsn/b/n/10/52 ^^F
+ []
+
+
+LaTeX Warning: Reference `sec:similarity_candidate' on page 4 undefined on inpu
+t line 536.
+
+
+LaTeX Warning: Reference `sec:placement_scoring' on page 4 undefined on input l
+ine 540.
+
+
+LaTeX Warning: Reference `sec:greedy_scheduling' on page 4 undefined on input l
+ine 543.
+
+
+LaTeX Warning: Reference `eq:candidate_exec' on page 4 undefined on input line 
+565.
+
+
+LaTeX Warning: Reference `sec:demand_modeling' on page 4 undefined on input lin
+e 566.
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 578--580
+ \T1/ptm/m/it/10 1) \C70/gbsn/b/n/10/4e ˚ \C70/gbsn/b/n/10/52 ° \C70/gbsn/m/it/
+10/9e ÿ \C70/gbsn/b/n/10/8b § \C70/gbsn/b/n/10/63 • \C70/gbsn/b/n/10/51 e\T1/pt
+m/m/it/10 UAV: [][][] \C70/gbsn/b/n/10/5b ˘ \C70/gbsn/b/n/10/4e é \C70/gbsn/m/i
+t/10/6b œ \C70/gbsn/b/n/10/4e * ˚ \C70/gbsn/b/n/10/52 °$\OML/cmm/m/it/10 k \OMS
+/cmsy/m/n/10 2
+ []
+
+
+LaTeX Warning: Reference `eq:default_access' on page 5 undefined on input line 
+587.
+
+
+LaTeX Warning: Reference `eq:demand' on page 5 undefined on input line 605.
+
+
+LaTeX Warning: Reference `sec:similarity_candidate' on page 5 undefined on inpu
+t line 607.
+
+
+LaTeX Warning: Reference `sec:system' on page 5 undefined on input line 611.
+
+
+LaTeX Warning: Reference `sec:placement_scoring' on page 5 undefined on input l
+ine 638.
+
+
+LaTeX Warning: Reference `sec:greedy_scheduling' on page 5 undefined on input l
+ine 639.
+
+
+LaTeX Warning: Reference `eq:sim' on page 5 undefined on input line 700.
+
+
+LaTeX Warning: Reference `sec:eval' on page 5 undefined on input line 710.
+
+[5]
+
+LaTeX Warning: Reference `eq:theta' on page 6 undefined on input line 745.
+
+
+LaTeX Warning: Reference `sec:greedy_scheduling' on page 6 undefined on input l
+ine 800.
+
+
+LaTeX Warning: Reference `sec:eval' on page 6 undefined on input line 847.
+
+
+Underfull \hbox (badness 5924) in paragraph at lines 841--848
+[]\C70/gbsn/b/n/10/97 ^^@ \C70/gbsn/m/it/10/89 Å \C70/gbsn/b/n/10/63 ^^G \C70/g
+bsn/b/n/10/51 ˙ \C70/gbsn/m/it/10/ff ^^L$\OML/cmm/m/it/10 A\OT1/cmr/m/n/10 (\OM
+L/cmm/m/it/10 e; u\OT1/cmr/m/n/10 )$\C70/gbsn/m/it/10/ff ^^H \C70/gbsn/b/n/10/9
+7 ^^@ \C70/gbsn/m/it/10/6c B \C70/gbsn/m/it/10/5f : \C70/gbsn/b/n/10/5e ¶ \C70/
+gbsn/m/it/10/ff 	 \C70/gbsn/b/n/10/30 ^^A$\OML/cmm/m/it/10 B\OT1/cmr/m/n/10 (\O
+ML/cmm/m/it/10 e; u\OT1/cmr/m/n/10 )$\C70/gbsn/m/it/10/ff ^^H \C70/gbsn/m/it/10
+/65 ˆ
+ []
+
+
+LaTeX Warning: Reference `eq:basescore' on page 6 undefined on input line 849.
+
+
+LaTeX Warning: Reference `sec:greedy_scheduling' on page 6 undefined on input l
+ine 852.
+
+
+LaTeX Warning: Reference `sec:greedy_placement' on page 6 undefined on input li
+ne 864.
+
+
+LaTeX Warning: Reference `sec:inference_scheduling' on page 6 undefined on inpu
+t line 866.
+
+[6]
+Underfull \hbox (badness 2717) in paragraph at lines 877--887
+[]\C70/gbsn/b/n/10/4e ^^N \C70/gbsn/b/n/10/53 Í \C70/gbsn/b/n/10/63 	 \C70/gbsn
+/m/it/10/5f ó \C70/gbsn/b/n/10/52 ^^F \C70/gbsn/b/n/10/90 ^^P \C70/gbsn/m/it/10
+/6b e \C70/gbsn/m/n/10/58 k \C70/gbsn/b/n/10/51 E Ö \C70/gbsn/b/n/10/5b X \C70/
+gbsn/m/it/10/76 Ñ \C70/gbsn/m/it/10/66 n \C70/gbsn/b/n/10/90 ^^Z \C70/gbsn/b/n/
+10/8d * \C70/gbsn/m/it/10/5f √ \C70/gbsn/m/it/10/7b V \C70/gbsn/m/it/10/75 e \C
+70/gbsn/b/n/10/4e ^^M
+ []
+
+
+LaTeX Warning: Reference `eq:memory_constraint' on page 7 undefined on input li
+ne 953.
+
+
+LaTeX Warning: Reference `eq:single_copy' on page 7 undefined on input line 954
+.
+
+
+LaTeX Warning: Reference `alg:greedy_placement' on page 7 undefined on input li
+ne 962.
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 976.
+
+Underfull \hbox (badness 1803) in paragraph at lines 979--988
+[] []\C70/gbsn/m/it/10/50 ^^Y \C70/gbsn/b/n/10/90 	 \C70/gbsn/b/n/10/4e ^^S \C7
+0/gbsn/b/n/10/5b ∂ \C70/gbsn/b/n/10/96 ∆ \C70/gbsn/m/it/10/54 ^^H$\OMS/cmsy/m/n
+/10 E[]$\C70/gbsn/m/it/10/ff ^^[\T1/ptm/m/n/10 UAV \C70/gbsn/b/n/10/96 ∆ \C70/g
+bsn/m/it/10/54 ^^H$\OMS/cmsy/m/n/10 U$\C70/gbsn/m/it/10/ff ^^[ \C70/gbsn/b/n/10
+/57 ˙ \C70/gbsn/m/it/10/78 @ \C70/gbsn/m/it/10/5f ó
+ []
+
+
+Underfull \hbox (badness 2564) in paragraph at lines 979--988
+\C70/gbsn/b/n/10/52 ^^F$[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 e; u\OT1/cmr/m/n/10
+ )$\C70/gbsn/m/it/10/ff ^^[ \C70/gbsn/b/n/10/4e ^^S \C70/gbsn/b/n/10/5b ∂ \C70/
+gbsn/b/n/10/51 Ö \C70/gbsn/b/n/10/5b X \C70/gbsn/b/n/10/53 ` \C70/gbsn/m/it/10/
+75 ($\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 W[]\OMS/cmsy/m/n/10 g$\C70/gbsn/m/it/10
+/ff ^^[\T1/ptm/m/n/10 UAV \C70/gbsn/b/n/10/51 Ö
+ []
+
+
+Underfull \hbox (badness 5231) in paragraph at lines 979--988
+\C70/gbsn/b/n/10/5b X π \C70/gbsn/m/it/10/91 œ$\OMS/cmsy/m/n/10 f\OML/cmm/m/it/
+10 M[]\OMS/cmsy/m/n/10 g$\C70/gbsn/m/it/10/ff ^^[ \C70/gbsn/b/n/10/53 Ô \C70/gb
+sn/m/it/10/66 ˇ \C70/gbsn/b/n/10/4e „ ^^S \C70/gbsn/b/n/10/5b ∂ \C70/gbsn/b/n/1
+0/96 ∆ \C70/gbsn/m/it/10/54 ^^H$\OMS/cmsy/m/n/10 fA\OT1/cmr/m/n/10 (\OML/cmm/m/
+it/10 r\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 g$\C70/gbsn/m/it/10/ff ^^[ \C70/gbsn/b
+/n/10/51 ó \C70/gbsn/b/n/10/4f Y
+ []
+
+
+Underfull \hbox (badness 4060) in paragraph at lines 979--988
+\C70/gbsn/b/n/10/90 ª \C70/gbsn/b/n/10/57 ﬂ$\OMS/cmsy/m/n/10 fA[]\OT1/cmr/m/n/1
+0 (\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 g$\C70/gbsn/m/it/10/ff ^
+^[ \C70/gbsn/b/n/10/53 ü \C70/gbsn/m/it/10/59 À \C70/gbsn/m/it/10/62 @ \C70/gbs
+n/b/n/10/97 ^^@ \C70/gbsn/b/n/10/4e ^^S \C70/gbsn/b/n/10/5b ∂ \C70/gbsn/b/n/10/
+96 ∆ \C70/gbsn/m/it/10/54 ^^H$\OMS/cmsy/m/n/10 E[]$\C70/gbsn/m/it/10/ff ^^[ \C7
+0/gbsn/m/it/10/76 ¯ \C70/gbsn/b/n/10/4f <
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1010--1013
+[] []$\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 r[]; e[]; u[]\OT1/cmr/m/n/10 ) \OMS/cms
+y/m/n/10   [] [][] \OML/cmm/m/it/10 V[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 e; u\O
+T1/cmr/m/n/10 )$\C70/gbsn/m/it/10/ff ^^L \C70/gbsn/b/n/10/51 v
+ []
+
+
+LaTeX Warning: Reference `eq:redundancy' on page 7 undefined on input line 1020
+.
+
+
+LaTeX Warning: Reference `eq:score_t' on page 7 undefined on input line 1022.
+
+
+LaTeX Warning: Reference `eq:value_t' on page 7 undefined on input line 1022.
+
+[7]
+
+LaTeX Warning: Reference `eq:cost' on page 8 undefined on input line 1117.
+
+
+LaTeX Warning: Reference `eq:default_access' on page 8 undefined on input line 
+1140.
+
+
+LaTeX Warning: Reference `sec:similarity_candidate' on page 8 undefined on inpu
+t line 1156.
+
+
+LaTeX Warning: Reference `eq:candidate_exec' on page 8 undefined on input line 
+1157.
+
+
+LaTeX Warning: Reference `sec:placement_scoring' on page 8 undefined on input l
+ine 1158.
+
+
+LaTeX Warning: Reference `sec:demand_modeling' on page 8 undefined on input lin
+e 1160.
+
+
+LaTeX Warning: Reference `sec:design' on page 8 undefined on input line 1172.
+
+
+LaTeX Warning: Reference `sec:system' on page 8 undefined on input line 1173.
+
+
+LaTeX Warning: Reference `sec:design' on page 8 undefined on input line 1175.
+
+[8]
+
+LaTeX Warning: Reference `sec:similarity_candidate' on page 9 undefined on inpu
+t line 1200.
+
+
+LaTeX Warning: Reference `fig:total_delay' on page 9 undefined on input line 12
+39.
+
+
+Underfull \hbox (badness 4726) in paragraph at lines 1239--1245
+\C70/gbsn/b/n/10/52 0 \C70/gbsn/b/n/10/7a Ô \C70/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n
+/10/8f ﬂ \C70/gbsn/m/it/10/30 ^^B\T1/ptm/m/n/10 Proposed \C70/gbsn/m/it/10/76 Ñ
+ \C70/gbsn/b/n/10/5e s \C70/gbsn/b/n/10/57 G \C70/gbsn/b/n/10/60 ; \C70/gbsn/b/
+n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/b/n/10/4e :$\OT1/cmr/m/n/10 9892\OML/
+cmm/m/it/10 :\OT1/cmr/m/n/10 6$\T1/ptm/m/n/10 ms\C70/gbsn/m/it/10/ff ^^L
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1239--1245
+\C70/gbsn/b/n/10/4f N \C70/gbsn/b/n/10/4e é\T1/ptm/m/n/10 Random Place-ment \C7
+0/gbsn/m/it/10/76 Ñ$\OT1/cmr/m/n/10 13036\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 6$\T
+1/ptm/m/n/10 ms \C70/gbsn/b/n/10/54 å\T1/ptm/m/n/10 Importance
+ []
+
+<photo/fig1_total_delay.pdf, id=323, 451.68811pt x 315.39983pt>
+File: photo/fig1_total_delay.pdf Graphic file (type pdf)
+<use photo/fig1_total_delay.pdf>
+Package pdftex.def Info: photo/fig1_total_delay.pdf  used on input line 1248.
+(pdftex.def)             Requested size: 231.83954pt x 161.8913pt.
+
+LaTeX Warning: Reference `fig:delay_breakdown' on page 9 undefined on input lin
+e 1262.
+
+
+Underfull \hbox (badness 2253) in paragraph at lines 1262--1270
+[]\T1/ptm/m/n/10 Fig. [] \C70/gbsn/b/n/10/5c U \C70/gbsn/m/n/10/79 : \C70/gbsn/
+b/n/10/4e Ü \C70/gbsn/b/n/10/7a Ô \C70/gbsn/b/n/10/52 0 \C70/gbsn/b/n/10/7a Ô \
+C70/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/m/it/10/76 Ñ \C70/gbsn/b/n
+/10/7e ƒ \C70/gbsn/m/it/10/62 ^^P \C70/gbsn/m/it/10/30 ^^B \C70/gbsn/b/n/10/54 
+^^D \C70/gbsn/b/n/10/65 π \C70/gbsn/m/it/10/6c ’ \C70/gbsn/m/it/10/76 Ñ
+ []
+
+
+Underfull \hbox (badness 2310) in paragraph at lines 1262--1270
+\C70/gbsn/b/n/10/63 • \C70/gbsn/b/n/10/51 e \C70/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n
+/10/8f ﬂ \C70/gbsn/b/n/10/54 å \C70/gbsn/m/n/10/56 ﬁ \C70/gbsn/b/n/10/4f   \C70
+/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/m/it/10/5d Ó \C70/gbsn/m/it/1
+0/5f ^^B \C70/gbsn/b/n/10/8f É \C70/gbsn/b/n/10/5c ^^O \C70/gbsn/m/it/10/ff ^^L
+ \C70/gbsn/m/n/10/56 ‡ \C70/gbsn/b/n/10/4e : \C70/gbsn/b/n/10/5b É \C70/gbsn/b/
+n/10/4e Ï \C70/gbsn/b/n/10/51 q \C70/gbsn/b/n/10/4e ´
+ []
+
+
+Underfull \hbox (badness 2310) in paragraph at lines 1262--1270
+\C70/gbsn/m/it/10/76 ¯ \C70/gbsn/b/n/10/54 ^^L \C70/gbsn/m/it/10/76 Ñ \C70/gbsn
+/b/n/10/4e ˚ \C70/gbsn/b/n/10/52 ° \C70/gbsn/b/n/10/63 • \C70/gbsn/b/n/10/51 e 
+\C70/gbsn/b/n/10/89 ƒ \C70/gbsn/b/n/10/52 ^^Y \C70/gbsn/b/n/10/54 å \C70/gbsn/b
+/n/10/65 ‡ \C70/gbsn/b/n/10/7e ø \C70/gbsn/m/it/10/94 ˛ \C70/gbsn/b/n/10/8d Ô \
+C70/gbsn/m/it/10/6a ! \C70/gbsn/b/n/10/57 ã \C70/gbsn/m/it/10/ff ^^[ \C70/gbsn/
+b/n/10/4e ; \C70/gbsn/b/n/10/89 Å \C70/gbsn/m/it/10/5d Ó
+ []
+
+<photo/fig2_delay_breakdown.pdf, id=324, 440.5214pt x 315.39983pt>
+File: photo/fig2_delay_breakdown.pdf Graphic file (type pdf)
+<use photo/fig2_delay_breakdown.pdf>
+Package pdftex.def Info: photo/fig2_delay_breakdown.pdf  used on input line 127
+3.
+(pdftex.def)             Requested size: 231.83954pt x 165.99164pt.
+[9 <./photo/fig1_total_delay.pdf>]
+
+LaTeX Warning: Reference `sec:placement_scoring' on page 10 undefined on input 
+line 1278.
+
+
+LaTeX Warning: Reference `fig:substitutions' on page 10 undefined on input line
+ 1287.
+
+
+Underfull \hbox (badness 2253) in paragraph at lines 1287--1292
+[]\T1/ptm/m/n/10 Fig. [] \C70/gbsn/b/n/10/7e ﬂ \C70/gbsn/b/n/10/8b ° \C70/gbsn/
+b/n/10/4e Ü ^^M \C70/gbsn/b/n/10/54 ^^L \C70/gbsn/b/n/10/65 π \C70/gbsn/m/it/10
+/6c ’ \C70/gbsn/b/n/10/4e - \C70/gbsn/b/n/10/66 ˇ \C70/gbsn/b/n/10/4e „ ^^S \C7
+0/gbsn/b/n/10/5b ∂ \C70/gbsn/m/it/10/76 Ñ \C70/gbsn/b/n/10/4f ^^? \C70/gbsn/b/n
+/10/75 ( \C70/gbsn/m/it/10/6b !
+ []
+
+<photo/fig3_substitutions.pdf, id=408, 440.39592pt x 315.39983pt>
+File: photo/fig3_substitutions.pdf Graphic file (type pdf)
+<use photo/fig3_substitutions.pdf>
+Package pdftex.def Info: photo/fig3_substitutions.pdf  used on input line 1295.
+
+(pdftex.def)             Requested size: 231.83954pt x 166.03496pt.
+
+LaTeX Warning: Reference `eq:cost' on page 10 undefined on input line 1303.
+
+
+LaTeX Warning: Reference `fig:sensitivity_xi' on page 10 undefined on input lin
+e 1310.
+
+<photo/fig4_sensitivity_xi.pdf, id=409, 488.36012pt x 696.97388pt>
+File: photo/fig4_sensitivity_xi.pdf Graphic file (type pdf)
+<use photo/fig4_sensitivity_xi.pdf>
+Package pdftex.def Info: photo/fig4_sensitivity_xi.pdf  used on input line 1318
+.
+(pdftex.def)             Requested size: 231.83954pt x 330.8746pt.
+
+LaTeX Warning: Reference `fig:sensitivity_mid' on page 10 undefined on input li
+ne 1323.
+
+<photo/fig5_sensitivity_mid_size.pdf, id=410, 488.36012pt x 696.97388pt>
+File: photo/fig5_sensitivity_mid_size.pdf Graphic file (type pdf)
+<use photo/fig5_sensitivity_mid_size.pdf>
+Package pdftex.def Info: photo/fig5_sensitivity_mid_size.pdf  used on input lin
+e 1331.
+(pdftex.def)             Requested size: 231.83954pt x 330.8746pt.
+
+LaTeX Warning: Reference `fig:sensitivity_memory' on page 10 undefined on input
+ line 1336.
+
+<photo/fig6_sensitivity_memory.pdf, id=411, 488.36012pt x 696.97388pt>
+File: photo/fig6_sensitivity_memory.pdf Graphic file (type pdf)
+<use photo/fig6_sensitivity_memory.pdf>
+Package pdftex.def Info: photo/fig6_sensitivity_memory.pdf  used on input line 
+1346.
+(pdftex.def)             Requested size: 231.83954pt x 330.8746pt.
+
+LaTeX Warning: Reference `fig:scale_uav' on page 10 undefined on input line 135
+4.
+
+[10 <./photo/fig2_delay_breakdown.pdf> <./photo/fig3_substitutions.pdf> <./phot
+o/fig4_sensitivity_xi.pdf>]
+<photo/fig7_uav_count.pdf, id=642, 488.44044pt x 315.12859pt>
+File: photo/fig7_uav_count.pdf Graphic file (type pdf)
+<use photo/fig7_uav_count.pdf>
+Package pdftex.def Info: photo/fig7_uav_count.pdf  used on input line 1370.
+(pdftex.def)             Requested size: 231.83954pt x 149.57703pt.
+
+
+LaTeX Warning: Reference `fig:scale_task' on page 11 undefined on input line 13
+75.
+
+<photo/fig8_task_count.pdf, id=643, 849.85063pt x 343.42905pt>
+File: photo/fig8_task_count.pdf Graphic file (type pdf)
+<use photo/fig8_task_count.pdf>
+Package pdftex.def Info: photo/fig8_task_count.pdf  used on input line 1391.
+(pdftex.def)             Requested size: 252.0pt x 101.83472pt.
+
+LaTeX Warning: Reference `fig:scale_expert' on page 11 undefined on input line 
+1396.
+
+<photo/fig9_expert_count.pdf, id=644, 849.7904pt x 584.95541pt>
+File: photo/fig9_expert_count.pdf Graphic file (type pdf)
+<use photo/fig9_expert_count.pdf>
+Package pdftex.def Info: photo/fig9_expert_count.pdf  used on input line 1414.
+(pdftex.def)             Requested size: 495.36346pt x 340.97917pt.
+
+LaTeX Warning: Reference `fig:scale_area' on page 11 undefined on input line 14
+19.
+
+[11 <./photo/fig5_sensitivity_mid_size.pdf> <./photo/fig6_sensitivity_memory.pd
+f> <./photo/fig7_uav_count.pdf>]
+<photo/fig10_area_scaling.pdf, id=909, 1138.8704pt x 358.31667pt>
+File: photo/fig10_area_scaling.pdf Graphic file (type pdf)
+<use photo/fig10_area_scaling.pdf>
+Package pdftex.def Info: photo/fig10_area_scaling.pdf  used on input line 1440.
+
+(pdftex.def)             Requested size: 495.36346pt x 155.85555pt.
+
+
+LaTeX Warning: Reference `sec:design' on page 12 undefined on input line 1445.
+
+
+LaTeX Warning: Citation `mozaffari2019uav' on page 12 undefined on input line 1
+460.
+
+
+LaTeX Warning: Citation `zhu2019uav' on page 12 undefined on input line 1460.
+
+
+LaTeX Warning: Citation `zhou2019edge' on page 12 undefined on input line 1470.
+
+
+
+LaTeX Warning: Citation `zeng2020coedge' on page 12 undefined on input line 147
+1.
+
+
+LaTeX Warning: Citation `jia2022codl' on page 12 undefined on input line 1472.
+
+
+LaTeX Warning: Citation `jeong2022band' on page 12 undefined on input line 1473
+.
+
+
+LaTeX Warning: Citation `wang2021asymo' on page 12 undefined on input line 1474
+.
+
+
+LaTeX Warning: Citation `shazeer2017moe' on page 12 undefined on input line 148
+3.
+
+
+LaTeX Warning: Citation `fedus2022switch' on page 12 undefined on input line 14
+84.
+
+
+LaTeX Warning: Citation `lepikhin2021gshard' on page 12 undefined on input line
+ 1484.
+
+
+LaTeX Warning: Citation `jiang2024mixtral' on page 12 undefined on input line 1
+485.
+
+
+LaTeX Warning: Citation `zhou2022mixtureofexperts_routing' on page 12 undefined
+ on input line 1486.
+
+
+LaTeX Warning: Citation `du2022glam' on page 12 undefined on input line 1486.
+
+
+LaTeX Warning: Citation `aminabadi2022deepspeed' on page 12 undefined on input 
+line 1489.
+
+
+LaTeX Warning: Citation `yu2022orca' on page 12 undefined on input line 1489.
+
+
+LaTeX Warning: Citation `li2023alpaserve' on page 12 undefined on input line 14
+90.
+
+No file aeromde_main.bbl.
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the appropriate paper size.
+
+[12 <./photo/fig8_task_count.pdf>] [13
+
+ <./photo/fig9_expert_count.pdf> <./photo/fig10_area_scaling.pdf>] (./aeromde_m
+ain.aux
+* soulpos - computing points - it may take a few seconds *
+\openout4 = `aeromde_main.upb'.
+
+ (./aeromde_main.upa))
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+ ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `aeromde_main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `aeromde_main.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  A4382E362306DCE749EB0B4D3C7320BF;7015.
+ ) 
+Here is how much of TeX's memory you used:
+ 31433 strings out of 467525
+ 591725 string characters out of 5416358
+ 1006970 words of memory out of 5000000
+ 59213 multiletter control sequences out of 15000+600000
+ 813934 words of font info for 426 fonts, out of 8000000 for 9000
+ 1145 hyphenation exceptions out of 8191
+ 89i,14n,94p,580b,1987s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
+0.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx7.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmex10.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi10.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi5.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi7.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi8.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi9.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr10.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr5.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr7.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr9.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/WorkSoftWare/texlive/2026/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/WorkSoftWare/texlive/2026/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/WorkSoftWare/texlive/2026/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><e:/WorkSoftWare/texlive/202
+6/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu30.pfb><e:/WorkSoftWare/texlive/2026
+/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu4e.pfb><e:/WorkSoftWare/texlive/2026/
+texmf-dist/fonts/type1/arphic/gbsnu/gbsnu4f.pfb><e:/WorkSoftWare/texlive/2026/t
+exmf-dist/fonts/type1/arphic/gbsnu/gbsnu50.pfb><e:/WorkSoftWare/texlive/2026/te
+xmf-dist/fonts/type1/arphic/gbsnu/gbsnu51.pfb><e:/WorkSoftWare/texlive/2026/tex
+mf-dist/fonts/type1/arphic/gbsnu/gbsnu52.pfb><e:/WorkSoftWare/texlive/2026/texm
+f-dist/fonts/type1/arphic/gbsnu/gbsnu53.pfb><e:/WorkSoftWare/texlive/2026/texmf
+-dist/fonts/type1/arphic/gbsnu/gbsnu54.pfb><e:/WorkSoftWare/texlive/2026/texmf-
+dist/fonts/type1/arphic/gbsnu/gbsnu55.pfb><e:/WorkSoftWare/texlive/2026/texmf-d
+ist/fonts/type1/arphic/gbsnu/gbsnu56.pfb><e:/WorkSoftWare/texlive/2026/texmf-di
+st/fonts/type1/arphic/gbsnu/gbsnu57.pfb><e:/WorkSoftWare/texlive/2026/texmf-dis
+t/fonts/type1/arphic/gbsnu/gbsnu58.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist
+/fonts/type1/arphic/gbsnu/gbsnu59.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/
+fonts/type1/arphic/gbsnu/gbsnu5b.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/f
+onts/type1/arphic/gbsnu/gbsnu5c.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fo
+nts/type1/arphic/gbsnu/gbsnu5d.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fon
+ts/type1/arphic/gbsnu/gbsnu5e.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/font
+s/type1/arphic/gbsnu/gbsnu5f.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts
+/type1/arphic/gbsnu/gbsnu60.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/
+type1/arphic/gbsnu/gbsnu61.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/t
+ype1/arphic/gbsnu/gbsnu62.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/ty
+pe1/arphic/gbsnu/gbsnu63.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/typ
+e1/arphic/gbsnu/gbsnu64.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type
+1/arphic/gbsnu/gbsnu65.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1
+/arphic/gbsnu/gbsnu66.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/
+arphic/gbsnu/gbsnu67.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/a
+rphic/gbsnu/gbsnu68.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/ar
+phic/gbsnu/gbsnu69.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arp
+hic/gbsnu/gbsnu6a.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arph
+ic/gbsnu/gbsnu6b.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphi
+c/gbsnu/gbsnu6c.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic
+/gbsnu/gbsnu6d.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/
+gbsnu/gbsnu6e.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/g
+bsnu/gbsnu6f.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gb
+snu/gbsnu70.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbs
+nu/gbsnu71.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsn
+u/gbsnu72.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu
+/gbsnu73.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/
+gbsnu74.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/g
+bsnu75.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gb
+snu76.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbs
+nu77.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsn
+u78.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu
+79.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu7
+a.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu7b
+.pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu7c.
+pfb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu7d.p
+fb><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu7e.pf
+b><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu7f.pfb
+><e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu80.pfb>
+<e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu81.pfb><
+e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu82.pfb><e
+:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu83.pfb><e:
+/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu84.pfb><e:/
+WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu86.pfb><e:/W
+orkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu88.pfb><e:/Wo
+rkSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu89.pfb><e:/Wor
+kSoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu8a.pfb><e:/Work
+SoftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu8b.pfb><e:/WorkS
+oftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu8c.pfb><e:/WorkSo
+ftWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu8d.pfb><e:/WorkSof
+tWare/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu8e.pfb><e:/WorkSoft
+Ware/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu8f.pfb><e:/WorkSoftW
+are/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu90.pfb><e:/WorkSoftWa
+re/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu91.pfb><e:/WorkSoftWar
+e/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu94.pfb><e:/WorkSoftWare
+/texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu95.pfb><e:/WorkSoftWare/
+texlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu96.pfb><e:/WorkSoftWare/t
+exlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu97.pfb><e:/WorkSoftWare/te
+xlive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu98.pfb><e:/WorkSoftWare/tex
+live/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu99.pfb><e:/WorkSoftWare/texl
+ive/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu9a.pfb><e:/WorkSoftWare/texli
+ve/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu9c.pfb><e:/WorkSoftWare/texliv
+e/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu9e.pfb><e:/WorkSoftWare/texlive
+/2026/texmf-dist/fonts/type1/arphic/gbsnu/gbsnuff.pfb><e:/WorkSoftWare/texlive/
+2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/WorkSoftWare
+/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><e:/WorkSoftWare/te
+xlive/2026/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><e:/WorkSoftWare/texlive
+/2026/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><e:/WorkSoftWare/texlive/202
+6/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><e:/WorkSoftWare/texlive/2026/tex
+mf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on aeromde_main.pdf (13 pages, 1171150 bytes).
+PDF statistics:
+ 1628 PDF objects out of 1728 (max. 8388607)
+ 601 compressed objects within 7 object streams
+ 145 named destinations out of 1000 (max. 500000)
+ 367 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -1,0 +1,146 @@
+\relax 
+\providecommand\zref@newlabel[2]{}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{IEEEexample:BSTcontrol}
+\citation{mozaffari2019uav,zhu2019uav}
+\citation{shazeer2017moe,fedus2022switch,jiang2024mixtral}
+\citation{shazeer2017moe,fedus2022switch,lepikhin2021gshard,jiang2024mixtral}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{I}{1}{Introduction}{section.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Background and Motivation}{1}{section.2}\protected@file@percent }
+\newlabel{sec:background}{{II}{1}{Background and Motivation}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}MoE Expert Inference}{1}{subsection.2.1}\protected@file@percent }
+\newlabel{sec:bg_moe}{{\mbox  {II-A}}{1}{MoE Expert Inference}{subsection.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Expert Deployment Challenges in UAV Edge Networks}{2}{subsection.2.2}\protected@file@percent }
+\newlabel{sec:bg_uav_challenge}{{\mbox  {II-B}}{2}{Expert Deployment Challenges in UAV Edge Networks}{subsection.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Motivation for Similarity-Aware Deployment}{2}{subsection.2.3}\protected@file@percent }
+\newlabel{sec:bg_similarity_motivation}{{\mbox  {II-C}}{2}{Motivation for Similarity-Aware Deployment}{subsection.2.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces 准静态 UAV 边缘网络中的协同推理场景。地面任务通过空地链路接入 UAV，多个资源异构 UAV 在给定无线拓扑下协同执行 MoE 推理计算单元，并通过 UAV-UAV 链路传输中间特征，最终将推理结果返回至基站或应急指挥中心。}}{2}{figure.1}\protected@file@percent }
+\newlabel{fig:system_model}{{1}{2}{准静态 UAV 边缘网络中的协同推理场景。地面任务通过空地链路接入 UAV，多个资源异构 UAV 在给定无线拓扑下协同执行 MoE 推理计算单元，并通过 UAV-UAV 链路传输中间特征，最终将推理结果返回至基站或应急指挥中心。}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}System Model}{2}{section.3}\protected@file@percent }
+\newlabel{sec:system}{{III}{2}{System Model}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}准静态 UAV 网络}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}无线链路与单跳连通性}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}协同推理任务模型}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}端到端延迟模型}{3}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}通用优化问题}{3}{subsection.3.5}\protected@file@percent }
+\newlabel{eq:p_s_coupling}{{14}{4}{通用优化问题}{equation.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Proposed Design}{4}{section.4}\protected@file@percent }
+\newlabel{sec:design}{{IV}{4}{Proposed Design}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Design Overview}{4}{subsection.4.1}\protected@file@percent }
+\newlabel{sec:design_overview}{{\mbox  {IV-A}}{4}{Design Overview}{subsection.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces SimAeroMoE 分阶段设计流程：任务需求建模 $\rightarrow $ 相似候选专家构造 $\rightarrow $ 通信感知部署评分 $\rightarrow $ 动态贪心部署与轻量级推理调度。}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:design_flow}{{2}{4}{SimAeroMoE 分阶段设计流程：任务需求建模 $\rightarrow $ 相似候选专家构造 $\rightarrow $ 通信感知部署评分 $\rightarrow $ 动态贪心部署与轻量级推理调度。}{figure.2}{}}
+\newlabel{eq:sklu_def}{{15}{4}{Design Overview}{equation.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Task Demand Modeling under Single-Hop UAV Communication}{4}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:demand_modeling}{{\mbox  {IV-B}}{4}{Task Demand Modeling under Single-Hop UAV Communication}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}1}任务默认接入 UAV}{5}{subsubsection.4.2.1}\protected@file@percent }
+\newlabel{eq:default_access}{{16}{5}{任务默认接入 UAV}{equation.16}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}2}直接专家需求 $\mathrm  {Demand}(r,u)$}{5}{subsubsection.4.2.2}\protected@file@percent }
+\newlabel{eq:demand}{{17}{5}{直接专家需求 \texorpdfstring {$\mathrm {Demand}(r,u)$}{Demand(r,u)}}{equation.17}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}3}单跳 UAV-UAV 通信设定}{5}{subsubsection.4.2.3}\protected@file@percent }
+\newlabel{eq:single_hop_g}{{18}{5}{单跳 UAV-UAV 通信设定}{equation.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Similarity-Aware Candidate Expert Construction}{5}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:similarity_candidate}{{\mbox  {IV-C}}{5}{Similarity-Aware Candidate Expert Construction}{subsection.4.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}1}任务原本需要的原始专家集合}{5}{subsubsection.4.3.1}\protected@file@percent }
+\newlabel{eq:ereq}{{20}{5}{任务原本需要的原始专家集合}{equation.20}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}2}可替代专家集合}{5}{subsubsection.4.3.2}\protected@file@percent }
+\newlabel{eq:ar}{{21}{5}{可替代专家集合}{equation.21}{}}
+\newlabel{eq:sim}{{22}{5}{可替代专家集合}{equation.22}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}3}候选专家集合}{5}{subsubsection.4.3.3}\protected@file@percent }
+\newlabel{eq:ecand}{{23}{5}{候选专家集合}{equation.23}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}4}有效需求 $\mathrm  {Demand}^{\mathrm  {eff}}(e,u)$}{6}{subsubsection.4.3.4}\protected@file@percent }
+\newlabel{eq:demand_eff}{{24}{6}{有效需求 \texorpdfstring {$\mathrm {Demand}^{\mathrm {eff}}(e,u)$}{Demand\_eff(e,u)}}{equation.24}{}}
+\newlabel{eq:theta}{{25}{6}{有效需求 \texorpdfstring {$\mathrm {Demand}^{\mathrm {eff}}(e,u)$}{Demand\_eff(e,u)}}{equation.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Communication-Aware Expert Placement Scoring}{6}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:placement_scoring}{{\mbox  {IV-D}}{6}{Communication-Aware Expert Placement Scoring}{subsection.4.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-D}1}通信感知任务需求收益 $A(e,u)$}{6}{subsubsection.4.4.1}\protected@file@percent }
+\newlabel{eq:A}{{26}{6}{通信感知任务需求收益 \texorpdfstring {$A(e,u)$}{A(e,u)}}{equation.26}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-D}2}计算能力收益 $B(e,u)$}{6}{subsubsection.4.4.2}\protected@file@percent }
+\newlabel{eq:B}{{27}{6}{计算能力收益 \texorpdfstring {$B(e,u)$}{B(e,u)}}{equation.27}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-D}3}网络位置收益 $C(e,u)$}{6}{subsubsection.4.4.3}\protected@file@percent }
+\newlabel{eq:C}{{28}{6}{网络位置收益 \texorpdfstring {$C(e,u)$}{C(e,u)}}{equation.28}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-D}4}基础部署得分 $\mathrm  {BaseScore}(e,u)$}{6}{subsubsection.4.4.4}\protected@file@percent }
+\newlabel{eq:basescore}{{29}{6}{基础部署得分 \texorpdfstring {$\mathrm {BaseScore}(e,u)$}{BaseScore(e,u)}}{equation.29}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Dynamic Greedy Expert Placement and Lightweight Inference Scheduling}{6}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:greedy_scheduling}{{\mbox  {IV-E}}{6}{Dynamic Greedy Expert Placement and Lightweight Inference Scheduling}{subsection.4.5}{}}
+\newlabel{sec:greedy_placement}{{\mbox  {IV-E}1}{7}{动态贪心专家部署}{subsubsection.4.5.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-E}1}动态贪心专家部署}{7}{subsubsection.4.5.1}\protected@file@percent }
+\newlabel{eq:ared}{{30}{7}{动态贪心专家部署}{equation.30}{}}
+\newlabel{eq:redundancy}{{31}{7}{动态贪心专家部署}{equation.31}{}}
+\newlabel{eq:score_t}{{32}{7}{动态贪心专家部署}{equation.32}{}}
+\newlabel{eq:value_t}{{33}{7}{动态贪心专家部署}{equation.33}{}}
+\newlabel{eq:memory_constraint}{{34}{7}{动态贪心专家部署}{equation.34}{}}
+\newlabel{eq:single_copy}{{35}{7}{动态贪心专家部署}{equation.35}{}}
+\newlabel{eq:binary_m}{{36}{7}{动态贪心专家部署}{equation.36}{}}
+\newlabel{sec:inference_scheduling}{{\mbox  {IV-E}2}{7}{轻量级推理调度}{subsubsection.4.5.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-E}2}轻量级推理调度}{7}{subsubsection.4.5.2}\protected@file@percent }
+\newlabel{eq:cur_init}{{37}{7}{轻量级推理调度}{equation.37}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces 动态贪心专家部署算法}}{8}{algorithm.1}\protected@file@percent }
+\newlabel{alg:greedy_placement}{{1}{8}{动态贪心专家部署}{algorithm.1}{}}
+\newlabel{eq:candidate_exec}{{38}{8}{轻量级推理调度}{equation.38}{}}
+\newlabel{eq:cost}{{39}{8}{轻量级推理调度}{equation.39}{}}
+\newlabel{eq:min_cost}{{40}{8}{轻量级推理调度}{equation.40}{}}
+\newlabel{eq:Dk}{{41}{8}{轻量级推理调度}{equation.41}{}}
+\newlabel{eq:Dtotal}{{43}{8}{轻量级推理调度}{equation.43}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Implementation and Evaluation}{9}{section.5}\protected@file@percent }
+\newlabel{sec:eval}{{V}{9}{Implementation and Evaluation}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Simulation Setup}{9}{subsection.5.1}\protected@file@percent }
+\newlabel{sec:setup}{{\mbox  {V-A}}{9}{Simulation Setup}{subsection.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Baselines and Metrics}{9}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:baselines_metrics}{{\mbox  {V-B}}{9}{Baselines and Metrics}{subsection.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces 不同专家部署方法的平均端到端延迟对比。}}{9}{figure.3}\protected@file@percent }
+\newlabel{fig:total_delay}{{3}{9}{不同专家部署方法的平均端到端延迟对比。}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}End-to-End Delay Performance}{9}{subsection.5.3}\protected@file@percent }
+\newlabel{sec:e2e_delay}{{\mbox  {V-C}}{9}{End-to-End Delay Performance}{subsection.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Delay Breakdown}{9}{subsection.5.4}\protected@file@percent }
+\newlabel{sec:delay_breakdown}{{\mbox  {V-D}}{9}{Delay Breakdown}{subsection.5.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces 端到端延迟分解。SimAeroMoE 通过通信感知部署和逐层调度同时降低计算与传输开销。}}{10}{figure.4}\protected@file@percent }
+\newlabel{fig:delay_breakdown}{{4}{10}{端到端延迟分解。SimAeroMoE 通过通信感知部署和逐层调度同时降低计算与传输开销。}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces 相似专家替代次数。Proposed 更充分地利用相似专家覆盖原始专家需求。}}{10}{figure.5}\protected@file@percent }
+\newlabel{fig:substitutions}{{5}{10}{相似专家替代次数。Proposed 更充分地利用相似专家覆盖原始专家需求。}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Similarity Substitution Analysis}{10}{subsection.5.5}\protected@file@percent }
+\newlabel{sec:substitution_analysis}{{\mbox  {V-E}}{10}{Similarity Substitution Analysis}{subsection.5.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces 相似度阈值 $\xi $ 的敏感性分析。}}{10}{figure.6}\protected@file@percent }
+\newlabel{fig:sensitivity_xi}{{6}{10}{相似度阈值 $\xi $ 的敏感性分析。}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-F}}Sensitivity Analysis}{10}{subsection.5.6}\protected@file@percent }
+\newlabel{sec:sensitivity}{{\mbox  {V-F}}{10}{Sensitivity Analysis}{subsection.5.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces 中间特征大小对端到端延迟的影响。}}{11}{figure.7}\protected@file@percent }
+\newlabel{fig:sensitivity_mid}{{7}{11}{中间特征大小对端到端延迟的影响。}{figure.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-G}}Scalability Analysis}{11}{subsection.5.7}\protected@file@percent }
+\newlabel{sec:scalability}{{\mbox  {V-G}}{11}{Scalability Analysis}{subsection.5.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces UAV 内存容量对端到端延迟和部署规模的影响。}}{11}{figure.8}\protected@file@percent }
+\newlabel{fig:sensitivity_memory}{{8}{11}{UAV 内存容量对端到端延迟和部署规模的影响。}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces UAV 数量变化下的扩展性。}}{11}{figure.9}\protected@file@percent }
+\newlabel{fig:scale_uav}{{9}{11}{UAV 数量变化下的扩展性。}{figure.9}{}}
+\citation{mozaffari2019uav,zhu2019uav}
+\citation{zhou2019edge}
+\citation{zeng2020coedge}
+\citation{jia2022codl}
+\citation{jeong2022band}
+\citation{wang2021asymo}
+\citation{shazeer2017moe}
+\citation{fedus2022switch}
+\citation{lepikhin2021gshard}
+\citation{jiang2024mixtral}
+\citation{zhou2022mixtureofexperts_routing}
+\citation{du2022glam}
+\citation{aminabadi2022deepspeed}
+\citation{yu2022orca}
+\citation{li2023alpaserve}
+\bibstyle{IEEEtran}
+\bibdata{IEEEabrv,refs}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces 任务数量变化下的延迟和规划时间。}}{12}{figure.10}\protected@file@percent }
+\newlabel{fig:scale_task}{{10}{12}{任务数量变化下的延迟和规划时间。}{figure.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Related Work}{12}{section.6}\protected@file@percent }
+\newlabel{sec:related}{{VI}{12}{Related Work}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Conclusion}{12}{section.7}\protected@file@percent }
+\newlabel{sec:conclusion}{{VII}{12}{Conclusion}{section.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces 专家池规模变化下的扩展性。}}{13}{figure.11}\protected@file@percent }
+\newlabel{fig:scale_expert}{{11}{13}{专家池规模变化下的扩展性。}{figure.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces 部署区域大小变化下的扩展性。固定资源时，大范围场景会因单跳连通性和 UAV 内存限制而降低可行性；同步扩展资源后可维持稳定服务。}}{13}{figure.12}\protected@file@percent }
+\newlabel{fig:scale_area}{{12}{13}{部署区域大小变化下的扩展性。固定资源时，大范围场景会因单跳连通性和 UAV 内存限制而降低可行性；同步扩展资源后可维持稳定服务。}{figure.12}{}}
+\ulp@afterend
+\gdef \@abspage@last{13}
