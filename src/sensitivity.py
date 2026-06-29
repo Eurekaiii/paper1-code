@@ -101,11 +101,17 @@ def _print_summary(
     title: str,
     rows: List[Dict[str, float | str]],
     include_deployments: bool = False,
+    include_success: bool = False,
 ) -> None:
     """Print compact terminal summary for a sensitivity experiment."""
     headers = [
         "value",
         "method",
+        *(
+            ["success_rate", "infeasible_count"]
+            if include_success
+            else []
+        ),
         "mean_D_total_ms",
         "std_D_total_ms",
         "mean_Substitutions",
@@ -119,6 +125,14 @@ def _print_summary(
         [
             f"{float(row['value']):.2f}",
             str(row["method"]),
+            *(
+                [
+                    f"{float(row.get('success_rate', 0.0)):.2f}",
+                    f"{float(row.get('infeasible_count', 0.0)):.0f}",
+                ]
+                if include_success
+                else []
+            ),
             f"{float(row['mean_D_total_ms']):.2f}",
             f"{float(row['std_D_total_ms']):.2f}",
             f"{float(row['mean_Substitutions']):.2f}",
@@ -208,6 +222,75 @@ def run_memory_sensitivity(output_dir: Path) -> List[Dict[str, float | str]]:
     return rows
 
 
+def run_compute_window_sensitivity(output_dir: Path) -> List[Dict[str, float | str]]:
+    """Run scheduling-window compute budget sensitivity."""
+    rows: List[Dict[str, float | str]] = []
+
+    def finite_mean(values: List[float], empty_value: float = float("inf")) -> float:
+        finite = [value for value in values if np.isfinite(value)]
+        return float(np.mean(finite)) if finite else empty_value
+
+    def finite_std(values: List[float]) -> float:
+        finite = [value for value in values if np.isfinite(value)]
+        return float(np.std(finite)) if finite else float("nan")
+
+    for window_s in [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]:
+        metrics_by_method: Dict[str, List[MethodMetrics]] = {
+            method: [] for method in METHOD_ORDER
+        }
+        for seed in SEEDS:
+            cfg = SystemConfig()
+            cfg.seed = seed
+            cfg.scheduling.compute_window_s = window_s
+            uavs, experts, tasks = build_controlled_random_hotspot_scenario_v2(cfg)
+            results = run_all_methods(uavs, experts, tasks, cfg)
+            for method, result in results:
+                metrics_by_method[method].append(compute_metrics(method, result))
+
+        for method, metrics in metrics_by_method.items():
+            feasible_count = sum(1 for metric in metrics if metric.feasible)
+            rows.append(
+                {
+                    "parameter": "compute_window_s",
+                    "value": window_s,
+                    "method": method,
+                    "success_rate": feasible_count / len(metrics),
+                    "infeasible_count": float(len(metrics) - feasible_count),
+                    "mean_D_total_ms": finite_mean([m.D_total for m in metrics]) * 1e3,
+                    "std_D_total_ms": finite_std([m.D_total for m in metrics]) * 1e3,
+                    "mean_Substitutions": finite_mean([
+                        float(m.substitutions) for m in metrics if m.feasible
+                    ], empty_value=0.0),
+                    "mean_AvgCompute_ms": finite_mean([
+                        m.avg_D_compute for m in metrics
+                    ]) * 1e3,
+                    "mean_AvgTrans_ms": finite_mean([
+                        m.avg_D_trans for m in metrics
+                    ]) * 1e3,
+                }
+            )
+
+    fields = [
+        "parameter",
+        "value",
+        "method",
+        "success_rate",
+        "infeasible_count",
+        "mean_D_total_ms",
+        "std_D_total_ms",
+        "mean_Substitutions",
+        "mean_AvgCompute_ms",
+        "mean_AvgTrans_ms",
+    ]
+    _save_csv(rows, output_dir / "sensitivity_compute_window.csv", fields)
+    _print_summary(
+        "Sensitivity: compute scheduling window",
+        rows,
+        include_success=True,
+    )
+    return rows
+
+
 def run_mid_size_sensitivity(output_dir: Path) -> List[Dict[str, float | str]]:
     """Run intermediate-feature-size sensitivity."""
     rows: List[Dict[str, float | str]] = []
@@ -244,6 +327,7 @@ def run_all_sensitivity_experiments(output_dir: str | Path = "results") -> None:
     output_path = Path(output_dir)
     run_xi_sensitivity(output_path)
     run_memory_sensitivity(output_path)
+    run_compute_window_sensitivity(output_path)
     run_mid_size_sensitivity(output_path)
 
 

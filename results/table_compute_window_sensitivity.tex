@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\caption{Sensitivity to the compute scheduling window. Delay values are averaged over feasible runs only; success rate is computed over five random seeds.}
+\label{tab:compute_window_sensitivity}
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular}{ccccccccccccc}
+\toprule
+\multirow{2}{*}{$T$ (s)} & \multicolumn{3}{c}{Proposed} & \multicolumn{3}{c}{Random} & \multicolumn{3}{c}{Importance} & \multicolumn{3}{c}{No-sim.} \\
+ & Succ. & Delay & Per-task & Succ. & Delay & Per-task & Succ. & Delay & Per-task & Succ. & Delay & Per-task \\
+\midrule
+2 & 0.00 & -- & -- & 0.00 & -- & -- & 0.20 & 9688.9 & 242.2 & 0.00 & -- & -- \\
+3 & 1.00 & 9888.8 & 247.2 & 0.40 & 10175.2 & 254.4 & 0.60 & 10463.1 & 261.6 & 0.00 & -- & -- \\
+4 & 1.00 & 9878.9 & 247.0 & 0.60 & 11152.9 & 278.8 & 0.80 & 11005.2 & 275.1 & 0.00 & -- & -- \\
+5 & 1.00 & 9878.9 & 247.0 & 0.60 & 11152.9 & 278.8 & 0.80 & 11005.2 & 275.1 & 0.00 & -- & -- \\
+6 & 1.00 & 9878.9 & 247.0 & 0.80 & 12028.4 & 300.7 & 0.80 & 11005.2 & 275.1 & 0.80 & 18877.6 & 471.9 \\
+7 & 1.00 & 9878.9 & 247.0 & 0.80 & 12028.4 & 300.7 & 0.80 & 11005.2 & 275.1 & 1.00 & 19107.5 & 477.7 \\
+8 & 1.00 & 9878.9 & 247.0 & 1.00 & 13014.9 & 325.4 & 0.80 & 11005.2 & 275.1 & 1.00 & 19107.5 & 477.7 \\
+9 & 1.00 & 9878.9 & 247.0 & 1.00 & 13014.9 & 325.4 & 1.00 & 12527.7 & 313.2 & 1.00 & 19107.5 & 477.7 \\
+10 & 1.00 & 9878.9 & 247.0 & 1.00 & 13014.9 & 325.4 & 1.00 & 12527.7 & 313.2 & 1.00 & 19107.5 & 477.7 \\
+\bottomrule
+\end{tabular}
+\vspace{2pt}
+\begin{flushleft}
+\footnotesize Succ. denotes the fraction of feasible runs. Delay and Per-task are in milliseconds. ``--'' indicates that no feasible run is available.
+\end{flushleft}
+\end{table*}

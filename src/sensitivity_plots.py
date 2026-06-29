@@ -164,6 +164,13 @@ def plot_all_sensitivity_figures(results_dir: str | Path = "results") -> None:
         min_x=1.0,
         mark_infeasible=True,
     )
+    _plot_sensitivity(
+        root / "sensitivity_compute_window.csv",
+        root / "fig_compute_window_sensitivity",
+        xlabel="Scheduling Window  (s)",
+        title="Effect of Compute Scheduling Window",
+        mark_infeasible=True,
+    )
 
 
 def main() -> None:
@@ -172,6 +179,7 @@ def main() -> None:
     print("  results/fig4_sensitivity_xi.{png,pdf}")
     print("  results/fig5_sensitivity_mid_size.{png,pdf}")
     print("  results/fig6_sensitivity_memory.{png,pdf}")
+    print("  results/fig_compute_window_sensitivity.{png,pdf}")
 
 
 if __name__ == "__main__":
