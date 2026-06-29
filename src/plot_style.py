@@ -88,7 +88,7 @@ def apply_style() -> None:
         # Figure
         "figure.dpi":           150,
         "savefig.dpi":          300,
-        "savefig.bbox":         "tight",
+        "savefig.bbox":         None,
         "savefig.pad_inches":   0.04,
         # Spine defaults
         "axes.spines.top":      False,
@@ -137,7 +137,7 @@ def save_figure(fig: plt.Figure, path: Path) -> None:
         fig.savefig(
             path.with_suffix(f".{fmt}"),
             dpi=300,
-            bbox_inches="tight",
+            bbox_inches=None,
             facecolor="white",
             edgecolor="none",
         )
@@ -152,6 +152,7 @@ def label_bars(
     ax: plt.Axes,
     fmt: str = ".1f",
     offset_frac: float = 0.015,
+    include_zero: bool = False,
     **kwargs,
 ) -> None:
     """Place value labels above every bar in *ax*.
@@ -171,7 +172,7 @@ def label_bars(
 
     for bar in ax.patches:
         h = bar.get_height()
-        if h > 0 and np.isfinite(h):
+        if (h > 0 or include_zero) and np.isfinite(h):
             ax.text(
                 bar.get_x() + bar.get_width() / 2,
                 h + offset_y,

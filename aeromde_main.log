@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.5.21)  28 JUN 2026 15:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.5.21)  28 JUN 2026 17:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1461,33 +1461,17 @@ t line 1200.
 LaTeX Warning: Reference `fig:total_delay' on page 9 undefined on input line 12
 39.
 
-
-Underfull \hbox (badness 4726) in paragraph at lines 1239--1245
-\C70/gbsn/b/n/10/52 0 \C70/gbsn/b/n/10/7a Ô \C70/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n
-/10/8f ﬂ \C70/gbsn/m/it/10/30 ^^B\T1/ptm/m/n/10 Proposed \C70/gbsn/m/it/10/76 Ñ
- \C70/gbsn/b/n/10/5e s \C70/gbsn/b/n/10/57 G \C70/gbsn/b/n/10/60 ; \C70/gbsn/b/
-n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/b/n/10/4e :$\OT1/cmr/m/n/10 9892\OML/
-cmm/m/it/10 :\OT1/cmr/m/n/10 6$\T1/ptm/m/n/10 ms\C70/gbsn/m/it/10/ff ^^L
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1239--1245
-\C70/gbsn/b/n/10/4f N \C70/gbsn/b/n/10/4e é\T1/ptm/m/n/10 Random Place-ment \C7
-0/gbsn/m/it/10/76 Ñ$\OT1/cmr/m/n/10 13036\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 6$\T
-1/ptm/m/n/10 ms \C70/gbsn/b/n/10/54 å\T1/ptm/m/n/10 Importance
- []
-
-<photo/fig1_total_delay.pdf, id=323, 451.68811pt x 315.39983pt>
+<photo/fig1_total_delay.pdf, id=323, 505.89pt x 332.44202pt>
 File: photo/fig1_total_delay.pdf Graphic file (type pdf)
 <use photo/fig1_total_delay.pdf>
 Package pdftex.def Info: photo/fig1_total_delay.pdf  used on input line 1248.
-(pdftex.def)             Requested size: 231.83954pt x 161.8913pt.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
 
 LaTeX Warning: Reference `fig:delay_breakdown' on page 9 undefined on input lin
-e 1262.
+e 1263.
 
 
-Underfull \hbox (badness 2253) in paragraph at lines 1262--1270
+Underfull \hbox (badness 2253) in paragraph at lines 1263--1270
 []\T1/ptm/m/n/10 Fig. [] \C70/gbsn/b/n/10/5c U \C70/gbsn/m/n/10/79 : \C70/gbsn/
 b/n/10/4e Ü \C70/gbsn/b/n/10/7a Ô \C70/gbsn/b/n/10/52 0 \C70/gbsn/b/n/10/7a Ô \
 C70/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/m/it/10/76 Ñ \C70/gbsn/b/n
@@ -1496,7 +1480,7 @@ C70/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/m/it/10/76 Ñ \C70/gbsn/b/n
  []
 
 
-Underfull \hbox (badness 2310) in paragraph at lines 1262--1270
+Underfull \hbox (badness 2310) in paragraph at lines 1263--1270
 \C70/gbsn/b/n/10/63 • \C70/gbsn/b/n/10/51 e \C70/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n
 /10/8f ﬂ \C70/gbsn/b/n/10/54 å \C70/gbsn/m/n/10/56 ﬁ \C70/gbsn/b/n/10/4f   \C70
 /gbsn/b/n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/m/it/10/5d Ó \C70/gbsn/m/it/1
@@ -1506,21 +1490,50 @@ n/10/4e Ï \C70/gbsn/b/n/10/51 q \C70/gbsn/b/n/10/4e ´
  []
 
 
-Underfull \hbox (badness 2310) in paragraph at lines 1262--1270
+Underfull \hbox (badness 4608) in paragraph at lines 1263--1270
 \C70/gbsn/m/it/10/76 ¯ \C70/gbsn/b/n/10/54 ^^L \C70/gbsn/m/it/10/76 Ñ \C70/gbsn
 /b/n/10/4e ˚ \C70/gbsn/b/n/10/52 ° \C70/gbsn/b/n/10/63 • \C70/gbsn/b/n/10/51 e 
 \C70/gbsn/b/n/10/89 ƒ \C70/gbsn/b/n/10/52 ^^Y \C70/gbsn/b/n/10/54 å \C70/gbsn/b
 /n/10/65 ‡ \C70/gbsn/b/n/10/7e ø \C70/gbsn/m/it/10/94 ˛ \C70/gbsn/b/n/10/8d Ô \
 C70/gbsn/m/it/10/6a ! \C70/gbsn/b/n/10/57 ã \C70/gbsn/m/it/10/ff ^^[ \C70/gbsn/
-b/n/10/4e ; \C70/gbsn/b/n/10/89 Å \C70/gbsn/m/it/10/5d Ó
+b/n/10/4e ; \C70/gbsn/b/n/10/89 Å
  []
 
-<photo/fig2_delay_breakdown.pdf, id=324, 440.5214pt x 315.39983pt>
+
+Underfull \hbox (badness 2980) in paragraph at lines 1263--1270
+\C70/gbsn/m/it/10/5d Ó \C70/gbsn/m/it/10/5f ^^B \C70/gbsn/b/n/10/67 e \C70/gbsn
+/m/n/10/81 Í \C70/gbsn/b/n/10/4e ^^S \C70/gbsn/b/n/10/5b ∂ \C70/gbsn/b/n/10/8b 
+° \C70/gbsn/m/it/10/7b ó \C70/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/
+b/n/10/54 å\T1/ptm/m/n/10 UAV-UAV \C70/gbsn/b/n/10/4e - \C70/gbsn/b/n/10/95 Ù \
+C70/gbsn/m/it/10/72 y \C70/gbsn/m/it/10/5f Å \C70/gbsn/b/n/10/4f  
+ []
+
+
+Underfull \hbox (badness 2478) in paragraph at lines 1263--1270
+\C70/gbsn/b/n/10/8f ì \C70/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/m/i
+t/10/30 ^^B\T1/ptm/m/n/10 Proposed \C70/gbsn/m/it/10/76 Ñ \C70/gbsn/b/n/10/5e s
+ \C70/gbsn/b/n/10/57 G \C70/gbsn/b/n/10/8b ° \C70/gbsn/m/it/10/7b ó \C70/gbsn/b
+/n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/b/n/10/4e :$\OT1/cmr/m/n/10 171\OML/
+cmm/m/it/10 :\OT1/cmr/m/n/10 8$\T1/ptm/m/n/10 ms\C70/gbsn/m/it/10/ff ^^L \C70/g
+bsn/b/n/10/4f N
+ []
+
+
+Underfull \hbox (badness 3343) in paragraph at lines 1263--1270
+\C70/gbsn/b/n/10/54 å\T1/ptm/m/n/10 No-Sim \C70/gbsn/m/it/10/76 Ñ$\OT1/cmr/m/n/
+10 394\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 8$\T1/ptm/m/n/10 ms\C70/gbsn/m/it/10/ff
+ ^^[ \C70/gbsn/b/n/10/5e s \C70/gbsn/b/n/10/57 G \C70/gbsn/b/n/10/4f   \C70/gbs
+n/b/n/10/8f ì \C70/gbsn/b/n/10/5e ˆ \C70/gbsn/b/n/10/8f ﬂ \C70/gbsn/b/n/10/4e :
+$\OT1/cmr/m/n/10 40\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 2$\T1/ptm/m/n/10 ms\C70/gb
+sn/m/it/10/ff ^^L \C70/gbsn/b/n/10/4e _
+ []
+
+<photo/fig2_delay_breakdown.pdf, id=325, 505.89pt x 332.44202pt>
 File: photo/fig2_delay_breakdown.pdf Graphic file (type pdf)
 <use photo/fig2_delay_breakdown.pdf>
 Package pdftex.def Info: photo/fig2_delay_breakdown.pdf  used on input line 127
 3.
-(pdftex.def)             Requested size: 231.83954pt x 165.99164pt.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
 [9 <./photo/fig1_total_delay.pdf>]
 
 LaTeX Warning: Reference `sec:placement_scoring' on page 10 undefined on input 
@@ -1528,10 +1541,10 @@ line 1278.
 
 
 LaTeX Warning: Reference `fig:substitutions' on page 10 undefined on input line
- 1287.
+ 1288.
 
 
-Underfull \hbox (badness 2253) in paragraph at lines 1287--1292
+Underfull \hbox (badness 2253) in paragraph at lines 1288--1293
 []\T1/ptm/m/n/10 Fig. [] \C70/gbsn/b/n/10/7e ﬂ \C70/gbsn/b/n/10/8b ° \C70/gbsn/
 b/n/10/4e Ü ^^M \C70/gbsn/b/n/10/54 ^^L \C70/gbsn/b/n/10/65 π \C70/gbsn/m/it/10
 /6c ’ \C70/gbsn/b/n/10/4e - \C70/gbsn/b/n/10/66 ˇ \C70/gbsn/b/n/10/4e „ ^^S \C7
@@ -1539,150 +1552,167 @@ b/n/10/4e Ü ^^M \C70/gbsn/b/n/10/54 ^^L \C70/gbsn/b/n/10/65 π \C70/gbsn/m/it/10
 /10/75 ( \C70/gbsn/m/it/10/6b !
  []
 
-<photo/fig3_substitutions.pdf, id=408, 440.39592pt x 315.39983pt>
+<photo/fig3_substitutions.pdf, id=410, 505.89pt x 332.44202pt>
 File: photo/fig3_substitutions.pdf Graphic file (type pdf)
 <use photo/fig3_substitutions.pdf>
-Package pdftex.def Info: photo/fig3_substitutions.pdf  used on input line 1295.
+Package pdftex.def Info: photo/fig3_substitutions.pdf  used on input line 1296.
 
-(pdftex.def)             Requested size: 231.83954pt x 166.03496pt.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
 
-LaTeX Warning: Reference `eq:cost' on page 10 undefined on input line 1303.
+LaTeX Warning: Reference `eq:cost' on page 10 undefined on input line 1304.
 
 
 LaTeX Warning: Reference `fig:sensitivity_xi' on page 10 undefined on input lin
-e 1310.
+e 1311.
 
-<photo/fig4_sensitivity_xi.pdf, id=409, 488.36012pt x 696.97388pt>
+
+LaTeX Warning: Reference `eq:cost' on page 10 undefined on input line 1315.
+
+<photo/fig4_sensitivity_xi.pdf, id=411, 505.89pt x 332.44202pt>
 File: photo/fig4_sensitivity_xi.pdf Graphic file (type pdf)
 <use photo/fig4_sensitivity_xi.pdf>
-Package pdftex.def Info: photo/fig4_sensitivity_xi.pdf  used on input line 1318
+Package pdftex.def Info: photo/fig4_sensitivity_xi.pdf  used on input line 1320
 .
-(pdftex.def)             Requested size: 231.83954pt x 330.8746pt.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
 
 LaTeX Warning: Reference `fig:sensitivity_mid' on page 10 undefined on input li
-ne 1323.
+ne 1331.
 
-<photo/fig5_sensitivity_mid_size.pdf, id=410, 488.36012pt x 696.97388pt>
+<photo/fig5_sensitivity_mid_size.pdf, id=412, 505.89pt x 332.44202pt>
 File: photo/fig5_sensitivity_mid_size.pdf Graphic file (type pdf)
 <use photo/fig5_sensitivity_mid_size.pdf>
 Package pdftex.def Info: photo/fig5_sensitivity_mid_size.pdf  used on input lin
-e 1331.
-(pdftex.def)             Requested size: 231.83954pt x 330.8746pt.
+e 1341.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
 
 LaTeX Warning: Reference `fig:sensitivity_memory' on page 10 undefined on input
- line 1336.
+ line 1346.
 
-<photo/fig6_sensitivity_memory.pdf, id=411, 488.36012pt x 696.97388pt>
+<photo/fig6_sensitivity_memory.pdf, id=413, 505.89pt x 332.44202pt>
 File: photo/fig6_sensitivity_memory.pdf Graphic file (type pdf)
 <use photo/fig6_sensitivity_memory.pdf>
 Package pdftex.def Info: photo/fig6_sensitivity_memory.pdf  used on input line 
-1346.
-(pdftex.def)             Requested size: 231.83954pt x 330.8746pt.
-
-LaTeX Warning: Reference `fig:scale_uav' on page 10 undefined on input line 135
-4.
-
+1355.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
 [10 <./photo/fig2_delay_breakdown.pdf> <./photo/fig3_substitutions.pdf> <./phot
 o/fig4_sensitivity_xi.pdf>]
-<photo/fig7_uav_count.pdf, id=642, 488.44044pt x 315.12859pt>
+
+LaTeX Warning: Reference `fig:scale_uav' on page 11 undefined on input line 137
+0.
+
+<photo/fig7_uav_count.pdf, id=628, 505.89pt x 332.44202pt>
 File: photo/fig7_uav_count.pdf Graphic file (type pdf)
 <use photo/fig7_uav_count.pdf>
-Package pdftex.def Info: photo/fig7_uav_count.pdf  used on input line 1370.
-(pdftex.def)             Requested size: 231.83954pt x 149.57703pt.
-
+Package pdftex.def Info: photo/fig7_uav_count.pdf  used on input line 1384.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
 
 LaTeX Warning: Reference `fig:scale_task' on page 11 undefined on input line 13
-75.
+95.
 
-<photo/fig8_task_count.pdf, id=643, 849.85063pt x 343.42905pt>
+<photo/fig8_task_count.pdf, id=629, 505.89pt x 332.44202pt>
 File: photo/fig8_task_count.pdf Graphic file (type pdf)
 <use photo/fig8_task_count.pdf>
-Package pdftex.def Info: photo/fig8_task_count.pdf  used on input line 1391.
-(pdftex.def)             Requested size: 252.0pt x 101.83472pt.
+Package pdftex.def Info: photo/fig8_task_count.pdf  used on input line 1408.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
+
+LaTeX Warning: Reference `fig:scale_task' on page 11 undefined on input line 14
+13.
+
 
 LaTeX Warning: Reference `fig:scale_expert' on page 11 undefined on input line 
-1396.
+1420.
 
-<photo/fig9_expert_count.pdf, id=644, 849.7904pt x 584.95541pt>
+<photo/fig9_expert_count.pdf, id=630, 505.89pt x 332.44202pt>
 File: photo/fig9_expert_count.pdf Graphic file (type pdf)
 <use photo/fig9_expert_count.pdf>
-Package pdftex.def Info: photo/fig9_expert_count.pdf  used on input line 1414.
-(pdftex.def)             Requested size: 495.36346pt x 340.97917pt.
-
-LaTeX Warning: Reference `fig:scale_area' on page 11 undefined on input line 14
-19.
-
+Package pdftex.def Info: photo/fig9_expert_count.pdf  used on input line 1433.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
 [11 <./photo/fig5_sensitivity_mid_size.pdf> <./photo/fig6_sensitivity_memory.pd
-f> <./photo/fig7_uav_count.pdf>]
-<photo/fig10_area_scaling.pdf, id=909, 1138.8704pt x 358.31667pt>
+f> <./photo/fig7_uav_count.pdf> <./photo/fig8_task_count.pdf>]
+
+LaTeX Warning: Reference `fig:scale_area' on page 12 undefined on input line 14
+45.
+
+<photo/fig10_area_scaling.pdf, id=941, 505.89pt x 332.44202pt>
 File: photo/fig10_area_scaling.pdf Graphic file (type pdf)
 <use photo/fig10_area_scaling.pdf>
-Package pdftex.def Info: photo/fig10_area_scaling.pdf  used on input line 1440.
+Package pdftex.def Info: photo/fig10_area_scaling.pdf  used on input line 1466.
 
-(pdftex.def)             Requested size: 495.36346pt x 155.85555pt.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
 
+LaTeX Warning: Reference `fig:advantage_scenario' on page 12 undefined on input
+ line 1471.
 
-LaTeX Warning: Reference `sec:design' on page 12 undefined on input line 1445.
+<photo/fig11_advantage_scenario.pdf, id=942, 505.89pt x 332.44202pt>
+File: photo/fig11_advantage_scenario.pdf Graphic file (type pdf)
+<use photo/fig11_advantage_scenario.pdf>
+Package pdftex.def Info: photo/fig11_advantage_scenario.pdf  used on input line
+ 1489.
+(pdftex.def)             Requested size: 231.83954pt x 152.35196pt.
+
+LaTeX Warning: Reference `sec:design' on page 12 undefined on input line 1494.
 
 
 LaTeX Warning: Citation `mozaffari2019uav' on page 12 undefined on input line 1
-460.
+509.
 
 
-LaTeX Warning: Citation `zhu2019uav' on page 12 undefined on input line 1460.
+LaTeX Warning: Citation `zhu2019uav' on page 12 undefined on input line 1509.
 
 
-LaTeX Warning: Citation `zhou2019edge' on page 12 undefined on input line 1470.
+LaTeX Warning: Citation `zhou2019edge' on page 12 undefined on input line 1519.
 
 
 
-LaTeX Warning: Citation `zeng2020coedge' on page 12 undefined on input line 147
-1.
+LaTeX Warning: Citation `zeng2020coedge' on page 12 undefined on input line 152
+0.
 
 
-LaTeX Warning: Citation `jia2022codl' on page 12 undefined on input line 1472.
+LaTeX Warning: Citation `jia2022codl' on page 12 undefined on input line 1521.
 
 
-LaTeX Warning: Citation `jeong2022band' on page 12 undefined on input line 1473
+LaTeX Warning: Citation `jeong2022band' on page 12 undefined on input line 1522
 .
 
 
-LaTeX Warning: Citation `wang2021asymo' on page 12 undefined on input line 1474
+LaTeX Warning: Citation `wang2021asymo' on page 12 undefined on input line 1523
 .
 
+[12 <./photo/fig9_expert_count.pdf> <./photo/fig10_area_scaling.pdf> <./photo/f
+ig11_advantage_scenario.pdf>]
 
-LaTeX Warning: Citation `shazeer2017moe' on page 12 undefined on input line 148
-3.
-
-
-LaTeX Warning: Citation `fedus2022switch' on page 12 undefined on input line 14
-84.
+LaTeX Warning: Citation `shazeer2017moe' on page 13 undefined on input line 153
+2.
 
 
-LaTeX Warning: Citation `lepikhin2021gshard' on page 12 undefined on input line
- 1484.
+LaTeX Warning: Citation `fedus2022switch' on page 13 undefined on input line 15
+33.
 
 
-LaTeX Warning: Citation `jiang2024mixtral' on page 12 undefined on input line 1
-485.
+LaTeX Warning: Citation `lepikhin2021gshard' on page 13 undefined on input line
+ 1533.
 
 
-LaTeX Warning: Citation `zhou2022mixtureofexperts_routing' on page 12 undefined
- on input line 1486.
+LaTeX Warning: Citation `jiang2024mixtral' on page 13 undefined on input line 1
+534.
 
 
-LaTeX Warning: Citation `du2022glam' on page 12 undefined on input line 1486.
+LaTeX Warning: Citation `zhou2022mixtureofexperts_routing' on page 13 undefined
+ on input line 1535.
 
 
-LaTeX Warning: Citation `aminabadi2022deepspeed' on page 12 undefined on input 
-line 1489.
+LaTeX Warning: Citation `du2022glam' on page 13 undefined on input line 1535.
 
 
-LaTeX Warning: Citation `yu2022orca' on page 12 undefined on input line 1489.
+LaTeX Warning: Citation `aminabadi2022deepspeed' on page 13 undefined on input 
+line 1538.
 
 
-LaTeX Warning: Citation `li2023alpaserve' on page 12 undefined on input line 14
-90.
+LaTeX Warning: Citation `yu2022orca' on page 13 undefined on input line 1538.
+
+
+LaTeX Warning: Citation `li2023alpaserve' on page 13 undefined on input line 15
+39.
 
 No file aeromde_main.bbl.
 
@@ -1696,10 +1726,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[12 <./photo/fig8_task_count.pdf>] [13
-
- <./photo/fig9_expert_count.pdf> <./photo/fig10_area_scaling.pdf>] (./aeromde_m
-ain.aux
+[13] (./aeromde_main.aux
 * soulpos - computing points - it may take a few seconds *
 \openout4 = `aeromde_main.upb'.
 
@@ -1728,11 +1755,11 @@ Package rerunfilecheck Info: Checksums for `aeromde_main.out':
 (rerunfilecheck)             After:  A4382E362306DCE749EB0B4D3C7320BF;7015.
  ) 
 Here is how much of TeX's memory you used:
- 31433 strings out of 467525
- 591725 string characters out of 5416358
+ 31465 strings out of 467525
+ 592368 string characters out of 5416358
  1006970 words of memory out of 5000000
- 59213 multiletter control sequences out of 15000+600000
- 813934 words of font info for 426 fonts, out of 8000000 for 9000
+ 59242 multiletter control sequences out of 15000+600000
+ 814420 words of font info for 428 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
  89i,14n,94p,580b,1987s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
@@ -1833,10 +1860,10 @@ xlive/2026/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><e:/WorkSoftWare/texlive
 /2026/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><e:/WorkSoftWare/texlive/202
 6/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><e:/WorkSoftWare/texlive/2026/tex
 mf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on aeromde_main.pdf (13 pages, 1171150 bytes).
+Output written on aeromde_main.pdf (13 pages, 1180556 bytes).
 PDF statistics:
- 1628 PDF objects out of 1728 (max. 8388607)
- 601 compressed objects within 7 object streams
- 145 named destinations out of 1000 (max. 500000)
- 367 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1644 PDF objects out of 1728 (max. 8388607)
+ 611 compressed objects within 7 object streams
+ 146 named destinations out of 1000 (max. 500000)
+ 372 words of extra memory for PDF output out of 10000 (max. 10000000)
 

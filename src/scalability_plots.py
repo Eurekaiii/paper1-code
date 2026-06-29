@@ -11,6 +11,7 @@ import numpy as np
 
 from .plot_style import (
     COLORS,
+    FIG_SINGLE,
     MARKERS,
     METHOD_LABELS,
     METHOD_ORDER,
@@ -21,6 +22,13 @@ from .plot_style import (
 
 
 apply_style()
+
+LINESTYLES: Dict[str, str] = {
+    "Proposed": "-",
+    "Random Placement": "--",
+    "Importance-based Placement": "-.",
+    "No-similarity Placement": ":",
+}
 
 
 def _read_rows(path: Path) -> List[Dict[str, str]]:
@@ -47,6 +55,7 @@ def _plot_metric_by_experiment(
     title: str,
 ) -> None:
     exp_rows = [row for row in rows if row["experiment"] == experiment]
+    x_values = sorted({_to_float(row["value"]) for row in exp_rows})
     infeasible_points: Dict[str, List[float]] = {}
     for method in METHOD_ORDER:
         method_rows = [row for row in exp_rows if row["method"] == method]
@@ -70,6 +79,7 @@ def _plot_metric_by_experiment(
             ys,
             label=METHOD_LABELS[method],
             color=COLORS[method],
+            linestyle=LINESTYLES[method],
             marker=MARKERS[method],
             linewidth=2.0,
             markersize=5.8,
@@ -105,6 +115,9 @@ def _plot_metric_by_experiment(
     ax.set_xlabel(xlabel, labelpad=6)
     ax.set_ylabel(ylabel, labelpad=6)
     ax.set_title(title, fontsize=11, fontweight="bold", pad=8)
+    if x_values:
+        ax.set_xticks(x_values)
+        ax.set_xlim(x_values[0], x_values[-1])
     style_axes(ax)
 
 
@@ -216,7 +229,7 @@ def _save_single_metric_figure(
     output_base: str | Path,
 ) -> None:
     """Save a single-panel line figure for one scalability sweep."""
-    fig, ax = plt.subplots(figsize=(7.0, 4.6))
+    fig, ax = plt.subplots(figsize=FIG_SINGLE)
     _plot_metric_by_experiment(
         ax,
         rows,
@@ -227,8 +240,16 @@ def _save_single_metric_figure(
         title=title,
     )
     handles, labels = ax.get_legend_handles_labels()
-    ax.legend(handles, labels, loc="best", fontsize=9.5)
-    fig.tight_layout()
+    fig.legend(
+        handles,
+        labels,
+        loc="lower center",
+        ncol=len(METHOD_ORDER),
+        fontsize=9.5,
+        bbox_to_anchor=(0.5, 0.01),
+        frameon=False,
+    )
+    fig.tight_layout(rect=(0.0, 0.12, 1.0, 1.0))
     save_figure(fig, Path(output_base))
 
 
@@ -255,129 +276,32 @@ def plot_task_count_scalability(
 ) -> None:
     """Save the task-count scalability figure."""
     rows = _read_rows(Path(csv_path))
-    fig, axes = plt.subplots(1, 2, figsize=(12.0, 4.6))
-    ax_delay, ax_runtime = axes
-    _plot_metric_by_experiment(
-        ax_delay,
+    _save_single_metric_figure(
         rows,
         "task_count",
         "mean_D_per_task_ms",
         xlabel="Number of Tasks",
         ylabel="Mean Delay per Task (ms)",
-        title="Task Delay",
+        title="Scalability with Task Count",
+        output_base=output_base,
     )
-    _plot_metric_by_experiment(
-        ax_runtime,
-        rows,
-        "task_count",
-        "mean_runtime_ms",
-        xlabel="Number of Tasks",
-        ylabel="Planning Runtime (ms)",
-        title="Planning Runtime",
-    )
-    for idx, ax in enumerate(axes):
-        ax.text(
-            -0.10,
-            1.03,
-            f"({chr(97 + idx)})",
-            transform=ax.transAxes,
-            fontsize=11,
-            fontweight="bold",
-            va="bottom",
-            ha="left",
-        )
-    handles, labels = ax_delay.get_legend_handles_labels()
-    fig.legend(
-        handles,
-        labels,
-        loc="lower center",
-        ncol=len(METHOD_ORDER),
-        fontsize=9.5,
-        bbox_to_anchor=(0.5, -0.04),
-        frameon=False,
-    )
-    fig.suptitle("Scalability with Task Count", fontsize=13, fontweight="bold", y=0.99)
-    fig.tight_layout(rect=(0.0, 0.08, 1.0, 0.95))
-    save_figure(fig, Path(output_base))
 
 
 def plot_expert_scalability(
     csv_path: str | Path = "results/scalability_summary.csv",
     output_base: str | Path = "results/fig9_expert_count",
 ) -> None:
-    """Create a four-panel figure for expert-pool scalability."""
+    """Save the expert-count delay scalability figure."""
     rows = _read_rows(Path(csv_path))
-    fig, axes = plt.subplots(2, 2, figsize=(12.0, 8.0))
-    ax_delay, ax_success, ax_subs, ax_runtime = axes.ravel()
-
-    _plot_metric_by_experiment(
-        ax_delay,
+    _save_single_metric_figure(
         rows,
         "expert_count",
         "mean_D_per_task_ms",
         xlabel="Number of Experts",
         ylabel="Mean Delay per Task (ms)",
-        title="Task Delay",
+        title="Expert Pool Scalability",
+        output_base=output_base,
     )
-    _plot_metric_by_experiment(
-        ax_success,
-        rows,
-        "expert_count",
-        "success_rate",
-        xlabel="Number of Experts",
-        ylabel="Success Rate",
-        title="Feasibility",
-    )
-    ax_success.set_ylim(-0.05, 1.05)
-    _plot_metric_by_experiment(
-        ax_subs,
-        rows,
-        "expert_count",
-        "mean_Substitutions",
-        xlabel="Number of Experts",
-        ylabel="Mean Substitutions",
-        title="Substitution Usage",
-    )
-    _plot_metric_by_experiment(
-        ax_runtime,
-        rows,
-        "expert_count",
-        "mean_runtime_ms",
-        xlabel="Number of Experts",
-        ylabel="Planning Runtime (ms)",
-        title="Planning Runtime",
-    )
-
-    for idx, ax in enumerate(axes.ravel()):
-        ax.text(
-            -0.10,
-            1.03,
-            f"({chr(97 + idx)})",
-            transform=ax.transAxes,
-            fontsize=11,
-            fontweight="bold",
-            va="bottom",
-            ha="left",
-        )
-
-    handles, labels = ax_delay.get_legend_handles_labels()
-    fig.legend(
-        handles,
-        labels,
-        loc="lower center",
-        ncol=len(METHOD_ORDER),
-        fontsize=9.5,
-        bbox_to_anchor=(0.5, -0.02),
-        frameon=False,
-    )
-    fig.suptitle(
-        "Expert Pool Scalability",
-        fontsize=13,
-        fontweight="bold",
-        y=0.99,
-    )
-    fig.tight_layout(rect=(0.0, 0.04, 1.0, 0.97))
-    save_figure(fig, Path(output_base))
 
 
 def plot_area_scalability(
@@ -386,7 +310,7 @@ def plot_area_scalability(
 ) -> None:
     """Save the deployment-area scalability figure."""
     rows = _read_rows(Path(csv_path))
-    fig, axes = plt.subplots(1, 3, figsize=(16.0, 4.8))
+    fig, axes = plt.subplots(1, 3, figsize=FIG_SINGLE)
     ax_fixed_delay, ax_fixed_success, ax_full_delay = axes
 
     _plot_metric_by_experiment(
@@ -437,11 +361,72 @@ def plot_area_scalability(
         loc="lower center",
         ncol=len(METHOD_ORDER),
         fontsize=9.5,
-        bbox_to_anchor=(0.5, -0.04),
+        bbox_to_anchor=(0.5, 0.01),
         frameon=False,
     )
-    fig.suptitle("Deployment Area Scalability", fontsize=13, fontweight="bold", y=0.99)
-    fig.tight_layout(rect=(0.0, 0.08, 1.0, 0.95))
+    fig.suptitle("Deployment Area Scalability", fontsize=13, fontweight="bold", y=0.96)
+    fig.tight_layout(rect=(0.0, 0.12, 1.0, 0.90))
+    save_figure(fig, Path(output_base))
+
+
+def plot_advantage_scenario(
+    csv_path: str | Path = "results/scalability_summary.csv",
+    output_base: str | Path = "results/fig11_advantage_scenario",
+) -> None:
+    """Save the resource-constrained heterogeneous-demand advantage figure."""
+    rows = _read_rows(Path(csv_path))
+    fig, axes = plt.subplots(1, 2, figsize=FIG_SINGLE)
+    ax_delay, ax_success = axes
+
+    _plot_metric_by_experiment(
+        ax_delay,
+        rows,
+        "advantage_memory",
+        "mean_D_per_task_ms",
+        xlabel="UAV Memory Scale",
+        ylabel="Mean Delay per Task (ms)",
+        title="Delay under Tight Expert Memory",
+    )
+    _plot_metric_by_experiment(
+        ax_success,
+        rows,
+        "advantage_memory",
+        "success_rate",
+        xlabel="UAV Memory Scale",
+        ylabel="Success Rate",
+        title="Feasibility under Tight Expert Memory",
+    )
+    ax_success.set_ylim(-0.05, 1.05)
+
+    for idx, ax in enumerate(axes):
+        ax.text(
+            -0.10,
+            1.03,
+            f"({chr(97 + idx)})",
+            transform=ax.transAxes,
+            fontsize=11,
+            fontweight="bold",
+            va="bottom",
+            ha="left",
+        )
+
+    handles, labels = ax_delay.get_legend_handles_labels()
+    fig.legend(
+        handles,
+        labels,
+        loc="lower center",
+        ncol=len(METHOD_ORDER),
+        fontsize=9.5,
+        bbox_to_anchor=(0.5, 0.01),
+        frameon=False,
+    )
+    fig.suptitle(
+        "Advantage Scenario: Heterogeneous Experts with Limited UAV Memory",
+        fontsize=13,
+        fontweight="bold",
+        y=0.96,
+    )
+    fig.tight_layout(rect=(0.0, 0.12, 1.0, 0.90))
     save_figure(fig, Path(output_base))
 
 
@@ -450,10 +435,12 @@ def main() -> None:
     plot_task_count_scalability()
     plot_expert_scalability()
     plot_area_scalability()
+    plot_advantage_scenario()
     print("Saved UAV-count figure: results/fig7_uav_count.{png,pdf}")
     print("Saved task-count figure: results/fig8_task_count.{png,pdf}")
     print("Saved expert-count figure: results/fig9_expert_count.{png,pdf}")
     print("Saved area-scaling figure: results/fig10_area_scaling.{png,pdf}")
+    print("Saved advantage-scenario figure: results/fig11_advantage_scenario.{png,pdf}")
 
 
 if __name__ == "__main__":

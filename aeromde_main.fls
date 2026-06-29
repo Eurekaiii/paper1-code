@@ -370,6 +370,7 @@ INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/soul/soul.sty
 INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/soul/soul-ori.sty
 INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/tex/generic/soul/soul-ori.sty
 INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm
+INPUT aeromde_main.upb
 OUTPUT aeromde_main.out
 OUTPUT aeromde_main.pdf
 INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/tex/latex/cjk/texinput/UTF8/UTF8.bdg
@@ -710,6 +711,7 @@ INPUT ./photo/fig1_total_delay.pdf
 INPUT ./photo/fig1_total_delay.pdf
 INPUT ./photo/fig1_total_delay.pdf
 INPUT ./photo/fig1_total_delay.pdf
+INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/tfm/arphic/gbsnu/gbsnu55.tfm
 INPUT ./photo/fig2_delay_breakdown.pdf
 INPUT ./photo/fig2_delay_breakdown.pdf
 INPUT ./photo/fig2_delay_breakdown.pdf
@@ -755,7 +757,12 @@ INPUT ./photo/fig10_area_scaling.pdf
 INPUT ./photo/fig10_area_scaling.pdf
 INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/tfm/arphic/gbsnu/gbsnu83.tfm
 INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/tfm/arphic/gbsnu/gbsnu80.tfm
-INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/tfm/arphic/gbsnu/gbsnu55.tfm
+INPUT ./photo/fig11_advantage_scenario.pdf
+INPUT ./photo/fig11_advantage_scenario.pdf
+INPUT ./photo/fig11_advantage_scenario.pdf
+INPUT ./photo/fig11_advantage_scenario.pdf
+INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/tfm/arphic/gbsnu/gbsnu79.tfm
+INPUT e:/WorkSoftWare/texlive/2026/texmf-dist/fonts/tfm/arphic/gbsnu/gbsnu7d.tfm
 INPUT aeromde_main.aux
 OUTPUT aeromde_main.upb
 INPUT ./aeromde_main.upa

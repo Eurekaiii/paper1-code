@@ -197,7 +197,7 @@ def plot_fig3_substitutions(summary_csv: Path, output_base: Path) -> None:
     ax.set_ylabel("Mean Expert Substitutions", labelpad=8)
     ax.set_ylim(0, subs.max() * 1.25)
 
-    label_bars(ax, fmt=".1f")
+    label_bars(ax, fmt=".1f", include_zero=True)
 
     style_axes(ax)
     ax.set_title("Expert Substitution Count", fontsize=12, fontweight="bold", pad=12)
@@ -216,6 +216,7 @@ def _add_sensitivity_lines(
 ) -> None:
     """Draw one mean-value line per method on *ax*."""
     grouped: Dict[str, Tuple[List[float], List[float]]] = {}
+    infeasible_points: Dict[str, List[float]] = {}
     for method in METHOD_ORDER:
         method_rows = [r for r in rows if r["method"] == method]
         method_rows.sort(key=lambda r: _to_float(r["value"]))
@@ -223,6 +224,7 @@ def _add_sensitivity_lines(
         for r in method_rows:
             m = _to_float(r[field])
             if not np.isfinite(m):
+                infeasible_points.setdefault(method, []).append(_to_float(r["value"]))
                 continue
             xs.append(_to_float(r["value"]))
             means.append(m)
@@ -249,6 +251,30 @@ def _add_sensitivity_lines(
             markeredgewidth=0.5,
             markeredgecolor="#333333",
             zorder=3,
+        )
+
+    if infeasible_points:
+        y_min, y_max = ax.get_ylim()
+        y_marker = y_min + (y_max - y_min) * 0.95
+        for method, xs in infeasible_points.items():
+            ax.scatter(
+                xs,
+                [y_marker] * len(xs),
+                color=COLORS[method],
+                marker="x",
+                s=44,
+                linewidths=1.4,
+                zorder=4,
+            )
+        ax.text(
+            0.98,
+            0.95,
+            "x: infeasible",
+            transform=ax.transAxes,
+            ha="right",
+            va="top",
+            fontsize=8,
+            color="#444444",
         )
 
 
@@ -329,8 +355,11 @@ def _plot_sensitivity_3panel(
         axes[-1].set_xlim(all_xs[0] - margin, all_xs[-1] + margin)
         axes[-1].set_xticks(all_xs)
 
-    # ── Suptitle ──────────────────────────────────────────────────────
-    fig.suptitle(title, fontsize=13, fontweight="bold", y=1.01)
+    # ── Title ─────────────────────────────────────────────────────────
+    if n_panels == 1:
+        axes[0].set_title(title, fontsize=11, fontweight="bold", pad=8)
+    else:
+        fig.suptitle(title, fontsize=13, fontweight="bold", y=0.96)
 
     # ── Shared legend below all panels ────────────────────────────────
     handles, labels = axes[0].get_legend_handles_labels()
@@ -339,11 +368,14 @@ def _plot_sensitivity_3panel(
         loc="lower center",
         ncol=len(METHOD_ORDER),
         fontsize=9.5,
-        bbox_to_anchor=(0.5, -0.06),
+        bbox_to_anchor=(0.5, 0.01),
         frameon=False,
     )
 
-    fig.tight_layout()
+    if n_panels == 1:
+        fig.tight_layout(rect=(0.0, 0.12, 1.0, 1.0))
+    else:
+        fig.tight_layout(rect=(0.0, 0.12, 1.0, 0.90))
     save_figure(fig, output_base)
 
 

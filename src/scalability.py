@@ -206,7 +206,7 @@ def default_scalability_settings() -> List[ScalabilitySetting]:
     """Return the default sweep design used for the paper add-on experiments."""
     settings: List[ScalabilitySetting] = []
 
-    for num_uavs in [5, 10, 20]:
+    for num_uavs in range(4, 21, 2):
         settings.append(
             ScalabilitySetting(
                 experiment="uav_count",
@@ -217,7 +217,7 @@ def default_scalability_settings() -> List[ScalabilitySetting]:
             )
         )
 
-    for num_tasks in [20, 40, 60, 80, 100]:
+    for num_tasks in range(20, 101, 10):
         settings.append(
             ScalabilitySetting(
                 experiment="task_count",
@@ -256,7 +256,7 @@ def default_scalability_settings() -> List[ScalabilitySetting]:
             )
         )
 
-    for num_experts in [8, 12, 16, 24]:
+    for num_experts in range(8, 25, 2):
         settings.append(
             ScalabilitySetting(
                 experiment="expert_count",
@@ -265,6 +265,19 @@ def default_scalability_settings() -> List[ScalabilitySetting]:
                 num_tasks=80,
                 area_size=240.0,
                 num_experts=num_experts,
+            )
+        )
+
+    for memory_scale in [0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2]:
+        settings.append(
+            ScalabilitySetting(
+                experiment="advantage_memory",
+                value=memory_scale,
+                num_uavs=10,
+                num_tasks=80,
+                area_size=240.0,
+                num_experts=20,
+                memory_scale=memory_scale,
             )
         )
 
