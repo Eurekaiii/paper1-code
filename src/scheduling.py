@@ -15,6 +15,17 @@ from .config import SchedulingConfig
 from .models import ExpertStep, Task, TaskExecutionPlan, UAV
 
 
+def _build_compute_budgets(
+    C_map: Dict[int, float],
+    cfg: SchedulingConfig,
+) -> Dict[int, float]:
+    """Return per-UAV FLOP budgets for the current scheduling window."""
+    if not cfg.enforce_compute_capacity:
+        return {u: float("inf") for u in C_map}
+    window_s = max(cfg.compute_window_s, 0.0)
+    return {u: max(C_u, 0.0) * window_s for u, C_u in C_map.items()}
+
+
 def schedule_task(
     task: Task,
     access_uav: int,
@@ -28,6 +39,7 @@ def schedule_task(
     uav_indices: Dict[int, int],
     F_map: Dict[int, float],
     C_map: Dict[int, float],
+    remaining_compute: Dict[int, float],
     access_delay_val: float,
     cfg: SchedulingConfig,
     comm_cfg,
@@ -79,8 +91,14 @@ def schedule_task(
         best_trans = 0.0
         best_comp = 0.0
         best_err = 0.0
+        capacity_feasible = False
 
         for actual_expert, uav_id in candidates:
+            F_e = F_map.get(actual_expert, 1.0)
+            if remaining_compute.get(uav_id, 0.0) < F_e:
+                continue
+            capacity_feasible = True
+
             if uav_id == cur:
                 trans_delay = 0.0
             else:
@@ -94,7 +112,6 @@ def schedule_task(
             if np.isinf(trans_delay):
                 continue
 
-            F_e = F_map.get(actual_expert, 1.0)
             C_u = C_map.get(uav_id, 1.0)
             comp_delay = F_e / C_u if C_u > 0 else float("inf")
 
@@ -114,6 +131,11 @@ def schedule_task(
                 best_err = err_penalty
 
         if best_expert < 0:
+            if not capacity_feasible:
+                raise RuntimeError(
+                    f"Task {task.id} layer {layer_idx}: reachable expert "
+                    f"candidates exist, but their UAV compute budgets are exhausted."
+                )
             raise RuntimeError(
                 f"Task {task.id} layer {layer_idx}: all single-hop candidates "
                 f"have infinite cost."
@@ -131,6 +153,7 @@ def schedule_task(
                 cost_error=best_err,
             )
         )
+        remaining_compute[best_uav] -= F_map.get(best_expert, 0.0)
         cur = best_uav
 
     D_access = access_delay_val
@@ -171,6 +194,7 @@ def schedule_all_tasks(
     """Schedule all tasks and compute weighted total delay."""
     plans: List[TaskExecutionPlan] = []
     D_weighted = 0.0
+    remaining_compute = _build_compute_budgets(C_map, cfg)
 
     for task_idx, task in enumerate(tasks):
         access_uav = access_assignment[task_idx]
@@ -188,6 +212,7 @@ def schedule_all_tasks(
             uav_indices=uav_indices,
             F_map=F_map,
             C_map=C_map,
+            remaining_compute=remaining_compute,
             access_delay_val=access_delay_val,
             cfg=cfg,
             comm_cfg=comm_cfg,

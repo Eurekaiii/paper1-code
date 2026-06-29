@@ -48,6 +48,8 @@ class SchedulingConfig:
     """Inference scheduling parameters (Section IV-E)."""
     lamb: float = 0.1            # Error penalty weight λ (Eq. 23)
                                  # Larger λ → prefer original experts over substitutes
+    enforce_compute_capacity: bool = True
+    compute_window_s: float = 10.0
 
 
 @dataclass
