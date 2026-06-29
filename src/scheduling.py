@@ -10,7 +10,7 @@ from typing import Dict, List, Set, Tuple
 
 import numpy as np
 
-from .communication import downlink_delay, single_hop_delay
+from .communication import downlink_delay, downlink_rate, single_hop_delay
 from .config import SchedulingConfig
 from .models import ExpertStep, Task, TaskExecutionPlan, UAV
 
@@ -38,6 +38,7 @@ def schedule_task(
     steps: List[ExpertStep] = []
 
     for layer_idx, original_expert in enumerate(task.expert_sequence):
+        is_final_layer = layer_idx == task.L - 1
         if layer_idx == 0:
             data_size = task.S_in
         else:
@@ -54,6 +55,10 @@ def schedule_task(
                     continue
                 deployed_substitutes.append((actual_expert, uav_id))
                 if uav_id == cur or G[uav_indices[cur], uav_indices[uav_id]] == 1:
+                    if is_final_layer and downlink_rate(
+                        uav_objects[uav_id], task.position, comm_cfg
+                    ) <= 0.0:
+                        continue
                     candidates.append((actual_expert, uav_id))
 
         if not candidates:
