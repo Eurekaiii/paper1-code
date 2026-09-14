@@ -24,6 +24,7 @@ from .plot_style import (
     apply_style,
     save_figure,
     style_axes,
+    use_single_panel_layout,
 )
 
 apply_style()
@@ -116,7 +117,7 @@ def _plot_sensitivity(
         ax.text(
             0.02, 0.97, "Infeasible",
             transform=ax.transAxes,
-            fontsize=9, color="#CC3333", fontweight="bold",
+            fontsize=13, color="#CC3333", fontweight="bold",
             fontstyle="italic",
             ha="left", va="top",
         )
@@ -131,9 +132,10 @@ def _plot_sensitivity(
         margin = (all_xs[-1] - all_xs[0]) * 0.08
         ax.set_xlim(all_xs[0] - margin, all_xs[-1] + margin)
 
-    ax.legend(fontsize=9.5, loc="best")
-    ax.set_title(title, fontsize=12, fontweight="bold", pad=12)
+    ax.legend(fontsize=13, loc="best")
+    ax.set_title(title, fontsize=14.3, fontweight="bold", pad=12)
     style_axes(ax)
+    use_single_panel_layout(fig)
     save_figure(fig, output_path)
 
 

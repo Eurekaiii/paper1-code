@@ -29,6 +29,7 @@ from .plot_style import (
     label_bars,
     save_figure,
     style_axes,
+    use_single_panel_layout,
 )
 
 # Apply global rcParams on import so figures are consistent.
@@ -107,7 +108,7 @@ def plot_fig1_total_delay(summary_csv: Path, output_base: Path) -> None:
     annotate_improvement(ax, 0.0, proposed_mean, best_baseline, best_baseline_label)
 
     style_axes(ax)
-    ax.set_title("Mean Total Delay Comparison", fontsize=12, fontweight="bold", pad=12)
+    use_single_panel_layout(fig)
     save_figure(fig, output_base)
 
 
@@ -151,7 +152,7 @@ def plot_fig2_delay_breakdown(summary_csv: Path, output_base: Path) -> None:
                     bar.get_x() + bar.get_width() / 2, h,
                     f"{h:.1f}",
                     ha="center", va="bottom",
-                    fontsize=7.5, fontweight="bold", color="#333333",
+                    fontsize=13, fontweight="bold", color="#333333",
                 )
 
     ax.set_xticks(x)
@@ -163,9 +164,9 @@ def plot_fig2_delay_breakdown(summary_csv: Path, output_base: Path) -> None:
     y_max = max(compute.max(), trans.max()) * 1.25
     ax.set_ylim(0, y_max)
 
-    ax.legend(fontsize=9.5, loc="upper right")
+    ax.legend(fontsize=13, loc="upper right")
     style_axes(ax)
-    ax.set_title("Delay Breakdown by Component", fontsize=12, fontweight="bold", pad=12)
+    use_single_panel_layout(fig)
     save_figure(fig, output_base)
 
 
@@ -200,7 +201,7 @@ def plot_fig3_substitutions(summary_csv: Path, output_base: Path) -> None:
     label_bars(ax, fmt=".1f", include_zero=True)
 
     style_axes(ax)
-    ax.set_title("Expert Substitution Count", fontsize=12, fontweight="bold", pad=12)
+    use_single_panel_layout(fig)
     save_figure(fig, output_base)
 
 
@@ -273,7 +274,7 @@ def _add_sensitivity_lines(
             transform=ax.transAxes,
             ha="right",
             va="top",
-            fontsize=8,
+            fontsize=13,
             color="#444444",
         )
 
@@ -291,6 +292,7 @@ def _plot_sensitivity_3panel(
     mark_infeasible: bool = False,
     infeasible_min_x: float | None = None,
     x_margin_frac: float = 0.08,
+    keep_x_values: Iterable[float] | None = None,
 ) -> None:
     """Generic 3-row sensitivity figure.
 
@@ -298,6 +300,9 @@ def _plot_sensitivity_3panel(
     All rows share the same x-axis and a single legend placed below.
     """
     rows = _read_csv(csv_path)
+    if keep_x_values is not None:
+        keep = {round(x, 6) for x in keep_x_values}
+        rows = [r for r in rows if round(_to_float(r["value"]), 6) in keep]
     n_panels = len(fields)
 
     figsize = FIG_SINGLE if n_panels == 1 else (FIG_TALL_3[0], FIG_TALL_3[1] * n_panels / 3)
@@ -333,7 +338,7 @@ def _plot_sensitivity_3panel(
                     "Infeasible",
                     transform=ax.get_xaxis_transform(),
                     ha="center", va="top",
-                    fontsize=9, color="#CC3333", fontweight="bold",
+                    fontsize=13, color="#CC3333", fontweight="bold",
                     fontstyle="italic",
                 )
 
@@ -343,7 +348,7 @@ def _plot_sensitivity_3panel(
             ax.text(
                 -0.06, 1.02, f"({chr(97 + idx)})",
                 transform=ax.transAxes,
-                fontsize=11, fontweight="bold", va="bottom", ha="left",
+                fontsize=14.3, fontweight="bold", va="bottom", ha="left",
             )
 
     # ── Shared x-label ────────────────────────────────────────────────
@@ -356,26 +361,23 @@ def _plot_sensitivity_3panel(
         axes[-1].set_xticks(all_xs)
 
     # ── Title ─────────────────────────────────────────────────────────
-    if n_panels == 1:
-        axes[0].set_title(title, fontsize=11, fontweight="bold", pad=8)
-    else:
-        fig.suptitle(title, fontsize=13, fontweight="bold", y=0.96)
-
-    # ── Shared legend below all panels ────────────────────────────────
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(
+    axes[0].legend(
         handles, labels,
-        loc="lower center",
-        ncol=len(METHOD_ORDER),
-        fontsize=9.5,
-        bbox_to_anchor=(0.5, 0.01),
-        frameon=False,
+        loc="center left",
+        bbox_to_anchor=(0.04, 0.56),
+        ncol=1,
+        fontsize=13,
+        frameon=True,
+        facecolor="white",
+        edgecolor="none",
+        framealpha=0.9,
     )
 
     if n_panels == 1:
-        fig.tight_layout(rect=(0.0, 0.12, 1.0, 1.0))
+        use_single_panel_layout(fig)
     else:
-        fig.tight_layout(rect=(0.0, 0.12, 1.0, 0.90))
+        fig.tight_layout()
     save_figure(fig, output_base)
 
 
@@ -399,7 +401,7 @@ def _plot_sensitivity_2panel(
     ax1.set_ylabel("Mean Total Delay  (ms)", labelpad=6)
     style_axes(ax1)
     ax1.text(-0.06, 1.02, "(a)", transform=ax1.transAxes,
-             fontsize=11, fontweight="bold", va="bottom", ha="left")
+             fontsize=14.3, fontweight="bold", va="bottom", ha="left")
 
     # ── Panel (b): Breakdown ──────────────────────────────────────
     # For clarity we overlay only Proposed and the best baseline
@@ -424,12 +426,12 @@ def _plot_sensitivity_2panel(
     from matplotlib.lines import Line2D
     legend_comp = Line2D([0], [0], color="#555555", linestyle="--", linewidth=1.6, label="Computation")
     legend_trans = Line2D([0], [0], color="#555555", linestyle=":", linewidth=1.6, label="Transmission")
-    ax2.legend(handles=[legend_comp, legend_trans], fontsize=9, loc="upper right")
+    ax2.legend(handles=[legend_comp, legend_trans], fontsize=13, loc="upper right")
 
     ax2.set_ylabel("Delay Breakdown  (ms)", labelpad=6)
     style_axes(ax2)
     ax2.text(-0.06, 1.02, "(b)", transform=ax2.transAxes,
-             fontsize=11, fontweight="bold", va="bottom", ha="left")
+             fontsize=14.3, fontweight="bold", va="bottom", ha="left")
 
     # ── Shared x-axis ─────────────────────────────────────────────
     axes[-1].set_xlabel(xlabel, labelpad=8)
@@ -441,9 +443,9 @@ def _plot_sensitivity_2panel(
     # ── Shared method legend ──────────────────────────────────────
     handles, labels = ax1.get_legend_handles_labels()
     fig.legend(handles, labels, loc="lower center", ncol=len(METHOD_ORDER),
-               fontsize=9.5, bbox_to_anchor=(0.5, -0.07), frameon=False)
+               fontsize=13, bbox_to_anchor=(0.5, -0.07), frameon=False)
 
-    fig.suptitle(title, fontsize=13, fontweight="bold", y=1.01)
+    fig.suptitle(title, fontsize=14.3, fontweight="bold", y=1.01)
     fig.tight_layout()
     save_figure(fig, output_base)
 
@@ -482,15 +484,14 @@ def plot_fig5_sensitivity_mid_size(csv_path: Path, output_base: Path) -> None:
 
 
 def plot_fig6_sensitivity_memory(csv_path: Path, output_base: Path) -> None:
-    """UAV memory capacity → 3-panel sensitivity chart with infeasible region."""
+    """UAV memory capacity → single-panel sensitivity chart."""
     _plot_sensitivity_3panel(
         csv_path, output_base,
         xlabel="UAV Memory Capacity  (scale factor)",
         title="Effect of UAV Memory Capacity",
         fields=_SENSITIVITY_FIELDS[:1],
-        mark_infeasible=True,
-        infeasible_min_x=0.8,
         x_margin_frac=0.0,
+        keep_x_values=[0.9, 1.0, 1.1, 1.2, 1.3, 1.4],
     )
 
 

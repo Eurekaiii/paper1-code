@@ -11,13 +11,17 @@ import numpy as np
 
 from .plot_style import (
     COLORS,
+    FIG_GRID_2X3,
     FIG_SINGLE,
+    FIG_WIDE_2,
+    FIG_WIDE_3,
     MARKERS,
     METHOD_LABELS,
     METHOD_ORDER,
     apply_style,
     save_figure,
     style_axes,
+    use_single_panel_layout,
 )
 
 
@@ -108,13 +112,12 @@ def _plot_metric_by_experiment(
             transform=ax.transAxes,
             ha="right",
             va="top",
-            fontsize=8,
+            fontsize=13,
             color="#444444",
         )
 
     ax.set_xlabel(xlabel, labelpad=6)
     ax.set_ylabel(ylabel, labelpad=6)
-    ax.set_title(title, fontsize=11, fontweight="bold", pad=8)
     if x_values:
         ax.set_xticks(x_values)
         ax.set_xlim(x_values[0], x_values[-1])
@@ -128,7 +131,7 @@ def plot_scalability_summary(
     """Create the four-panel scalability summary figure."""
     rows = _read_rows(Path(csv_path))
 
-    fig, axes = plt.subplots(2, 3, figsize=(16.0, 8.2))
+    fig, axes = plt.subplots(2, 3, figsize=FIG_GRID_2X3)
     ax_uav, ax_task, ax_area_delay, ax_area_success, ax_full, ax_runtime = axes.ravel()
 
     _plot_metric_by_experiment(
@@ -193,7 +196,7 @@ def plot_scalability_summary(
             1.03,
             f"({chr(97 + idx)})",
             transform=ax.transAxes,
-            fontsize=11,
+            fontsize=14.3,
             fontweight="bold",
             va="bottom",
             ha="left",
@@ -205,13 +208,13 @@ def plot_scalability_summary(
         labels,
         loc="lower center",
         ncol=len(METHOD_ORDER),
-        fontsize=9.5,
+        fontsize=13,
         bbox_to_anchor=(0.5, -0.02),
         frameon=False,
     )
     fig.suptitle(
         "Scalability and Spatial Robustness",
-        fontsize=13,
+        fontsize=14.3,
         fontweight="bold",
         y=0.99,
     )
@@ -227,6 +230,7 @@ def _save_single_metric_figure(
     ylabel: str,
     title: str,
     output_base: str | Path,
+    legend_position: str = "inside",
 ) -> None:
     """Save a single-panel line figure for one scalability sweep."""
     fig, ax = plt.subplots(figsize=FIG_SINGLE)
@@ -239,17 +243,29 @@ def _save_single_metric_figure(
         ylabel=ylabel,
         title=title,
     )
-    handles, labels = ax.get_legend_handles_labels()
-    fig.legend(
-        handles,
-        labels,
-        loc="lower center",
-        ncol=len(METHOD_ORDER),
-        fontsize=9.5,
-        bbox_to_anchor=(0.5, 0.01),
-        frameon=False,
-    )
-    fig.tight_layout(rect=(0.0, 0.12, 1.0, 1.0))
+    use_single_panel_layout(fig)
+    if legend_position == "inside_blank":
+        ax.legend(
+            loc="upper left",
+            bbox_to_anchor=(0.03, 0.74),
+            ncol=1,
+            fontsize=13,
+            frameon=True,
+            facecolor="white",
+            edgecolor="none",
+            framealpha=0.9,
+        )
+    else:
+        ax.legend(
+            loc="upper left",
+            bbox_to_anchor=(0.03, 0.74),
+            ncol=1,
+            fontsize=13,
+            frameon=True,
+            facecolor="white",
+            edgecolor="none",
+            framealpha=0.9,
+        )
     save_figure(fig, Path(output_base))
 
 
@@ -301,6 +317,7 @@ def plot_expert_scalability(
         ylabel="Mean Delay per Task (ms)",
         title="Expert Pool Scalability",
         output_base=output_base,
+        legend_position="inside_blank",
     )
 
 
@@ -310,7 +327,7 @@ def plot_area_scalability(
 ) -> None:
     """Save the deployment-area scalability figure."""
     rows = _read_rows(Path(csv_path))
-    fig, axes = plt.subplots(1, 3, figsize=FIG_SINGLE)
+    fig, axes = plt.subplots(1, 3, figsize=FIG_WIDE_3)
     ax_fixed_delay, ax_fixed_success, ax_full_delay = axes
 
     _plot_metric_by_experiment(
@@ -348,7 +365,7 @@ def plot_area_scalability(
             1.03,
             f"({chr(97 + idx)})",
             transform=ax.transAxes,
-            fontsize=11,
+            fontsize=14.3,
             fontweight="bold",
             va="bottom",
             ha="left",
@@ -360,12 +377,12 @@ def plot_area_scalability(
         labels,
         loc="lower center",
         ncol=len(METHOD_ORDER),
-        fontsize=9.5,
+        fontsize=13,
         bbox_to_anchor=(0.5, 0.01),
         frameon=False,
     )
-    fig.suptitle("Deployment Area Scalability", fontsize=13, fontweight="bold", y=0.96)
-    fig.tight_layout(rect=(0.0, 0.12, 1.0, 0.90))
+    fig.suptitle("Deployment Area Scalability", fontsize=14.3, fontweight="bold", y=0.96)
+    fig.subplots_adjust(left=0.04, bottom=0.18, right=0.975, top=0.91, wspace=0.28)
     save_figure(fig, Path(output_base))
 
 
@@ -375,7 +392,7 @@ def plot_advantage_scenario(
 ) -> None:
     """Save the resource-constrained heterogeneous-demand advantage figure."""
     rows = _read_rows(Path(csv_path))
-    fig, axes = plt.subplots(1, 2, figsize=FIG_SINGLE)
+    fig, axes = plt.subplots(1, 2, figsize=FIG_WIDE_2)
     ax_delay, ax_success = axes
 
     _plot_metric_by_experiment(
@@ -404,7 +421,7 @@ def plot_advantage_scenario(
             1.03,
             f"({chr(97 + idx)})",
             transform=ax.transAxes,
-            fontsize=11,
+            fontsize=14.3,
             fontweight="bold",
             va="bottom",
             ha="left",
@@ -416,17 +433,17 @@ def plot_advantage_scenario(
         labels,
         loc="lower center",
         ncol=len(METHOD_ORDER),
-        fontsize=9.5,
+        fontsize=13,
         bbox_to_anchor=(0.5, 0.01),
         frameon=False,
     )
     fig.suptitle(
         "Advantage Scenario: Heterogeneous Experts with Limited UAV Memory",
-        fontsize=13,
+        fontsize=14.3,
         fontweight="bold",
         y=0.96,
     )
-    fig.tight_layout(rect=(0.0, 0.12, 1.0, 0.90))
+    fig.subplots_adjust(left=0.05, bottom=0.18, right=0.975, top=0.91, wspace=0.24)
     save_figure(fig, Path(output_base))
 
 

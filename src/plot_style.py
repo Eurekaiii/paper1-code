@@ -11,6 +11,10 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Dict, List
 
+import matplotlib
+
+matplotlib.use("Agg")
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -64,10 +68,15 @@ BAR_EDGE: str = "#4A4A4A"
 #  Figure dimensions (inches)
 # ═══════════════════════════════════════════════════════════════════════════
 
-FIG_SINGLE  = (7.0, 4.6)    # single-panel bar / line chart
-FIG_WIDE_2  = (12.0, 4.8)   # two-panel horizontal
+FIG_SINGLE  = (7.25, 5.05)  # single-panel bar / line chart
+FIG_WIDE_2  = (13.70, 5.17) # two-panel horizontal, same axes size as FIG_SINGLE
+FIG_WIDE_3  = (21.54, 5.20) # three-panel horizontal, same axes size as FIG_SINGLE
+FIG_GRID_2X3 = (21.2, 10.1) # six-panel summary, same axes size as FIG_SINGLE
 FIG_TALL_2  = (7.0, 8.0)    # two-panel vertical
 FIG_TALL_3  = (7.0, 9.0)    # three-panel vertical
+
+AX_BOX_ASPECT = 0.62
+SINGLE_PANEL_RECT = (0.18, 0.20, 0.96, 0.90)
 
 # ═══════════════════════════════════════════════════════════════════════════
 #  Global rcParams
@@ -77,22 +86,23 @@ def apply_style() -> None:
     """Set matplotlib rcParams for a clean, publication-ready look."""
     plt.rcParams.update({
         # Font
-        "font.family":          "sans-serif",
-        "font.sans-serif":      ["Arial", "Helvetica", "DejaVu Sans"],
-        "font.size":            11,
-        "axes.titlesize":       12,
-        "axes.labelsize":       11,
-        "xtick.labelsize":      10,
-        "ytick.labelsize":      10,
-        "legend.fontsize":      9,
+        "font.family":          "serif",
+        "font.serif":           ["Times New Roman", "Times", "DejaVu Serif"],
+        "mathtext.fontset":     "stix",
+        "font.size":            14.3,
+        "axes.titlesize":       14.3,
+        "axes.labelsize":       14.3,
+        "xtick.labelsize":      13,
+        "ytick.labelsize":      13,
+        "legend.fontsize":      13,
         # Figure
         "figure.dpi":           150,
         "savefig.dpi":          300,
         "savefig.bbox":         None,
         "savefig.pad_inches":   0.04,
         # Spine defaults
-        "axes.spines.top":      False,
-        "axes.spines.right":    False,
+        "axes.spines.top":      True,
+        "axes.spines.right":    True,
         "axes.linewidth":       0.9,
         "xtick.major.width":    0.7,
         "ytick.major.width":    0.7,
@@ -127,7 +137,18 @@ def style_axes(ax: plt.Axes, grid: bool = True) -> None:
     if grid:
         ax.grid(axis="y", linestyle="--", linewidth=0.5, alpha=0.25, zorder=0)
         ax.set_axisbelow(True)
-    ax.tick_params(axis="both", labelsize=10)
+    for spine in ax.spines.values():
+        spine.set_visible(True)
+        spine.set_color("#222222")
+        spine.set_linewidth(0.9)
+    ax.set_box_aspect(AX_BOX_ASPECT)
+    ax.tick_params(axis="both", labelsize=13)
+
+
+def use_single_panel_layout(fig: plt.Figure) -> None:
+    """Use one fixed axes rectangle for all single-panel paper figures."""
+    left, bottom, right, top = SINGLE_PANEL_RECT
+    fig.subplots_adjust(left=left, bottom=bottom, right=right, top=top)
 
 
 def save_figure(fig: plt.Figure, path: Path) -> None:
@@ -165,7 +186,7 @@ def label_bars(
 
     kw = dict(
         ha="center", va="bottom",
-        fontsize=8.5, fontweight="bold",
+        fontsize=13, fontweight="bold",
         color="#333333",
     )
     kw.update(kwargs)
@@ -197,7 +218,7 @@ def add_reference_line(
             0.98, 0.96, f"← {label}",
             transform=ax.transAxes,
             ha="right", va="top",
-            fontsize=8, color=color, alpha=0.85,
+            fontsize=13, color=color, alpha=0.85,
             fontweight="bold",
         )
 
@@ -227,7 +248,7 @@ def annotate_improvement(
         f"↓ {pct:.0f}%\nvs {baseline_label}",
         xy=(x, proposed_val),
         xytext=(x, anchor_y),
-        fontsize=8, color="#CC3333", fontweight="bold",
+        fontsize=13, color="#CC3333", fontweight="bold",
         ha="center", va="bottom",
         arrowprops=dict(
             arrowstyle="->", color="#CC3333", lw=0.9,

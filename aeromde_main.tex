@@ -258,7 +258,7 @@ Fig.~\ref{fig:system_model} 展示了本文考虑的准静态 UAV 协同推理�
 \begin{figure}[!t]
   \centering
   \includegraphics[width=\columnwidth]{photo/system_model_uav_scenario.png}
-  \caption{准静态 UAV 边缘网络中的协同推理场景。地面任务通过空地链路接入 UAV，多个资源异构 UAV 在给定无线拓扑下协同执行 MoE 推理计算单元，并通过 UAV-UAV 链路传输中间特征，最终将推理结果返回至基站或应急指挥中心。}
+  \caption{准静态 UAV 边缘网络中的协同 MoE 推理场景。地面任务通过空地链路接入 UAV，资源异构 UAV 在给定单跳无线拓扑下部署并执行推理模块或专家步骤；当相邻步骤位于不同 UAV 时，系统仅通过可用 UAV-UAV 单跳链路传输中间特征，不可用链路不参与调度，最终将推理结果返回至基站或应急指挥中心。}
   \label{fig:system_model}
 \end{figure}
 
@@ -502,14 +502,14 @@ MoE 专家候选构造、相似性感知专家部署和逐层单跳推理调度�
     \node[stage, below=of s1] (s2) {
       \textbf{2) 相似专家候选构造}\\
       基于 $\mathrm{Sim}(r,e)$ 构造
-      $\mathcal{A}(r)=\{r\}\cup\{e\mid \mathrm{Sim}(r,e)\ge\xi\}$，
+      $\mathcal{A}(r)=\{r\}\cup\{e\in\mathcal{E}\mid \mathrm{Sim}(r,e)\ge\xi\}$，
       并计算候选集合 $\mathcal{E}_{\mathrm{cand}}$ 与
       $\mathrm{Demand}^{\mathrm{eff}}(e,u)$。
     };
     \node[stage, below=of s2] (s3) {
       \textbf{3) 通信感知部署评分}\\
       结合本地/单跳邻域需求、UAV 计算能力、网络位置和专家内存占用，
-      计算 $\mathrm{BaseScore}(e,u)=\alpha A+\beta B+\gamma C-\mu W_e$。
+      计算 $\mathrm{BaseScore}(e,u)=\alpha A(e,u)+\beta B(e,u)+\gamma C(e,u)-\mu W_e$。
     };
     \node[stage, below=of s3] (s4) {
       \textbf{4) 动态贪心部署与逐层调度}\\
@@ -1211,6 +1211,127 @@ $\omega_k$ 以及由 gating 决定的专家执行序列 $\mathbf{e}_k$。每个�
 $\alpha=0.4$、$\beta=0.25$、$\gamma=0.2$、$\mu=0.15$、
 $\eta=0.5$、$\nu=0.3$、$\eta_{\mathrm{red}}=0.5$、
 $\lambda=0.1$，相似度阈值默认为 $\xi=0.7$。
+为便于复现实验，表~\ref{tab:simulation_parameters} 总结了默认仿真场景和无线信道参数，
+表~\ref{tab:task_expert_parameters} 给出了任务与专家池设置，表~\ref{tab:algorithm_sweep_parameters}
+列出了算法超参数以及敏感性、扩展性实验中的参数扫描范围。
+
+\begin{table}[!t]
+  \centering
+  \caption{SIMULATION SCENARIO AND WIRELESS SETTINGS.}
+  \label{tab:simulation_parameters}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \renewcommand{\arraystretch}{1.12}
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\columnwidth}
+                  >{\raggedright\arraybackslash}p{0.58\columnwidth}@{}}
+    \toprule
+    Item & Setting \\
+    \midrule
+    \multicolumn{2}{@{}l}{\textit{Scenario scale}} \\
+    Scenario & Controlled random hotspot UAV scenario \\
+    Random seeds & $\{0,1,2,3,4\}$ \\
+    Area & $240\,\mathrm{m}\times240\,\mathrm{m}$ \\
+    UAVs / tasks / experts & $U=4$, $K=40$, $E=8$ \\
+    Expert vector dimension & 64 \\
+    \addlinespace[1pt]
+    \midrule
+    \multicolumn{2}{@{}l}{\textit{UAV resources}} \\
+    Base positions & $(60,60)$, $(180,60)$, $(60,180)$, $(180,180)$ m \\
+    Position perturbation & $x,y\sim\mathcal{U}[-10,10]$ m; $H\sim\mathcal{U}[70,90]$ m \\
+    Computing capability $C_u$ & $\mathcal{U}[8,11]$ GFLOP/s \\
+    Memory capacity $M_u$ & $\mathcal{U}[850,1050]$ MB \\
+    UAV transmit power $P_u$ & $\mathcal{U}[10,14]$ W \\
+    \addlinespace[1pt]
+    \midrule
+    \multicolumn{2}{@{}l}{\textit{Wireless channel}} \\
+    Communication mode & Ground--UAV access and single-hop UAV--UAV links \\
+    Reference gain $\beta_0$ & 1 \\
+    Path-loss exponent & 2.5 \\
+    Noise density $N_0$ & $10^{-12}$ W/Hz \\
+    Bandwidth $B$ & 20 MHz \\
+    SNR threshold $\rho_{\mathrm{th}}$ & 0.5 \\
+    Ground transmit power & 5 W \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[!t]
+  \centering
+  \caption{TASK AND EXPERT SPECIFICATIONS.}
+  \label{tab:task_expert_parameters}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \renewcommand{\arraystretch}{1.12}
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\columnwidth}
+                  >{\raggedright\arraybackslash}p{0.58\columnwidth}@{}}
+    \toprule
+    Item & Setting \\
+    \midrule
+    \multicolumn{2}{@{}l}{\textit{Expert pool}} \\
+    Original experts $E_0$--$E_3$ & $W_e\sim\mathcal{U}[620,760]$ MB, $F_e\sim\mathcal{U}[1.0,1.35]$ GFLOP \\
+    Substitute experts $E_4$--$E_6$ & $W_e\sim\mathcal{U}[220,320]$ MB, $F_e\sim\mathcal{U}[0.35,0.52]$ GFLOP \\
+    Auxiliary expert $E_7$ & $W_e\sim\mathcal{U}[280,380]$ MB, $F_e\sim\mathcal{U}[0.50,0.70]$ GFLOP \\
+    Similar pairs & $(E_0,E_4)$, $(E_1,E_5)$, $(E_2,E_6)$ \\
+    Similarity noise scale & $\mathcal{U}[0.06,0.10]$ \\
+    \addlinespace[1pt]
+    \midrule
+    \multicolumn{2}{@{}l}{\textit{Task profile}} \\
+    Number of layers & $\mathcal{U}\{2,3,4\}$ \\
+    Input size $S_k^{\mathrm{in}}$ & $\mathcal{U}[1.0,2.2]$ Mbit \\
+    Output size $S_k^{\mathrm{out}}$ & $\mathcal{U}[10,25]$ kbit \\
+    Mid-feature size $S_{k,l}^{\mathrm{mid}}$ & First value $\mathcal{U}[0.8,1.4]$ Mbit, then multiplied by $0.9^l$ \\
+    Task priority $\omega_k$ & $\mathcal{U}[0.8,1.4]$ \\
+    Hotspot spread & Gaussian offset, $\sigma=12$ m \\
+    \addlinespace[1pt]
+    \midrule
+    \multicolumn{2}{@{}l}{\textit{Hotspot expert distributions}} \\
+    UAV 0 & experts $(0,1,3,2)$, probabilities $(0.75,0.15,0.07,0.03)$ \\
+    UAV 1 & experts $(1,3,0,2)$, probabilities $(0.75,0.15,0.07,0.03)$ \\
+    UAV 2 & experts $(2,0,3,1)$, probabilities $(0.75,0.15,0.07,0.03)$ \\
+    UAV 3 & experts $(0,2,1,3)$, probabilities $(0.48,0.48,0.02,0.02)$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[!t]
+  \centering
+  \caption{ALGORITHM PARAMETERS AND SWEEP SETTINGS.}
+  \label{tab:algorithm_sweep_parameters}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \renewcommand{\arraystretch}{1.12}
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\columnwidth}
+                  >{\raggedright\arraybackslash}p{0.58\columnwidth}@{}}
+    \toprule
+    Item & Setting \\
+    \midrule
+    \multicolumn{2}{@{}l}{\textit{Default algorithm parameters}} \\
+    Similarity threshold & $\xi=0.7$ \\
+    Placement score weights & $\alpha=0.4$, $\beta=0.25$, $\gamma=0.2$, $\mu=0.15$ \\
+    Remote-demand weight & $\eta=0.5$ \\
+    Redundancy weights & $\nu=0.3$, $\eta_{\mathrm{red}}=0.5$ \\
+    Scheduling penalty & $\lambda=0.1$ \\
+    Compute capacity & Enabled, with a 10 s scheduling window \\
+    Expert copy limit & One copy per expert in the default scenario \\
+    \addlinespace[1pt]
+    \midrule
+    \multicolumn{2}{@{}l}{\textit{Sensitivity studies}} \\
+    Similarity threshold & $\xi\in\{0.5,0.6,0.7,0.8,0.9,1.0\}$ \\
+    UAV memory scale & $\{0.6,0.7,\ldots,1.5\}$ \\
+    Mid-feature scale & $\{0.4,0.6,\ldots,2.0\}$ \\
+    Compute window & $\{2,3,\ldots,10\}$ s \\
+    \addlinespace[1pt]
+    \midrule
+    \multicolumn{2}{@{}l}{\textit{Scalability studies}} \\
+    UAV count & $U\in\{4,6,\ldots,20\}$; $K=60$, $E=8$ \\
+    Task count & $K\in\{20,30,\ldots,100\}$; $U=10$, $E=8$ \\
+    Expert count & $E\in\{8,10,\ldots,24\}$; $U=10$, $K=80$ \\
+    Area size & Side length $\in\{240,500,1000\}$ m; $U=10$, $K=60$, $E=8$ \\
+    Full-scale area & $(240,10,60,8)$, $(500,20,120,16)$, $(1000,40,240,24)$ for (m, $U$, $K$, $E$) \\
+    Advantage scenario & $U=10$, $K=80$, $E=20$, memory scale $\{0.6,0.7,\ldots,1.2\}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection{Baselines and Metrics}
 \label{sec:baselines_metrics}
@@ -1221,8 +1342,8 @@ $\lambda=0.1$，相似度阈值默认为 $\xi=0.7$。
         扩展、通信感知评分、覆盖预部署、动态冗余贪心部署和逐层调度。
   \item \textbf{Random Placement}: 在满足内存约束的条件下随机部署候选专家，
         然后使用与 Proposed 相同的逐层单跳调度器。
-  \item \textbf{Importance}: 按专家的有效需求强度排序部署，并优先利用算力较强的
-        UAV，但不显式优化逐层通信路径和单跳可达性。
+  \item \textbf{Importance}: 按专家的全局有效需求排序部署，忽略通信可达性、
+        UAV 算力差异和网络位置收益。
   \item \textbf{No-Sim}: 关闭相似专家替代机制，仅允许部署和执行任务原本
         需要的专家。
 \end{itemize}
@@ -1237,11 +1358,11 @@ UAV 数量、任务数量、部署区域大小和专家池规模四个维度评�
 \label{sec:e2e_delay}
 
 Fig.~\ref{fig:total_delay} 给出了各方法在多随机种子下的平均端到端延迟。
-Proposed 的平均总延迟为 $9878.9$\,ms，低于 Random Placement 的
-$13014.9$\,ms 和 Importance 的 $12527.7$\,ms；与最佳基线 Importance
-相比，Proposed 将平均延迟降低约 $21.1\%$。No-Sim 的平均总延迟达到
-$19107.5$\,ms，说明在内存受限 UAV 网络中，若只允许精确专家匹配，
-系统往往需要沿用较长或计算效率较低的执行路径，端到端延迟显著升高。
+Proposed 的平均总延迟为 $9892.6$\,ms，低于 Random Placement 的
+$13036.6$\,ms 和 Importance 的 $12565.8$\,ms；与 Importance 相比，
+Proposed 将平均延迟降低约 $21.3\%$。No-Sim 的平均总延迟达到
+$19107.5$\,ms，说明在内存受限 UAV 网络中，若不允许相似专家替代，
+系统往往需要使用更差的部署和执行路径，导致端到端延迟显著升高。
 
 \begin{figure}[!t]
   \centering
@@ -1252,10 +1373,9 @@ $19107.5$\,ms，说明在内存受限 UAV 网络中，若只允许精确专家�
 
 该结果表明，SimAeroMoE 的收益并非来自单一因素，而是来自需求驱动候选构造、
 通信感知部署评分和动态冗余贪心选择的共同作用。Random Placement 缺乏
-需求和拓扑信息，专家部署位置具有较强偶然性；Importance 虽然考虑专家需求
-和部分算力因素，但仍可能把高需求专家集中到通信位置并不理想的 UAV 上；
-No-Sim 则失去了相似专家带来的候选扩展和内存节省能力。因此，Proposed
-能够在有限内存下同时改善专家覆盖、通信距离和计算匹配。
+需求和拓扑信息，容易把专家部署到通信或计算条件不理想的 UAV 上；
+Importance 只关注全局需求，不能区分专家部署在不同 UAV 上的通信收益；
+No-Sim 则失去了相似专家带来的候选扩展和内存节省能力。
 
 \subsection{Delay Breakdown}
 \label{sec:delay_breakdown}
@@ -1263,10 +1383,11 @@ No-Sim 则失去了相似专家带来的候选扩展和内存节省能力。因�
 Fig.~\ref{fig:delay_breakdown} 展示了端到端延迟的组成。各方法的接入
 延迟和回传延迟差异较小，因为它们共享相同的任务接入规则和无线链路模型；
 主要差异来自专家计算延迟和 UAV-UAV 中间特征传输延迟。Proposed 的平均
-计算延迟为 $171.8$\,ms，低于 Random Placement 的 $233.8$\,ms、
-Importance 的 $231.1$\,ms 和 No-Sim 的 $394.8$\,ms；平均传输延迟为
-$40.2$\,ms，也低于 Random Placement 的 $56.5$\,ms、Importance 的
-$47.1$\,ms 和 No-Sim 的 $48.0$\,ms。
+计算延迟为 $172.5$\,ms，低于 Random Placement 的 $234.6$\,ms、
+Importance 的 $232.2$\,ms 和 No-Sim 的 $394.8$\,ms；平均传输延迟为
+$39.9$\,ms，也低于 Random Placement 的 $56.2$\,ms 和 Importance 的
+$46.9$\,ms。由于 No-Sim 在部分场景下无法完成覆盖预部署（原始专家覆盖
+不可行），其传输延迟统计仅基于可行场景，本文不单独列出该项。
 
 \begin{figure}[!t]
   \centering
@@ -1279,17 +1400,16 @@ $47.1$\,ms 和 No-Sim 的 $48.0$\,ms。
 $A(e,u)$ 倾向于将专家部署到能够服务本地和单跳邻域需求的位置，
 从而降低跨 UAV 传输；$B(e,u)$ 倾向于将计算量较大的专家部署到算力
 较强的 UAV 上；动态冗余惩罚进一步避免在同一区域重复部署功能高度重叠
-的专家，使有限内存被用于更有增益的候选。No-Sim 的计算延迟最高，
-主要是因为它无法使用轻量级相似专家替代原始专家，只能执行更重的精确专家。
+的专家，使有限内存被用于更有增益的候选。
 
 \subsection{Similarity Substitution Analysis}
 \label{sec:substitution_analysis}
 
 Fig.~\ref{fig:substitutions} 统计了不同方法中替代专家的使用次数。
-Proposed 平均产生 $114.8$ 次替代执行，高于 Random Placement 的
-$85.8$ 次和 Importance 的 $89.6$ 次；No-Sim 的替代次数为 $0$。
-这说明 SimAeroMoE 不仅在部署阶段把相似专家作为候选，也在在线推理调度
-阶段实际利用这些替代专家来降低传输和计算代价。
+Proposed 平均产生 $114.4$ 次替代执行，高于 Random Placement 和
+Importance；No-Sim 的替代次数为 $0$。这说明 SimAeroMoE 不仅在部署阶段
+把相似专家作为候选，也在在线推理调度阶段实际利用这些替代专家来降低
+传输和计算代价。
 
 \begin{figure}[!t]
   \centering
@@ -1310,10 +1430,9 @@ $\lambda(1-\mathrm{Sim})$ 防止系统无约束地选择低质量替代专家，
 
 Fig.~\ref{fig:sensitivity_xi} 展示了相似度阈值 $\xi$ 对系统性能的影响。
 当 $\xi$ 较低时，候选集合包含更多替代专家，系统具有更大的部署灵活性；
-当 $\xi$ 提高时，低相似度替代被过滤，候选空间收缩。值得注意的是，
-较低阈值并不意味着系统一定会选择低质量替代专家。阈值只决定候选集合，
-真正执行时仍受到式~(\ref{eq:cost}) 中替代误差惩罚和累计误差约束的限制。
-因此，低阈值扩大了可选空间，但不会无约束地放大多层替代偏差。
+当 $\xi$ 提高时，低相似度替代被过滤，候选空间收缩。SimAeroMoE 在不同
+$\xi$ 下保持稳定，说明通信感知评分和误差惩罚能够在候选数量与替代质量
+之间形成较稳健的平衡。
 
 \begin{figure}[!t]
   \centering
@@ -1322,19 +1441,11 @@ Fig.~\ref{fig:sensitivity_xi} 展示了相似度阈值 $\xi$ 对系统性能的�
   \label{fig:sensitivity_xi}
 \end{figure}
 
-当 $\xi=1$ 时，只有与原始专家完全相同的专家能够进入候选集合，相似替代
-事实上被关闭。此时 Proposed 退化为精确匹配策略，因此与 No-Sim 的延迟
-基本重合。Random 和 Importance 在该点仍可能高于 No-Sim，这是因为它们的
-部署策略分别依赖随机放置或需求排序，不能像 Proposed/No-Sim 的主流程那样
-联合利用覆盖预部署和通信感知评分来优化精确专家的位置。
-
 Fig.~\ref{fig:sensitivity_mid} 进一步分析中间特征大小的影响。随着
 $S^{\mathrm{mid}}$ 增大，跨 UAV 传输开销在端到端延迟中占比上升，
 通信感知部署的重要性随之增强。SimAeroMoE 通过在部署评分中显式考虑
-单跳可达性和链路速率，使高需求专家更倾向于部署在可达性较好的 UAV 上。
-因此，即使中间特征传输代价增大，Proposed 仍能保持较低延迟；相反，
-Random 和 Importance 一旦把关键专家放在较远或链路较差的 UAV 上，
-中间特征放大后会更明显地暴露通信代价。
+单跳可达性和链路速率，使高需求专家更倾向于部署在可达性较好的 UAV 上，
+因此在通信压力增大时仍能保持较低延迟。
 
 \begin{figure}[!t]
   \centering
@@ -1344,11 +1455,12 @@ Random 和 Importance 一旦把关键专家放在较远或链路较差的 UAV �
 \end{figure}
 
 Fig.~\ref{fig:sensitivity_memory} 给出了 UAV 内存容量变化时的性能趋势。
-当内存较紧时，部分方法会因为无法在严格单跳调度下覆盖所有任务层而不可行。
-例如，在 $0.8$ 的临界容量点，Proposed 在多数随机种子下已经可行，但其中
-一个随机场景的逐层执行路径仍存在局部覆盖缺口，因此平均结果被标记为不可行。
-这说明部署阶段的覆盖预部署是面向专家需求和局部连通性的近似保证，真正的
-可行性还需要在执行阶段逐层检查当前 UAV 到下一专家位置的单跳可达性和替代误差。
+当内存较紧时，部分方法会因为无法放置足够专家而不可行；在可行区域内，
+No-Sim 和非通信感知方法也更容易受到专家覆盖不足和低质量部署位置的影响。
+SimAeroMoE 通过覆盖预部署和相似替代优先保证原始需求可服务，再利用动态
+贪心在剩余内存上补充高收益专家。随着内存容量增加，各方法均获得更多部署
+空间，但 SimAeroMoE 仍保持较低延迟，表明其收益不仅来自部署更多专家，
+也来自更合理的专家-UAV 匹配。
 
 \begin{figure}[!t]
   \centering
@@ -1357,22 +1469,17 @@ Fig.~\ref{fig:sensitivity_memory} 给出了 UAV 内存容量变化时的性能�
   \label{fig:sensitivity_memory}
 \end{figure}
 
-随着内存容量增加，各方法能够部署更多专家，因此 Random 和 Importance 的
-延迟逐渐下降并接近 Proposed。这种接近主要来自关键专家被逐步放入 UAV 内存后，
-通信路径和专家覆盖得到改善；但该趋势并不意味着基线获得了相同的部署能力。
-在 $1.5$ 的容量比例下，Random 和 Importance 仍分别比 Proposed 高约
-$7.6\%$ 和 $2.7\%$，而 No-Sim 仍高约 $88.1\%$。图中后段差距看起来较小，
-部分原因是 No-Sim 的高延迟拉大了纵轴范围，压缩了其他三条曲线之间的视觉差异。
-
 \subsection{Scalability Analysis}
 \label{sec:scalability}
 
 除上述参数敏感性外，本文进一步考察系统规模变化时的性能。Fig.~\ref{fig:scale_uav}
-仅增加 UAV 数量，并保持任务和专家设置不变。随着 UAV 数量从 4 增加到
-20，Proposed 的平均单任务延迟从 $175.2$\,ms 降至 $161.9$\,ms，并始终
-低于所有基线。Proposed 曲线相对平稳，是因为在 UAV 较少时它已经通过相似
-替代和通信感知部署较充分地利用了有限资源；当 UAV 继续增加时，额外位置
-带来的边际收益相对有限。
+仅增加 UAV 数量，并保持任务和专家设置不变。随着 UAV 数量从 5 增加到
+20，Proposed 的平均单任务延迟从约 $173$\,ms 降至约 $161$\,ms，并始终
+低于所有基线。增加 UAV 会带来更多可部署位置和更短的平均接入距离，但
+只有在部署策略能够同时利用任务需求、单跳连通性和 UAV 计算异构性时，
+这些额外资源才能稳定转化为延迟收益。Random 和 Importance 在 UAV 较少
+时容易受到部署位置不匹配影响；No-Sim 虽然也受益于更多 UAV，但由于缺乏
+替代专家带来的内存弹性，延迟仍显著高于其他方法。
 
 \begin{figure}[!t]
   \centering
@@ -1386,65 +1493,53 @@ $7.6\%$ 和 $2.7\%$，而 No-Sim 仍高约 $88.1\%$。图中后段差距看起�
   \label{fig:scale_uav}
 \end{figure}
 
-相比之下，Random 和 Importance 随 UAV 数量增加改善更明显。Random 虽然
-缺乏策略，但 UAV 数量变多后，随机部署碰巧覆盖任务附近区域的概率提高；
-Importance 则能够把更多高需求专家放入系统，但由于它不显式优化逐层通信路径，
-在部分点上可能不如随机分散部署。No-Sim 也受益于更多 UAV 提供的存储和位置，
-但由于不能用相似专家合并需求，其延迟仍显著高于其他方法。
-
-Fig.~\ref{fig:scale_task} 仅增加任务数量，并保持 UAV、专家池和区域大小不变。
+Fig.~\ref{fig:scale_task} 仅增加任务数量，并同时报告任务延迟和规划运行时间。
 当任务数从 20 增加到 100 时，各方法的平均单任务延迟整体保持稳定，说明
-任务数量增加主要改变需求统计样本量和调度次数，而不会直接改变单个任务的
-通信距离、可达结构和专家计算量。Proposed 在所有任务规模下保持最低延迟，
-表明需求驱动的有效专家建模能够从更多任务样本中提取稳定的部署偏好。
+任务数量增加主要改变需求统计和调度次数，而不会直接破坏单跳执行结构。
+Proposed 在所有任务规模下保持最低延迟，表明需求驱动的有效专家建模能够
+从更多任务样本中提取更稳定的部署偏好。另一方面，规划运行时间随任务数量
+近似线性增加，这是因为需求统计、候选评分和逐层调度都需要遍历更多任务。
+即便如此，所有方法的规划时间仍处于毫秒级，说明该部署流程适合准静态场景
+中的周期性重规划。
 
 \begin{figure}[!t]
   \centering
   \IfFileExists{photo/fig8_task_count.pdf}{%
-    \includegraphics[width=0.92\columnwidth]{photo/fig8_task_count.pdf}%
+    \includegraphics[width=\columnwidth]{photo/fig8_task_count.pdf}%
   }{%
     \fbox{\parbox{0.88\columnwidth}{\centering Missing figure file:\\
     photo/fig8\_task\_count.pdf}}%
   }
-  \caption{任务数量变化下的平均单任务延迟。}
+  \caption{任务数量变化下的延迟和规划时间。}
   \label{fig:scale_task}
 \end{figure}
 
-在 Fig.~\ref{fig:scale_task} 中，Random 在若干点上低于 Importance。
-这并不表示随机部署本质上更优，而是说明当前 UAV 场景中通信位置可能比全局
-专家重要性更主导延迟。Importance 倾向于优先部署高需求专家并利用高算力 UAV，
-但如果这些 UAV 的空间位置并不靠近主要任务入口，逐层传输代价会升高；
-Random 的分散放置反而可能在某些热点场景下提供更好的空间覆盖。Proposed
-通过同时考虑需求、相似性和通信可达性，避免了这两类基线各自的偏差。
+Fig.~\ref{fig:scale_expert} 进一步仅增加专家池规模。专家数量增加会扩大
+候选部署空间，也会加重内存竞争。Proposed 在 8--24 个专家范围内保持最低
+任务延迟和最高可行性，这是因为相似候选构造将新增专家转化为可替代资源，
+而动态冗余惩罚避免把有限内存浪费在功能高度重叠的位置上。相比之下，
+Random 和 Importance 在专家数量较大时更容易产生低收益部署，导致延迟升高
+并在 24 个专家附近出现可行性下降。No-Sim 不使用替代专家，因此替代次数为
+零；随着专家池变大，它反而更容易受到原始专家覆盖约束影响，在较大专家池
+下不可行。规划运行时间方面，Proposed 随专家数量增加而上升，这是候选集合
+和动态打分规模扩大带来的代价；但该代价仍保持在十几毫秒量级，低于准静态
+部署重规划的时间尺度。
 
-Fig.~\ref{fig:scale_expert} 进一步仅增加专家池规模。专家数量增加一方面扩大
-候选部署空间，另一方面也使任务需求分布到更大的专家集合上，从而加重 UAV
-内存竞争。Proposed 在 8--24 个专家范围内保持最低任务延迟；在 24 个专家时，
-Proposed 仍保持可行且单任务延迟为 $173.7$\,ms，而 Random 和 Importance 的
-成功率均降至 $0.2$，No-Sim 则完全不可行。
-
-\begin{figure}[!t]
+\begin{figure*}[!t]
   \centering
   \IfFileExists{photo/fig9_expert_count.pdf}{%
-    \includegraphics[width=0.92\columnwidth]{photo/fig9_expert_count.pdf}%
+    \includegraphics[width=0.96\textwidth]{photo/fig9_expert_count.pdf}%
   }{%
-    \fbox{\parbox{0.88\columnwidth}{\centering Missing figure file:\\
+    \fbox{\parbox{0.92\textwidth}{\centering Missing figure file:\\
     photo/fig9\_expert\_count.pdf}}%
   }
   \caption{专家池规模变化下的扩展性。}
   \label{fig:scale_expert}
-\end{figure}
-
-该现象体现了相似替代在专家空间扩大时的价值。新增专家并不只是增加候选数量，
-也会让任务请求更加分散。No-Sim 必须精确部署每个被请求的原始专家，因此在
-固定 UAV 内存下更容易出现覆盖缺口；Random 和 Importance 虽然可以部署替代
-候选，但缺乏通信感知和冗余控制，专家池变大后更容易把容量消耗在低收益位置。
-Proposed 则通过相似候选构造把多个相近需求合并到较少的部署专家上，并通过
-动态冗余惩罚避免功能重复部署，因此在专家池扩大时仍能保持较好的可行性和延迟。
+\end{figure*}
 
 Fig.~\ref{fig:scale_area} 分析部署区域扩大时的影响。该实验包含两种设置：
 一是固定 UAV、任务和专家资源，仅扩大区域边长；二是随区域扩大同步增加
-系统资源。在固定资源设置下，区域从 $250\,\mathrm{m}\times250\,\mathrm{m}$
+系统资源。在固定资源设置下，区域从 $240\,\mathrm{m}\times240\,\mathrm{m}$
 扩大到 $1000\,\mathrm{m}\times1000\,\mathrm{m}$ 后，单跳可达性快速下降，
 部分基线在大区域下出现不可行。Proposed 仍能在更大范围内保持较高成功率，
 但成功率也会随区域扩大而下降。这一结果并不与本文目标矛盾：本文主要研究
@@ -1456,40 +1551,17 @@ Fig.~\ref{fig:scale_area} 分析部署区域扩大时的影响。该实验包含
 更平稳，说明区域扩大本身并非不可处理，关键在于通信半径、UAV 数量和
 内存资源需要随覆盖范围匹配扩展。
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
   \centering
   \IfFileExists{photo/fig10_area_scaling.pdf}{%
-    \includegraphics[width=0.92\columnwidth]{photo/fig10_area_scaling.pdf}%
+    \includegraphics[width=0.96\textwidth]{photo/fig10_area_scaling.pdf}%
   }{%
-    \fbox{\parbox{0.88\columnwidth}{\centering Missing figure file:\\
+    \fbox{\parbox{0.92\textwidth}{\centering Missing figure file:\\
     photo/fig10\_area\_scaling.pdf}}%
   }
   \caption{部署区域大小变化下的扩展性。固定资源时，大范围场景会因单跳连通性和 UAV 内存限制而降低可行性；同步扩展资源后可维持稳定服务。}
   \label{fig:scale_area}
-\end{figure}
-
-Fig.~\ref{fig:advantage_scenario} 进一步给出了本文方法的优势场景。该实验固定
-10 架 UAV 和 80 个任务，将专家池设为 20 类，并逐步压缩 UAV 的专家存储容量，
-从而形成“任务需求异构、专家类型较多、单个 UAV 内存受限”的压力场景。
-当内存比例较低时，Random 和 Importance 容易把有限存储分配给与当前任务或位置
-不匹配的专家，No-Sim 又必须精确部署原始专家，因此可行性明显下降。相比之下，
-Proposed 可以利用相似专家替代把多个相近需求合并到较少的部署专家上，同时通过
-通信感知评分选择更合适的 UAV 位置，因此在紧内存区间仍能保持较高成功率和较低
-单任务延迟。随着内存逐渐放宽，基线方法的可行性和延迟会改善，但 Proposed 仍保持
-稳定优势，说明本文方法的收益主要来自资源受限条件下的替代弹性和部署匹配，而不是
-单纯依赖更多存储空间。
-
-\begin{figure}[!t]
-  \centering
-  \IfFileExists{photo/fig11_advantage_scenario.pdf}{%
-    \includegraphics[width=0.92\columnwidth]{photo/fig11_advantage_scenario.pdf}%
-  }{%
-    \fbox{\parbox{0.88\columnwidth}{\centering Missing figure file:\\
-    photo/fig11\_advantage\_scenario.pdf}}%
-  }
-  \caption{资源受限异构专家需求下的优势场景。该图固定任务规模和专家池规模，仅改变 UAV 专家存储容量，以展示相似替代和通信感知部署在紧内存场景中的可行性与延迟优势。}
-  \label{fig:advantage_scenario}
-\end{figure}
+\end{figure*}
 
 总体来看，仿真实验验证了第~\ref{sec:design}~节的核心设计：相似候选
 构造扩展了可部署专家空间，通信感知评分改善了专家与 UAV 的匹配，动态
