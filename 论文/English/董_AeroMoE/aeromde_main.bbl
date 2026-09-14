@@ -1,0 +1,138 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+\renewcommand\BIBentryALTinterwordstretchfactor{4}
+
+\bibitem{R1}
+P.~McEnroe, S.~Wang, and M.~Liyanage, ``A survey on the convergence of edge computing and {AI} for {UAVs}: Opportunities and challenges,'' \emph{IEEE Internet Things J.}, vol.~9, no.~17, pp. 15\,435--15\,459, 2022.
+
+\bibitem{R3}
+C.~Chen, T.~Zhang, W.~Xu, X.~Yang, and Y.~Wang, ``Multi-{UAV} cooperation based edge computing offloading in emergency communication networks,'' in \emph{Proc. IEEE Wirel. Commun. Netw. Conf. (WCNC)}, 2023, pp. 1--6.
+
+\bibitem{R4}
+Y.~Guo, Z.~Cheng, X.~Tang, Z.~Tu, and T.~Lin, ``Dynamic mixture of experts: An auto-tuning approach for efficient transformer models,'' in \emph{Proc. Int. Conf. Learn. Represent.(ICLR)}, 2025, pp. 79\,643--79\,672.
+
+\bibitem{R5}
+J.~Shao and J.~Zhang, ``Communication-computation trade-off in resource-constrained edge inference,'' \emph{IEEE Commun. Mag.}, vol.~58, no.~12, pp. 20--26, 2020.
+
+\bibitem{R6}
+A.~Sacco, F.~Esposito, G.~Marchetto, and P.~Montuschi, ``A self-learning strategy for task offloading in {UAV} networks,'' \emph{IEEE Trans. Veh. Technol.}, vol.~71, no.~4, pp. 4301--4311, 2022.
+
+\bibitem{R7}
+Q.~Li, \emph{et~al.}, ``{Memory-Constrained} semantic segmentation for ultra-high resolution {UAV} imagery,'' \emph{IEEE Robot. Autom. Lett.}, vol.~9, no.~2, pp. 1708--1715, 2024.
+
+\bibitem{R8}
+X.~Zhang, X.~Wang, X.~Xu, and Y.~Zhao, ``Demand learning and cooperative deployment of {UAV} networks,'' \emph{Chin. J. Electron.}, vol.~31, no.~3, pp. 408--415, 2022.
+
+\bibitem{R9}
+Y.~Qu, \emph{et~al.}, ``Elastic collaborative edge intelligence for {UAV} swarm: Architecture, challenges, and opportunities,'' \emph{IEEE Commun. Mag.}, vol.~62, no.~1, pp. 62--68, 2024.
+
+\bibitem{R10}
+M.~A. Dhuheir, E.~Baccour, A.~Erbad, S.~S. Al-Obaidi, and M.~Hamdi, ``Deep reinforcement learning for trajectory path planning and distributed inference in resource-constrained {UAV} swarms,'' \emph{IEEE Internet Things J.}, vol.~10, no.~9, pp. 8185--8201, 2023.
+
+\bibitem{R12}
+Z.~Zhang, X.~Liu, H.~Cheng, C.~Xu, and J.~Gao, ``Diversifying the expert knowledge for task-agnostic pruning in sparse {Mixture-of-Experts},'' in \emph{Proc. Findings Assoc. Comput. Linguist.:ACL 2025}, July 2025, pp. 86--102.
+
+\bibitem{R13}
+S.~He, D.~Dong, L.~Ding, and A.~Li, ``Towards efficient mixture of experts: A holistic study of compression techniques,'' \emph{[Online]. Available:https://arxiv.org/abs/2406.02500}, 2024.
+
+\bibitem{R14}
+L.~Li, \emph{et~al.}, ``Sub-{MoE}: Efficient mixture-of-expert {LLMs} compression via subspace expert merging,'' in \emph{Proc. AAAI Conf. Artif. Intell.}, 2026.
+
+\bibitem{R15}
+R.~Kong, Y.~Li, W.~Wang, L.~Kong, and Y.~Liu, ``Serving {MoE} models on resource-constrained edge devices via dynamic expert swapping,'' \emph{IEEE Trans. Comput.}, vol.~74, no.~8, pp. 2799--2811, 2025.
+
+\bibitem{R16}
+H.~Zhao, Z.~Qiu, H.~Wu, Z.~Wang, Z.~He, and J.~Fu, ``{H}yper{M}o{E}: Towards better mixture of experts via transferring among experts,'' in \emph{Proc. Annu. Meet. Assoc. Comput. Linguist. (Volume 1: Long Papers)}, Aug. 2024, pp. 10\,605--10\,618.
+
+\bibitem{R17}
+Q.~Yan, Y.~Li, N.~Ma, and F.~Wan, ``Research on the structure and realization of {Mixture-of-Experts},'' in \emph{Proc. Int. Conf. Comput. Eng. Appl. (ICCEA)}, 2024, pp. 354--359.
+
+\bibitem{R18}
+D.~Dai, \emph{et~al.}, ``{D}eep{S}eek{M}o{E}: Towards ultimate expert specialization in {Mixture-of-Experts} language models,'' in \emph{Proc. Annu. Meet. Assoc. Comput. Linguist.}, Aug. 2024, pp. 1280--1297.
+
+\bibitem{R19}
+J.~Shao, Y.~Mao, and J.~Zhang, ``Learning task-oriented communication for edge inference: An information bottleneck approach,'' \emph{IEEE J. Sel. Areas Commun.}, vol.~40, no.~1, pp. 197--211, 2022.
+
+\bibitem{R20}
+X.~Xia, S.~M.~M. Fattah, and M.~A. Babar, ``A survey on {UAV}-enabled edge computing: Resource management perspective,'' \emph{ACM Comput. Surv.}, vol.~56, no.~3, Oct. 2023.
+
+\bibitem{R21}
+J.~Yan, W.~Wang, J.~Liu, J.~Deng, H.~Yuan, and Y.~Zhu, ``Task demand-oriented collaborative offloading and deployment strategy in software-defined {UAV}-assisted edge networks,'' \emph{IEEE Sens. J.}, vol.~25, no.~1, pp. 1641--1655, 2025.
+
+\bibitem{R22}
+F.~Chen, P.~Li, S.~Pan, L.~Zhong, and J.~Deng, ``Giant could be tiny: Efficient inference of giant models on resource-constrained {UAVs},'' \emph{IEEE Internet Things J.}, vol.~11, no.~12, pp. 21\,170--21\,179, 2024.
+
+\bibitem{R23}
+Z.~Liang, X.~Lyu, C.~Ren, N.~Li, and K.~Li, ``{Communication-Efficient} topology orchestration for distributed learning in {UAV} networks,'' in \emph{Proc. Int. Wireless Commun. Mobile Comput. (IWCMC)}, 2024, pp. 662--667.
+
+\bibitem{R24}
+W.~Zhuang, Y.~Mao, I.~W.-H. Ho, and X.~Yu, ``{UAV-Assisted} cooperative edge inference for {Low-Altitude} economy via {MoE-based} hierarchical deep reinforcement learning,'' \emph{[Online]. Available:https://arxiv.org/abs/2605.19290}, 2026.
+
+\bibitem{mozaffari2019uav}
+M.~Mozaffari, W.~Saad, M.~Bennis, Y.-H. Nam, and M.~Debbah, ``A tutorial on {UAVs} for wireless networks: Applications, challenges, and open problems,'' \emph{IEEE Commun. Surveys Tuts.}, vol.~21, no.~3, pp. 2334--2360, 2019.
+
+\bibitem{zhu2019uav}
+J.~Zhu, Z.~Han, and H.~V. Poor, ``Multi-{UAV} networks for search and rescue with deep reinforcement learning,'' \emph{IEEE Trans. Veh. Technol.}, vol.~68, no.~5, pp. 4910--4920, 2019.
+
+\bibitem{zhou2019edge}
+Z.~Zhou, X.~Chen, E.~Li, L.~Zeng, K.~Luo, and J.~Zhang, ``Edge intelligence: Paving the last mile of artificial intelligence with edge computing,'' \emph{Proc. IEEE}, vol. 107, no.~8, pp. 1738--1762, 2019.
+
+\bibitem{zeng2020coedge}
+L.~Zeng, X.~Chen, Z.~Zhou, L.~Yang, and J.~Zhang, ``{CoEdge}: Cooperative {DNN} inference with adaptive workload partitioning over heterogeneous edge devices,'' \emph{IEEE/ACM Trans. Netw.}, vol.~29, no.~2, pp. 595--608, 2020.
+
+\bibitem{jia2022codl}
+F.~Jia, \emph{et~al.}, ``{CoDL}: Efficient {CPU-GPU Co-execution} for deep learning inference on mobile devices,'' in \emph{Proc. Annu. Int. Conf. Mobile Syst., Appl., Serv. (MobiSys)}, 2022, pp. 209--221.
+
+\bibitem{jeong2022band}
+J.~S. Jeong, \emph{et~al.}, ``{BAND}: Coordinated multi-{DNN} inference on heterogeneous mobile processors,'' in \emph{Proc. Annu. Int. Conf. Mobile Syst., Appl., Serv. (MobiSys)}, 2022, pp. 235--247.
+
+\bibitem{wang2021asymo}
+M.~Wang, S.~Ding, T.~Cao, Y.~Liu, and F.~Xu, ``{ASYMO}: Scalable and efficient deep-learning inference on asymmetric mobile {CPUs},'' in \emph{Proc. Annu. Int. Conf. Mobile Comput. Netw. (MobiCom)}, 2021, pp. 215--228.
+
+\bibitem{shazeer2017moe}
+N.~Shazeer, \emph{et~al.}, ``Outrageously large neural networks: The {Sparsely-Gated Mixture-of-Experts} layer,'' in \emph{Proc. Int. Conf. Learn. Represent. (ICLR)}, 2017.
+
+\bibitem{fedus2022switch}
+W.~Fedus, B.~Zoph, and N.~Shazeer, ``{Switch Transformers}: Scaling to trillion parameter models with simple and efficient sparsity,'' \emph{J. Mach. Learn. Res. (JMLR)}, vol.~23, no. 120, pp. 1--39, 2022.
+
+\bibitem{lepikhin2021gshard}
+D.~Lepikhin, \emph{et~al.}, ``{GShard}: Scaling giant models with conditional computation and automatic sharding,'' \emph{[Online]. Available:https://arxiv.org/abs/2006.16668}, 2021.
+
+\bibitem{jiang2024mixtral}
+A.~Q. Jiang, \emph{et~al.}, ``{Mixtral of Experts},'' \emph{[Online]. Available:https://arxiv.org/abs/2401.04088}, 2024.
+
+\bibitem{zhou2022mixtureofexperts_routing}
+Y.~Zhou, \emph{et~al.}, ``{Mixture-of-Experts} with expert choice routing,'' in \emph{Proc. Adv. Neural Inf. Process. Syst. (NeurIPS)}, vol.~35, 2022.
+
+\bibitem{du2022glam}
+N.~Du, \emph{et~al.}, ``{GLaM}: Efficient scaling of language models with {Mixture-of-Experts},'' \emph{[Online]. Available:https://arxiv.org/abs/2112.06905}, 2022.
+
+\bibitem{aminabadi2022deepspeed}
+R.~Y. Aminabadi, \emph{et~al.}, ``{DeepSpeed-Inference}: Enabling efficient inference of transformer models at unprecedented scale,'' in \emph{Proc. Int. Conf. High Perform. Comput., Netw., Storage Anal. (SC)}, 2022, pp. 646--660.
+
+\bibitem{yu2022orca}
+G.-I. Yu, J.~S. Jeong, G.-W. Kim, S.~Kim, and B.-G. Chun, ``{ORCA}: A distributed serving system for {Transformer-Based} generative models,'' in \emph{Proc. USENIX Symp. Oper. Syst. Des. Implement. (OSDI)}, 2022, pp. 521--538.
+
+\bibitem{li2023alpaserve}
+Z.~Li, \emph{et~al.}, ``{AlpaServe}: Statistical multiplexing with model parallelism for deep learning serving,'' in \emph{Proc. USENIX Symp. Oper. Syst. Des. Implement. (OSDI)}, 2023, pp. 663--679.
+
+\bibitem{R26}
+G.~Zhu, \emph{et~al.}, ``{SMoE}: An algorithm-system {Co-Design} for pushing {MoE} to the edge via expert substitution,'' \emph{[Online]. Available:https://arxiv.org/abs/2508.18983}, 2025.
+
+\end{thebibliography}

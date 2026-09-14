@@ -1,0 +1,195 @@
+\relax 
+\providecommand\zref@newlabel[2]{}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{IEEEexample:BSTcontrol}
+\citation{R1}
+\citation{R3}
+\citation{R4}
+\citation{R5}
+\citation{R6,R7}
+\citation{R8}
+\citation{R9,R10}
+\citation{R12,R13,R14}
+\citation{R15}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{I}{1}{Introduction}{section.1}{}}
+\citation{R16,R17}
+\citation{R18}
+\citation{R19}
+\citation{R20,R21}
+\citation{R22}
+\citation{R23}
+\citation{R24}
+\citation{mozaffari2019uav,zhu2019uav}
+\citation{zhou2019edge}
+\citation{zeng2020coedge}
+\citation{jia2022codl}
+\citation{jeong2022band}
+\citation{wang2021asymo}
+\citation{shazeer2017moe}
+\citation{fedus2022switch}
+\citation{lepikhin2021gshard}
+\citation{jiang2024mixtral}
+\citation{zhou2022mixtureofexperts_routing}
+\citation{du2022glam}
+\citation{aminabadi2022deepspeed}
+\citation{yu2022orca}
+\citation{li2023alpaserve}
+\citation{R26}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Background and Motivation}{2}{section.2}\protected@file@percent }
+\newlabel{sec:background}{{II}{2}{Background and Motivation}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}MoE Expert Inference}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Expert Deployment Challenges in UAV Edge Networks}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Related Work}{2}{subsection.2.3}\protected@file@percent }
+\newlabel{sec:related}{{\mbox  {II-C}}{2}{Related Work}{subsection.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Motivation for Similarity-Aware Deployment}{2}{subsection.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Collaborative MoE inference scenario in a quasi-static UAV edge network. Ground tasks access UAVs through air-to-ground links. Heterogeneous UAVs jointly execute MoE inference units over a given wireless topology, with intermediate features transmitted via UAV-UAV links. Final results are returned to a base station or emergency command center.}}{3}{figure.1}\protected@file@percent }
+\newlabel{fig:system_model}{{1}{3}{Collaborative MoE inference scenario in a quasi-static UAV edge network. Ground tasks access UAVs through air-to-ground links. Heterogeneous UAVs jointly execute MoE inference units over a given wireless topology, with intermediate features transmitted via UAV-UAV links. Final results are returned to a base station or emergency command center}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}System Model}{3}{section.3}\protected@file@percent }
+\newlabel{sec:system}{{III}{3}{System Model}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Quasi-Static UAV Network}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Wireless Model}{3}{subsection.3.2}\protected@file@percent }
+\newlabel{e2}{{2}{3}{Wireless Model}{equation.2}{}}
+\newlabel{e3}{{3}{3}{Wireless Model}{equation.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Collaborative Inference Task Model}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}End-to-End Delay Model}{4}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Optimization Problem}{4}{subsection.3.5}\protected@file@percent }
+\newlabel{e16}{{9}{4}{Optimization Problem}{equation.9}{}}
+\newlabel{eq:p_s_coupling}{{16}{4}{Optimization Problem}{equation.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Proposed Design}{4}{section.4}\protected@file@percent }
+\newlabel{sec:design}{{IV}{4}{Proposed Design}{section.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces AeroMoE decouples the joint optimization into five sequential stages, i.e., task demand matching, similarity-aware candidate construction, communication-aware dynamic deployment, and inference scheduling.}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:design_flow}{{2}{5}{AeroMoE decouples the joint optimization into five sequential stages, i.e., task demand matching, similarity-aware candidate construction, communication-aware dynamic deployment, and inference scheduling}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-}1}Task Demand Matching}{5}{subsubsection.4.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-}2}Similarity-Aware Candidate Construction}{5}{subsubsection.4.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-}3}Communication-Aware Expert Placement Scoring}{5}{subsubsection.4.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-}4}Dynamic Expert Placement}{5}{subsubsection.4.0.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-}5}Inference Scheduling}{5}{subsubsection.4.0.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Task Demand Matching}{5}{subsection.4.1}\protected@file@percent }
+\newlabel{sec:demand_modeling}{{\mbox  {IV-A}}{5}{Task Demand Matching}{subsection.4.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-A}1}Default Task-UAV Assignment}{5}{subsubsection.4.1.1}\protected@file@percent }
+\newlabel{eq:default_access}{{18}{5}{Default Task-UAV Assignment}{equation.18}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-A}2}Direct Expert Demand}{5}{subsubsection.4.1.2}\protected@file@percent }
+\newlabel{eq:demand}{{19}{5}{Direct Expert Demand}{equation.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Similarity-Aware Candidate Expert Construction}{5}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:similarity_candidate}{{\mbox  {IV-B}}{5}{Similarity-Aware Candidate Expert Construction}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}1}Original Expert Set}{5}{subsubsection.4.2.1}\protected@file@percent }
+\newlabel{eq:ereq}{{20}{5}{Original Expert Set}{equation.20}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}2}Substitutable Expert Set}{5}{subsubsection.4.2.2}\protected@file@percent }
+\newlabel{eq:ar}{{21}{5}{Substitutable Expert Set}{equation.21}{}}
+\newlabel{eq:sim}{{22}{5}{Substitutable Expert Set}{equation.22}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}3}Candidate Expert Set}{5}{subsubsection.4.2.3}\protected@file@percent }
+\newlabel{eq:ecand}{{23}{5}{Candidate Expert Set}{equation.23}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}4}Effective Demand}{5}{subsubsection.4.2.4}\protected@file@percent }
+\newlabel{eq:demand_eff}{{24}{5}{Effective Demand}{equation.24}{}}
+\newlabel{eq:theta}{{25}{5}{Effective Demand}{equation.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Communication-Aware Expert Placement Scoring}{6}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:placement_scoring}{{\mbox  {IV-C}}{6}{Communication-Aware Expert Placement Scoring}{subsection.4.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}1}Communication-Aware Task Demand Benefit}{6}{subsubsection.4.3.1}\protected@file@percent }
+\newlabel{eq:A}{{26}{6}{Communication-Aware Task Demand Benefit}{equation.26}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}2}Computing Power Benefit}{6}{subsubsection.4.3.2}\protected@file@percent }
+\newlabel{eq:B}{{27}{6}{Computing Power Benefit}{equation.27}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}3}Position Benefit}{6}{subsubsection.4.3.3}\protected@file@percent }
+\newlabel{eq:C}{{28}{6}{Position Benefit}{equation.28}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}4}Base Deployment Score}{6}{subsubsection.4.3.4}\protected@file@percent }
+\newlabel{eq:basescore}{{29}{6}{Base Deployment Score}{equation.29}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Dynamic Greedy Expert Placement}{6}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:greedy_placement}{{\mbox  {IV-D}}{6}{Dynamic Greedy Expert Placement}{subsection.4.4}{}}
+\newlabel{e30}{{30}{6}{Dynamic Greedy Expert Placement}{equation.30}{}}
+\newlabel{eq:redundancy}{{31}{6}{Dynamic Greedy Expert Placement}{equation.31}{}}
+\newlabel{eq:value_t}{{33}{6}{Dynamic Greedy Expert Placement}{equation.33}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Dynamic Expert Placement Algorithm}}{7}{algorithm.1}\protected@file@percent }
+\newlabel{alg:greedy_placement}{{1}{7}{Dynamic Greedy Expert Placement}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Lightweight Inference Scheduling}{7}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:inference_scheduling}{{\mbox  {IV-E}}{7}{Lightweight Inference Scheduling}{subsection.4.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Lightweight inference scheduling.}}{7}{figure.3}\protected@file@percent }
+\newlabel{fig:scheduling}{{3}{7}{Lightweight inference scheduling}{figure.3}{}}
+\newlabel{e35}{{35}{7}{Lightweight Inference Scheduling}{equation.35}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Simulation Results}{8}{section.5}\protected@file@percent }
+\newlabel{sec:eval}{{V}{8}{Simulation Results}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Simulation Setup}{8}{subsection.5.1}\protected@file@percent }
+\newlabel{sec:setup}{{\mbox  {V-A}}{8}{Simulation Setup}{subsection.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Baselines and Metrics}{8}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:baselines_metrics}{{\mbox  {V-B}}{8}{Baselines and Metrics}{subsection.5.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces SIMULATION SCENARIO AND WIRELESS SETTINGS.}}{8}{table.1}\protected@file@percent }
+\newlabel{tab:simulation_parameters}{{I}{8}{SIMULATION SCENARIO AND WIRELESS SETTINGS}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces TASK AND EXPERT SPECIFICATIONS.}}{8}{table.2}\protected@file@percent }
+\newlabel{tab:task_expert_parameters}{{II}{8}{TASK AND EXPERT SPECIFICATIONS}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces ALGORITHM PARAMETERS AND SWEEP SETTINGS.}}{9}{table.3}\protected@file@percent }
+\newlabel{tab:algorithm_sweep_parameters}{{III}{9}{ALGORITHM PARAMETERS AND SWEEP SETTINGS}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Performance Analysis}{9}{subsection.5.3}\protected@file@percent }
+\newlabel{sec:e2e_delay}{{\mbox  {V-C}}{9}{Performance Analysis}{subsection.5.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-C}1}End-to-End Delay Performance}{9}{subsubsection.5.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Average end-to-end latency comparison of different expert deployment methods.}}{9}{figure.4}\protected@file@percent }
+\newlabel{fig:total_delay}{{4}{9}{Average end-to-end latency comparison of different expert deployment methods}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces End-to-end latency breakdown. AeroMoE reduces both computation and transmission overhead through communication-aware deployment and per-layer scheduling.}}{9}{figure.5}\protected@file@percent }
+\newlabel{fig:delay_breakdown}{{5}{9}{End-to-end latency breakdown. AeroMoE reduces both computation and transmission overhead through communication-aware deployment and per-layer scheduling}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-C}2}Delay Breakdown}{9}{figure.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Number of substitute expert usages. The Proposed scheme utilizes similar experts more effectively to cover originally required demands.}}{10}{figure.6}\protected@file@percent }
+\newlabel{fig:substitutions}{{6}{10}{Number of substitute expert usages. The Proposed scheme utilizes similar experts more effectively to cover originally required demands}{figure.6}{}}
+\newlabel{sec:substitution_analysis}{{\mbox  {V-C}3}{10}{Similarity Substitution Analysis}{subsubsection.5.3.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-C}3}Similarity Substitution Analysis}{10}{figure.6}\protected@file@percent }
+\newlabel{sec:sensitivity}{{\mbox  {V-C}4}{10}{Sensitivity Analysis}{subsubsection.5.3.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-C}4}Sensitivity Analysis}{10}{subsubsection.5.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Sensitivity analysis with respect to the similarity threshold $\xi $.}}{10}{figure.7}\protected@file@percent }
+\newlabel{fig:sensitivity_xi}{{7}{10}{Sensitivity analysis with respect to the similarity threshold $\xi $}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Impact of intermediate feature size on end-to-end latency.}}{10}{figure.8}\protected@file@percent }
+\newlabel{fig:sensitivity_mid}{{8}{10}{Impact of intermediate feature size on end-to-end latency}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Impact of UAV memory capacity on end-to-end latency and deployment scale.}}{11}{figure.9}\protected@file@percent }
+\newlabel{fig:sensitivity_memory}{{9}{11}{Impact of UAV memory capacity on end-to-end latency and deployment scale}{figure.9}{}}
+\newlabel{sec:scalability}{{\mbox  {V-C}5}{11}{Scalability Analysis}{subsubsection.5.3.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-C}5}Scalability Analysis}{11}{subsubsection.5.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Scalability with respect to the number of UAVs.}}{11}{figure.10}\protected@file@percent }
+\newlabel{fig:scale_uav}{{10}{11}{Scalability with respect to the number of UAVs}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Average per-task latency as the number of tasks increases.}}{11}{figure.11}\protected@file@percent }
+\newlabel{fig:scale_task}{{11}{11}{Average per-task latency as the number of tasks increases}{figure.11}{}}
+\bibstyle{IEEEtran}
+\bibdata{IEEEabrv,refs}
+\bibcite{R1}{1}
+\bibcite{R3}{2}
+\bibcite{R4}{3}
+\bibcite{R5}{4}
+\bibcite{R6}{5}
+\bibcite{R7}{6}
+\bibcite{R8}{7}
+\bibcite{R9}{8}
+\bibcite{R10}{9}
+\bibcite{R12}{10}
+\bibcite{R13}{11}
+\bibcite{R14}{12}
+\bibcite{R15}{13}
+\bibcite{R16}{14}
+\bibcite{R17}{15}
+\bibcite{R18}{16}
+\bibcite{R19}{17}
+\bibcite{R20}{18}
+\bibcite{R21}{19}
+\bibcite{R22}{20}
+\bibcite{R23}{21}
+\bibcite{R24}{22}
+\bibcite{mozaffari2019uav}{23}
+\bibcite{zhu2019uav}{24}
+\bibcite{zhou2019edge}{25}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Scalability with respect to expert pool size.}}{12}{figure.12}\protected@file@percent }
+\newlabel{fig:scale_expert}{{12}{12}{Scalability with respect to expert pool size}{figure.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{12}{section.6}\protected@file@percent }
+\newlabel{sec:conclusion}{{VI}{12}{Conclusion}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{References}{12}{section*.1}\protected@file@percent }
+\bibcite{zeng2020coedge}{26}
+\bibcite{jia2022codl}{27}
+\bibcite{jeong2022band}{28}
+\bibcite{wang2021asymo}{29}
+\bibcite{shazeer2017moe}{30}
+\bibcite{fedus2022switch}{31}
+\bibcite{lepikhin2021gshard}{32}
+\bibcite{jiang2024mixtral}{33}
+\bibcite{zhou2022mixtureofexperts_routing}{34}
+\bibcite{du2022glam}{35}
+\bibcite{aminabadi2022deepspeed}{36}
+\bibcite{yu2022orca}{37}
+\bibcite{li2023alpaserve}{38}
+\bibcite{R26}{39}
+\ulp@afterend
+\gdef \@abspage@last{13}

@@ -1,0 +1,738 @@
+@IEEEtranBSTCTL{IEEEexample:BSTcontrol,
+    CTLuse_article_number = "yes",
+    CTLuse_paper          = "yes",
+    CTLuse_forced_etal    = "yes",
+    CTLmax_names_forced_etal = "6",
+    CTLnames_show_etal    = "1",
+    CTLuse_alt_spacing    = "yes",
+    CTLalt_stretch_factor = "4",
+    CTLdash_repeated_names = "yes",
+    CTLname_format_string = "{f.~}{vv~}{ll}{, jj}",
+    CTLname_latex_cmd     = "",
+    CTLname_url_prefix    = "[Online]. Available:"
+}
+
+%% -----------------------------------------------------------------------
+%%  Foundational Transformer / Language Models
+%% -----------------------------------------------------------------------
+@article{devlin2018bert,
+  author  = {J. Devlin and M.-W. Chang and K. Lee and K. Toutanova},
+  title   = {{BERT}: Pre-training of Deep Bidirectional Transformers for
+             Language Understanding},
+  journal = {arXiv preprint arXiv:1810.04805},
+  year    = {2018}
+}
+
+@article{radford2019gpt2,
+  author  = {A. Radford and J. Wu and R. Child and D. Luan and
+             D. Amodei and I. Sutskever},
+  title   = {Language Models are Unsupervised Multitask Learners},
+  journal = {OpenAI Blog},
+  volume  = {1},
+  number  = {8},
+  pages   = {9},
+  year    = {2019}
+}
+
+@inproceedings{vaswani2017attention,
+  author    = {A. Vaswani and N. Shazeer and N. Parmar and J. Uszkoreit
+               and L. Jones and A. N. Gomez and {\L}. Kaiser and
+               I. Polosukhin},
+  title     = {Attention Is All You Need},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {30},
+  year      = {2017}
+}
+
+@article{zhang2022opt,
+  author  = {S. Zhang and S. Roller and N. Goyal and M. Artetxe and
+             M. Chen and S. Chen and C. Dewan and M. Diab and X. Li
+             and X. V. Lin and others},
+  title   = {{OPT}: Open Pre-trained Transformer Language Models},
+  journal = {arXiv preprint arXiv:2205.01068},
+  year    = {2022}
+}
+
+%% -----------------------------------------------------------------------
+%%  Mixture of Experts (MoE)
+%% -----------------------------------------------------------------------
+@inproceedings{shazeer2017moe,
+  author    = {N. Shazeer and A. Mirhoseini and K. Maziarz and
+               A. Davis and Q. Le and G. Hinton and J. Dean},
+  title     = {Outrageously Large Neural Networks: The {Sparsely-Gated
+               Mixture-of-Experts} Layer},
+  booktitle = {Proc. Int. Conf. Learn. Represent. (ICLR)},
+  year      = {2017}
+}
+
+@article{fedus2022switch,
+  author  = {W. Fedus and B. Zoph and N. Shazeer},
+  title   = {{Switch Transformers}: Scaling to Trillion Parameter Models
+             with Simple and Efficient Sparsity},
+  journal = {J. Mach. Learn. Res. (JMLR)},
+  volume  = {23},
+  number  = {120},
+  pages   = {1--39},
+  year    = {2022}
+}
+
+@article{lepikhin2021gshard,
+  author  = {D. Lepikhin and H. Lee and Y. Xu and D. Chen and
+             O. Firat and Y. Huang and M. Krikun and N. Shazeer
+             and Z. Chen},
+  title   = {{GShard}: Scaling Giant Models with Conditional Computation
+             and Automatic Sharding},
+  journal = {[Online]. Available:https://arxiv.org/abs/2006.16668},
+  year    = {2021}
+}
+
+@article{jiang2024mixtral,
+  author  = {A. Q. Jiang and A. Sablayrolles and A. Roux and
+             A. Mensch and B. Savary and C. Bamford and
+             D. S. Chaplot and others},
+  title   = {{Mixtral of Experts}},
+  journal = {[Online]. Available:https://arxiv.org/abs/2401.04088},
+  year    = {2024}
+}
+
+%% -----------------------------------------------------------------------
+%%  Edge Intelligence & In-situ Inference
+%% -----------------------------------------------------------------------
+@article{zhou2019edge,
+  author  = {Z. Zhou and X. Chen and E. Li and L. Zeng and K. Luo
+             and J. Zhang},
+  title   = {Edge Intelligence: Paving the Last Mile of Artificial
+             Intelligence with Edge Computing},
+  journal = {Proc. IEEE},
+  volume  = {107},
+  number  = {8},
+  pages   = {1738--1762},
+  year    = {2019}
+}
+
+@article{zeng2020coedge,
+  author  = {L. Zeng and X. Chen and Z. Zhou and L. Yang and J. Zhang},
+  title   = {{CoEdge}: Cooperative {DNN} Inference with Adaptive Workload
+             Partitioning over Heterogeneous Edge Devices},
+  journal = {IEEE/ACM Trans. Netw.},
+  volume  = {29},
+  number  = {2},
+  pages   = {595--608},
+  year    = {2020}
+}
+
+@inproceedings{jia2022codl,
+  author    = {F. Jia and D. Zhang and T. Cao and S. Jiang and Y. Liu
+               and J. Ren and Y. Zhang},
+  title     = {{CoDL}: Efficient {CPU-GPU Co-execution} for Deep Learning
+               Inference on Mobile Devices},
+  booktitle = {Proc. Annu. Int. Conf. Mobile Syst., Appl., Serv. (MobiSys)},
+  pages     = {209--221},
+  year      = {2022}
+}
+
+@inproceedings{ye2022ecofl,
+  author    = {S. Ye and L. Zeng and Q. Wu and K. Luo and Q. Fang
+               and X. Chen},
+  title     = {{ECO-FL}: Adaptive Federated Learning with Efficient Edge
+               Collaborative Pipeline Training},
+  booktitle = {Proceedings of the 51st International Conference on
+               Parallel Processing (ICPP)},
+  pages     = {1--11},
+  year      = {2022}
+}
+
+@article{voigt2017gdpr,
+  author  = {P. Voigt and A. {Von dem Bussche}},
+  title   = {The {EU} General Data Protection Regulation ({GDPR}):
+             A Practical Guide},
+  journal = {Springer International Publishing},
+  volume  = {10},
+  year    = {2017}
+}
+
+%% -----------------------------------------------------------------------
+%%  UAV / Aerial Computing
+%% -----------------------------------------------------------------------
+@article{mozaffari2019uav,
+  author  = {M. Mozaffari and W. Saad and M. Bennis and Y.-H. Nam
+             and M. Debbah},
+  title   = {A Tutorial on {UAVs} for Wireless Networks: Applications,
+             Challenges, and Open Problems},
+  journal = {IEEE Commun. Surveys Tuts.},
+  volume  = {21},
+  number  = {3},
+  pages   = {2334--2360},
+  year    = {2019}
+}
+
+@article{zhu2019uav,
+  author  = {J. Zhu and Z. Han and H. V. Poor},
+  title   = {Multi-{UAV} Networks for Search and Rescue with Deep
+             Reinforcement Learning},
+  journal = {IEEE Trans. Veh. Technol.},
+  volume  = {68},
+  number  = {5},
+  pages   = {4910--4920},
+  year    = {2019}
+}
+
+@misc{airsim2017,
+  author       = {S. Shah and D. Dey and C. Lovett and A. Kapoor},
+  title        = {{AirSim}: High-Fidelity Visual and Physical Simulation
+                 for Autonomous Vehicles},
+  howpublished = {arXiv preprint arXiv:1705.05065},
+  year         = {2017}
+}
+
+@misc{jetson_nano,
+  author       = {{NVIDIA}},
+  title        = {{Jetson Nano Developer Kit}},
+  howpublished = {[Online]. Available:
+                 https://developer.nvidia.com/embedded/jetson-nano-developer-kit},
+  year         = {2019}
+}
+
+@misc{jetson_orin,
+  author       = {{NVIDIA}},
+  title        = {{Jetson AGX Orin Developer Kit}},
+  howpublished = {[Online]. Available:
+                 https://developer.nvidia.com/embedded/jetson-agx-orin-developer-kit},
+  year         = {2022}
+}
+
+%% -----------------------------------------------------------------------
+%%  Model / Tensor Parallelism & Distributed Inference
+%% -----------------------------------------------------------------------
+@article{shoeybi2019megatron,
+  author  = {M. Shoeybi and M. Patwary and R. Puri and P. LeGresley
+             and J. Casper and B. Catanzaro},
+  title   = {{Megatron-LM}: Training Multi-Billion Parameter Language
+             Models Using Model Parallelism},
+  journal = {arXiv preprint arXiv:1909.08053},
+  year    = {2019}
+}
+
+@article{li2021sequence,
+  author  = {S. Li and F. Xue and C. Baranwal and Y. Li and Y. You},
+  title   = {Sequence Parallelism: Long Sequence Training from System
+             Perspective},
+  journal = {arXiv e-prints},
+  pages   = {arXiv--2105},
+  year    = {2021}
+}
+
+@inproceedings{aminabadi2022deepspeed,
+  author    = {R. Y. Aminabadi and S. Rajbhandari and A. A. Awan
+               and C. Li and D. Li and E. Zheng and O. Ruwase
+               and S. Smith and M. Zhang and J. Rasley and others},
+  title     = {{DeepSpeed-Inference}: Enabling Efficient Inference of
+               Transformer Models at Unprecedented Scale},
+  booktitle = {Proc. Int. Conf. High Perform. Comput., Netw., Storage Anal. (SC)},
+  pages     = {646--660},
+  year      = {2022}
+}
+
+@inproceedings{narayanan2021efficient,
+  author    = {D. Narayanan and M. Shoeybi and J. Casper and
+               P. LeGresley and M. Patwary and V. Korthikanti and
+               D. Vainbrand and others},
+  title     = {Efficient Large-Scale Language Model Training on {GPU}
+               Clusters Using {Megatron-LM}},
+  booktitle = {Proceedings of the International Conference for High
+               Performance Computing, Networking, Storage and Analysis
+               (SC)},
+  pages     = {1--15},
+  year      = {2021}
+}
+
+@inproceedings{huang2019gpipe,
+  author    = {Y. Huang and Y. Cheng and A. Bapna and O. Firat
+               and D. Chen and M. Chen and H. Lee and J. Ngiam
+               and Q. V. Le and Y. Wu and others},
+  title     = {{GPipe}: Efficient Training of Giant Neural Networks
+               Using Pipeline Parallelism},
+  booktitle = {Adv. Neural Inf. Process. Syst.
+               (NeurIPS)},
+  volume    = {32},
+  year      = {2019}
+}
+
+@article{li2014parameter,
+  author  = {M. Li and D. G. Andersen and A. J. Smola and K. Yu},
+  title   = {Communication Efficient Distributed Machine Learning with
+             the Parameter Server},
+  journal = {Adv. Neural Inf. Process. Syst.
+             (NeurIPS)},
+  volume  = {27},
+  year    = {2014}
+}
+
+@inproceedings{rajbhandari2020zero,
+  author    = {S. Rajbhandari and J. Rasley and O. Ruwase and Y. He},
+  title     = {{ZeRO}: Memory Optimizations toward Training Trillion
+               Parameter Models},
+  booktitle = {Proceedings of the International Conference for High
+               Performance Computing, Networking, Storage and Analysis
+               (SC)},
+  pages     = {1--16},
+  year      = {2020}
+}
+
+%% -----------------------------------------------------------------------
+%%  Communication Optimization
+%% -----------------------------------------------------------------------
+@article{sergeev2018horovod,
+  author  = {A. Sergeev and M. {Del Balso}},
+  title   = {Horovod: Fast and Easy Distributed Deep Learning in
+             {TensorFlow}},
+  journal = {arXiv preprint arXiv:1802.05799},
+  year    = {2018}
+}
+
+@inproceedings{wang2023zero_pp,
+  author    = {G. Wang and H. Qin and S. A. Jacobs and C. Holmes
+               and S. Rajbhandari and O. Ruwase and F. Yan and
+               L. Yang and Y. He},
+  title     = {{ZeRO++}: Extremely Efficient Collective Communication
+               for Giant Model Training},
+  booktitle = {arXiv preprint arXiv:2306.10209},
+  year      = {2023}
+}
+
+@inproceedings{jangda2022breaking,
+  author    = {A. Jangda and J. Huang and G. Liu and A. H. N. Sabet
+               and S. Maleki and Y. Miao and M. Musuvathi and
+               T. Mytkowicz and O. Saarikivi},
+  title     = {Breaking the Computation and Communication Abstraction
+               Barrier in Distributed Machine Learning Workloads},
+  booktitle = {Proceedings of the 27th ACM International Conference on
+               Architectural Support for Programming Languages and
+               Operating Systems (ASPLOS)},
+  pages     = {402--416},
+  year      = {2022}
+}
+
+%% -----------------------------------------------------------------------
+%%  Expert Routing & Scheduling
+%% -----------------------------------------------------------------------
+@inproceedings{zhou2022mixtureofexperts_routing,
+  author    = {Y. Zhou and T. Lei and H. Liu and N. Du and Y. Huang
+               and V. Zhao and A. M. Dai and Q. V. Le and J. Laudon
+               and others},
+  title     = {{Mixture-of-Experts} with Expert Choice Routing},
+  booktitle = {Proc. Adv. Neural Inf. Process. Syst.
+               (NeurIPS)},
+  volume    = {35},
+  year      = {2022}
+}
+
+@article{du2022glam,
+  author  = {N. Du and Y. Huang and A. M. Dai and S. Tong and
+             D. Lepikhin and Y. Xu and M. Krikun and Y. Zhou and
+             A. Yu and V. Firat and others},
+  title   = {{GLaM}: Efficient Scaling of Language Models with
+             {Mixture-of-Experts}},
+  journal = {[Online]. Available:https://arxiv.org/abs/2112.06905},
+  year    = {2022}
+}
+
+%% -----------------------------------------------------------------------
+%%  On-device / In-situ Inference
+%% -----------------------------------------------------------------------
+@inproceedings{lin2022ondevice,
+  author    = {J. Lin and L. Zhu and W.-M. Chen and W.-C. Wang
+               and C. Gan and S. Han},
+  title     = {On-Device Training Under 256{KB} Memory},
+  booktitle = {Advances in Neural Information Processing Systems
+               (NeurIPS)},
+  volume    = {35},
+  pages     = {22941--22954},
+  year      = {2022}
+}
+
+@misc{pytorch2019,
+  author       = {{PyTorch}},
+  title        = {{PyTorch: An Imperative Style, High-Performance Deep
+                 Learning Library}},
+  howpublished = {[Online]. Available: https://github.com/pytorch/pytorch},
+  year         = {2019}
+}
+
+@article{wang2018glue,
+  author  = {A. Wang and A. Singh and J. Michael and F. Hill and
+             O. Levy and S. R. Bowman},
+  title   = {{GLUE}: A Multi-Task Benchmark and Analysis Platform for
+             Natural Language Understanding},
+  journal = {arXiv preprint arXiv:1804.07461},
+  year    = {2018}
+}
+
+@article{sanh2019distilbert,
+  author  = {V. Sanh and L. Debut and J. Chaumond and T. Wolf},
+  title   = {{DistilBERT}, a Distilled Version of {BERT}: Smaller,
+             Faster, Cheaper and Lighter},
+  journal = {arXiv preprint arXiv:1910.01108},
+  year    = {2019}
+}
+
+%% -----------------------------------------------------------------------
+%%  Mobile / Embedded Inference
+%% -----------------------------------------------------------------------
+@inproceedings{wang2021asymo,
+  author    = {M. Wang and S. Ding and T. Cao and Y. Liu and F. Xu},
+  title     = {{ASYMO}: Scalable and Efficient Deep-Learning Inference
+               on Asymmetric Mobile {CPUs}},
+  booktitle = {Proc. Annu. Int. Conf. Mobile Comput. Netw. (MobiCom)},
+  pages     = {215--228},
+  year      = {2021}
+}
+
+@inproceedings{jeong2022band,
+  author    = {J. S. Jeong and J. Lee and D. Kim and C. Jeon and
+               C. Jeong and Y. Lee and B.-G. Chun},
+  title     = {{BAND}: Coordinated Multi-{DNN} Inference on
+               Heterogeneous Mobile Processors},
+  booktitle = {Proc. Annu. Int. Conf. Mobile Syst., Appl., Serv. (MobiSys)},
+  pages     = {235--247},
+  year      = {2022}
+}
+
+%% -----------------------------------------------------------------------
+%%  Smart Home / IoT Applications
+%% -----------------------------------------------------------------------
+@article{king2023sasha,
+  author  = {E. King and H. Yu and S. Lee and C. Julien},
+  title   = {{SASHA}: Creative Goal-Oriented Reasoning in Smart Homes
+             with Large Language Models},
+  journal = {arXiv preprint arXiv:2305.09802},
+  year    = {2023}
+}
+
+%% -----------------------------------------------------------------------
+%%  Serving Systems
+%% -----------------------------------------------------------------------
+@inproceedings{yu2022orca,
+  author    = {G.-I. Yu and J. S. Jeong and G.-W. Kim and S. Kim
+               and B.-G. Chun},
+  title     = {{ORCA}: A Distributed Serving System for
+               {Transformer-Based} Generative Models},
+  booktitle = {Proc. USENIX Symp. Oper. Syst. Des. Implement. (OSDI)},
+  pages     = {521--538},
+  year      = {2022}
+}
+
+@inproceedings{li2023alpaserve,
+  author    = {Z. Li and L. Zheng and Y. Zhong and V. Liu and Y. Sheng
+               and X. Jin and Y. Huang and Z. Chen and H. Zhang and
+               J. E. Gonzalez and others},
+  title     = {{AlpaServe}: Statistical Multiplexing with Model
+               Parallelism for Deep Learning Serving},
+  booktitle = {Proc. USENIX Symp. Oper. Syst. Des. Implement. (OSDI)},
+  pages     = {663--679},
+  year      = {2023}
+}
+
+%% -----------------------------------------------------------------------
+%%  Wireless Channel Models for UAV
+%% -----------------------------------------------------------------------
+@article{azari2018uav_channel,
+  author  = {M. M. Azari and F. Rosas and A. Chiumento and
+             S. Pollin},
+  title   = {Coexistence of Terrestrial and Aerial Users in Cellular
+             Networks},
+  journal = {IEEE Global Communications Conference (GLOBECOM)},
+  year    = {2018}
+}
+
+@article{al2014optimal_uav,
+  author  = {A. Al-Hourani and S. Kandeepan and S. Lardner},
+  title   = {Optimal {LAP} Altitude for Maximum Coverage},
+  journal = {IEEE Wireless Communications Letters},
+  volume  = {3},
+  number  = {6},
+  pages   = {569--572},
+  year    = {2014}
+}
+
+%% -----------------------------------------------------------------------
+%%  Energy-Aware Computation
+%% -----------------------------------------------------------------------
+@inproceedings{narayanan2019pipedream,
+  author    = {D. Narayanan and A. Harlap and A. Phanishayee and
+               V. Seshadri and N. R. Devanur and G. R. Ganger and
+               P. B. Gibbons and M. Zaharia},
+  title     = {{PipeDream}: Generalized Pipeline Parallelism for {DNN}
+               Training},
+  booktitle = {Proceedings of the ACM Symposium on Operating Systems
+               Principles (SOSP)},
+  pages     = {1--15},
+  year      = {2019}
+}
+
+@inproceedings{korthikanti2023reducing,
+  author    = {V. A. Korthikanti and J. Casper and S. Lym and
+               L. McAfee and M. Andersch and M. Shoeybi and
+               B. Catanzaro},
+  title     = {Reducing Activation Recomputation in Large Transformer
+               Models},
+  booktitle = {Proceedings of Machine Learning and Systems (MLSys)},
+  volume    = {5},
+  year      = {2023}
+}
+======================================
+@ARTICLE{R1,
+  author={McEnroe, Patrick and Wang, Shen and Liyanage, Madhusanka},
+  journal={IEEE Internet Things J.}, 
+  title={A Survey on the Convergence of Edge Computing and {AI} for {UAVs}: Opportunities and Challenges}, 
+  year={2022},
+  volume={9},
+  number={17},
+  pages={15435-15459},
+  keywords={Artificial intelligence;Edge computing;Autonomous aerial vehicles;Servers;Internet of Things;Cloud computing;Task analysis;Artificial intelligence (AI);edge AI;edge computing;edge intelligence;Internet of Things (IoT);MEC;unmanned aerial vehicle (UAV)},
+  doi={10.1109/JIOT.2022.3176400}}
+
+@INPROCEEDINGS{R3,
+  author={Chen, Chaobin and Zhang, Tiankui and Xu, Wenjun and Yang, Xu and Wang, Yapeng},
+  booktitle={Proc. IEEE Wirel. Commun. Netw. Conf.  (WCNC)}, 
+  title={Multi-{UAV} Cooperation Based Edge Computing Offloading in Emergency Communication Networks}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={Processor scheduling;Simulation;Computer architecture;Autonomous aerial vehicles;Approximation algorithms;Trajectory;Delays;emergency communication;mobile edge computing;trajectory optimization;unmanned aerial vehicle},
+  doi={10.1109/WCNC55385.2023.10118864}}
+
+@inproceedings{R4,
+ author = {Guo, Yongxin and Cheng, Zhenglin and Tang, Xiaoying and Tu, Zhaopeng and Lin, Tao},
+ booktitle = {Proc. Int. Conf. Learn. Represent.(ICLR)},
+ pages = {79643-79672},
+ title = {Dynamic Mixture of Experts: An Auto-Tuning Approach for Efficient Transformer Models},
+ year = {2025}
+}
+
+@ARTICLE{R5,
+  author={Shao, Jiawei and Zhang, Jun},
+  journal={IEEE Commun. Mag.}, 
+  title={Communication-Computation Trade-off in Resource-Constrained Edge Inference}, 
+  year={2020},
+  volume={58},
+  number={12},
+  pages={20-26},
+  keywords={Computational modeling;Neural networks;Encoding;Servers;Artificial intelligence;Resource management;Edge computing},
+  doi={10.1109/MCOM.001.2000373}}
+
+@ARTICLE{R6,
+  author={Sacco, Alessio and Esposito, Flavio and Marchetto, Guido and Montuschi, Paolo},
+  journal={IEEE Trans. Veh. Technol.}, 
+  title={A Self-Learning Strategy for Task Offloading in {UAV} Networks}, 
+  year={2022},
+  volume={71},
+  number={4},
+  pages={4301-4311},
+  keywords={Task analysis;Computational modeling;Autonomous aerial vehicles;Predictive models;Performance evaluation;Mobile handsets;Heuristic algorithms;Machine learning;task offloading;time series;UAV},
+  doi={10.1109/TVT.2022.3144654}}
+
+@ARTICLE{R7,
+  author={Li, Qi and Cai, Jiaxin and Luo, Jiexin and Yu, Yuanlong and Gu, Jason and Pan, Jia and Liu, Wenxi},
+  journal={IEEE Robot. Autom. Lett.}, 
+  title={{Memory-Constrained} Semantic Segmentation for Ultra-High Resolution {UAV} Imagery}, 
+  year={2024},
+  volume={9},
+  number={2},
+  pages={1708-1715},
+  keywords={Graphics processing units;Image resolution;Semantics;Spatial resolution;Semantic segmentation;Memory management;Autonomous aerial vehicles;Aerial Systems: Perception and Autonomy;Deep Learning for Visual Perception},
+  doi={10.1109/LRA.2024.3349812}}
+
+@article{R8,
+author = {Zhang, Xiao and Wang, Xuehe and Xu, Xinping and Zhao, Yingchao},
+title = {Demand Learning and Cooperative Deployment of {UAV} Networks},
+journal = {Chin. J. Electron.},
+volume = {31},
+number = {3},
+pages = {408-415},
+keywords = {Unmanned aerial vehicle networks, Wireless coverage, Dynamic pricing, Capacity allocation},
+year = {2022}
+}
+
+@ARTICLE{R9,
+  author={Qu, Yuben and Sun, Hao and Dong, Chao and Kang, Jiawen and Dai, Haipeng and Wu, Qihui and Guo, Song},
+  journal={IEEE Commun. Mag.}, 
+  title={Elastic Collaborative Edge Intelligence for {UAV} Swarm: Architecture, Challenges, and Opportunities}, 
+  year={2024},
+  volume={62},
+  number={1},
+  pages={62-68},
+  keywords={Autonomous aerial vehicles;Task analysis;Collaboration;Biological system modeling;Servers;Computational modeling;Computer architecture;Edge computing;Particle swarm optimization;Military communication},
+  doi={10.1109/MCOM.002.2300129}}
+
+@ARTICLE{R10,
+  author={Dhuheir, Marwan Abdou and Baccour, Emna and Erbad, Aiman and Al-Obaidi, Sinan Sabeeh and Hamdi, Mounir},
+  journal={IEEE Internet Things J.}, 
+  title={Deep Reinforcement Learning for Trajectory Path Planning and Distributed Inference in Resource-Constrained {UAV} Swarms}, 
+  year={2023},
+  volume={10},
+  number={9},
+  pages={8185-8201},}
+
+@inproceedings{R12,
+    title = "Diversifying the Expert Knowledge for Task-Agnostic Pruning in Sparse {Mixture-of-Experts}",
+    author = "Zhang, Zeliang  and
+      Liu, Xiaodong  and
+      Cheng, Hao  and
+      Xu, Chenliang  and
+      Gao, Jianfeng",
+    booktitle = "Proc. Findings Assoc. Comput. Linguist.:ACL 2025",
+    month = jul,
+    year = "2025",
+    pages = "86--102",
+    ISBN = "979-8-89176-256-5",
+}
+
+@article{R13,
+  author  = {He, Shwai and Dong, Daize and Ding, Liang and Li, Ang },
+  title   = {Towards Efficient Mixture of Experts: A Holistic Study of Compression Techniques},
+  journal = {[Online]. Available:https://arxiv.org/abs/2406.02500},
+  year    = {2024}
+}
+
+@inproceedings{R14,
+    author = {Li, L. and Zhu, Q. and Wang, J. and Qin, X. and Li, W. and Gu, H. and Guo, Y.},
+    title = {Sub-{MoE}: Efficient Mixture-of-Expert {LLMs} Compression via Subspace Expert Merging},
+    booktitle = {Proc. AAAI Conf. Artif. Intell.},
+    year = 2026,
+page= {22994–23002}
+}
+
+@ARTICLE{R15,
+  author={Kong, Rui and Li, Yuanchun and Wang, Weijun and Kong, Linghe and Liu, Yunxin},
+  journal={IEEE Trans. Comput.}, 
+  title={Serving {MoE} Models on Resource-Constrained Edge Devices via Dynamic Expert Swapping}, 
+  year={2025},
+  volume={74},
+  number={8},
+  pages={2799-2811},}
+
+@inproceedings{R16,
+    title = "{H}yper{M}o{E}: Towards Better Mixture of Experts via Transferring Among Experts",
+    author = "Zhao, Hao  and
+      Qiu, Zihan  and
+      Wu, Huijia  and
+      Wang, Zili  and
+      He, Zhaofeng  and
+      Fu, Jie",
+    booktitle = "Proc. Annu. Meet. Assoc. Comput. Linguist. (Volume 1: Long Papers)",
+    month = aug,
+    year = "2024",
+    pages = "10605--10618",
+}
+
+@INPROCEEDINGS{R17,
+  author={Yan, Qidong and Li, Yingjie and Ma, Ning and Wan, Fucheng},
+  booktitle={Proc. Int. Conf. Comput. Eng. Appl. (ICCEA)}, 
+  title={Research on the Structure and Realization of {Mixture-of-Experts}}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={354-359},}
+
+@inproceedings{R18,
+    title = "{D}eep{S}eek{M}o{E}: Towards Ultimate Expert Specialization in {Mixture-of-Experts} Language Models",
+    author = "Dai, Damai  and
+      Deng, Chengqi  and
+      Zhao, Chenggang  and
+      Xu, R.x.  and
+      Gao, Huazuo  and
+      Chen, Deli  and
+      Li, Jiashi  and
+      Zeng, Wangding  and
+      Yu, Xingkai  and
+      Wu, Y.  and
+      Xie, Zhenda  and
+      Li, Y.k.  and
+      Huang, Panpan  and
+      Luo, Fuli  and
+      Ruan, Chong  and
+      Sui, Zhifang  and
+      Liang, Wenfeng",
+    booktitle = "Proc. Annu. Meet. Assoc. Comput. Linguist.",
+    month = aug,
+    year = "2024",
+    pages = "1280--1297",
+}
+
+@ARTICLE{R19,
+  author={Shao, Jiawei and Mao, Yuyi and Zhang, Jun},
+  journal={IEEE J. Sel. Areas Commun.}, 
+  title={Learning Task-Oriented Communication for Edge Inference: An Information Bottleneck Approach}, 
+  year={2022},
+  volume={40},
+  number={1},
+  pages={197-211},}
+
+@article{R20,
+author = {Xia, Xiaoyu and Fattah, Sheik Mohammad Mostakim and Babar, Muhammad Ali},
+title = {A Survey on {UAV}-Enabled Edge Computing: Resource Management Perspective},
+year = {2023},
+volume = {56},
+number = {3},
+journal = {ACM Comput. Surv.},
+month = oct,
+articleno = {78},
+numpages = {36},
+}
+
+@ARTICLE{R21,
+  author={Yan, Junjie and Wang, Wenli and Liu, Jingxian and Deng, Junyi and Yuan, Haohao and Zhu, Yaxin},
+  journal={IEEE Sens. J.}, 
+  title={Task Demand-Oriented Collaborative Offloading and Deployment Strategy in Software-Defined {UAV}-Assisted Edge Networks}, 
+  year={2025},
+  volume={25},
+  number={1},
+  pages={1641-1655},}
+
+@ARTICLE{R22,
+  author={Chen, Fahao and Li, Peng and Pan, Shengli and Zhong, Lei and Deng, Jing},
+  journal={IEEE Internet Things J.}, 
+  title={Giant Could Be Tiny: Efficient Inference of Giant Models on Resource-Constrained {UAVs}}, 
+  year={2024},
+  volume={11},
+  number={12},
+  pages={21170-21179},}
+
+@INPROCEEDINGS{R23,
+  author={Liang, Zixuan and Lyu, Xinchen and Ren, Chenshan and Li, Na and Li, Kai},
+  booktitle={Proc. Int. Wireless Commun. Mobile Comput. (IWCMC)}, 
+  title={{Communication-Efficient} Topology Orchestration for Distributed Learning in {UAV} Networks}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={662-667},}
+
+@article{R24,
+  author  = {Zhuang, Wenhao and Mao, Yuyi and Ho, Ivan Wang-Hei and Yu, Xianghao  },
+  title   = {{UAV-Assisted} Cooperative Edge Inference for {Low-Altitude} Economy via {MoE-based} Hierarchical Deep Reinforcement Learning},
+  journal = {[Online]. Available:https://arxiv.org/abs/2605.19290},
+  year    = {2026}
+}
+
+@ARTICLE{R25,
+  author={Chen, Qian and Chen, Xianhao and Huang, Kaibin},
+  journal={IEEE Trans. Mobile Comput.}, 
+  title={{SlimCaching}: Edge Caching of {Mixture-of-Experts} for Distributed Inference}, 
+  year={2026},
+  volume={25},
+  number={7},
+  pages={10924-10938},}
+
+@ARTICLE{R26,
+  author  = {Zhu, Guoying and Li, Meng and Dai, Haipeng and Liu, Xuechen and Wang, Weijun and Li, Keran and Xiao, Jun and Chen, Ligeng and Wang, Wei },
+  title   = {{SMoE}: An Algorithm-System {Co-Design} for Pushing {MoE} to the Edge via Expert Substitution},
+  journal = {[Online]. Available:https://arxiv.org/abs/2508.18983},
+  year    = {2025}}
+
+@ARTICLE{R27,
+  author  = {Han, Yu and Pan, Lehan and Peng, Jie and Tao, Ziyang and Zhu, Hanqi and Zhang, Wuyang and Zhang, Yanyong},
+  title   = {{GRACE-MoE}: Grouping and Replication with {Locality-Aware} Routing for Efficient Distributed {MoE} Inference},
+  journal = {[Online]. Available:https://arxiv.org/abs/2509.25041},
+  year    = {2025}}
