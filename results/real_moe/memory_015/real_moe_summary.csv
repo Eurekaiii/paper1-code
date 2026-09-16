@@ -1,0 +1,5 @@
+Method,D_total_ms,D_weighted_ms,Substitutions,Deployments,AvgAccess_ms,AvgCompute_ms,AvgTrans_ms,AvgReturn_ms,Feasible
+Proposed,790.526279,790.526279,1,71,5.394372,46.243315,26.015380,1.399561,True
+Random Placement,881.036298,881.036298,0,71,5.394372,47.484575,33.324614,1.900069,True
+Importance-based Placement,622.311655,622.311655,1,71,5.394372,45.947961,9.286569,1.602264,True
+No-similarity Placement,632.361242,632.361242,0,35,5.394372,44.229835,12.056084,1.555833,True

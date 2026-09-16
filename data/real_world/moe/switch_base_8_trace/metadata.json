@@ -1,0 +1,7 @@
+{
+  "model_name": "google/switch-base-8",
+  "device": "cpu",
+  "num_tasks": 40,
+  "num_experts": 96,
+  "notes": "Real Switch Transformer router trace for UAV MoE simulation."
+}

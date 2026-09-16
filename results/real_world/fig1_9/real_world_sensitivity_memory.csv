@@ -1,0 +1,25 @@
+experiment,value,method,D_total_ms,Substitutions,Deployments,AvgAccess_ms,AvgCompute_ms,AvgTrans_ms,AvgReturn_ms,Feasible
+memory_scale,0.400000,Proposed,9372.858978,333,19,51.408631,0.020235,168.756740,14.135870,True
+memory_scale,0.400000,Random Placement,inf,0,0,inf,inf,inf,inf,False
+memory_scale,0.400000,Importance-based Placement,inf,0,0,inf,inf,inf,inf,False
+memory_scale,0.400000,No-similarity Placement,inf,0,0,inf,inf,inf,inf,False
+memory_scale,0.600000,Proposed,3788.617401,357,28,51.408631,0.026679,29.933269,13.346857,True
+memory_scale,0.600000,Random Placement,inf,0,0,inf,inf,inf,inf,False
+memory_scale,0.600000,Importance-based Placement,inf,0,0,inf,inf,inf,inf,False
+memory_scale,0.600000,No-similarity Placement,inf,0,0,inf,inf,inf,inf,False
+memory_scale,0.800000,Proposed,4415.588780,350,40,51.408631,0.029887,47.792493,11.158709,True
+memory_scale,0.800000,Random Placement,7141.744389,129,40,51.408631,0.018421,113.769701,13.346857,True
+memory_scale,0.800000,Importance-based Placement,6011.271585,70,40,51.408631,0.014712,84.566113,14.292334,True
+memory_scale,0.800000,No-similarity Placement,6870.816292,0,35,51.408631,0.005223,106.220684,14.135870,True
+memory_scale,1.000000,Proposed,3810.895352,384,49,51.408631,0.050826,32.402480,11.410447,True
+memory_scale,1.000000,Random Placement,6731.622647,256,49,51.408631,0.027936,102.557696,14.296303,True
+memory_scale,1.000000,Importance-based Placement,7386.560500,101,49,51.408631,0.102621,118.860427,14.292334,True
+memory_scale,1.000000,No-similarity Placement,10156.352593,0,35,51.408631,0.004300,188.360014,14.135870,True
+memory_scale,1.200000,Proposed,2768.535750,382,59,51.408631,0.141841,8.977573,8.685349,True
+memory_scale,1.200000,Random Placement,5892.633291,250,59,51.408631,0.032285,82.798492,13.076424,True
+memory_scale,1.200000,Importance-based Placement,6353.227515,69,59,51.408631,0.052848,93.233339,14.135870,True
+memory_scale,1.200000,No-similarity Placement,6638.895464,0,35,51.408631,0.003438,100.424448,14.135870,True
+memory_scale,1.500000,Proposed,2828.493019,357,76,51.408631,0.150092,10.468254,8.685349,True
+memory_scale,1.500000,Random Placement,5928.147154,269,76,51.408631,0.080833,83.753692,12.960524,True
+memory_scale,1.500000,Importance-based Placement,5894.558600,116,76,51.408631,0.008525,81.810940,14.135870,True
+memory_scale,1.500000,No-similarity Placement,4644.790408,0,35,51.408631,0.003003,51.361269,13.346857,True

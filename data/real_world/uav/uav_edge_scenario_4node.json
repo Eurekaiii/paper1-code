@@ -1,0 +1,40 @@
+{
+  "scenario_id": "realistic_jetson_4uav_hotspot",
+  "description": "Four-UAV edge scenario using realistic Jetson-class payload computers. Positions are a repeatable hotspot layout; compute and memory are derived from platform specifications.",
+  "area_size_m": 240.0,
+  "compute_capacity_note": "C_u is mapped from ai_perf_tops_int8 as TOPS * 1e12 operations/s for relative scheduling simulation.",
+  "uavs": [
+    {
+      "id": 0,
+      "platform_id": "jetson_orin_nano_super_8gb",
+      "position_m": [60.0, 60.0, 80.0],
+      "C_u": 67000000000000.0,
+      "M_u": 8589934592.0,
+      "P_u": 12.0
+    },
+    {
+      "id": 1,
+      "platform_id": "jetson_xavier_nx_8gb",
+      "position_m": [180.0, 60.0, 80.0],
+      "C_u": 21000000000000.0,
+      "M_u": 8589934592.0,
+      "P_u": 12.0
+    },
+    {
+      "id": 2,
+      "platform_id": "jetson_nano_devkit",
+      "position_m": [60.0, 180.0, 80.0],
+      "C_u": 472000000000.0,
+      "M_u": 4294967296.0,
+      "P_u": 10.0
+    },
+    {
+      "id": 3,
+      "platform_id": "jetson_orin_nx_16gb_super",
+      "position_m": [180.0, 180.0, 80.0],
+      "C_u": 157000000000000.0,
+      "M_u": 17179869184.0,
+      "P_u": 14.0
+    }
+  ]
+}

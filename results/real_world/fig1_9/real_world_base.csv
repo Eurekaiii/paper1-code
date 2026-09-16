@@ -1,0 +1,5 @@
+experiment,value,method,D_total_ms,Substitutions,Deployments,AvgAccess_ms,AvgCompute_ms,AvgTrans_ms,AvgReturn_ms,Feasible
+base,1.000000,Proposed,3810.895352,384,49,51.408631,0.050826,32.402480,11.410447,True
+base,1.000000,Random Placement,6731.622647,256,49,51.408631,0.027936,102.557696,14.296303,True
+base,1.000000,Importance-based Placement,7386.560500,101,49,51.408631,0.102621,118.860427,14.292334,True
+base,1.000000,No-similarity Placement,10156.352593,0,35,51.408631,0.004300,188.360014,14.135870,True

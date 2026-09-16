@@ -1,0 +1,1293 @@
+Method,Expert,UAV,Deployed
+Proposed,0,0,1
+Proposed,0,1,0
+Proposed,0,2,0
+Proposed,0,3,0
+Proposed,1,0,0
+Proposed,1,1,0
+Proposed,1,2,0
+Proposed,1,3,1
+Proposed,2,0,0
+Proposed,2,1,0
+Proposed,2,2,1
+Proposed,2,3,0
+Proposed,3,0,0
+Proposed,3,1,1
+Proposed,3,2,0
+Proposed,3,3,0
+Proposed,4,0,0
+Proposed,4,1,1
+Proposed,4,2,0
+Proposed,4,3,0
+Proposed,5,0,1
+Proposed,5,1,0
+Proposed,5,2,0
+Proposed,5,3,0
+Proposed,6,0,0
+Proposed,6,1,0
+Proposed,6,2,0
+Proposed,6,3,1
+Proposed,7,0,1
+Proposed,7,1,0
+Proposed,7,2,0
+Proposed,7,3,0
+Proposed,8,0,0
+Proposed,8,1,0
+Proposed,8,2,0
+Proposed,8,3,1
+Proposed,9,0,1
+Proposed,9,1,0
+Proposed,9,2,0
+Proposed,9,3,0
+Proposed,10,0,0
+Proposed,10,1,0
+Proposed,10,2,1
+Proposed,10,3,0
+Proposed,11,0,0
+Proposed,11,1,1
+Proposed,11,2,0
+Proposed,11,3,0
+Proposed,12,0,0
+Proposed,12,1,0
+Proposed,12,2,0
+Proposed,12,3,1
+Proposed,13,0,0
+Proposed,13,1,0
+Proposed,13,2,1
+Proposed,13,3,0
+Proposed,14,0,1
+Proposed,14,1,0
+Proposed,14,2,0
+Proposed,14,3,0
+Proposed,15,0,0
+Proposed,15,1,1
+Proposed,15,2,0
+Proposed,15,3,0
+Proposed,16,0,1
+Proposed,16,1,0
+Proposed,16,2,0
+Proposed,16,3,0
+Proposed,17,0,0
+Proposed,17,1,0
+Proposed,17,2,1
+Proposed,17,3,0
+Proposed,18,0,0
+Proposed,18,1,1
+Proposed,18,2,0
+Proposed,18,3,0
+Proposed,19,0,1
+Proposed,19,1,0
+Proposed,19,2,0
+Proposed,19,3,0
+Proposed,20,0,0
+Proposed,20,1,0
+Proposed,20,2,0
+Proposed,20,3,1
+Proposed,21,0,0
+Proposed,21,1,1
+Proposed,21,2,0
+Proposed,21,3,0
+Proposed,22,0,0
+Proposed,22,1,0
+Proposed,22,2,1
+Proposed,22,3,0
+Proposed,23,0,0
+Proposed,23,1,0
+Proposed,23,2,0
+Proposed,23,3,1
+Proposed,24,0,0
+Proposed,24,1,1
+Proposed,24,2,0
+Proposed,24,3,0
+Proposed,25,0,1
+Proposed,25,1,0
+Proposed,25,2,0
+Proposed,25,3,0
+Proposed,26,0,1
+Proposed,26,1,0
+Proposed,26,2,0
+Proposed,26,3,0
+Proposed,27,0,0
+Proposed,27,1,0
+Proposed,27,2,1
+Proposed,27,3,0
+Proposed,28,0,0
+Proposed,28,1,1
+Proposed,28,2,0
+Proposed,28,3,0
+Proposed,29,0,0
+Proposed,29,1,0
+Proposed,29,2,0
+Proposed,29,3,1
+Proposed,30,0,1
+Proposed,30,1,0
+Proposed,30,2,0
+Proposed,30,3,0
+Proposed,31,0,0
+Proposed,31,1,0
+Proposed,31,2,1
+Proposed,31,3,0
+Proposed,32,0,0
+Proposed,32,1,1
+Proposed,32,2,0
+Proposed,32,3,0
+Proposed,33,0,0
+Proposed,33,1,1
+Proposed,33,2,0
+Proposed,33,3,0
+Proposed,34,0,1
+Proposed,34,1,0
+Proposed,34,2,0
+Proposed,34,3,0
+Proposed,35,0,0
+Proposed,35,1,0
+Proposed,35,2,1
+Proposed,35,3,0
+Proposed,36,0,0
+Proposed,36,1,0
+Proposed,36,2,0
+Proposed,36,3,1
+Proposed,37,0,0
+Proposed,37,1,0
+Proposed,37,2,1
+Proposed,37,3,0
+Proposed,38,0,0
+Proposed,38,1,0
+Proposed,38,2,0
+Proposed,38,3,1
+Proposed,39,0,1
+Proposed,39,1,0
+Proposed,39,2,0
+Proposed,39,3,0
+Proposed,40,0,0
+Proposed,40,1,1
+Proposed,40,2,0
+Proposed,40,3,0
+Proposed,41,0,0
+Proposed,41,1,0
+Proposed,41,2,1
+Proposed,41,3,0
+Proposed,42,0,0
+Proposed,42,1,0
+Proposed,42,2,0
+Proposed,42,3,1
+Proposed,43,0,0
+Proposed,43,1,1
+Proposed,43,2,0
+Proposed,43,3,0
+Proposed,44,0,1
+Proposed,44,1,0
+Proposed,44,2,0
+Proposed,44,3,0
+Proposed,45,0,0
+Proposed,45,1,0
+Proposed,45,2,1
+Proposed,45,3,0
+Proposed,46,0,0
+Proposed,46,1,0
+Proposed,46,2,0
+Proposed,46,3,1
+Proposed,47,0,1
+Proposed,47,1,0
+Proposed,47,2,0
+Proposed,47,3,0
+Proposed,48,0,0
+Proposed,48,1,1
+Proposed,48,2,0
+Proposed,48,3,0
+Proposed,49,0,1
+Proposed,49,1,0
+Proposed,49,2,0
+Proposed,49,3,0
+Proposed,50,0,0
+Proposed,50,1,0
+Proposed,50,2,1
+Proposed,50,3,0
+Proposed,51,0,0
+Proposed,51,1,0
+Proposed,51,2,1
+Proposed,51,3,0
+Proposed,52,0,1
+Proposed,52,1,0
+Proposed,52,2,0
+Proposed,52,3,0
+Proposed,53,0,0
+Proposed,53,1,0
+Proposed,53,2,0
+Proposed,53,3,1
+Proposed,54,0,0
+Proposed,54,1,0
+Proposed,54,2,0
+Proposed,54,3,1
+Proposed,55,0,0
+Proposed,55,1,1
+Proposed,55,2,0
+Proposed,55,3,0
+Proposed,56,0,1
+Proposed,56,1,0
+Proposed,56,2,0
+Proposed,56,3,0
+Proposed,57,0,0
+Proposed,57,1,0
+Proposed,57,2,0
+Proposed,57,3,1
+Proposed,58,0,0
+Proposed,58,1,0
+Proposed,58,2,1
+Proposed,58,3,0
+Proposed,59,0,0
+Proposed,59,1,0
+Proposed,59,2,0
+Proposed,59,3,1
+Proposed,60,0,0
+Proposed,60,1,1
+Proposed,60,2,0
+Proposed,60,3,0
+Proposed,61,0,0
+Proposed,61,1,0
+Proposed,61,2,1
+Proposed,61,3,0
+Proposed,62,0,1
+Proposed,62,1,0
+Proposed,62,2,0
+Proposed,62,3,0
+Proposed,63,0,0
+Proposed,63,1,1
+Proposed,63,2,0
+Proposed,63,3,0
+Proposed,64,0,0
+Proposed,64,1,0
+Proposed,64,2,1
+Proposed,64,3,0
+Proposed,65,0,1
+Proposed,65,1,0
+Proposed,65,2,0
+Proposed,65,3,0
+Proposed,66,0,0
+Proposed,66,1,1
+Proposed,66,2,0
+Proposed,66,3,0
+Proposed,67,0,0
+Proposed,67,1,1
+Proposed,67,2,0
+Proposed,67,3,0
+Proposed,68,0,0
+Proposed,68,1,0
+Proposed,68,2,1
+Proposed,68,3,0
+Proposed,69,0,0
+Proposed,69,1,0
+Proposed,69,2,0
+Proposed,69,3,1
+Proposed,70,0,0
+Proposed,70,1,0
+Proposed,70,2,0
+Proposed,70,3,1
+Proposed,71,0,1
+Proposed,71,1,0
+Proposed,71,2,0
+Proposed,71,3,0
+Proposed,72,0,0
+Proposed,72,1,1
+Proposed,72,2,0
+Proposed,72,3,0
+Proposed,73,0,1
+Proposed,73,1,0
+Proposed,73,2,0
+Proposed,73,3,0
+Proposed,74,0,0
+Proposed,74,1,1
+Proposed,74,2,0
+Proposed,74,3,0
+Proposed,75,0,0
+Proposed,75,1,0
+Proposed,75,2,0
+Proposed,75,3,1
+Proposed,76,0,0
+Proposed,76,1,0
+Proposed,76,2,1
+Proposed,76,3,0
+Proposed,77,0,0
+Proposed,77,1,0
+Proposed,77,2,1
+Proposed,77,3,0
+Proposed,78,0,0
+Proposed,78,1,0
+Proposed,78,2,0
+Proposed,78,3,1
+Proposed,79,0,1
+Proposed,79,1,0
+Proposed,79,2,0
+Proposed,79,3,0
+Proposed,80,0,0
+Proposed,80,1,1
+Proposed,80,2,0
+Proposed,80,3,0
+Proposed,81,0,0
+Proposed,81,1,0
+Proposed,81,2,1
+Proposed,81,3,0
+Proposed,82,0,0
+Proposed,82,1,0
+Proposed,82,2,1
+Proposed,82,3,0
+Proposed,83,0,0
+Proposed,83,1,0
+Proposed,83,2,0
+Proposed,83,3,1
+Proposed,84,0,1
+Proposed,84,1,0
+Proposed,84,2,0
+Proposed,84,3,0
+Proposed,85,0,0
+Proposed,85,1,1
+Proposed,85,2,0
+Proposed,85,3,0
+Proposed,86,0,1
+Proposed,86,1,0
+Proposed,86,2,0
+Proposed,86,3,0
+Proposed,87,0,0
+Proposed,87,1,0
+Proposed,87,2,0
+Proposed,87,3,1
+Proposed,88,0,1
+Proposed,88,1,0
+Proposed,88,2,0
+Proposed,88,3,0
+Proposed,89,0,0
+Proposed,89,1,0
+Proposed,89,2,0
+Proposed,89,3,1
+Proposed,90,0,1
+Proposed,90,1,0
+Proposed,90,2,0
+Proposed,90,3,0
+Proposed,91,0,0
+Proposed,91,1,0
+Proposed,91,2,0
+Proposed,91,3,1
+Proposed,92,0,0
+Proposed,92,1,0
+Proposed,92,2,1
+Proposed,92,3,0
+Proposed,93,0,0
+Proposed,93,1,0
+Proposed,93,2,1
+Proposed,93,3,0
+Proposed,94,0,0
+Proposed,94,1,1
+Proposed,94,2,0
+Proposed,94,3,0
+Proposed,95,0,0
+Proposed,95,1,1
+Proposed,95,2,0
+Proposed,95,3,0
+Random Placement,0,0,1
+Random Placement,0,1,0
+Random Placement,0,2,0
+Random Placement,0,3,0
+Random Placement,1,0,0
+Random Placement,1,1,0
+Random Placement,1,2,0
+Random Placement,1,3,1
+Random Placement,2,0,1
+Random Placement,2,1,0
+Random Placement,2,2,0
+Random Placement,2,3,0
+Random Placement,3,0,0
+Random Placement,3,1,0
+Random Placement,3,2,0
+Random Placement,3,3,1
+Random Placement,4,0,1
+Random Placement,4,1,0
+Random Placement,4,2,0
+Random Placement,4,3,0
+Random Placement,5,0,0
+Random Placement,5,1,1
+Random Placement,5,2,0
+Random Placement,5,3,0
+Random Placement,6,0,0
+Random Placement,6,1,1
+Random Placement,6,2,0
+Random Placement,6,3,0
+Random Placement,7,0,1
+Random Placement,7,1,0
+Random Placement,7,2,0
+Random Placement,7,3,0
+Random Placement,8,0,0
+Random Placement,8,1,1
+Random Placement,8,2,0
+Random Placement,8,3,0
+Random Placement,9,0,1
+Random Placement,9,1,0
+Random Placement,9,2,0
+Random Placement,9,3,0
+Random Placement,10,0,0
+Random Placement,10,1,0
+Random Placement,10,2,0
+Random Placement,10,3,1
+Random Placement,11,0,0
+Random Placement,11,1,0
+Random Placement,11,2,1
+Random Placement,11,3,0
+Random Placement,12,0,0
+Random Placement,12,1,0
+Random Placement,12,2,1
+Random Placement,12,3,0
+Random Placement,13,0,0
+Random Placement,13,1,0
+Random Placement,13,2,1
+Random Placement,13,3,0
+Random Placement,14,0,0
+Random Placement,14,1,1
+Random Placement,14,2,0
+Random Placement,14,3,0
+Random Placement,15,0,0
+Random Placement,15,1,0
+Random Placement,15,2,1
+Random Placement,15,3,0
+Random Placement,16,0,0
+Random Placement,16,1,1
+Random Placement,16,2,0
+Random Placement,16,3,0
+Random Placement,17,0,0
+Random Placement,17,1,0
+Random Placement,17,2,0
+Random Placement,17,3,1
+Random Placement,18,0,0
+Random Placement,18,1,0
+Random Placement,18,2,1
+Random Placement,18,3,0
+Random Placement,19,0,1
+Random Placement,19,1,0
+Random Placement,19,2,0
+Random Placement,19,3,0
+Random Placement,20,0,1
+Random Placement,20,1,0
+Random Placement,20,2,0
+Random Placement,20,3,0
+Random Placement,21,0,1
+Random Placement,21,1,0
+Random Placement,21,2,0
+Random Placement,21,3,0
+Random Placement,22,0,0
+Random Placement,22,1,1
+Random Placement,22,2,0
+Random Placement,22,3,0
+Random Placement,23,0,0
+Random Placement,23,1,0
+Random Placement,23,2,1
+Random Placement,23,3,0
+Random Placement,24,0,1
+Random Placement,24,1,0
+Random Placement,24,2,0
+Random Placement,24,3,0
+Random Placement,25,0,0
+Random Placement,25,1,0
+Random Placement,25,2,0
+Random Placement,25,3,1
+Random Placement,26,0,0
+Random Placement,26,1,0
+Random Placement,26,2,0
+Random Placement,26,3,1
+Random Placement,27,0,0
+Random Placement,27,1,0
+Random Placement,27,2,1
+Random Placement,27,3,0
+Random Placement,28,0,0
+Random Placement,28,1,1
+Random Placement,28,2,0
+Random Placement,28,3,0
+Random Placement,29,0,0
+Random Placement,29,1,0
+Random Placement,29,2,0
+Random Placement,29,3,1
+Random Placement,30,0,0
+Random Placement,30,1,0
+Random Placement,30,2,0
+Random Placement,30,3,1
+Random Placement,31,0,1
+Random Placement,31,1,0
+Random Placement,31,2,0
+Random Placement,31,3,0
+Random Placement,32,0,0
+Random Placement,32,1,1
+Random Placement,32,2,0
+Random Placement,32,3,0
+Random Placement,33,0,0
+Random Placement,33,1,0
+Random Placement,33,2,1
+Random Placement,33,3,0
+Random Placement,34,0,1
+Random Placement,34,1,0
+Random Placement,34,2,0
+Random Placement,34,3,0
+Random Placement,35,0,0
+Random Placement,35,1,0
+Random Placement,35,2,0
+Random Placement,35,3,1
+Random Placement,36,0,0
+Random Placement,36,1,0
+Random Placement,36,2,1
+Random Placement,36,3,0
+Random Placement,37,0,0
+Random Placement,37,1,1
+Random Placement,37,2,0
+Random Placement,37,3,0
+Random Placement,38,0,0
+Random Placement,38,1,1
+Random Placement,38,2,0
+Random Placement,38,3,0
+Random Placement,39,0,1
+Random Placement,39,1,0
+Random Placement,39,2,0
+Random Placement,39,3,0
+Random Placement,40,0,0
+Random Placement,40,1,1
+Random Placement,40,2,0
+Random Placement,40,3,0
+Random Placement,41,0,1
+Random Placement,41,1,0
+Random Placement,41,2,0
+Random Placement,41,3,0
+Random Placement,42,0,1
+Random Placement,42,1,0
+Random Placement,42,2,0
+Random Placement,42,3,0
+Random Placement,43,0,0
+Random Placement,43,1,1
+Random Placement,43,2,0
+Random Placement,43,3,0
+Random Placement,44,0,0
+Random Placement,44,1,0
+Random Placement,44,2,0
+Random Placement,44,3,1
+Random Placement,45,0,1
+Random Placement,45,1,0
+Random Placement,45,2,0
+Random Placement,45,3,0
+Random Placement,46,0,0
+Random Placement,46,1,1
+Random Placement,46,2,0
+Random Placement,46,3,0
+Random Placement,47,0,0
+Random Placement,47,1,0
+Random Placement,47,2,1
+Random Placement,47,3,0
+Random Placement,48,0,0
+Random Placement,48,1,0
+Random Placement,48,2,1
+Random Placement,48,3,0
+Random Placement,49,0,1
+Random Placement,49,1,0
+Random Placement,49,2,0
+Random Placement,49,3,0
+Random Placement,50,0,0
+Random Placement,50,1,0
+Random Placement,50,2,0
+Random Placement,50,3,1
+Random Placement,51,0,0
+Random Placement,51,1,0
+Random Placement,51,2,0
+Random Placement,51,3,1
+Random Placement,52,0,0
+Random Placement,52,1,0
+Random Placement,52,2,1
+Random Placement,52,3,0
+Random Placement,53,0,1
+Random Placement,53,1,0
+Random Placement,53,2,0
+Random Placement,53,3,0
+Random Placement,54,0,0
+Random Placement,54,1,0
+Random Placement,54,2,0
+Random Placement,54,3,1
+Random Placement,55,0,0
+Random Placement,55,1,0
+Random Placement,55,2,0
+Random Placement,55,3,1
+Random Placement,56,0,0
+Random Placement,56,1,1
+Random Placement,56,2,0
+Random Placement,56,3,0
+Random Placement,57,0,0
+Random Placement,57,1,1
+Random Placement,57,2,0
+Random Placement,57,3,0
+Random Placement,58,0,1
+Random Placement,58,1,0
+Random Placement,58,2,0
+Random Placement,58,3,0
+Random Placement,59,0,0
+Random Placement,59,1,0
+Random Placement,59,2,0
+Random Placement,59,3,1
+Random Placement,60,0,0
+Random Placement,60,1,1
+Random Placement,60,2,0
+Random Placement,60,3,0
+Random Placement,61,0,1
+Random Placement,61,1,0
+Random Placement,61,2,0
+Random Placement,61,3,0
+Random Placement,62,0,1
+Random Placement,62,1,0
+Random Placement,62,2,0
+Random Placement,62,3,0
+Random Placement,63,0,0
+Random Placement,63,1,0
+Random Placement,63,2,0
+Random Placement,63,3,1
+Random Placement,64,0,0
+Random Placement,64,1,0
+Random Placement,64,2,0
+Random Placement,64,3,1
+Random Placement,65,0,1
+Random Placement,65,1,0
+Random Placement,65,2,0
+Random Placement,65,3,0
+Random Placement,66,0,0
+Random Placement,66,1,1
+Random Placement,66,2,0
+Random Placement,66,3,0
+Random Placement,67,0,0
+Random Placement,67,1,0
+Random Placement,67,2,1
+Random Placement,67,3,0
+Random Placement,68,0,0
+Random Placement,68,1,1
+Random Placement,68,2,0
+Random Placement,68,3,0
+Random Placement,69,0,0
+Random Placement,69,1,1
+Random Placement,69,2,0
+Random Placement,69,3,0
+Random Placement,70,0,0
+Random Placement,70,1,0
+Random Placement,70,2,0
+Random Placement,70,3,1
+Random Placement,71,0,0
+Random Placement,71,1,0
+Random Placement,71,2,0
+Random Placement,71,3,1
+Random Placement,72,0,0
+Random Placement,72,1,1
+Random Placement,72,2,0
+Random Placement,72,3,0
+Random Placement,73,0,0
+Random Placement,73,1,1
+Random Placement,73,2,0
+Random Placement,73,3,0
+Random Placement,74,0,1
+Random Placement,74,1,0
+Random Placement,74,2,0
+Random Placement,74,3,0
+Random Placement,75,0,0
+Random Placement,75,1,0
+Random Placement,75,2,0
+Random Placement,75,3,1
+Random Placement,76,0,1
+Random Placement,76,1,0
+Random Placement,76,2,0
+Random Placement,76,3,0
+Random Placement,77,0,0
+Random Placement,77,1,0
+Random Placement,77,2,1
+Random Placement,77,3,0
+Random Placement,78,0,0
+Random Placement,78,1,0
+Random Placement,78,2,1
+Random Placement,78,3,0
+Random Placement,79,0,0
+Random Placement,79,1,1
+Random Placement,79,2,0
+Random Placement,79,3,0
+Random Placement,80,0,0
+Random Placement,80,1,0
+Random Placement,80,2,0
+Random Placement,80,3,1
+Random Placement,81,0,0
+Random Placement,81,1,1
+Random Placement,81,2,0
+Random Placement,81,3,0
+Random Placement,82,0,0
+Random Placement,82,1,0
+Random Placement,82,2,1
+Random Placement,82,3,0
+Random Placement,83,0,0
+Random Placement,83,1,0
+Random Placement,83,2,1
+Random Placement,83,3,0
+Random Placement,84,0,1
+Random Placement,84,1,0
+Random Placement,84,2,0
+Random Placement,84,3,0
+Random Placement,85,0,1
+Random Placement,85,1,0
+Random Placement,85,2,0
+Random Placement,85,3,0
+Random Placement,86,0,0
+Random Placement,86,1,1
+Random Placement,86,2,0
+Random Placement,86,3,0
+Random Placement,87,0,0
+Random Placement,87,1,0
+Random Placement,87,2,1
+Random Placement,87,3,0
+Random Placement,88,0,0
+Random Placement,88,1,0
+Random Placement,88,2,0
+Random Placement,88,3,1
+Random Placement,89,0,0
+Random Placement,89,1,0
+Random Placement,89,2,0
+Random Placement,89,3,1
+Random Placement,90,0,1
+Random Placement,90,1,0
+Random Placement,90,2,0
+Random Placement,90,3,0
+Random Placement,91,0,0
+Random Placement,91,1,0
+Random Placement,91,2,0
+Random Placement,91,3,1
+Random Placement,92,0,0
+Random Placement,92,1,0
+Random Placement,92,2,0
+Random Placement,92,3,1
+Random Placement,93,0,0
+Random Placement,93,1,0
+Random Placement,93,2,0
+Random Placement,93,3,1
+Random Placement,94,0,0
+Random Placement,94,1,1
+Random Placement,94,2,0
+Random Placement,94,3,0
+Random Placement,95,0,0
+Random Placement,95,1,0
+Random Placement,95,2,1
+Random Placement,95,3,0
+Importance-based Placement,0,0,1
+Importance-based Placement,0,1,0
+Importance-based Placement,0,2,0
+Importance-based Placement,0,3,0
+Importance-based Placement,1,0,1
+Importance-based Placement,1,1,0
+Importance-based Placement,1,2,0
+Importance-based Placement,1,3,0
+Importance-based Placement,2,0,1
+Importance-based Placement,2,1,0
+Importance-based Placement,2,2,0
+Importance-based Placement,2,3,0
+Importance-based Placement,3,0,1
+Importance-based Placement,3,1,0
+Importance-based Placement,3,2,0
+Importance-based Placement,3,3,0
+Importance-based Placement,4,0,1
+Importance-based Placement,4,1,0
+Importance-based Placement,4,2,0
+Importance-based Placement,4,3,0
+Importance-based Placement,5,0,1
+Importance-based Placement,5,1,0
+Importance-based Placement,5,2,0
+Importance-based Placement,5,3,0
+Importance-based Placement,6,0,1
+Importance-based Placement,6,1,0
+Importance-based Placement,6,2,0
+Importance-based Placement,6,3,0
+Importance-based Placement,7,0,1
+Importance-based Placement,7,1,0
+Importance-based Placement,7,2,0
+Importance-based Placement,7,3,0
+Importance-based Placement,8,0,1
+Importance-based Placement,8,1,0
+Importance-based Placement,8,2,0
+Importance-based Placement,8,3,0
+Importance-based Placement,9,0,1
+Importance-based Placement,9,1,0
+Importance-based Placement,9,2,0
+Importance-based Placement,9,3,0
+Importance-based Placement,10,0,1
+Importance-based Placement,10,1,0
+Importance-based Placement,10,2,0
+Importance-based Placement,10,3,0
+Importance-based Placement,11,0,1
+Importance-based Placement,11,1,0
+Importance-based Placement,11,2,0
+Importance-based Placement,11,3,0
+Importance-based Placement,12,0,1
+Importance-based Placement,12,1,0
+Importance-based Placement,12,2,0
+Importance-based Placement,12,3,0
+Importance-based Placement,13,0,1
+Importance-based Placement,13,1,0
+Importance-based Placement,13,2,0
+Importance-based Placement,13,3,0
+Importance-based Placement,14,0,1
+Importance-based Placement,14,1,0
+Importance-based Placement,14,2,0
+Importance-based Placement,14,3,0
+Importance-based Placement,15,0,1
+Importance-based Placement,15,1,0
+Importance-based Placement,15,2,0
+Importance-based Placement,15,3,0
+Importance-based Placement,16,0,0
+Importance-based Placement,16,1,1
+Importance-based Placement,16,2,0
+Importance-based Placement,16,3,0
+Importance-based Placement,17,0,0
+Importance-based Placement,17,1,1
+Importance-based Placement,17,2,0
+Importance-based Placement,17,3,0
+Importance-based Placement,18,0,1
+Importance-based Placement,18,1,0
+Importance-based Placement,18,2,0
+Importance-based Placement,18,3,0
+Importance-based Placement,19,0,1
+Importance-based Placement,19,1,0
+Importance-based Placement,19,2,0
+Importance-based Placement,19,3,0
+Importance-based Placement,20,0,0
+Importance-based Placement,20,1,1
+Importance-based Placement,20,2,0
+Importance-based Placement,20,3,0
+Importance-based Placement,21,0,1
+Importance-based Placement,21,1,0
+Importance-based Placement,21,2,0
+Importance-based Placement,21,3,0
+Importance-based Placement,22,0,0
+Importance-based Placement,22,1,1
+Importance-based Placement,22,2,0
+Importance-based Placement,22,3,0
+Importance-based Placement,23,0,1
+Importance-based Placement,23,1,0
+Importance-based Placement,23,2,0
+Importance-based Placement,23,3,0
+Importance-based Placement,24,0,0
+Importance-based Placement,24,1,1
+Importance-based Placement,24,2,0
+Importance-based Placement,24,3,0
+Importance-based Placement,25,0,1
+Importance-based Placement,25,1,0
+Importance-based Placement,25,2,0
+Importance-based Placement,25,3,0
+Importance-based Placement,26,0,1
+Importance-based Placement,26,1,0
+Importance-based Placement,26,2,0
+Importance-based Placement,26,3,0
+Importance-based Placement,27,0,1
+Importance-based Placement,27,1,0
+Importance-based Placement,27,2,0
+Importance-based Placement,27,3,0
+Importance-based Placement,28,0,0
+Importance-based Placement,28,1,1
+Importance-based Placement,28,2,0
+Importance-based Placement,28,3,0
+Importance-based Placement,29,0,1
+Importance-based Placement,29,1,0
+Importance-based Placement,29,2,0
+Importance-based Placement,29,3,0
+Importance-based Placement,30,0,1
+Importance-based Placement,30,1,0
+Importance-based Placement,30,2,0
+Importance-based Placement,30,3,0
+Importance-based Placement,31,0,1
+Importance-based Placement,31,1,0
+Importance-based Placement,31,2,0
+Importance-based Placement,31,3,0
+Importance-based Placement,32,0,1
+Importance-based Placement,32,1,0
+Importance-based Placement,32,2,0
+Importance-based Placement,32,3,0
+Importance-based Placement,33,0,1
+Importance-based Placement,33,1,0
+Importance-based Placement,33,2,0
+Importance-based Placement,33,3,0
+Importance-based Placement,34,0,1
+Importance-based Placement,34,1,0
+Importance-based Placement,34,2,0
+Importance-based Placement,34,3,0
+Importance-based Placement,35,0,1
+Importance-based Placement,35,1,0
+Importance-based Placement,35,2,0
+Importance-based Placement,35,3,0
+Importance-based Placement,36,0,1
+Importance-based Placement,36,1,0
+Importance-based Placement,36,2,0
+Importance-based Placement,36,3,0
+Importance-based Placement,37,0,1
+Importance-based Placement,37,1,0
+Importance-based Placement,37,2,0
+Importance-based Placement,37,3,0
+Importance-based Placement,38,0,1
+Importance-based Placement,38,1,0
+Importance-based Placement,38,2,0
+Importance-based Placement,38,3,0
+Importance-based Placement,39,0,1
+Importance-based Placement,39,1,0
+Importance-based Placement,39,2,0
+Importance-based Placement,39,3,0
+Importance-based Placement,40,0,1
+Importance-based Placement,40,1,0
+Importance-based Placement,40,2,0
+Importance-based Placement,40,3,0
+Importance-based Placement,41,0,1
+Importance-based Placement,41,1,0
+Importance-based Placement,41,2,0
+Importance-based Placement,41,3,0
+Importance-based Placement,42,0,1
+Importance-based Placement,42,1,0
+Importance-based Placement,42,2,0
+Importance-based Placement,42,3,0
+Importance-based Placement,43,0,1
+Importance-based Placement,43,1,0
+Importance-based Placement,43,2,0
+Importance-based Placement,43,3,0
+Importance-based Placement,44,0,1
+Importance-based Placement,44,1,0
+Importance-based Placement,44,2,0
+Importance-based Placement,44,3,0
+Importance-based Placement,45,0,0
+Importance-based Placement,45,1,1
+Importance-based Placement,45,2,0
+Importance-based Placement,45,3,0
+Importance-based Placement,46,0,0
+Importance-based Placement,46,1,1
+Importance-based Placement,46,2,0
+Importance-based Placement,46,3,0
+Importance-based Placement,47,0,1
+Importance-based Placement,47,1,0
+Importance-based Placement,47,2,0
+Importance-based Placement,47,3,0
+Importance-based Placement,48,0,1
+Importance-based Placement,48,1,0
+Importance-based Placement,48,2,0
+Importance-based Placement,48,3,0
+Importance-based Placement,49,0,1
+Importance-based Placement,49,1,0
+Importance-based Placement,49,2,0
+Importance-based Placement,49,3,0
+Importance-based Placement,50,0,1
+Importance-based Placement,50,1,0
+Importance-based Placement,50,2,0
+Importance-based Placement,50,3,0
+Importance-based Placement,51,0,1
+Importance-based Placement,51,1,0
+Importance-based Placement,51,2,0
+Importance-based Placement,51,3,0
+Importance-based Placement,52,0,1
+Importance-based Placement,52,1,0
+Importance-based Placement,52,2,0
+Importance-based Placement,52,3,0
+Importance-based Placement,53,0,1
+Importance-based Placement,53,1,0
+Importance-based Placement,53,2,0
+Importance-based Placement,53,3,0
+Importance-based Placement,54,0,1
+Importance-based Placement,54,1,0
+Importance-based Placement,54,2,0
+Importance-based Placement,54,3,0
+Importance-based Placement,55,0,1
+Importance-based Placement,55,1,0
+Importance-based Placement,55,2,0
+Importance-based Placement,55,3,0
+Importance-based Placement,56,0,1
+Importance-based Placement,56,1,0
+Importance-based Placement,56,2,0
+Importance-based Placement,56,3,0
+Importance-based Placement,57,0,1
+Importance-based Placement,57,1,0
+Importance-based Placement,57,2,0
+Importance-based Placement,57,3,0
+Importance-based Placement,58,0,1
+Importance-based Placement,58,1,0
+Importance-based Placement,58,2,0
+Importance-based Placement,58,3,0
+Importance-based Placement,59,0,1
+Importance-based Placement,59,1,0
+Importance-based Placement,59,2,0
+Importance-based Placement,59,3,0
+Importance-based Placement,60,0,1
+Importance-based Placement,60,1,0
+Importance-based Placement,60,2,0
+Importance-based Placement,60,3,0
+Importance-based Placement,61,0,1
+Importance-based Placement,61,1,0
+Importance-based Placement,61,2,0
+Importance-based Placement,61,3,0
+Importance-based Placement,62,0,1
+Importance-based Placement,62,1,0
+Importance-based Placement,62,2,0
+Importance-based Placement,62,3,0
+Importance-based Placement,63,0,1
+Importance-based Placement,63,1,0
+Importance-based Placement,63,2,0
+Importance-based Placement,63,3,0
+Importance-based Placement,64,0,1
+Importance-based Placement,64,1,0
+Importance-based Placement,64,2,0
+Importance-based Placement,64,3,0
+Importance-based Placement,65,0,1
+Importance-based Placement,65,1,0
+Importance-based Placement,65,2,0
+Importance-based Placement,65,3,0
+Importance-based Placement,66,0,1
+Importance-based Placement,66,1,0
+Importance-based Placement,66,2,0
+Importance-based Placement,66,3,0
+Importance-based Placement,67,0,1
+Importance-based Placement,67,1,0
+Importance-based Placement,67,2,0
+Importance-based Placement,67,3,0
+Importance-based Placement,68,0,1
+Importance-based Placement,68,1,0
+Importance-based Placement,68,2,0
+Importance-based Placement,68,3,0
+Importance-based Placement,69,0,1
+Importance-based Placement,69,1,0
+Importance-based Placement,69,2,0
+Importance-based Placement,69,3,0
+Importance-based Placement,70,0,1
+Importance-based Placement,70,1,0
+Importance-based Placement,70,2,0
+Importance-based Placement,70,3,0
+Importance-based Placement,71,0,1
+Importance-based Placement,71,1,0
+Importance-based Placement,71,2,0
+Importance-based Placement,71,3,0
+Importance-based Placement,72,0,1
+Importance-based Placement,72,1,0
+Importance-based Placement,72,2,0
+Importance-based Placement,72,3,0
+Importance-based Placement,73,0,1
+Importance-based Placement,73,1,0
+Importance-based Placement,73,2,0
+Importance-based Placement,73,3,0
+Importance-based Placement,74,0,1
+Importance-based Placement,74,1,0
+Importance-based Placement,74,2,0
+Importance-based Placement,74,3,0
+Importance-based Placement,75,0,1
+Importance-based Placement,75,1,0
+Importance-based Placement,75,2,0
+Importance-based Placement,75,3,0
+Importance-based Placement,76,0,1
+Importance-based Placement,76,1,0
+Importance-based Placement,76,2,0
+Importance-based Placement,76,3,0
+Importance-based Placement,77,0,1
+Importance-based Placement,77,1,0
+Importance-based Placement,77,2,0
+Importance-based Placement,77,3,0
+Importance-based Placement,78,0,1
+Importance-based Placement,78,1,0
+Importance-based Placement,78,2,0
+Importance-based Placement,78,3,0
+Importance-based Placement,79,0,1
+Importance-based Placement,79,1,0
+Importance-based Placement,79,2,0
+Importance-based Placement,79,3,0
+Importance-based Placement,80,0,1
+Importance-based Placement,80,1,0
+Importance-based Placement,80,2,0
+Importance-based Placement,80,3,0
+Importance-based Placement,81,0,1
+Importance-based Placement,81,1,0
+Importance-based Placement,81,2,0
+Importance-based Placement,81,3,0
+Importance-based Placement,82,0,1
+Importance-based Placement,82,1,0
+Importance-based Placement,82,2,0
+Importance-based Placement,82,3,0
+Importance-based Placement,83,0,1
+Importance-based Placement,83,1,0
+Importance-based Placement,83,2,0
+Importance-based Placement,83,3,0
+Importance-based Placement,84,0,1
+Importance-based Placement,84,1,0
+Importance-based Placement,84,2,0
+Importance-based Placement,84,3,0
+Importance-based Placement,85,0,1
+Importance-based Placement,85,1,0
+Importance-based Placement,85,2,0
+Importance-based Placement,85,3,0
+Importance-based Placement,86,0,1
+Importance-based Placement,86,1,0
+Importance-based Placement,86,2,0
+Importance-based Placement,86,3,0
+Importance-based Placement,87,0,1
+Importance-based Placement,87,1,0
+Importance-based Placement,87,2,0
+Importance-based Placement,87,3,0
+Importance-based Placement,88,0,1
+Importance-based Placement,88,1,0
+Importance-based Placement,88,2,0
+Importance-based Placement,88,3,0
+Importance-based Placement,89,0,1
+Importance-based Placement,89,1,0
+Importance-based Placement,89,2,0
+Importance-based Placement,89,3,0
+Importance-based Placement,90,0,1
+Importance-based Placement,90,1,0
+Importance-based Placement,90,2,0
+Importance-based Placement,90,3,0
+Importance-based Placement,91,0,1
+Importance-based Placement,91,1,0
+Importance-based Placement,91,2,0
+Importance-based Placement,91,3,0
+Importance-based Placement,92,0,1
+Importance-based Placement,92,1,0
+Importance-based Placement,92,2,0
+Importance-based Placement,92,3,0
+Importance-based Placement,93,0,1
+Importance-based Placement,93,1,0
+Importance-based Placement,93,2,0
+Importance-based Placement,93,3,0
+Importance-based Placement,94,0,1
+Importance-based Placement,94,1,0
+Importance-based Placement,94,2,0
+Importance-based Placement,94,3,0
+Importance-based Placement,95,0,1
+Importance-based Placement,95,1,0
+Importance-based Placement,95,2,0
+Importance-based Placement,95,3,0
+No-similarity Placement,0,0,1
+No-similarity Placement,0,1,0
+No-similarity Placement,0,2,0
+No-similarity Placement,0,3,0
+No-similarity Placement,1,0,1
+No-similarity Placement,1,1,0
+No-similarity Placement,1,2,0
+No-similarity Placement,1,3,0
+No-similarity Placement,2,0,0
+No-similarity Placement,2,1,0
+No-similarity Placement,2,2,1
+No-similarity Placement,2,3,0
+No-similarity Placement,4,0,0
+No-similarity Placement,4,1,0
+No-similarity Placement,4,2,0
+No-similarity Placement,4,3,1
+No-similarity Placement,5,0,1
+No-similarity Placement,5,1,0
+No-similarity Placement,5,2,0
+No-similarity Placement,5,3,0
+No-similarity Placement,7,0,1
+No-similarity Placement,7,1,0
+No-similarity Placement,7,2,0
+No-similarity Placement,7,3,0
+No-similarity Placement,8,0,1
+No-similarity Placement,8,1,0
+No-similarity Placement,8,2,0
+No-similarity Placement,8,3,0
+No-similarity Placement,9,0,1
+No-similarity Placement,9,1,0
+No-similarity Placement,9,2,0
+No-similarity Placement,9,3,0
+No-similarity Placement,10,0,1
+No-similarity Placement,10,1,0
+No-similarity Placement,10,2,0
+No-similarity Placement,10,3,0
+No-similarity Placement,12,0,1
+No-similarity Placement,12,1,0
+No-similarity Placement,12,2,0
+No-similarity Placement,12,3,0
+No-similarity Placement,15,0,1
+No-similarity Placement,15,1,0
+No-similarity Placement,15,2,0
+No-similarity Placement,15,3,0
+No-similarity Placement,18,0,1
+No-similarity Placement,18,1,0
+No-similarity Placement,18,2,0
+No-similarity Placement,18,3,0
+No-similarity Placement,21,0,1
+No-similarity Placement,21,1,0
+No-similarity Placement,21,2,0
+No-similarity Placement,21,3,0
+No-similarity Placement,23,0,1
+No-similarity Placement,23,1,0
+No-similarity Placement,23,2,0
+No-similarity Placement,23,3,0
+No-similarity Placement,25,0,0
+No-similarity Placement,25,1,1
+No-similarity Placement,25,2,0
+No-similarity Placement,25,3,0
+No-similarity Placement,26,0,1
+No-similarity Placement,26,1,0
+No-similarity Placement,26,2,0
+No-similarity Placement,26,3,0
+No-similarity Placement,27,0,1
+No-similarity Placement,27,1,0
+No-similarity Placement,27,2,0
+No-similarity Placement,27,3,0
+No-similarity Placement,29,0,1
+No-similarity Placement,29,1,0
+No-similarity Placement,29,2,0
+No-similarity Placement,29,3,0
+No-similarity Placement,31,0,1
+No-similarity Placement,31,1,0
+No-similarity Placement,31,2,0
+No-similarity Placement,31,3,0
+No-similarity Placement,34,0,0
+No-similarity Placement,34,1,1
+No-similarity Placement,34,2,0
+No-similarity Placement,34,3,0
+No-similarity Placement,35,0,0
+No-similarity Placement,35,1,0
+No-similarity Placement,35,2,1
+No-similarity Placement,35,3,0
+No-similarity Placement,36,0,1
+No-similarity Placement,36,1,0
+No-similarity Placement,36,2,0
+No-similarity Placement,36,3,0
+No-similarity Placement,38,0,0
+No-similarity Placement,38,1,0
+No-similarity Placement,38,2,0
+No-similarity Placement,38,3,1
+No-similarity Placement,40,0,1
+No-similarity Placement,40,1,0
+No-similarity Placement,40,2,0
+No-similarity Placement,40,3,0
+No-similarity Placement,41,0,0
+No-similarity Placement,41,1,0
+No-similarity Placement,41,2,1
+No-similarity Placement,41,3,0
+No-similarity Placement,42,0,0
+No-similarity Placement,42,1,0
+No-similarity Placement,42,2,0
+No-similarity Placement,42,3,1
+No-similarity Placement,43,0,1
+No-similarity Placement,43,1,0
+No-similarity Placement,43,2,0
+No-similarity Placement,43,3,0
+No-similarity Placement,44,0,1
+No-similarity Placement,44,1,0
+No-similarity Placement,44,2,0
+No-similarity Placement,44,3,0
+No-similarity Placement,47,0,1
+No-similarity Placement,47,1,0
+No-similarity Placement,47,2,0
+No-similarity Placement,47,3,0
+No-similarity Placement,49,0,1
+No-similarity Placement,49,1,0
+No-similarity Placement,49,2,0
+No-similarity Placement,49,3,0
+No-similarity Placement,62,0,1
+No-similarity Placement,62,1,0
+No-similarity Placement,62,2,0
+No-similarity Placement,62,3,0
+No-similarity Placement,67,0,1
+No-similarity Placement,67,1,0
+No-similarity Placement,67,2,0
+No-similarity Placement,67,3,0
+No-similarity Placement,79,0,1
+No-similarity Placement,79,1,0
+No-similarity Placement,79,2,0
+No-similarity Placement,79,3,0
+No-similarity Placement,80,0,1
+No-similarity Placement,80,1,0
+No-similarity Placement,80,2,0
+No-similarity Placement,80,3,0
+No-similarity Placement,95,0,1
+No-similarity Placement,95,1,0
+No-similarity Placement,95,2,0
+No-similarity Placement,95,3,0

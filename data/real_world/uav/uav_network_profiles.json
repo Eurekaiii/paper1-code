@@ -1,0 +1,26 @@
+[
+  {
+    "profile_id": "short_range_high_quality",
+    "description": "Dense local UAV edge network, short inter-UAV separation.",
+    "area_size_m": 240.0,
+    "altitude_range_m": [70.0, 90.0],
+    "uav_tx_power_w": [10.0, 14.0],
+    "ground_tx_power_w": 5.0,
+    "bandwidth_hz": 20000000.0,
+    "noise_density_w_per_hz": 1e-12,
+    "path_loss_exponent": 2.5,
+    "snr_threshold_linear": 0.5
+  },
+  {
+    "profile_id": "medium_range_sparse",
+    "description": "Larger service area with weaker single-hop connectivity.",
+    "area_size_m": 500.0,
+    "altitude_range_m": [80.0, 120.0],
+    "uav_tx_power_w": [10.0, 15.0],
+    "ground_tx_power_w": 5.0,
+    "bandwidth_hz": 20000000.0,
+    "noise_density_w_per_hz": 1e-12,
+    "path_loss_exponent": 2.7,
+    "snr_threshold_linear": 0.5
+  }
+]

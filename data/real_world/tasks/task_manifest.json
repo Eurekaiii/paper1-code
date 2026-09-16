@@ -1,0 +1,17 @@
+{
+  "num_tasks": 40,
+  "sources": [
+    {
+      "dataset": "fancyzhx/ag_news",
+      "count": 20,
+      "task_type": "news_classification",
+      "url": "https://huggingface.co/datasets/fancyzhx/ag_news"
+    },
+    {
+      "dataset": "rajpurkar/squad",
+      "count": 20,
+      "task_type": "question_answering",
+      "url": "https://huggingface.co/datasets/rajpurkar/squad"
+    }
+  ]
+}
