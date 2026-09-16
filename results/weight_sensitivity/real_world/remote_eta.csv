@@ -1,0 +1,6 @@
+Scenario,Sweep,Value,D_total_ms,Substitutions,Deployments,AvgAccess_ms,AvgCompute_ms,AvgTrans_ms,AvgReturn_ms,Feasible
+real_moe_uav,remote_eta,0,3794.229152,373,49,51.408631,0.051404,32.363911,11.031783,True
+real_moe_uav,remote_eta,0.25,3810.915402,384,49,51.408631,0.051327,32.402480,11.410447,True
+real_moe_uav,remote_eta,0.5,3810.895352,384,49,51.408631,0.050826,32.402480,11.410447,True
+real_moe_uav,remote_eta,0.75,3810.931368,385,49,51.408631,0.051726,32.402480,11.410447,True
+real_moe_uav,remote_eta,1,3793.150754,388,49,51.408631,0.051643,31.958048,11.410447,True

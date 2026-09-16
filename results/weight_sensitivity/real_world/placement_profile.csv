@@ -1,0 +1,6 @@
+Scenario,Sweep,Value,D_total_ms,Substitutions,Deployments,AvgAccess_ms,AvgCompute_ms,AvgTrans_ms,AvgReturn_ms,Feasible
+real_moe_uav,placement_profile,default,3810.895352,384,49,51.408631,0.050826,32.402480,11.410447,True
+real_moe_uav,placement_profile,demand_heavy,3598.587184,374,49,51.408631,0.050765,25.355965,13.149319,True
+real_moe_uav,placement_profile,compute_heavy,3749.609926,383,49,51.408631,0.052880,31.824502,10.454236,True
+real_moe_uav,placement_profile,network_heavy,3598.587184,374,49,51.408631,0.050765,25.355965,13.149319,True
+real_moe_uav,placement_profile,memory_heavy,3597.908128,374,49,51.408631,0.050674,25.339080,13.149319,True

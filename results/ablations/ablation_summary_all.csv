@@ -1,0 +1,9 @@
+Scenario,Variant,D_total_ms,Delta_vs_full_pct,Substitutions,Deployments,AvgAccess_ms,AvgCompute_ms,AvgTrans_ms,AvgReturn_ms,Feasible
+synthetic_hotspot_v2,Full AeroMoE,8464.990478,0.000000,109,6,35.325306,138.046005,37.873764,0.379686,True
+synthetic_hotspot_v2,w/o Similarity,17231.353649,103.560225,0,4,35.325306,355.357422,39.721430,0.379684,True
+synthetic_hotspot_v2,w/o Communication,8464.990478,0.000000,109,6,35.325306,138.046005,37.873764,0.379686,True
+synthetic_hotspot_v2,w/o Redundancy,8503.445922,0.454288,107,6,35.325306,141.716513,35.164643,0.379686,True
+real_moe_uav,Full AeroMoE,3810.895352,0.000000,384,49,51.408631,0.050826,32.402480,11.410447,True
+real_moe_uav,w/o Similarity,10156.352593,166.508305,0,35,51.408631,0.004300,188.360014,14.135870,True
+real_moe_uav,w/o Communication,3794.229152,-0.437330,373,49,51.408631,0.051404,32.363911,11.031783,True
+real_moe_uav,w/o Redundancy,4075.839603,6.952284,308,49,51.408631,0.006505,37.133997,13.346857,True

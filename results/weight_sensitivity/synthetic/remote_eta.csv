@@ -1,0 +1,6 @@
+Scenario,Sweep,Value,D_total_ms,Substitutions,Deployments,AvgAccess_ms,AvgCompute_ms,AvgTrans_ms,AvgReturn_ms,Feasible
+synthetic_hotspot_v2,remote_eta,0,8464.990478,109,6,35.325306,138.046005,37.873764,0.379686,True
+synthetic_hotspot_v2,remote_eta,0.25,8464.990478,109,6,35.325306,138.046005,37.873764,0.379686,True
+synthetic_hotspot_v2,remote_eta,0.5,8464.990478,109,6,35.325306,138.046005,37.873764,0.379686,True
+synthetic_hotspot_v2,remote_eta,0.75,8464.990478,109,6,35.325306,138.046005,37.873764,0.379686,True
+synthetic_hotspot_v2,remote_eta,1,8849.873622,109,6,35.325306,138.167042,47.325532,0.428961,True

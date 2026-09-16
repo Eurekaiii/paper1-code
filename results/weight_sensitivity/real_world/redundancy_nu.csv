@@ -1,0 +1,6 @@
+Scenario,Sweep,Value,D_total_ms,Substitutions,Deployments,AvgAccess_ms,AvgCompute_ms,AvgTrans_ms,AvgReturn_ms,Feasible
+real_moe_uav,redundancy_nu,0,4075.839603,308,49,51.408631,0.006505,37.133997,13.346857,True
+real_moe_uav,redundancy_nu,0.1,3933.654483,341,49,51.408631,0.008194,33.577681,13.346857,True
+real_moe_uav,redundancy_nu,0.3,3810.895352,384,49,51.408631,0.050826,32.402480,11.410447,True
+real_moe_uav,redundancy_nu,0.5,3821.738380,383,49,51.408631,0.052359,32.611612,11.470858,True
+real_moe_uav,redundancy_nu,0.7,3987.881952,377,49,51.408631,0.055918,34.737873,13.494627,True

@@ -1,0 +1,6 @@
+Scenario,Sweep,Value,D_total_ms,Substitutions,Deployments,AvgAccess_ms,AvgCompute_ms,AvgTrans_ms,AvgReturn_ms,Feasible
+synthetic_hotspot_v2,placement_profile,default,8464.990478,109,6,35.325306,138.046005,37.873764,0.379686,True
+synthetic_hotspot_v2,placement_profile,demand_heavy,8464.990478,109,6,35.325306,138.046005,37.873764,0.379686,True
+synthetic_hotspot_v2,placement_profile,compute_heavy,8464.990478,109,6,35.325306,138.046005,37.873764,0.379686,True
+synthetic_hotspot_v2,placement_profile,network_heavy,8464.990478,109,6,35.325306,138.046005,37.873764,0.379686,True
+synthetic_hotspot_v2,placement_profile,memory_heavy,8464.990478,109,6,35.325306,138.046005,37.873764,0.379686,True
